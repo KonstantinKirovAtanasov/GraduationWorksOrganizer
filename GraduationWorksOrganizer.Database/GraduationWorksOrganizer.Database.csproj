@@ -11,4 +11,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GraduationWorksOrganizer.Web\GraduationWorksOrganizer.Common\GraduationWorksOrganizer.Common.csproj" />
+    <ProjectReference Include="..\GraduationWorksOrganizer.Web\GraduationWorksOrganizer.Core\GraduationWorksOrganizer.Core.csproj" />
+  </ItemGroup>
+
 </Project>
