@@ -31,17 +31,32 @@
 
             <div class="form-group">
                 <label>Факултет:</label>
-                <select asp-for="Input.SpecialtyId" asp-items="@Html.GetEntityEnumSelectList(Model.Specialties)"></select>
+                <select id="#facultySelect" asp-for="Input.FacultyId">
+                    @foreach (GraduationWorksOrganizer.Database.Models.Faculty faculty in Model.Faculties)
+                    {
+                        <option value="@faculty.Id">@faculty.FacultyName</option>
+                    }
+                </select>
                 <span></span>
             </div>
-            <div class="form-group">
+            <div class="form-group filtered">
                 <label>Катедра:</label>
-                <select asp-for="Input.SpecialtyId" asp-items="@Html.GetEntityEnumSelectList(Model.Specialties)"></select>
+                <select id="#departmentSelect" asp-for="Input.DepartmentId" onselect="FiltrateSelectionBox">
+                    @foreach (GraduationWorksOrganizer.Database.Models.Department department in Model.Departments)
+                    {
+                        <option value="@department.Id" data-filter-id="@department.FacultyId" data-filter-type="@department.GetType()">@department.DepartmentName</option>
+                    }
+                </select>
                 <span></span>
             </div>
-            <div class="form-group">
+            <div class="form-group filtered">
                 <label>Специалност:</label>
-                <select asp-for="Input.SpecialtyId" asp-items="@Html.GetEntityEnumSelectList(Model.Specialties)"></select>
+                <select id="#specialtiesSelect" asp-for="Input.SpecialtyId" onselect="FiltrateSelectionBox">
+                    @foreach (GraduationWorksOrganizer.Database.Models.Specialty specialty in Model.Specialties)
+                    {
+                        <option value="@specialty.Id" data-filter-id="@specialty.DepartmentId" data-filter-type="@specialty.GetType()"> @specialty.SpecialtyName</option>
+                    }
+                </select>
                 <span></span>
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
@@ -81,9 +96,13 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script>
-        function OnSelectedFaculty() {
-            document.getElementById("selectFaculty")
-        }
+        $(function () {
+            $("#facultySelect").on('click', function () {
+                var $jsthis = $(this);
+                alert($jsthis);
+            });
+        });
     </script>
 }

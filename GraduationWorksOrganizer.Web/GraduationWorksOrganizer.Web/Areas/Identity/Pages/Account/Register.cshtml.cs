@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
+﻿using GraduationWorksOrganizer.Core.Database;
 using GraduationWorksOrganizer.Database.Models;
-using GraduationWorksOrganizer.Database.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -15,6 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
 {
@@ -23,12 +22,12 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly SpecialtiesDatabaseService _specDbService;
+        private readonly IAsyncRepository _dbService;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            SpecialtiesDatabaseService specDbService,
+            IAsyncRepository dbService,
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
@@ -38,7 +37,7 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-            _specDbService = specDbService;
+            _dbService = dbService;
         }
 
         [BindProperty]
@@ -52,6 +51,16 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
         /// Специалности
         /// </summary>
         public IEnumerable<Specialty> Specialties { get; set; }
+
+        /// <summary>
+        /// Катедри
+        /// </summary>
+        public IEnumerable<Department> Departments { get; set; }
+
+        /// <summary>
+        /// Факултети
+        /// </summary>
+        public IEnumerable<Faculty> Faculties { get; set; }
 
         public class InputModel
         {
@@ -73,13 +82,17 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
 
             [Required]
             public int SpecialtyId { get; set; }
+            [Required]
+            public int DepartmentId { get; set; }
+            [Required]
+            public int FacultyId { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            Specialties = await _specDbService.GetSpecialties();
+            await InitializeRequisites();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -121,9 +134,19 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
-            Specialties = await _specDbService.GetSpecialties();
+            await InitializeRequisites();
             return Page();
+        }
+
+        /// <summary>
+        /// Метод който инициализира реквизитите за PageModel-a
+        /// </summary>
+        /// <returns></returns>
+        private async Task InitializeRequisites()
+        {
+            Specialties = await _dbService.GetAll<Specialty>();
+            Departments = await _dbService.GetAll<Department>();
+            Faculties = await _dbService.GetAll<Faculty>();
         }
     }
 }

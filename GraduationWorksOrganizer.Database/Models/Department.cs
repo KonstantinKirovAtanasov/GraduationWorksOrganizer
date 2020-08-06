@@ -1,14 +1,13 @@
 ﻿using GraduationWorksOrganizer.Common.Attributes;
-using System;
+using GraduationWorksOrganizer.Core.Database.Models;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GraduationWorksOrganizer.Database.Models
 {
-    public class Department
+    public class Department : IDatabaseEntity
     {
         [EntityEnumValue]
-        public int DepartmentId { get; set; }
+        public int Id { get; set; }
 
         [EntityEnumName]
         public string DepartmentName { get; set; }

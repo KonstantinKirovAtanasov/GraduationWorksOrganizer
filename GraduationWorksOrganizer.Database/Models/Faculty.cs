@@ -1,18 +1,18 @@
 ﻿using GraduationWorksOrganizer.Common.Attributes;
+using GraduationWorksOrganizer.Core.Database.Models;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GraduationWorksOrganizer.Database.Models
 {
     /// <summary>
     /// Факултет
     /// </summary>
-    public class Faculty
+    public class Faculty : IDatabaseEntity
     {
         [EntityEnumValue]
-        public int FacultyId { get; set; }
+        public int Id { get; set; }
 
         [EntityEnumName]
         public string FacultyName { get; set; }

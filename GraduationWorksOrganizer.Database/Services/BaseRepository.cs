@@ -1,7 +1,9 @@
 ﻿using GraduationWorksOrganizer.Core.Database;
 using GraduationWorksOrganizer.Core.Database.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -43,7 +45,8 @@ namespace GraduationWorksOrganizer.Database.Services
         /// <param name="entity"></param>
         public void Add<TEntity>(TEntity entity) where TEntity : class, IDatabaseEntity
         {
-            throw new NotImplementedException();
+            _dbContext.Add(entity);
+            _dbContext.SaveChanges();
         }
 
         /// <summary>
@@ -53,17 +56,9 @@ namespace GraduationWorksOrganizer.Database.Services
         /// <param name="entity"></param>
         public void Delete<TEntity>(TEntity entity) where TEntity : class, IDatabaseEntity
         {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Метод за промяна
-        /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
-        /// <param name="entity"></param>
-        public void Edit<TEntity>(TEntity entity) where TEntity : class, IDatabaseEntity
-        {
-            throw new NotImplementedException();
+            TEntity contextEntity = _dbContext.Set<TEntity>().Find(entity);
+            _dbContext.Entry(contextEntity).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            _dbContext.SaveChanges();
         }
 
         /// <summary>
@@ -72,7 +67,7 @@ namespace GraduationWorksOrganizer.Database.Services
         /// <returns></returns>
         public IEnumerable<TEntity> GetAll<TEntity>() where TEntity : class, IDatabaseEntity
         {
-            throw new NotImplementedException();
+            return _dbContext.Set<TEntity>().ToList();
         }
 
         /// <summary>
@@ -81,7 +76,7 @@ namespace GraduationWorksOrganizer.Database.Services
         /// <returns></returns>
         public IEnumerable<TEntity> GetAll<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class, IDatabaseEntity
         {
-            throw new NotImplementedException();
+            return _dbContext.Set<TEntity>().Where(predicate).ToList();
         }
 
         /// <summary>
@@ -103,9 +98,10 @@ namespace GraduationWorksOrganizer.Database.Services
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entity"></param>
-        Task IAsyncRepository.Add<TEntity>(TEntity entity)
+        async Task IAsyncRepository.Add<TEntity>(TEntity entity)
         {
-            throw new NotImplementedException();
+            await _dbContext.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>
@@ -113,37 +109,29 @@ namespace GraduationWorksOrganizer.Database.Services
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entity"></param>
-        Task IAsyncRepository.Delete<TEntity>(TEntity entity)
+        async Task IAsyncRepository.Delete<TEntity>(TEntity entity)
         {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Метод за промяна
-        /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
-        /// <param name="entity"></param>
-        async Task IAsyncRepository.Edit<TEntity>(TEntity entity)
-        {
-            TEntity dbEntity = await _dbContext.Set<TEntity>().FindAsync(entity.Id);
+            TEntity contextEntity = await _dbContext.Set<TEntity>().FindAsync(entity.Id);
+            _dbContext.Entry(contextEntity).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>
         /// Метод който връща всички елементи от дадения тип
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<TEntity>> IAsyncRepository.GetAll<TEntity>()
+        async Task<IEnumerable<TEntity>> IAsyncRepository.GetAll<TEntity>()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Set<TEntity>().ToListAsync();
         }
 
         /// <summary>
         /// Метод който връща всички елементи от дадения тип по експешън
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<TEntity>> IAsyncRepository.GetAll<TEntity>(Expression<Func<TEntity, bool>> predicate)
+        async Task<IEnumerable<TEntity>> IAsyncRepository.GetAll<TEntity>(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Set<TEntity>().Where(predicate).ToListAsync();
         }
 
         /// <summary>
@@ -151,9 +139,9 @@ namespace GraduationWorksOrganizer.Database.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<TEntity> IAsyncRepository.GetById<TEntity>(int id)
+        async Task<TEntity> IAsyncRepository.GetById<TEntity>(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Set<TEntity>().FindAsync(id);
         }
 
         #endregion

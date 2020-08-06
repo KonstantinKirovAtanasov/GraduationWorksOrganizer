@@ -1,12 +1,12 @@
 ﻿using GraduationWorksOrganizer.Common.Attributes;
-using System.Collections.Generic;
+using GraduationWorksOrganizer.Core.Database.Models;
 
 namespace GraduationWorksOrganizer.Database.Models
 {
-    public class Specialty
+    public class Specialty : IDatabaseEntity
     {
         [EntityEnumValue]
-        public int SpecialtyId { get; set; }
+        public int Id { get; set; }
 
         [EntityEnumName]
         public string SpecialtyName { get; set; }

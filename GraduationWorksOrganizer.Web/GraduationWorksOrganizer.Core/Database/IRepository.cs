@@ -43,13 +43,6 @@ namespace GraduationWorksOrganizer.Core.Database
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entity"></param>
         void Delete<TEntity>(TEntity entity) where TEntity : class, IDatabaseEntity;
-
-        /// <summary>
-        /// Метод за промяна
-        /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
-        /// <param name="entity"></param>
-        void Edit<TEntity>(TEntity entity) where TEntity : class, IDatabaseEntity;
     }
 
     /// <summary>
@@ -89,12 +82,5 @@ namespace GraduationWorksOrganizer.Core.Database
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entity"></param>
         Task Delete<TEntity>(TEntity entity) where TEntity : class, IDatabaseEntity;
-
-        /// <summary>
-        /// Метод за промяна
-        /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
-        /// <param name="entity"></param>
-        Task Edit<TEntity>(TEntity entity) where TEntity : class, IDatabaseEntity;
     }
 }

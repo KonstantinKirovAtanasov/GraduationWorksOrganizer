@@ -41,9 +41,9 @@ namespace GraduationWorksOrganizer.Database
 
             // PrimaryKeys
             builder.Entity<GraduationWorkBlanckRequest>().HasKey(gwbr => gwbr.GraduationWorkBlanckRequestId);
-            builder.Entity<Faculty>().HasKey(f => f.FacultyId);
-            builder.Entity<Department>().HasKey(d => d.DepartmentId);
-            builder.Entity<Specialty>().HasKey(s => s.SpecialtyId);
+            builder.Entity<Faculty>().HasKey(f => f.Id);
+            builder.Entity<Department>().HasKey(d => d.Id);
+            builder.Entity<Specialty>().HasKey(s => s.Id);
 
             // Relations
             builder.Entity<Faculty>().HasMany(f => f.Departments).WithOne(d => d.Faculty).HasForeignKey(d => d.FacultyId).OnDelete(DeleteBehavior.Cascade);
@@ -55,25 +55,25 @@ namespace GraduationWorksOrganizer.Database
             // Seeds
             builder.Entity<Faculty>().HasData(new object[]
             {
-                new Faculty(){FacultyId = 1, FacultyName = "Факултет Компютърни системи и технологии"},
-                new Faculty(){FacultyId = 2, FacultyName = "Факултет по телекомуникации"},
+                new Faculty(){Id = 1, FacultyName = "Факултет Компютърни системи и технологии"},
+                new Faculty(){Id = 2, FacultyName = "Факултет по телекомуникации"},
             });
             builder.Entity<Department>().HasData(new object[]
             {
-                new Department(){DepartmentId = 1, DepartmentName = "Програмиране и компютърни технологии",FacultyId = 1},
-                new Department(){DepartmentId = 2, DepartmentName = "Компютърни системи",FacultyId = 1},
+                new Department(){Id = 1, DepartmentName = "Програмиране и компютърни технологии",FacultyId = 1},
+                new Department(){Id = 2, DepartmentName = "Компютърни системи",FacultyId = 1},
 
-                new Department(){DepartmentId = 3, DepartmentName = "Радиокомуникации и видеотехнологии",FacultyId = 2},
+                new Department(){Id = 3, DepartmentName = "Радиокомуникации и видеотехнологии",FacultyId = 2},
             });
             builder.Entity<Specialty>().HasData(new object[]
             {
-                new Specialty(){SpecialtyId = 1, SpecialtyName = "Графичен и web дизайн", DepartmentId = 1, SpecialtyType = SpecialtyType.Bachelor},
+                new Specialty(){Id = 1, SpecialtyName = "Графичен и web дизайн", DepartmentId = 1, SpecialtyType = SpecialtyType.Bachelor},
 
-                new Specialty(){SpecialtyId = 2, SpecialtyName = "Компютърно и софтуерно инженерство", DepartmentId = 2, SpecialtyType = SpecialtyType.Bachelor},
-                new Specialty(){SpecialtyId = 3, SpecialtyName = "Компютърно и софтуерно инженерство", DepartmentId = 2, SpecialtyType = SpecialtyType.Master},
+                new Specialty(){Id = 2, SpecialtyName = "Компютърно и софтуерно инженерство", DepartmentId = 2, SpecialtyType = SpecialtyType.Bachelor},
+                new Specialty(){Id = 3, SpecialtyName = "Компютърно и софтуерно инженерство", DepartmentId = 2, SpecialtyType = SpecialtyType.Master},
 
-                new Specialty(){SpecialtyId = 4, SpecialtyName = "Телекомуникации", DepartmentId = 3, SpecialtyType = SpecialtyType.Bachelor},
-                new Specialty(){SpecialtyId = 5, SpecialtyName = "Телекомуникационно инженерство", DepartmentId = 3, SpecialtyType = SpecialtyType.MasterAfterBachelor},
+                new Specialty(){Id = 4, SpecialtyName = "Телекомуникации", DepartmentId = 3, SpecialtyType = SpecialtyType.Bachelor},
+                new Specialty(){Id = 5, SpecialtyName = "Телекомуникационно инженерство", DepartmentId = 3, SpecialtyType = SpecialtyType.MasterAfterBachelor},
             });
 
         }

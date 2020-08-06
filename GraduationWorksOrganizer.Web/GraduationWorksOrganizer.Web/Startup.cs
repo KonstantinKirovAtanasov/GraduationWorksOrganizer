@@ -1,3 +1,4 @@
+using GraduationWorksOrganizer.Core.Database;
 using GraduationWorksOrganizer.Database;
 using GraduationWorksOrganizer.Database.Services;
 using Microsoft.AspNetCore.Builder;
@@ -29,7 +30,7 @@ namespace GraduationWorksOrganizer.Web
                 .AddEntityFrameworkStores<GraduationWorksOrganizerDataContext>();
             services.AddRazorPages();
 
-            services.AddScoped<SpecialtiesDatabaseService>();
+            services.AddScoped<IAsyncRepository, BaseRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
