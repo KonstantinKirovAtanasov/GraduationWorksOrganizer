@@ -23,7 +23,7 @@ namespace GraduationWorksOrganizer.Web.Helpers
             return values.Select(eachValue => new SelectListItem
             {
                 Text = eachValue.GetType().GetProperties().FirstOrDefault(p => p.GetCustomAttribute<EntityEnumNameAttribute>() != null).GetValue(eachValue).ToString(),
-                Value = eachValue.GetType().GetProperties().FirstOrDefault(p => p.GetCustomAttribute<EntityEnumValueAttribute>() != null).GetValue(eachValue).ToString()
+                Value = eachValue.GetType().GetProperties().FirstOrDefault(p => p.GetCustomAttribute<EntityEnumValueAttribute>() != null).GetValue(eachValue).ToString(),
             });
         }
     }

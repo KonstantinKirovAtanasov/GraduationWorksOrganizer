@@ -82,5 +82,6 @@ namespace GraduationWorksOrganizer.Core.Database
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entity"></param>
         Task Delete<TEntity>(TEntity entity) where TEntity : class, IDatabaseEntity;
+
     }
 }

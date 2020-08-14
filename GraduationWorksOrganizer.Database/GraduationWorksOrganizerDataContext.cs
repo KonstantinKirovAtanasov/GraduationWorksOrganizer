@@ -44,6 +44,7 @@ namespace GraduationWorksOrganizer.Database
             builder.Entity<Faculty>().HasKey(f => f.Id);
             builder.Entity<Department>().HasKey(d => d.Id);
             builder.Entity<Specialty>().HasKey(s => s.Id);
+            builder.Entity<Group>().HasKey(g => g.Id);
 
             // Relations
             builder.Entity<Faculty>().HasMany(f => f.Departments).WithOne(d => d.Faculty).HasForeignKey(d => d.FacultyId).OnDelete(DeleteBehavior.Cascade);
@@ -51,7 +52,9 @@ namespace GraduationWorksOrganizer.Database
 
             builder.Entity<Teacher>().HasOne(t => t.Department).WithMany().HasForeignKey(t => t.DepartmentId).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<Student>().HasOne(s => s.Specialty).WithMany().HasForeignKey(s => s.SpecialtyId).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Student>().HasOne(s => s.Group).WithMany(g => g.Students).HasForeignKey(s => s.GroupId).OnDelete(DeleteBehavior.NoAction);
 
+            builder.Entity<Group>().HasOne(g => g.Specialty).WithMany().HasForeignKey(g => g.SpecialtyId).OnDelete(DeleteBehavior.NoAction);
             // Seeds
             builder.Entity<Faculty>().HasData(new object[]
             {
@@ -74,6 +77,14 @@ namespace GraduationWorksOrganizer.Database
 
                 new Specialty(){Id = 4, SpecialtyName = "Телекомуникации", DepartmentId = 3, SpecialtyType = SpecialtyType.Bachelor},
                 new Specialty(){Id = 5, SpecialtyName = "Телекомуникационно инженерство", DepartmentId = 3, SpecialtyType = SpecialtyType.MasterAfterBachelor},
+            });
+            builder.Entity<Group>().HasData(new object[]
+            {
+                new Group(){Id = 1, FromYear = 2020, GroupName= "39", SpecialtyId = 1},
+                new Group(){Id = 2, FromYear = 2020, GroupName= "40", SpecialtyId = 1},
+                new Group(){Id = 3, FromYear = 2020, GroupName= "41", SpecialtyId = 2},
+                new Group(){Id = 4, FromYear = 2020, GroupName= "42", SpecialtyId = 2},
+                new Group(){Id = 5, FromYear = 2020, GroupName= "43", SpecialtyId = 2}
             });
 
         }

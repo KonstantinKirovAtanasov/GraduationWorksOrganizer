@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraduationWorksOrganizer.We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraduationWorksOrganizer.Database", "..\GraduationWorksOrganizer.Database\GraduationWorksOrganizer.Database.csproj", "{240EFA9D-AA30-4285-8C1C-938F63537656}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduationWorksOrganizer.Common", "GraduationWorksOrganizer.Common\GraduationWorksOrganizer.Common.csproj", "{0D680597-EA56-4236-8CF3-163C8AFB3169}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraduationWorksOrganizer.Common", "GraduationWorksOrganizer.Common\GraduationWorksOrganizer.Common.csproj", "{0D680597-EA56-4236-8CF3-163C8AFB3169}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduationWorksOrganizer.Core", "GraduationWorksOrganizer.Core\GraduationWorksOrganizer.Core.csproj", "{EC7FF613-16D3-4733-8B42-F122A31AEB91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraduationWorksOrganizer.Core", "GraduationWorksOrganizer.Core\GraduationWorksOrganizer.Core.csproj", "{EC7FF613-16D3-4733-8B42-F122A31AEB91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
