@@ -18,19 +18,19 @@ using System.Threading.Tasks;
 namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class RegisterModel : PageModel
+    public class RegisterStudentModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IAsyncRepository _dbService;
-        private readonly ILogger<RegisterModel> _logger;
+        private readonly ILogger<RegisterStudentModel> _logger;
         private readonly IEmailSender _emailSender;
 
-        public RegisterModel(
+        public RegisterStudentModel(
             IAsyncRepository dbService,
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            ILogger<RegisterModel> logger,
+            ILogger<RegisterStudentModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -46,16 +46,6 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
-        /// <summary>
-        /// Специалности
-        /// </summary>
-        public IEnumerable<Specialty> Specialties { get; set; }
-
-        /// <summary>
-        /// Катедри
-        /// </summary>
-        public IEnumerable<Department> Departments { get; set; }
 
         /// <summary>
         /// Факултети
@@ -86,6 +76,8 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
             public int DepartmentId { get; set; }
             [Required]
             public int FacultyId { get; set; }
+            [Required]
+            public int GroupId { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -144,8 +136,6 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
         /// <returns></returns>
         private async Task InitializeRequisites()
         {
-            Specialties = await _dbService.GetAll<Specialty>();
-            Departments = await _dbService.GetAll<Department>();
             Faculties = await _dbService.GetAll<Faculty>();
         }
     }

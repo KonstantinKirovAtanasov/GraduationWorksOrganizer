@@ -9,13 +9,13 @@ namespace GraduationWorksOrganizer.Database.Models
     /// <summary>
     /// Факултет
     /// </summary>
-    public class Faculty : IDatabaseEntity
+    public class Faculty : IEnumDbEntity, IDatabaseEntity
     {
         [EntityEnumValue]
         public int Id { get; set; }
 
         [EntityEnumName]
-        public string FacultyName { get; set; }
+        public string Name { get; set; }
 
         public virtual ICollection<Department> Departments { get; set; }
     }

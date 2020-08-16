@@ -9,17 +9,40 @@ namespace GraduationWorksOrganizer.Database
     {
         #region DbSets
 
+        /// <summary>
+        /// Преподаватели
+        /// </summary>
         public DbSet<Teacher> Teachers { get; set; }
 
+        /// <summary>
+        /// Студенти
+        /// </summary>
         public DbSet<Student> Students { get; set; }
 
+        /// <summary>
+        /// Request за одобрение на дипломна тема и работа
+        /// </summary>
         public DbSet<GraduationWorkBlanckRequest> GraduationWorkBlanckRequests { get; set; }
 
+        /// <summary>
+        /// Факултети
+        /// </summary>
         public DbSet<Faculty> Faculties { get; set; }
 
+        /// <summary>
+        /// Катедри
+        /// </summary>
         public DbSet<Department> Deparments { get; set; }
 
+        /// <summary>
+        /// Специалности
+        /// </summary>
         public DbSet<Specialty> Specialties { get; set; }
+
+        /// <summary>
+        /// Групи
+        /// </summary>
+        public DbSet<Group> Groups { get; set; }
 
         #endregion // DbSets
 
@@ -58,33 +81,33 @@ namespace GraduationWorksOrganizer.Database
             // Seeds
             builder.Entity<Faculty>().HasData(new object[]
             {
-                new Faculty(){Id = 1, FacultyName = "Факултет Компютърни системи и технологии"},
-                new Faculty(){Id = 2, FacultyName = "Факултет по телекомуникации"},
+                new Faculty(){Id = 1, Name = "Факултет Компютърни системи и технологии"},
+                new Faculty(){Id = 2, Name = "Факултет по телекомуникации"},
             });
             builder.Entity<Department>().HasData(new object[]
             {
-                new Department(){Id = 1, DepartmentName = "Програмиране и компютърни технологии",FacultyId = 1},
-                new Department(){Id = 2, DepartmentName = "Компютърни системи",FacultyId = 1},
+                new Department(){Id = 1, Name = "Програмиране и компютърни технологии",FacultyId = 1},
+                new Department(){Id = 2, Name = "Компютърни системи",FacultyId = 1},
 
-                new Department(){Id = 3, DepartmentName = "Радиокомуникации и видеотехнологии",FacultyId = 2},
+                new Department(){Id = 3, Name = "Радиокомуникации и видеотехнологии",FacultyId = 2},
             });
             builder.Entity<Specialty>().HasData(new object[]
             {
-                new Specialty(){Id = 1, SpecialtyName = "Графичен и web дизайн", DepartmentId = 1, SpecialtyType = SpecialtyType.Bachelor},
+                new Specialty(){Id = 1, Name = "Графичен и web дизайн", DepartmentId = 1, SpecialtyType = SpecialtyType.Bachelor},
 
-                new Specialty(){Id = 2, SpecialtyName = "Компютърно и софтуерно инженерство", DepartmentId = 2, SpecialtyType = SpecialtyType.Bachelor},
-                new Specialty(){Id = 3, SpecialtyName = "Компютърно и софтуерно инженерство", DepartmentId = 2, SpecialtyType = SpecialtyType.Master},
+                new Specialty(){Id = 2, Name = "Компютърно и софтуерно инженерство", DepartmentId = 2, SpecialtyType = SpecialtyType.Bachelor},
+                new Specialty(){Id = 3, Name = "Компютърно и софтуерно инженерство", DepartmentId = 2, SpecialtyType = SpecialtyType.Master},
 
-                new Specialty(){Id = 4, SpecialtyName = "Телекомуникации", DepartmentId = 3, SpecialtyType = SpecialtyType.Bachelor},
-                new Specialty(){Id = 5, SpecialtyName = "Телекомуникационно инженерство", DepartmentId = 3, SpecialtyType = SpecialtyType.MasterAfterBachelor},
+                new Specialty(){Id = 4, Name = "Телекомуникации", DepartmentId = 3, SpecialtyType = SpecialtyType.Bachelor},
+                new Specialty(){Id = 5, Name = "Телекомуникационно инженерство", DepartmentId = 3, SpecialtyType = SpecialtyType.MasterAfterBachelor},
             });
             builder.Entity<Group>().HasData(new object[]
             {
-                new Group(){Id = 1, FromYear = 2020, GroupName= "39", SpecialtyId = 1},
-                new Group(){Id = 2, FromYear = 2020, GroupName= "40", SpecialtyId = 1},
-                new Group(){Id = 3, FromYear = 2020, GroupName= "41", SpecialtyId = 2},
-                new Group(){Id = 4, FromYear = 2020, GroupName= "42", SpecialtyId = 2},
-                new Group(){Id = 5, FromYear = 2020, GroupName= "43", SpecialtyId = 2}
+                new Group(){Id = 1, FromYear = 2020, Name= "39", SpecialtyId = 1},
+                new Group(){Id = 2, FromYear = 2020, Name= "40", SpecialtyId = 1},
+                new Group(){Id = 3, FromYear = 2020, Name= "41", SpecialtyId = 2},
+                new Group(){Id = 4, FromYear = 2020, Name= "42", SpecialtyId = 2},
+                new Group(){Id = 5, FromYear = 2020, Name= "43", SpecialtyId = 2}
             });
 
         }

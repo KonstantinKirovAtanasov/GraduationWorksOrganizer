@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace GraduationWorksOrganizer.Database.Models
 {
-    public class Department : IDatabaseEntity
+    public class Department : IEnumDbEntity, IDatabaseEntity
     {
         [EntityEnumValue]
         public int Id { get; set; }
 
         [EntityEnumName]
-        public string DepartmentName { get; set; }
+        public string Name { get; set; }
 
         public virtual Faculty Faculty { get; set; }
 

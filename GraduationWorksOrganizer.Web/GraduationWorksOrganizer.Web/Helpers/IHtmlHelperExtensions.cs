@@ -20,11 +20,13 @@ namespace GraduationWorksOrganizer.Web.Helpers
         /// <returns></returns>
         public static IEnumerable<SelectListItem> GetEntityEnumSelectList<TEnumEntity>(this IHtmlHelper html, IEnumerable<TEnumEntity> values) where TEnumEntity : class
         {
-            return values.Select(eachValue => new SelectListItem
+            IEnumerable<SelectListItem> selectionItems = values.Select(eachValue => new SelectListItem
             {
                 Text = eachValue.GetType().GetProperties().FirstOrDefault(p => p.GetCustomAttribute<EntityEnumNameAttribute>() != null).GetValue(eachValue).ToString(),
                 Value = eachValue.GetType().GetProperties().FirstOrDefault(p => p.GetCustomAttribute<EntityEnumValueAttribute>() != null).GetValue(eachValue).ToString(),
             });
+
+            return selectionItems;
         }
     }
 }

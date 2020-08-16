@@ -8,7 +8,7 @@ namespace GraduationWorksOrganizer.Database.Models
     /// <summary>
     /// Група
     /// </summary>
-    public class Group : IDatabaseEntity
+    public class Group : IEnumDbEntity, IDatabaseEntity
     {
         /// <summary>
         /// Id
@@ -38,6 +38,6 @@ namespace GraduationWorksOrganizer.Database.Models
         /// <summary>
         /// Име на друпата
         /// </summary>
-        public string GroupName { get; set; }
+        public string Name { get; set; }
     }
 }

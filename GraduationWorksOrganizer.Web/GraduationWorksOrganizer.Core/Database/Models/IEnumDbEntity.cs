@@ -12,6 +12,6 @@ namespace GraduationWorksOrganizer.Core.Database.Models
         /// <summary>
         /// Пропърти за име
         /// </summary>
-        int Name { get; set; }
+        string Name { get; set; }
     }
 }
