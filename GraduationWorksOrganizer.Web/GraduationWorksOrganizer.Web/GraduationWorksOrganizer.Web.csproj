@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\GraduationWorksOrganizer.Database\GraduationWorksOrganizer.Database.csproj" />
+    <ProjectReference Include="..\GraduationWorksOrganizer.Additional\GraduationWorksOrganizer.Additional.csproj" />
   </ItemGroup>
 
 </Project>

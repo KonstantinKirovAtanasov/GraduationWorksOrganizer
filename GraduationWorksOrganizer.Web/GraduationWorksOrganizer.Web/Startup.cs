@@ -1,3 +1,5 @@
+using GraduationWorksOrganizer.Additional.SMTP;
+using GraduationWorksOrganizer.Core.Additional;
 using GraduationWorksOrganizer.Core.Database;
 using GraduationWorksOrganizer.Database;
 using GraduationWorksOrganizer.Database.Services;
@@ -29,7 +31,7 @@ namespace GraduationWorksOrganizer.Web
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<GraduationWorksOrganizerDataContext>();
             services.AddRazorPages();
-
+            services.AddScoped<IEmailSender, ComformationEmailSender>();
             services.AddScoped<IAsyncRepository, BaseRepository>();
         }
 
