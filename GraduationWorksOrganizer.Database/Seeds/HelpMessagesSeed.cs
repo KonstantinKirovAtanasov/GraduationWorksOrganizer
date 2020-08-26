@@ -14,16 +14,17 @@ namespace GraduationWorksOrganizer.Database.Seeds
         /// <param name="typeBuilder"></param>
         internal static void SeedData(this EntityTypeBuilder<HelpMessage> typeBuilder)
         {
-            typeBuilder.HasData(new HelpMessage() { Key = "email", Title = "Имейл", Content = "тест" });
-            typeBuilder.HasData(new HelpMessage() { Key = "password", Title = "Парола", Content = "тест" });
-            typeBuilder.HasData(new HelpMessage() { Key = "confirmpassword", Title = "Потжърьдажане на парола", Content = "тест" });
-            typeBuilder.HasData(new HelpMessage() { Key = "faculty", Title = "Факултет", Content = "тест" });
-            typeBuilder.HasData(new HelpMessage() { Key = "department", Title = "Катедра", Content = "тест" });
-            typeBuilder.HasData(new HelpMessage() { Key = "specialty", Title = "Специалност", Content = "тест" });
-            typeBuilder.HasData(new HelpMessage() { Key = "group", Title = "Група", Content = "тест" });
-            typeBuilder.HasData(new HelpMessage() { Key = "names", Title = "Имена", Content = "тест" });
-            typeBuilder.HasData(new HelpMessage() { Key = "personalnumber", Title = "ЕГН", Content = "тест" });
-            typeBuilder.HasData(new HelpMessage() { Key = "facultynumber", Title = "Факултетен Номер", Content = "тест" });
+            typeBuilder.HasData(new HelpMessage() { Id = 1, Key = "email", Title = "Имейл", Content = "Моля, попълнете имейл за потвърждение на регистрацията" });
+            typeBuilder.HasData(new HelpMessage() { Id = 2, Key = "password", Title = "Парола", Content = "Моля попълнете вашата парола. (Паролата трябва да съдържа поне 8 символа, главна буква, малка буква както и поне едно число)" });
+            typeBuilder.HasData(new HelpMessage() { Id = 3, Key = "confirmpassword", Title = "Потвърдажане на парола", Content = "Моля, повторете вашата парола." });
+            typeBuilder.HasData(new HelpMessage() { Id = 4, Key = "faculty", Title = "Факултет", Content = "Изберете факултет от падащото меню." });
+            typeBuilder.HasData(new HelpMessage() { Id = 5, Key = "department", Title = "Катедра", Content = "Изберете катедра от падащото меню." });
+            typeBuilder.HasData(new HelpMessage() { Id = 6, Key = "specialty", Title = "Специалност", Content = "Изберете специалност от падащото меню." });
+            typeBuilder.HasData(new HelpMessage() { Id = 7, Key = "group", Title = "Група", Content = "Изберете група от падащото меню." });
+            typeBuilder.HasData(new HelpMessage() { Id = 8, Key = "names", Title = "Имена", Content = "Моля, попълнете вашите имена." });
+            typeBuilder.HasData(new HelpMessage() { Id = 9, Key = "personalnumber", Title = "ЕГН", Content = "Моля, попълнете вашето ЕГН или ЛЧН." });
+            typeBuilder.HasData(new HelpMessage() { Id = 10, Key = "facultynumber", Title = "Факултетен Номер", Content = "Моля, попълнете вашия факултетен номер." });
+            typeBuilder.HasData(new HelpMessage() { Id = 11, Key = "defaultregisterstudenthelpmessage", Title = "Регистрация на студент", Content = "Моля, попълнете полетата във формата за регистрация на студент и натиснете бутона 'Регистрация'. (за да се регистрирате успешно в системата, трябва да попълните полетата с верни данни, след което да потвърдите вашата регистрация на чрез имейл за потвърждение. Имейлът за потвърждение ще бъде изпратен на посочената от вас поща.)." });
         }
     }
 }

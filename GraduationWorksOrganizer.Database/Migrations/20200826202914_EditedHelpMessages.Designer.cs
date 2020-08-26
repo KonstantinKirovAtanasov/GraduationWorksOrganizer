@@ -4,14 +4,16 @@ using GraduationWorksOrganizer.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GraduationWorksOrganizer.Database.Migrations
 {
     [DbContext(typeof(GraduationWorksOrganizerDataContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200826202914_EditedHelpMessages")]
+    partial class EditedHelpMessages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -248,13 +250,6 @@ namespace GraduationWorksOrganizer.Database.Migrations
                             Content = "Моля, попълнете вашия факултетен номер.",
                             Key = "facultynumber",
                             Title = "Факултетен Номер"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Content = "Моля, попълнете полетата във формата за регистрация на студент и натиснете бутона 'Регистрация'. (за да се регистрирате успешно в системата, трябва да попълните полетата с верни данни, след което да потвърдите вашата регистрация на чрез имейл за потвърждение. Имейлът за потвърждение ще бъде изпратен на посочената от вас поща.).",
-                            Key = "defaultregisterstudenthelpmessage",
-                            Title = "Регистрация на студент"
                         });
                 });
 

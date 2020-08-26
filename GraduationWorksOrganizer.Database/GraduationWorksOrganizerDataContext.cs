@@ -74,7 +74,7 @@ namespace GraduationWorksOrganizer.Database
             builder.Entity<Department>().HasKey(d => d.Id);
             builder.Entity<Specialty>().HasKey(s => s.Id);
             builder.Entity<Group>().HasKey(g => g.Id);
-            builder.Entity<HelpMessage>().HasKey(hm => hm.Key);
+            builder.Entity<HelpMessage>().HasKey(hm => hm.Id);
 
             // Relations
             builder.Entity<Faculty>().HasMany(f => f.Departments).WithOne(d => d.Faculty).HasForeignKey(d => d.FacultyId).OnDelete(DeleteBehavior.Cascade);

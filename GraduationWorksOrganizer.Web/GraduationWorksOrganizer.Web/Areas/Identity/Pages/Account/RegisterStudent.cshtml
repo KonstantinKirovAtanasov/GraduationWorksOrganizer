@@ -2,92 +2,82 @@
 @using GraduationWorksOrganizer.Web.Helpers
 @model RegisterStudentModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Регистрирай се като студент";
 }
-
 <h1>@ViewData["Title"]</h1>
-<h4>Create a new account.</h4>
 <hr />
 
-<div class="row">
-    <div class="col-md-6">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
+<form asp-route-returnUrl="@Model.ReturnUrl" method="post" class="helpinfodefault" data-helpmessagekey="defaultregisterstudenthelpmessage">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group  helpinfo" data-helpmessagekey="email">
                 <label asp-for="Input.Email"></label>
                 <input asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group helpinfo" data-helpmessagekey="password">
                 <label asp-for="Input.Password"></label>
                 <input asp-for="Input.Password" class="form-control" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group helpinfo" data-helpmessagekey="confirmpassword">
                 <label asp-for="Input.ConfirmPassword"></label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            <div class="form-group helpinfo" data-helpmessagekey="faculty">
                 <label>Факултет:</label>
                 <select id="facultySelect" class="form-control load" data-ajax-loadelementId="departmentSelect" asp-for="Input.FacultyId" asp-items="@Html.GetEntityEnumSelectList(Model.Faculties)">
                     <option value="default" selected="selected">Моля изберете</option>
                 </select>
                 <span></span>
             </div>
-            <div class="form-group">
+            <div class="form-group helpinfo" data-helpmessagekey="department">
                 <label>Катедра:</label>
                 <select id="departmentSelect" class="form-control load" data-axaj-load="Departments" data-ajax-loadelementId="specialtiesSelect" asp-for="Input.DepartmentId"></select>
                 <span></span>
             </div>
-            <div class="form-group">
+            <div class="form-group helpinfo" data-helpmessagekey="specialty">
                 <label>Специалност:</label>
                 <select id="specialtiesSelect" class="form-control load" data-axaj-load="Specialties" data-ajax-loadelementId="groupsSelect" asp-for="Input.SpecialtyId"></select>
                 <span></span>
             </div>
-            <div class="form-group">
+            <div class="form-group helpinfo" data-helpmessagekey="group">
                 <label>Група:</label>
                 <select id="groupsSelect" class="form-control load" data-axaj-load="Groups" asp-for="Input.GroupId"></select>
                 <span></span>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
+            <button type="submit" class="btn btn-primary">Регистрация</button>
+        </div>
+        <div class="col-md-6 col-md-offset-2">
+            <div class="form-group helpinfo" data-helpmessagekey="names">
                 <label>Имена:</label>
                 <input class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group helpinfo" data-helpmessagekey="personalnumber">
                 <label>ЕГН:</label>
                 <input class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group helpinfo" data-helpmessagekey="facultynumber">
                 <label>Факултетен Номер:</label>
                 <input class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-        </form>
-        <section>
-            <h4>Use another service to register.</h4>
-            <div>
-                <p>
-                    There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                    for details on setting up this ASP.NET application to support logging in via external services.
-                </p>
-            </div>
-        </section>
+            <section>
+                <h4 class="helptitle"></h4>
+                <div>
+                    <p class="helpcontent"></p>
+                </div>
+            </section>
+        </div>
     </div>
-</div>
+</form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/ajax/helpmessage.js"></script>
     <script>
         $(document).ready(function () {
             let items = document.getElementsByClassName("load");

@@ -3,8 +3,49 @@
 @{
     ViewData["Title"] = "Home page";
 }
+<style>
+    #imageslider {
+        width: 1240px;
+        height: 720px;
+        overflow: hidden;
+    }
 
+    #imageslider .slides {
+        display: block;
+        width: 10000px;
+        height: 720px;
+        margin: 0;
+        padding: 0;
+    }
+
+    #imageslider .slide {
+        float: left;
+        list-style-type: none;
+        width: 1240px;
+        height: 720px;
+    }
+</style>
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Добре дошли в системата за обработка на дипломни работи</h1>
+    <div id="imageslider">
+        <ul class="slides">
+            <li class="slide"><img src="~/images/scrolingTest2.jpg" /></li>
+            <li class="slide"><img src="~/images/scrolingTest2.jpg" /></li>
+            <li class="slide"><img src="~/images/scrolingTest2.jpg" /></li>
+        </ul>
+    </div>
+    <p>
+        Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,
+        Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,
+        Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,
+        Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,Текст с описание,
+    </p>
 </div>
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            
+        })
+    </script>
+}
