@@ -1,4 +1,5 @@
 ﻿using GraduationWorksOrganizer.Database.Models;
+using GraduationWorksOrganizer.Database.Seeds;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,11 @@ namespace GraduationWorksOrganizer.Database
         /// </summary>
         public DbSet<Group> Groups { get; set; }
 
+        /// <summary>
+        /// таблица с помощни съобщения
+        /// </summary>
+        public DbSet<HelpMessage> HelpMessages { get; set; }
+
         #endregion // DbSets
 
         #region Constructor
@@ -68,6 +74,7 @@ namespace GraduationWorksOrganizer.Database
             builder.Entity<Department>().HasKey(d => d.Id);
             builder.Entity<Specialty>().HasKey(s => s.Id);
             builder.Entity<Group>().HasKey(g => g.Id);
+            builder.Entity<HelpMessage>().HasKey(hm => hm.Key);
 
             // Relations
             builder.Entity<Faculty>().HasMany(f => f.Departments).WithOne(d => d.Faculty).HasForeignKey(d => d.FacultyId).OnDelete(DeleteBehavior.Cascade);
@@ -79,6 +86,7 @@ namespace GraduationWorksOrganizer.Database
 
             builder.Entity<Group>().HasOne(g => g.Specialty).WithMany().HasForeignKey(g => g.SpecialtyId).OnDelete(DeleteBehavior.NoAction);
             // Seeds
+            builder.Entity<HelpMessage>().SeedData();
             builder.Entity<Faculty>().HasData(new object[]
             {
                 new Faculty(){Id = 1, Name = "Факултет Компютърни системи и технологии"},
