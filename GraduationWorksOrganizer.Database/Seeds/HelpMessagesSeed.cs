@@ -25,6 +25,14 @@ namespace GraduationWorksOrganizer.Database.Seeds
             typeBuilder.HasData(new HelpMessage() { Id = 9, Key = "personalnumber", Title = "ЕГН", Content = "Моля, попълнете вашето ЕГН или ЛЧН." });
             typeBuilder.HasData(new HelpMessage() { Id = 10, Key = "facultynumber", Title = "Факултетен Номер", Content = "Моля, попълнете вашия факултетен номер." });
             typeBuilder.HasData(new HelpMessage() { Id = 11, Key = "defaultregisterstudenthelpmessage", Title = "Регистрация на студент", Content = "Моля, попълнете полетата във формата за регистрация на студент и натиснете бутона 'Регистрация'. (за да се регистрирате успешно в системата, трябва да попълните полетата с верни данни, след което да потвърдите вашата регистрация на чрез имейл за потвърждение. Имейлът за потвърждение ще бъде изпратен на посочената от вас поща.)." });
+            typeBuilder.HasData(new HelpMessage() { Id = 12, Key = "defaultregisterteacherhelpmessage", Title = "Регистрация на преподавател", Content = "Моля, попълнете полетата във формата за регистрация на преподавател и натиснете бутона 'Регистрация'. (за да се регистрирате успешно в системата, трябва да попълните полетата с верни данни, след което да потвърдите вашата регистрация на чрез имейл за потвърждение. Имейлът за потвърждение ще бъде изпратен на посочената от вас поща.)." });
+            typeBuilder.HasData(new HelpMessage() { Id = 13, Key = "cabinet", Title = "Кабинет", Content = "тест" });
+            typeBuilder.HasData(new HelpMessage() { Id = 14, Key = "phonenumber", Title = "Телефонен номер", Content = "тест" });
+            typeBuilder.HasData(new HelpMessage() { Id = 15, Key = "sciencedegree", Title = "Научна степен", Content = "тест" });
+            //typeBuilder.HasData(new HelpMessage() { Id = 15, Key = "names", Title = "Имена", Content = "Моля, попълнете вашите имена." });
+            //typeBuilder.HasData(new HelpMessage() { Id = 16, Key = "names", Title = "Имена", Content = "Моля, попълнете вашите имена." });
+            //typeBuilder.HasData(new HelpMessage() { Id = 17, Key = "names", Title = "Имена", Content = "Моля, попълнете вашите имена." });
+
         }
     }
 }

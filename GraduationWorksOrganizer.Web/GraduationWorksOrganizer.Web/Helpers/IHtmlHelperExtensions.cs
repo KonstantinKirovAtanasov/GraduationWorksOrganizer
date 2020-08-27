@@ -20,6 +20,9 @@ namespace GraduationWorksOrganizer.Web.Helpers
         /// <returns></returns>
         public static IEnumerable<SelectListItem> GetEntityEnumSelectList<TEnumEntity>(this IHtmlHelper html, IEnumerable<TEnumEntity> values) where TEnumEntity : class
         {
+            if (values == null)
+                return null;
+
             IEnumerable<SelectListItem> selectionItems = values.Select(eachValue => new SelectListItem
             {
                 Text = eachValue.GetType().GetProperties().FirstOrDefault(p => p.GetCustomAttribute<EntityEnumNameAttribute>() != null).GetValue(eachValue).ToString(),

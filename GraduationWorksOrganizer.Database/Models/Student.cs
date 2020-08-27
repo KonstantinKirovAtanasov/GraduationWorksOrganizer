@@ -8,6 +8,11 @@ namespace GraduationWorksOrganizer.Database.Models
     public class Student : IdentityUser
     {
         /// <summary>
+        /// Имена
+        /// </summary>
+        public string StudentName { get; set; }
+
+        /// <summary>
         /// Специалност
         /// </summary>
         public virtual Specialty Specialty { get; set; }
@@ -26,5 +31,15 @@ namespace GraduationWorksOrganizer.Database.Models
         /// Ид на групата
         /// </summary>
         public int GroupId { get; set; }
+
+        /// <summary>
+        /// ЕГН/ЛЧН
+        /// </summary>
+        public string PersonalNumber { get; set; }
+
+        /// <summary>
+        /// Факълтетен Номер
+        /// </summary>
+        public string FacultyNumber { get; set; }
     }
 }

@@ -36,17 +36,17 @@
             </div>
             <div class="form-group helpinfo" data-helpmessagekey="department">
                 <label>Катедра:</label>
-                <select id="departmentSelect" class="form-control load" data-axaj-load="Departments" data-ajax-loadelementId="specialtiesSelect" asp-for="Input.DepartmentId"></select>
+                <select id="departmentSelect" class="form-control load" data-axaj-load="Departments" data-ajax-loadelementId="specialtiesSelect" asp-for="Input.DepartmentId" asp-items="@Html.GetEntityEnumSelectList(Model.Departments)"></select>
                 <span></span>
             </div>
             <div class="form-group helpinfo" data-helpmessagekey="specialty">
                 <label>Специалност:</label>
-                <select id="specialtiesSelect" class="form-control load" data-axaj-load="Specialties" data-ajax-loadelementId="groupsSelect" asp-for="Input.SpecialtyId"></select>
+                <select id="specialtiesSelect" class="form-control load" data-axaj-load="Specialties" data-ajax-loadelementId="groupsSelect" asp-for="Input.SpecialtyId" asp-items="@Html.GetEntityEnumSelectList(Model.Specialties)"></select>
                 <span></span>
             </div>
             <div class="form-group helpinfo" data-helpmessagekey="group">
                 <label>Група:</label>
-                <select id="groupsSelect" class="form-control load" data-axaj-load="Groups" asp-for="Input.GroupId"></select>
+                <select id="groupsSelect" class="form-control load" data-axaj-load="Groups" asp-for="Input.GroupId" asp-items="@Html.GetEntityEnumSelectList(Model.Groups)"></select>
                 <span></span>
             </div>
             <button type="submit" class="btn btn-primary">Регистрация</button>
@@ -54,15 +54,15 @@
         <div class="col-md-6 col-md-offset-2">
             <div class="form-group helpinfo" data-helpmessagekey="names">
                 <label>Имена:</label>
-                <input class="form-control" />
+                <input class="form-control" asp-for="Input.Names" />
             </div>
             <div class="form-group helpinfo" data-helpmessagekey="personalnumber">
                 <label>ЕГН:</label>
-                <input class="form-control" />
+                <input class="form-control" asp-for="Input.PersonalNumber" />
             </div>
             <div class="form-group helpinfo" data-helpmessagekey="facultynumber">
                 <label>Факултетен Номер:</label>
-                <input class="form-control" />
+                <input class="form-control" asp-for="Input.FacultyNumber" />
             </div>
             <section>
                 <h4 class="helptitle"></h4>

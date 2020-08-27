@@ -1,18 +1,16 @@
-﻿using GraduationWorksOrganizer.Core.Database;
+﻿using GraduationWorksOrganizer.Core.Additional;
+using GraduationWorksOrganizer.Core.Database;
 using GraduationWorksOrganizer.Database.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using GraduationWorksOrganizer.Core.Additional;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
@@ -52,48 +50,71 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
         /// </summary>
         public IEnumerable<Faculty> Faculties { get; set; }
 
+        /// <summary>
+        /// Катедри
+        /// </summary>
+        public IEnumerable<Department> Departments { get; set; }
+
+        /// <summary>
+        /// Специуалности
+        /// </summary>
+        public IEnumerable<Specialty> Specialties { get; set; }
+
+        /// <summary>
+        /// Групи
+        /// </summary>
+        public IEnumerable<Group> Groups { get; set; }
+
         public class InputModel
         {
             [Required]
             [EmailAddress]
-            [Display(Name = "Email")]
             public string Email { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            [Required]
             public int SpecialtyId { get; set; }
-            [Required]
             public int DepartmentId { get; set; }
-            [Required]
             public int FacultyId { get; set; }
             [Required]
             public int GroupId { get; set; }
+            [Required]
+            public string Names { get; set; }
+            [Required]
+            public string PersonalNumber { get; set; }
+            [Required]
+            public string FacultyNumber { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            await InitializeRequisites();
+            Faculties = await _dbService.GetAll<Faculty>();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new Student()
+                {
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    GroupId = Input.GroupId,
+                    SpecialtyId = Input.SpecialtyId,
+                    StudentName = Input.Names,
+                    PersonalNumber = Input.PersonalNumber,
+                    FacultyNumber = Input.FacultyNumber
+                };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -105,7 +126,7 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendComfirmationMessageAsync(Input.Email, callbackUrl);
+                    // TO DO:  await _emailSender.SendComfirmationMessageAsync(Input.Email, callbackUrl);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
@@ -133,6 +154,9 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
         /// <returns></returns>
         private async Task InitializeRequisites()
         {
+            Departments = await _dbService.GetAll<Department>(d => d.FacultyId == Input.FacultyId);
+            Specialties = await _dbService.GetAll<Specialty>(s => s.DepartmentId == Input.DepartmentId);
+            Groups = await _dbService.GetAll<Group>(g => g.SpecialtyId == Input.SpecialtyId);
             Faculties = await _dbService.GetAll<Faculty>();
         }
     }

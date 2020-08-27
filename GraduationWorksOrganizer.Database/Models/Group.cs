@@ -1,7 +1,6 @@
-﻿using GraduationWorksOrganizer.Core.Database.Models;
-using System;
+﻿using GraduationWorksOrganizer.Common.Attributes;
+using GraduationWorksOrganizer.Core.Database.Models;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GraduationWorksOrganizer.Database.Models
 {
@@ -13,6 +12,7 @@ namespace GraduationWorksOrganizer.Database.Models
         /// <summary>
         /// Id
         /// </summary>
+        [EntityEnumValue]
         public int Id { get; set; }
 
         /// <summary>
@@ -38,6 +38,7 @@ namespace GraduationWorksOrganizer.Database.Models
         /// <summary>
         /// Име на друпата
         /// </summary>
+        [EntityEnumName]
         public string Name { get; set; }
     }
 }

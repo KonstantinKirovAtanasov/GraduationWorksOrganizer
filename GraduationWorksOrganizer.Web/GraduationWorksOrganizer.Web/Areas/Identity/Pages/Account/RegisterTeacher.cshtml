@@ -1,5 +1,79 @@
 ﻿@page
+@using GraduationWorksOrganizer.Web.Helpers
 @model GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account.RegisterTeacherModel
 @{
+    ViewData["Title"] = "Регистрирай се като преподавател";
 }
-<h1>HELLO TEACHER Aleskcheto be we</h1>
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<form method="post" class="helpinfodefault" data-helpmessagekey="defaultregisterteacherhelpmessage">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group  helpinfo" data-helpmessagekey="email">
+                <label>Имейл:</label>
+                <input class="form-control" asp-for="Input.Email" />
+                <span class="text-danger" asp-validation-for="Input.Email"></span>
+            </div>
+            <div class="form-group helpinfo" data-helpmessagekey="password">
+                <label>Парола:</label>
+                <input class="form-control" asp-for="Input.Password" />
+                <span class="text-danger" asp-validation-for="Input.Password"></span>
+            </div>
+            <div class="form-group helpinfo" data-helpmessagekey="confirmpassword">
+                <label>Потвърди парола:</label>
+                <input class="form-control" asp-for="Input.ConfirmPassword" />
+                <span class="text-danger" asp-validation-for="Input.ConfirmPassword"></span>
+            </div>
+            <div class="form-group helpinfo" data-helpmessagekey="faculty">
+                <label>Факултет:</label>
+                <select id="facultySelect" class="form-control load" data-ajax-loadelementId="departmentSelect" asp-for="Input.FacultyId" asp-items="@Html.GetEntityEnumSelectList(Model.Faculties)">
+                    <option value="default" selected="selected">Моля изберете</option>
+                </select>
+                <span class="text-danger" asp-validation-for="Input.FacultyId"></span>
+            </div>
+            <div class="form-group helpinfo" data-helpmessagekey="department">
+                <label>Катедра:</label>
+                <select id="departmentSelect" class="form-control load" data-axaj-load="Departments" data-ajax-loadelementId="specialtiesSelect" asp-for="Input.DepartmentId" asp-items="@Html.GetEntityEnumSelectList(Model.Departments)"></select>
+                <span class="text-danger" asp-validation-for="Input.DepartmentId"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Регистрация</button>
+        </div>
+        <div class="col-md-6 col-md-offset-2">
+            <div class="form-group helpinfo" data-helpmessagekey="cabinet">
+                <label>Кабинет:</label>
+                <input class="form-control" asp-for="Input.Cabinet" />
+                <span class="text-danger" asp-validation-for="Input.Cabinet"></span>
+            </div>
+            <div class="form-group helpinfo" data-helpmessagekey="phonenumber">
+                <label>Телефон:</label>
+                <input class="form-control" asp-for="Input.PhoneNumber" />
+                <span class="text-danger" asp-validation-for="Input.PhoneNumber"></span>
+            </div>
+            <div class="form-group helpinfo" data-helpmessagekey="names">
+                <label>Имена:</label>
+                <input class="form-control" asp-for="Input.Names" />
+                <span class="text-danger" asp-validation-for="Input.Names"></span>
+            </div>
+            <div class="form-group helpinfo" data-helpmessagekey="sciencedegree">
+                <label>Научна степен:</label>
+                <input class="form-control" asp-for="Input.ScienceDegree" />
+                <span class="text-danger" asp-validation-for="Input.ScienceDegree"></span>
+            </div>
+            <section>
+                <h4 class="helptitle"></h4>
+                <div>
+                    <p class="helpcontent"></p>
+                </div>
+            </section>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/ajax/helpmessage.js"></script>
+    <script src="~/js/ajax/fillselectoptionsonbaseoflastselection.js"></script>
+}
