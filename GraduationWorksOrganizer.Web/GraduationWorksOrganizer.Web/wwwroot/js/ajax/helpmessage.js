@@ -5,16 +5,32 @@
     RegisterEventHaandlers();
 
     function RegisterEventHaandlers() {
-        let items = $('.helpinfo');
-        for (let i = 0; i < items.length; i++) {
-            items[i].addEventListener('mouseenter', function () {
-                const helpMessageKey = $(items[i]).attr('data-helpmessagekey');
+        $('.helpinfo').each(function (index, item) {
+            const helpMessageKey = $(item).attr('data-helpmessagekey');
+            item.addEventListener('mouseenter', function () {
                 RequestForHelpMessage(helpMessageKey);
             });
-            items[i].addEventListener('mouseleave', function () {
-                RequestForHelpMessage(defaultHelpMessageKey);
+            item.addEventListener('mouseleave', function () {
+                if (messagesCache['onfocus'] == null) { RequestForHelpMessage(defaultHelpMessageKey); }
+                else { RequestForHelpMessage(messagesCache['onfocus']); }
             });
-        }
+            $(item).find('input').each(function (index, inputElement) {
+                inputElement.addEventListener('focus', function () {
+                    CacheFocusedElement(helpMessageKey);
+                    ApplyHelpMessage(messagesCache[helpMessageKey]);
+                });
+            });
+            $(item).find('input').each(function (index, inputElement) {
+                inputElement.addEventListener('blur', function () {
+                    messagesCache['onfocus'] = null;
+                    RequestForHelpMessage(defaultHelpMessageKey);
+                })
+            });
+        });
+    }
+
+    function CacheFocusedElement(helpMessageKey) {
+        messagesCache['onfocus'] = helpMessageKey;
     }
 
     function RequestForHelpMessage(helpMessageKey) {

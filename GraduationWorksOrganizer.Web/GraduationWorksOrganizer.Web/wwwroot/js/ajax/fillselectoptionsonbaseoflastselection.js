@@ -1,7 +1,5 @@
 ﻿$(document).ready(function () {
-    let items = document.getElementsByClassName("load");
-    for (let i = 0; i < items.length; i++) {
-        let item = items[i];
+    $(".load").each(function (index, item) {
         item.addEventListener('change', function () {
             RemoveDefaultOption(item.id);
             const $itemSourceSelectId = $(item).attr('data-ajax-loadelementId');
@@ -12,7 +10,7 @@
             MakeSelectDisabledIfEmpty(item);
         })
         MakeSelectDisabledIfEmpty(item);
-    }
+    });
 
     function requestSelectOptions(apiEndPoint, itemForLoadId, selectedId) {
         const apiRoute = 'https://localhost:44306/api/UnivercityItems/';
