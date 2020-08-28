@@ -65,7 +65,5 @@ namespace GraduationWorksOrganizer.Additional.SMTP
         {
             smtp.Dispose();
         }
-
-
     }
 }

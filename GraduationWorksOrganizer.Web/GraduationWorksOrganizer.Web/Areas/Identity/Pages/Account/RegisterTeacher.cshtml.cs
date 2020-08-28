@@ -1,4 +1,5 @@
-﻿using GraduationWorksOrganizer.Core.Additional;
+﻿using GraduationWorksOrganizer.Common;
+using GraduationWorksOrganizer.Core.Additional;
 using GraduationWorksOrganizer.Core.Database;
 using GraduationWorksOrganizer.Database.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -102,6 +103,7 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, Constants.RoleNames.TeacherRole);
                     await SendConfirmationEmail(user);
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
@@ -119,6 +121,8 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
+
+            Faculties = await _dbService.GetAll<Faculty>();
             Departments = await _dbService.GetAll<Department>(d => d.FacultyId == Input.FacultyId);
             return Page();
         }
@@ -155,7 +159,7 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
                 TeacherName = Input.Names,
                 Cabinet = Input.Cabinet,
                 ScienceDegree = Input.ScienceDegree,
-                PhoneNumber = Input.PhoneNumber
+                PhoneNumber = Input.PhoneNumber,
             };
         }
     }

@@ -1,4 +1,5 @@
-using GraduationWorksOrganizer.Additional.SMTP;
+﻿using GraduationWorksOrganizer.Additional.SMTP;
+using GraduationWorksOrganizer.Common;
 using GraduationWorksOrganizer.Core.Additional;
 using GraduationWorksOrganizer.Core.Database;
 using GraduationWorksOrganizer.Database;
@@ -6,11 +7,13 @@ using GraduationWorksOrganizer.Database.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Web
 {
@@ -26,11 +29,15 @@ namespace GraduationWorksOrganizer.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddRazorPages();
+            services.AddAuthentication();
+            ConfigureAuthorization(services);
+
             services.AddDbContext<GraduationWorksOrganizerDataContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<GraduationWorksOrganizerDataContext>();
-            services.AddRazorPages();
+
             services.AddScoped<IEmailSender, ComformationEmailSender>();
             services.AddScoped<IAsyncRepository, BaseRepository>();
         }
@@ -58,11 +65,42 @@ namespace GraduationWorksOrganizer.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+            SetupRolesAndClaims(app.ApplicationServices.CreateScope().ServiceProvider).Wait();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
+            });
+        }
+
+        /// <summary>
+        /// Метод който сетъп-ва роли и клеймове в приложението
+        /// </summary>
+        /// <param name="services"></param>
+        private async Task SetupRolesAndClaims(IServiceProvider serviceProvider)
+        {
+            RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            if (!await roleManager.RoleExistsAsync(Constants.RoleNames.AdminRole))
+                await roleManager.CreateAsync(new IdentityRole(Constants.RoleNames.AdminRole));
+            if (!await roleManager.RoleExistsAsync(Constants.RoleNames.PromotedTeacherRole))
+                await roleManager.CreateAsync(new IdentityRole(Constants.RoleNames.PromotedTeacherRole));
+            if (!await roleManager.RoleExistsAsync(Constants.RoleNames.TeacherRole))
+                await roleManager.CreateAsync(new IdentityRole(Constants.RoleNames.TeacherRole));
+            if (!await roleManager.RoleExistsAsync(Constants.RoleNames.StudentRole))
+                await roleManager.CreateAsync(new IdentityRole(Constants.RoleNames.StudentRole));
+        }
+
+        /// <summary>
+        /// Метод който сетъп-ва policies в приложението
+        /// </summary>
+        /// <param name="services"></param>
+        private void ConfigureAuthorization(IServiceCollection services)
+        {
+            services.AddAuthorization(op =>
+            {
+                op.AddPolicy(Constants.PolicyNames.ViewTheses, p => p.RequireRole(Constants.RoleNames.StudentRole, Constants.RoleNames.TeacherRole, Constants.RoleNames.PromotedTeacherRole));
             });
         }
     }

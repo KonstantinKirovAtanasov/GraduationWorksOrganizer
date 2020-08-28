@@ -1,4 +1,5 @@
-﻿using GraduationWorksOrganizer.Database.Models;
+﻿using GraduationWorksOrganizer.Common;
+using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Seeds;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -117,7 +118,6 @@ namespace GraduationWorksOrganizer.Database
                 new Group(){Id = 4, FromYear = 2020, Name= "42", SpecialtyId = 2},
                 new Group(){Id = 5, FromYear = 2020, Name= "43", SpecialtyId = 2}
             });
-
         }
     }
 }
