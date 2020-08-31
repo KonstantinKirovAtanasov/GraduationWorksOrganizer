@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GraduationWorksOrganizer.Common\GraduationWorksOrganizer.Common.csproj" />
+  </ItemGroup>
+
 </Project>

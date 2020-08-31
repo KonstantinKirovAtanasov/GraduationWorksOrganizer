@@ -6,48 +6,16 @@
 <h1>@ViewData["Title"]</h1>
 <hr />
 
-<ul>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-    <li>THESES ITEM</li>
-</ul>
+<form id="form1" runat="server">
+    <ul>
+        @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.ThesesViewModel vm in Model.Theses)
+        {
+            <li value="@vm.ThesesId">
+                <h3>@vm.Title</h3>
+                <h4>@vm.Type</h4>
+                <label>@vm.Description</label>
+                <label>@vm.Creator</label>
+            </li>
+        }
+    </ul>
+</form>

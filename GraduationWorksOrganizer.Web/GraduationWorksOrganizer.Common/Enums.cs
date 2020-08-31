@@ -9,6 +9,14 @@ namespace GraduationWorksOrganizer.Common
     /// </summary>
     public class Enums
     {
-       
+        /// <summary>
+        /// Статус на тема
+        /// </summary>
+        public enum ThesesStatusType
+        {
+            Accept,
+            Reject,
+            Pending,
+        }
     }
 }

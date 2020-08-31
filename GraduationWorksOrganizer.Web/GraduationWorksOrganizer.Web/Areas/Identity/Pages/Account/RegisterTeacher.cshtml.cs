@@ -104,7 +104,7 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, Constants.RoleNames.TeacherRole);
-                    await SendConfirmationEmail(user);
+                    //await SendConfirmationEmail(user);
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email });

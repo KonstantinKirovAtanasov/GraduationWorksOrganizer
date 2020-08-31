@@ -40,6 +40,7 @@ namespace GraduationWorksOrganizer.Web
 
             services.AddScoped<IEmailSender, ComformationEmailSender>();
             services.AddScoped<IAsyncRepository, BaseRepository>();
+            services.AddScoped<IThesesDatabaseService, ThesesDatabaseService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -51,6 +51,11 @@ namespace GraduationWorksOrganizer.Database
         /// </summary>
         public DbSet<HelpMessage> HelpMessages { get; set; }
 
+        /// <summary>
+        /// таблица с теми
+        /// </summary>
+        public DbSet<Theses> Theses { get; set; }
+
         #endregion // DbSets
 
         #region Constructor
@@ -76,6 +81,7 @@ namespace GraduationWorksOrganizer.Database
             builder.Entity<Specialty>().HasKey(s => s.Id);
             builder.Entity<Group>().HasKey(g => g.Id);
             builder.Entity<HelpMessage>().HasKey(hm => hm.Id);
+            builder.Entity<Theses>().HasKey(t => t.Id);
 
             // Relations
             builder.Entity<Faculty>().HasMany(f => f.Departments).WithOne(d => d.Faculty).HasForeignKey(d => d.FacultyId).OnDelete(DeleteBehavior.Cascade);
@@ -85,7 +91,11 @@ namespace GraduationWorksOrganizer.Database
             builder.Entity<Student>().HasOne(s => s.Specialty).WithMany().HasForeignKey(s => s.SpecialtyId).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<Student>().HasOne(s => s.Group).WithMany(g => g.Students).HasForeignKey(s => s.GroupId).OnDelete(DeleteBehavior.NoAction);
 
+            builder.Entity<Theses>().HasOne(t => t.Creator).WithMany().HasForeignKey(t => t.CreatorId).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Theses>().HasOne(t => t.TargetSpecialty).WithMany().HasForeignKey(t => t.TargetSpecialtyId).OnDelete(DeleteBehavior.NoAction);
+
             builder.Entity<Group>().HasOne(g => g.Specialty).WithMany().HasForeignKey(g => g.SpecialtyId).OnDelete(DeleteBehavior.NoAction);
+
             // Seeds
             builder.Entity<HelpMessage>().SeedData();
             builder.Entity<Faculty>().HasData(new object[]
