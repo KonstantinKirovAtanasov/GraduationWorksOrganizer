@@ -49,6 +49,10 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
             await InitializeViewModelItems();
         }
 
+        /// <summary>
+        /// Метод който инициализира реквизити от VM
+        /// </summary>
+        /// <returns></returns>
         private async Task InitializeViewModelItems()
         {
             IEnumerable<ITheses> theses = await _dbService.GetAllActive();

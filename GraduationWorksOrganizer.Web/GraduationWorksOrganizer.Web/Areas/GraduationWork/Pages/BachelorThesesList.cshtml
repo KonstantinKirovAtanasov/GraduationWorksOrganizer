@@ -5,17 +5,47 @@
 }
 <h1>@ViewData["Title"]</h1>
 <hr />
-
 <form id="form1" runat="server">
-    <ul>
-        @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.ThesesViewModel vm in Model.Theses)
-        {
-            <li value="@vm.ThesesId">
-                <h3>@vm.Title</h3>
-                <h4>@vm.Type</h4>
-                <label>@vm.Description</label>
-                <label>@vm.Creator</label>
-            </li>
-        }
-    </ul>
+    <table>
+        <tbody>
+            @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.ThesesViewModel vm in Model.Theses)
+            {
+                <tr style="width: 100%;">
+                    <td>
+                        <div class="row bordercorner">
+                            <div class="col text-align-right">
+                                <text class="modal-title">Заглавие:</text>
+                                <text>@vm.Title</text>
+                            </div>
+                            <div class="col text-align-right">
+                                <text class="modal-title">Тип:</text>
+                                <text>@vm.Type</text>
+                            </div>
+                            <div class="col text-align-left">
+                                <text class="modal-title">Автор:</text>
+                                <text>@vm.Creator</text>
+                            </div>
+                            <div class="row">
+                                <text>Описание:</text>
+                                <text>@vm.Description</text>
+                                <span></span>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <t
+                <td>
+                    <div class="footer-space">
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+
+
 </form>
