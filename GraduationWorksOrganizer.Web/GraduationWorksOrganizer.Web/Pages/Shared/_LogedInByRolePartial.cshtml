@@ -29,11 +29,12 @@
 @if ((await AuthorizationService.AuthorizeAsync(User, Constants.PolicyNames.ViewTheses)).Succeeded)
 {
     <div class="dropdown">
-        <button class="dropbtn">ТЕСТ</button>
+        <button class="dropbtn">Комисии</button>
         <div class="dropdown-content">
-            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="/BachelorThesesList" title="Manage">ТЕСТ</a>
-            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="" title="Manage">ТЕСТ</a>
-            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="" title="Manage">ТЕСТ</a>
+            @**ТО ДО *@
+            <a class="nav-link text-dark" asp-area="Commissions" asp-page="" title="Manage">Списък с комисии</a>
+            @**ТО ДО *@
+            <a class="nav-link text-dark" asp-area="Commissions" asp-page="" title="Manage">Създай комисия</a>
         </div>
     </div>
 }
@@ -42,9 +43,9 @@
     <div class="dropdown">
         <button class="dropbtn">ТЕСТ</button>
         <div class="dropdown-content">
-            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="/BachelorThesesList" title="Manage">ТЕСТ</a>
-            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="" title="Manage">ТЕСТ</a>
-            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="" title="Manage">ТЕСТ</a>
+            <a class="nav-link text-dark" asp-area="" asp-page="/BachelorThesesList" title="Manage">ТЕСТ</a>
+            <a class="nav-link text-dark" asp-area="" asp-page="" title="Manage">ТЕСТ</a>
+            <a class="nav-link text-dark" asp-area="" asp-page="" title="Manage">ТЕСТ</a>
         </div>
     </div>
 }
@@ -53,9 +54,9 @@
     <div class="dropdown">
         <button class="dropbtn">ТЕСТ</button>
         <div class="dropdown-content">
-            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="/BachelorThesesList" title="Manage">ТЕСТ</a>
-            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="" title="Manage">ТЕСТ</a>
-            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="" title="Manage">ТЕСТ</a>
+            <a class="nav-link text-dark" asp-area="" asp-page="/BachelorThesesList" title="Manage">ТЕСТ</a>
+            <a class="nav-link text-dark" asp-area="" asp-page="" title="Manage">ТЕСТ</a>
+            <a class="nav-link text-dark" asp-area="" asp-page="" title="Manage">ТЕСТ</a>
         </div>
     </div>
 }

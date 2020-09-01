@@ -28,7 +28,7 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            return Redirect("Logout");
+            return Redirect("~/Index");
         }
     }
 }
