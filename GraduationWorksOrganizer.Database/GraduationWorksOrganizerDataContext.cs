@@ -1,5 +1,6 @@
 ﻿using GraduationWorksOrganizer.Common;
 using GraduationWorksOrganizer.Database.Models;
+using GraduationWorksOrganizer.Database.Models.Base;
 using GraduationWorksOrganizer.Database.Seeds;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -71,8 +72,8 @@ namespace GraduationWorksOrganizer.Database
         {
             base.OnModelCreating(builder);
             // Graph types
-            builder.Entity<Teacher>().HasBaseType<IdentityUser>();
-            builder.Entity<Student>().HasBaseType<IdentityUser>();
+            builder.Entity<Teacher>().HasBaseType<ApplicationIdentityBase>();
+            builder.Entity<Student>().HasBaseType<ApplicationIdentityBase>();
 
             // PrimaryKeys
             builder.Entity<GraduationWorkBlanckRequest>().HasKey(gwbr => gwbr.GraduationWorkBlanckRequestId);

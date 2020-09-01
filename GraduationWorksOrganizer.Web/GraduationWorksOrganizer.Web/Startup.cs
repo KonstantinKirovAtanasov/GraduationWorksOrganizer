@@ -3,6 +3,7 @@ using GraduationWorksOrganizer.Common;
 using GraduationWorksOrganizer.Core.Additional;
 using GraduationWorksOrganizer.Core.Database;
 using GraduationWorksOrganizer.Database;
+using GraduationWorksOrganizer.Database.Models.Base;
 using GraduationWorksOrganizer.Database.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,7 +36,7 @@ namespace GraduationWorksOrganizer.Web
 
             services.AddDbContext<GraduationWorksOrganizerDataContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<ApplicationIdentityBase, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<GraduationWorksOrganizerDataContext>();
 
             services.AddScoped<IEmailSender, ComformationEmailSender>();
@@ -102,6 +103,8 @@ namespace GraduationWorksOrganizer.Web
             services.AddAuthorization(op =>
             {
                 op.AddPolicy(Constants.PolicyNames.ViewTheses, p => p.RequireRole(Constants.RoleNames.StudentRole, Constants.RoleNames.TeacherRole, Constants.RoleNames.PromotedTeacherRole));
+                op.AddPolicy(Constants.PolicyNames.ApproveTheses, p => p.RequireRole(Constants.RoleNames.TeacherRole, Constants.RoleNames.PromotedTeacherRole));
+                op.AddPolicy(Constants.PolicyNames.AddTheses, p => p.RequireRole(Constants.RoleNames.StudentRole, Constants.RoleNames.TeacherRole));
             });
         }
     }

@@ -1,4 +1,6 @@
-﻿namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
+﻿using System;
+
+namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
 {
     /// <summary>
     /// VM за теза
@@ -34,5 +36,10 @@
         /// Създател
         /// </summary>
         public string Creator { get; set; }
+
+        /// <summary>
+        ///Дата на създаване
+        /// </summary>
+        public DateTime CreationDate { get; set; }
     }
 }

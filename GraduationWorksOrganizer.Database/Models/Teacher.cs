@@ -1,17 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using GraduationWorksOrganizer.Database.Models.Base;
+using Microsoft.AspNetCore.Identity;
 
 namespace GraduationWorksOrganizer.Database.Models
 {
     /// <summary>
     /// Учител
     /// </summary>
-    public class Teacher : IdentityUser
+    public class Teacher : ApplicationIdentityBase
     {
-        /// <summary>
-        /// Имена
-        /// </summary>
-        public string TeacherName { get; set; }
-
         /// <summary>
         /// Катедра
         /// </summary>

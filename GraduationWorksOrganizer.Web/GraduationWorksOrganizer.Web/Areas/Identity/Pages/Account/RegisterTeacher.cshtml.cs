@@ -2,6 +2,7 @@
 using GraduationWorksOrganizer.Core.Additional;
 using GraduationWorksOrganizer.Core.Database;
 using GraduationWorksOrganizer.Database.Models;
+using GraduationWorksOrganizer.Database.Models.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,8 +22,8 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
     {
         #region Declarations
 
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<ApplicationIdentityBase> _signInManager;
+        private readonly UserManager<ApplicationIdentityBase> _userManager;
         private readonly IAsyncRepository _dbService;
         private readonly ILogger<RegisterStudentModel> _logger;
         private readonly IEmailSender _emailSender;
@@ -32,8 +33,8 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
         #region Constructor
         public RegisterTeacherModel(
                     IAsyncRepository dbService,
-                    UserManager<IdentityUser> userManager,
-                    SignInManager<IdentityUser> signInManager,
+                    UserManager<ApplicationIdentityBase> userManager,
+                    SignInManager<ApplicationIdentityBase> signInManager,
                     ILogger<RegisterStudentModel> logger,
                     IEmailSender emailSender)
         {
@@ -99,7 +100,7 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
         {
             if (ModelState.IsValid)
             {
-                IdentityUser user = GenerateTeacher();
+                ApplicationIdentityBase user = GenerateTeacher();
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -132,7 +133,7 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        private async Task SendConfirmationEmail(IdentityUser user)
+        private async Task SendConfirmationEmail(ApplicationIdentityBase user)
         {
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -156,7 +157,7 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
                 UserName = Input.Email,
                 Email = Input.Email,
                 DepartmentId = Input.DepartmentId,
-                TeacherName = Input.Names,
+                Name = Input.Names,
                 Cabinet = Input.Cabinet,
                 ScienceDegree = Input.ScienceDegree,
                 PhoneNumber = Input.PhoneNumber,

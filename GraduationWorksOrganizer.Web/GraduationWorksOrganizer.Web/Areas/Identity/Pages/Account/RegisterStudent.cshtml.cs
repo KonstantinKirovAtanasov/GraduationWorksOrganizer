@@ -1,6 +1,7 @@
 ﻿using GraduationWorksOrganizer.Core.Additional;
 using GraduationWorksOrganizer.Core.Database;
 using GraduationWorksOrganizer.Database.Models;
+using GraduationWorksOrganizer.Database.Models.Base;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -18,16 +19,16 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterStudentModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<ApplicationIdentityBase> _signInManager;
+        private readonly UserManager<ApplicationIdentityBase> _userManager;
         private readonly IAsyncRepository _dbService;
         private readonly ILogger<RegisterStudentModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterStudentModel(
             IAsyncRepository dbService,
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<ApplicationIdentityBase> userManager,
+            SignInManager<ApplicationIdentityBase> signInManager,
             ILogger<RegisterStudentModel> logger,
             IEmailSender emailSender)
         {
@@ -110,7 +111,7 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
                     Email = Input.Email,
                     GroupId = Input.GroupId,
                     SpecialtyId = Input.SpecialtyId,
-                    StudentName = Input.Names,
+                    Name = Input.Names,
                     PersonalNumber = Input.PersonalNumber,
                     FacultyNumber = Input.FacultyNumber
                 };

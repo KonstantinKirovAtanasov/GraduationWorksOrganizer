@@ -4,14 +4,58 @@
 
 @if ((await AuthorizationService.AuthorizeAsync(User, Constants.PolicyNames.ViewTheses)).Succeeded)
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="/BachelorThesesList" title="Manage">Theses</a>
-    </li>
-
     <div class="dropdown">
-        <button class="dropbtn">Dropdown</button>
+        <button class="dropbtn">Теми</button>
         <div class="dropdown-content">
-            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="/BachelorThesesList" title="Manage">Theses</a>
+            @if ((await AuthorizationService.AuthorizeAsync(User, Constants.PolicyNames.ViewTheses)).Succeeded)
+            {
+                <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="/BachelorThesesList" title="Manage">Списък с теми</a>
+            }
+            @if ((await AuthorizationService.AuthorizeAsync(User, Constants.PolicyNames.AddTheses)).Succeeded)
+            {
+                <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="/AddTheses" title="Manage">Добави тема</a>
+            }
+            @if ((await AuthorizationService.AuthorizeAsync(User, Constants.PolicyNames.ApproveTheses)).Succeeded)
+            {
+                <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="/PendingThesesList" title="Manage">Чакащи одобрение</a>
+            }
+            @if ((await AuthorizationService.AuthorizeAsync(User, Constants.PolicyNames.ViewTheses)).Succeeded)
+            {
+                <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="" title="Manage">Моите теми</a>
+            }
+        </div>
+    </div>
+}
+@if ((await AuthorizationService.AuthorizeAsync(User, Constants.PolicyNames.ViewTheses)).Succeeded)
+{
+    <div class="dropdown">
+        <button class="dropbtn">ТЕСТ</button>
+        <div class="dropdown-content">
+            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="/BachelorThesesList" title="Manage">ТЕСТ</a>
+            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="" title="Manage">ТЕСТ</a>
+            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="" title="Manage">ТЕСТ</a>
+        </div>
+    </div>
+}
+@if ((await AuthorizationService.AuthorizeAsync(User, Constants.PolicyNames.ViewTheses)).Succeeded)
+{
+    <div class="dropdown">
+        <button class="dropbtn">ТЕСТ</button>
+        <div class="dropdown-content">
+            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="/BachelorThesesList" title="Manage">ТЕСТ</a>
+            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="" title="Manage">ТЕСТ</a>
+            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="" title="Manage">ТЕСТ</a>
+        </div>
+    </div>
+}
+@if ((await AuthorizationService.AuthorizeAsync(User, Constants.PolicyNames.ViewTheses)).Succeeded)
+{
+    <div class="dropdown">
+        <button class="dropbtn">ТЕСТ</button>
+        <div class="dropdown-content">
+            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="/BachelorThesesList" title="Manage">ТЕСТ</a>
+            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="" title="Manage">ТЕСТ</a>
+            <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="" title="Manage">ТЕСТ</a>
         </div>
     </div>
 }

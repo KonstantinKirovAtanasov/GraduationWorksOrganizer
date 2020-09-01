@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace GraduationWorksOrganizer.Web.Areas.GraduationWork
+namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
 {
-    public class _ContextLeftBarPartialModel : PageModel
+    public class PreviewConcreteThesesModel : PageModel
     {
         public void OnGet()
         {

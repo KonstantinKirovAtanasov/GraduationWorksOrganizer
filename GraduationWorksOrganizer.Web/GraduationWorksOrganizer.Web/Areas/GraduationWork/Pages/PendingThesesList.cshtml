@@ -1,0 +1,49 @@
+﻿@page
+@model GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages.PendingThesesListModel
+@{
+    ViewData["Title"] = "Чакащи Теми";
+}
+<h1>@ViewData["Title"]</h1>
+<form id="form1" runat="server">
+    @if (Model.Theses.Any())
+    {
+        <table style="width:90%">
+            <thead>
+
+                <tr>
+                    <th class="pretty-cell"> <text class="modal-title">Заглавие:</text></th>
+                    <th class="pretty-cell"> <text class="modal-title">Описание:</text></th>
+                    <th class="pretty-cell"> <text class="modal-title">Тип:</text></th>
+                    <th class="pretty-cell"> <text class="modal-title">Автор:</text></th>
+                    <th class="pretty-cell"> <text class="modal-title">Дата на създаване:</text></th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.ThesesViewModel vm in Model.Theses)
+                {
+                    <tr class="bordercorner">
+                        <td class="pretty-cell"> <text>@vm.Title</text></td>
+                        <td class="pretty-cell"> <text>@vm.Description</text></td>
+                        <td class="pretty-cell"> <text>@vm.Type</text></td>
+                        <td class="pretty-cell"> <text>@vm.Creator</text></td>
+                        <td class="pretty-cell"> <text>@vm.CreationDate.ToShortDateString()</text></td>
+                    </tr>
+                    <tr>
+                        <td class="pretty-cell" colspan="6">
+                            <a class="nav-item text-dark" asp-area="GraduationWork" asp-page="/PreviewConcreteTheses" title="Manage"> Покажи повече </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <div class="footer-space">
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    }
+</form>

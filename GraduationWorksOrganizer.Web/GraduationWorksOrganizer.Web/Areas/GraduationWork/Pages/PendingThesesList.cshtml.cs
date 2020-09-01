@@ -1,17 +1,20 @@
-﻿using GraduationWorksOrganizer.Common;
-using GraduationWorksOrganizer.Core.Database;
-using GraduationWorksOrganizer.Database.Models;
-using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GraduationWorksOrganizer.Common;
+using GraduationWorksOrganizer.Core.Database;
+using GraduationWorksOrganizer.Core.Database.Models;
+using GraduationWorksOrganizer.Database.Models;
+using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
 {
-    [Authorize(Policy = Constants.PolicyNames.ViewTheses)]
-    public class BachelorThesesListModel : PageModel
+    [Authorize(Policy = Constants.PolicyNames.ApproveTheses)]
+    public class PendingThesesListModel : PageModel
     {
         #region Declarations
 
@@ -27,7 +30,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <summary>
         /// Конструктор
         /// </summary>
-        public BachelorThesesListModel(IThesesDatabaseService dbService)
+        public PendingThesesListModel(IThesesDatabaseService dbService)
         {
             _dbService = dbService;
         }
@@ -54,7 +57,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <returns></returns>
         private async Task InitializeViewModelItems()
         {
-            IEnumerable<Theses> theses = (await _dbService.GetAllActive()).Cast<Theses>();
+            IEnumerable<Theses> theses = (await _dbService.GetAllPending()).Cast<Theses>();
             Theses = theses.Select(t => new ThesesViewModel()
             {
                 ThesesId = t.Id,

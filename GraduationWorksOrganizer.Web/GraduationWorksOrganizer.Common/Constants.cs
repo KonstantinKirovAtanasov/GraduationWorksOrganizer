@@ -42,6 +42,16 @@ namespace GraduationWorksOrganizer.Common
             /// Полиси дали може да вижда тезите
             /// </summary>
             public const string ViewTheses = "ViewTheses";
+
+            /// <summary>
+            /// Полиси дали може да одобрява тезите
+            /// </summary>
+            public const string ApproveTheses = "ApproveTheses";
+
+            /// <summary>
+            /// Полиси дали може да добавя тезите
+            /// </summary>
+            public const string AddTheses = "AddTheses";
         }
     }
 }

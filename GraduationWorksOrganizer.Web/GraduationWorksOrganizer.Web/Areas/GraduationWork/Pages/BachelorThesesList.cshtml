@@ -1,51 +1,56 @@
 ﻿@page
 @model GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages.BachelorThesesListModel
 @{
-    ViewData["Title"] = "Теми";
+    ViewData["Title"] = "Активни Теми";
 }
 <h1>@ViewData["Title"]</h1>
-<hr />
 <form id="form1" runat="server">
-    <table>
-        <tbody>
-            @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.ThesesViewModel vm in Model.Theses)
-            {
-                <tr style="width: 100%;">
+    @if (Model.Theses.Any())
+    {
+        <table class="bordercorner">
+            <thead class="bordercorner">
+                <tr>
+                    <th class="pretty-cell"> <text class="text-center">Заглавие:</text></th>
+                    <th class="pretty-cell"> <text class="text-center">Описание:</text></th>
+                    <th class="pretty-cell"> <text class="text-center">Тип:</text></th>
+                    <th class="pretty-cell"> <text class="text-center">Автор:</text></th>
+                    <th class="pretty-cell"> <text class="text-center">Дата на създаване:</text></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.ThesesViewModel vm in Model.Theses)
+                {
+                    <tr>
+                        <td class="pretty-cell"> <text class="text-center">@vm.Title</text></td>
+                        <td class="pretty-cell"> <text class="text-left">@vm.Description</text></td>
+                        <td class="pretty-cell"> <text class="text-center">@vm.Type</text></td>
+                        <td class="pretty-cell"> <text class="text-left">@vm.Creator</text></td>
+                        <td class="pretty-cell"> <text class="text-center">@vm.CreationDate.ToShortDateString()</text></td>
+                    </tr>
+                    <tr class="row-footer">
+                        <td class="pretty-cell" colspan="6">
+                            <a asp-area="GraduationWork" asp-page="/PreviewConcreteTheses">
+                                <text class="modal-title">
+                                    Покажи повече ..
+                                </text>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <hr />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
                     <td>
-                        <div class="row bordercorner">
-                            <div class="col text-align-right">
-                                <text class="modal-title">Заглавие:</text>
-                                <text>@vm.Title</text>
-                            </div>
-                            <div class="col text-align-right">
-                                <text class="modal-title">Тип:</text>
-                                <text>@vm.Type</text>
-                            </div>
-                            <div class="col text-align-left">
-                                <text class="modal-title">Автор:</text>
-                                <text>@vm.Creator</text>
-                            </div>
-                            <div class="row">
-                                <text>Описание:</text>
-                                <text>@vm.Description</text>
-                                <span></span>
-                            </div>
+                        <div class="footer-space">
                         </div>
-
                     </td>
                 </tr>
-            }
-        </tbody>
-        <tfoot>
-            <t
-                <td>
-                    <div class="footer-space">
-                    </div>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-
-
-
+            </tfoot>
+        </table>
+    }
 </form>

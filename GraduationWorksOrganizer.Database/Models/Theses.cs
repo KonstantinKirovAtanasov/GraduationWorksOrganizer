@@ -1,4 +1,5 @@
 ﻿using GraduationWorksOrganizer.Core.Database.Models;
+using GraduationWorksOrganizer.Database.Models.Base;
 using Microsoft.AspNetCore.Identity;
 using System;
 using static GraduationWorksOrganizer.Common.Enums;
@@ -43,12 +44,22 @@ namespace GraduationWorksOrganizer.Database.Models
         /// <summary>
         /// Създател
         /// </summary>
-        public IdentityUser Creator { get; set; }
+        public ApplicationIdentityBase Creator { get; set; }
 
         /// <summary>
         /// Ид на Създателя на темата
         /// </summary>
         public string CreatorId { get; set; }
+
+        /// <summary>
+        /// Създател
+        /// </summary>
+        public ApplicationIdentityBase Approval { get; set; }
+
+        /// <summary>
+        /// Ид на Създателя на темата
+        /// </summary>
+        public string ApprovalId { get; set; }
 
         /// <summary>
         /// Специалност

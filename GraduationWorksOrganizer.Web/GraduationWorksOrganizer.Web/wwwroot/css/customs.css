@@ -1,16 +1,33 @@
-﻿
-.bordercorner {
-    border-radius: 25px !important;
-    border: 2px solid lightSkyBlue !important;
+﻿.bordercorner {
     padding: 20px !important;
     width: inherit !important;
     height: inherit !important;
 }
 
+    .bordercorner > tr > th {
+        margin: 5px !important;
+        background-color: lightblue !important;
+        text-align: center !important;
+        text-justify: trim !important;
+    }
+
+        .bordercorner > tr > th:first-child {
+            border-top-left-radius: 4px !important;
+        }
+
+        .bordercorner > tr > th:last-child {
+            border-top-right-radius: 4px !important;
+        }
+
+th.pretty-cell, td.pretty-cell {
+    padding-right: 20px !important;
+}
+
 /* Dropdown Button */
 .dropbtn {
-    color: white;
-    padding: 16px;
+    color: black;
+    background: white;
+    padding: 15px 5px;
     font-size: 16px;
     border: none;
 }
@@ -25,23 +42,25 @@
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    word-break: keep-all;
 }
 
     /* Links inside the dropdown */
     .dropdown-content a {
         color: black;
-        padding: 12px 16px;
+        background: white;
+        padding: 4px 5px;
         text-decoration: none;
         display: block;
+        white-space: nowrap;
     }
 
         /* Change color of dropdown links on hover */
         .dropdown-content a:hover {
-            background-color: #ddd;
+            border: 1px solid skyblue;
+            border-radius: 2px;
         }
 
 /* Show the dropdown menu on hover */
@@ -51,5 +70,6 @@
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+    border: 1px solid skyblue;
+    border-radius: 2px;
 }
