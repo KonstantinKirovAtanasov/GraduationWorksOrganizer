@@ -27,7 +27,7 @@ th.pretty-cell, td.pretty-cell {
 .dropbtn {
     color: black;
     background: white;
-    padding: 15px 5px;
+    padding: 5px 10px;
     font-size: 16px;
     border: none;
 }
@@ -42,7 +42,9 @@ th.pretty-cell, td.pretty-cell {
 .dropdown-content {
     display: none;
     position: absolute;
+    background-color: white;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    width: auto;
     z-index: 1;
     word-break: keep-all;
 }
