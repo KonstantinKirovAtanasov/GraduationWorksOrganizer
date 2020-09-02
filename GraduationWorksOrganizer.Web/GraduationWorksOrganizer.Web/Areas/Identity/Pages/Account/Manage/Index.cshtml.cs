@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using GraduationWorksOrganizer.Database.Models.Base;
+using GraduationWorksOrganizer.Database.Services;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,13 +18,16 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationIdentityBase> _userManager;
         private readonly SignInManager<ApplicationIdentityBase> _signInManager;
+        private readonly ApplicationUserDatabaseService _appUserDbService;
 
         public IndexModel(
             UserManager<ApplicationIdentityBase> userManager,
-            SignInManager<ApplicationIdentityBase> signInManager)
+            SignInManager<ApplicationIdentityBase> signInManager,
+            ApplicationUserDatabaseService appUserDbService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _appUserDbService = appUserDbService;
         }
 
         public string Username { get; set; }
@@ -36,6 +43,8 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            public IFormFile ImageFile { get; set; }
         }
 
         private async Task LoadAsync(ApplicationIdentityBase user)
@@ -86,6 +95,17 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account.Manage
                     StatusMessage = "Unexpected error when trying to set phone number.";
                     return RedirectToPage();
                 }
+            }
+
+            if (Input.ImageFile != null)
+            {
+                byte[] imageResult;
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    await Input.ImageFile.CopyToAsync(ms);
+                    imageResult = ms.ToArray();
+                }
+                await _appUserDbService.ChangeUserPhoto(user, imageResult);
             }
 
             await _signInManager.RefreshSignInAsync(user);

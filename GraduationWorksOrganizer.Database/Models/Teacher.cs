@@ -1,5 +1,4 @@
 ﻿using GraduationWorksOrganizer.Database.Models.Base;
-using Microsoft.AspNetCore.Identity;
 
 namespace GraduationWorksOrganizer.Database.Models
 {

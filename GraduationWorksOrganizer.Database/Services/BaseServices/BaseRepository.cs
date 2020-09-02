@@ -7,7 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace GraduationWorksOrganizer.Database.Services
+namespace GraduationWorksOrganizer.Database.Services.Base
 {
     /// <summary>
     /// Клас за базови действия с базата данни

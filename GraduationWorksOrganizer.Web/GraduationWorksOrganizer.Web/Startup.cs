@@ -2,9 +2,16 @@
 using GraduationWorksOrganizer.Common;
 using GraduationWorksOrganizer.Core.Additional;
 using GraduationWorksOrganizer.Core.Database;
+using GraduationWorksOrganizer.Core.Services;
+using GraduationWorksOrganizer.Core.ViewModels;
 using GraduationWorksOrganizer.Database;
+using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Models.Base;
 using GraduationWorksOrganizer.Database.Services;
+using GraduationWorksOrganizer.Database.Services.Base;
+using GraduationWorksOrganizer.Services.Commissions;
+using GraduationWorksOrganizer.Services.MapEntitiesServices;
+using GraduationWorksOrganizer.Web.SharedViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -42,6 +49,12 @@ namespace GraduationWorksOrganizer.Web
             services.AddScoped<IEmailSender, ComformationEmailSender>();
             services.AddScoped<IAsyncRepository, BaseRepository>();
             services.AddScoped<IThesesDatabaseService, ThesesDatabaseService>();
+
+            services.AddScoped<TeacherService<TeacherViewModel>>();
+
+            services.AddScoped<CommissionsService>();
+            services.AddScoped<TeachersDatabaseService>();
+            services.AddScoped<ApplicationUserDatabaseService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

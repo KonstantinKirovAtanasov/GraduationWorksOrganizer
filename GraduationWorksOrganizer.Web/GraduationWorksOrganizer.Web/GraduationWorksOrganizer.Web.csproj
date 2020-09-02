@@ -17,10 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\GraduationWorksOrganizer.Database\GraduationWorksOrganizer.Database.csproj" />
     <ProjectReference Include="..\GraduationWorksOrganizer.Additional\GraduationWorksOrganizer.Additional.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Commissions\Pages\" />
+    <ProjectReference Include="..\GraduationWorksOrganizer.Services\GraduationWorksOrganizer.Services.csproj" />
   </ItemGroup>
 
 </Project>

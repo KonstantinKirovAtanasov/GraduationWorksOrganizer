@@ -57,6 +57,27 @@ namespace GraduationWorksOrganizer.Database
         /// </summary>
         public DbSet<Theses> Theses { get; set; }
 
+        /// <summary>
+        /// таблица с теми
+        /// </summary>
+        public DbSet<Commission> Commissions { get; set; }
+
+        /// <summary>
+        /// таблица с теми
+        /// </summary>
+        public DbSet<CommissionDefencesDates> DefenceDates { get; set; }
+
+        /// <summary>
+        /// таблица с теми
+        /// </summary>
+        public DbSet<ThesisDefenceEvent> DefenceEvents { get; set; }
+
+        /// <summary>
+        /// таблица с теми
+        /// </summary>
+        public DbSet<ThesisMark> Marks { get; set; }
+
+
         #endregion // DbSets
 
         #region Constructor
@@ -83,6 +104,11 @@ namespace GraduationWorksOrganizer.Database
             builder.Entity<Group>().HasKey(g => g.Id);
             builder.Entity<HelpMessage>().HasKey(hm => hm.Id);
             builder.Entity<Theses>().HasKey(t => t.Id);
+            builder.Entity<Commission>().HasKey(c => c.Id);
+            builder.Entity<CommissionDefencesDates>().HasKey(cd => cd.Id);
+            builder.Entity<ThesisDefenceEvent>().HasKey(td => td.Id);
+            builder.Entity<ThesisMark>().HasKey(tm => tm.Id);
+
 
             // Relations
             builder.Entity<Faculty>().HasMany(f => f.Departments).WithOne(d => d.Faculty).HasForeignKey(d => d.FacultyId).OnDelete(DeleteBehavior.Cascade);
@@ -96,6 +122,18 @@ namespace GraduationWorksOrganizer.Database
             builder.Entity<Theses>().HasOne(t => t.TargetSpecialty).WithMany().HasForeignKey(t => t.TargetSpecialtyId).OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Group>().HasOne(g => g.Specialty).WithMany().HasForeignKey(g => g.SpecialtyId).OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Commission>().HasOne(c => c.Department).WithMany().HasForeignKey(c => c.DepartmentId).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Commission>().HasOne(c => c.MainCommissionTeacher).WithMany().HasForeignKey(c => c.MainCommissionTeacherId).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Commission>().HasMany(c => c.CommissionTeachers).WithOne().OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Commission>().HasMany(c => c.CommissionDefencesDates).WithOne().OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<CommissionDefencesDates>().HasMany(cd => cd.Defences).WithOne(td => td.DefencesDate).OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<ThesisDefenceEvent>().HasOne(td => td.DefencesDate).WithMany(cd => cd.Defences).HasForeignKey(td => td.DefenceDateId).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<ThesisDefenceEvent>().HasOne(td => td.Student).WithMany().HasForeignKey(td => td.StudentId).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<ThesisDefenceEvent>().HasOne(td => td.Thesis).WithOne().HasForeignKey<ThesisDefenceEvent>(td => td.ThesisId).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<ThesisDefenceEvent>().HasOne(td => td.ThesisMark).WithOne().HasForeignKey<ThesisDefenceEvent>(td => td.ThesisMarkId).OnDelete(DeleteBehavior.NoAction);
 
             // Seeds
             builder.Entity<HelpMessage>().SeedData();
