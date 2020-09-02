@@ -1,5 +1,6 @@
 ﻿using GraduationWorksOrganizer.Common;
 using GraduationWorksOrganizer.Core.Database;
+using GraduationWorksOrganizer.Core.Database.Models;
 using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -54,7 +55,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <returns></returns>
         private async Task InitializeViewModelItems()
         {
-            IEnumerable<Theses> theses = (await _dbService.GetAllActive()).Cast<Theses>();
+            IEnumerable<ITheses> theses = await _dbService.GetAllActive();
             Theses = theses.Select(t => new ThesesViewModel()
             {
                 ThesesId = t.Id,
@@ -62,7 +63,6 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
                 Title = t.Title,
                 Description = t.Description,
                 Type = t.Type,
-                Creator = t.Creator.Name,
                 CreationDate = t.CreationDate,
             });
         }

@@ -31,7 +31,7 @@ namespace GraduationWorksOrganizer.Database.Services
         /// <returns></returns>
         public async Task<IEnumerable<ITheses>> GetAllActive()
         {
-            return await _dbContext.Theses.Include(p => p.Creator).Where(t => t.Status == ThesesStatusType.Accept).ToListAsync();
+            return await _dbContext.Theses.Where(t => t.Status == ThesesStatusType.Accept).ToListAsync();
         }
 
         /// <summary>

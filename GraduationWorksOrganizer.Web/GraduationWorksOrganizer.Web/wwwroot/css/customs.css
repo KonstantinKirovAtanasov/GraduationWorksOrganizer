@@ -1,27 +1,51 @@
-﻿.bordercorner {
+﻿thead.border-header {
     padding: 20px !important;
-    width: inherit !important;
     height: inherit !important;
 }
 
-    .bordercorner > tr > th {
-        margin: 5px !important;
-        background-color: lightblue !important;
-        text-align: center !important;
-        text-justify: trim !important;
+    thead.border-header > tr > th {
+        padding: 5px !important;
+        background-color: #8cbaff;
+        text-align: center;
+        text-justify: trim;
     }
 
-        .bordercorner > tr > th:first-child {
-            border-top-left-radius: 4px !important;
+        thead.border-header > tr > th:first-child {
+            border-top-left-radius: 4px;
         }
 
-        .bordercorner > tr > th:last-child {
-            border-top-right-radius: 4px !important;
+        thead.border-header > tr > th:last-child {
+            border-top-right-radius: 4px;
         }
 
-th.pretty-cell, td.pretty-cell {
-    padding-right: 20px !important;
+table.border-table {
+    width: 99%;
+    margin-left: auto;
+    margin-right: auto;
 }
+
+    table.border-table > tbody {
+        border-left: 1px solid #8cbaff;
+        border-right: 1px solid #8cbaff;
+        border-bottom: 1px solid #8cbaff;
+    }
+
+        table.border-table > tbody > tr:nth-child(4n+1) {
+            background-color: #f2f2f2
+        }
+
+        table.border-table > tbody > tr:nth-child(4n+2) {
+            background-color: #f2f2f2;
+        }
+
+        table.border-table > tbody > tr > td:first-child {
+            max-width: 35%;
+        }
+
+        table.border-table > tbody > tr > td:last-child {
+            max-width: 25%;
+        }
+
 
 /* Dropdown Button */
 .dropbtn {
