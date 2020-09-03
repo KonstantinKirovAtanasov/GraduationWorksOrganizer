@@ -2,6 +2,7 @@
 using GraduationWorksOrganizer.Core.Database;
 using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Models.Base;
+using GraduationWorksOrganizer.Services.MapEntitiesServices;
 using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -22,7 +23,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
     public class AddThesesModel : PageModel
     {
         private readonly IAsyncRepository _dbService;
-        private readonly IThesesDatabaseService _themesService;
+        private readonly ThesisService<ThesesViewModel> _themesService;
         private readonly UserManager<ApplicationIdentityBase> _userManager;
 
         /// <summary>
@@ -31,7 +32,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <param name="dbService"></param>
         /// <param name="themesService"></param>
         public AddThesesModel(IAsyncRepository dbService,
-                              IThesesDatabaseService themesService,
+                              ThesisService<ThesesViewModel> themesService,
                               UserManager<ApplicationIdentityBase> userManager)
         {
             _dbService = dbService;

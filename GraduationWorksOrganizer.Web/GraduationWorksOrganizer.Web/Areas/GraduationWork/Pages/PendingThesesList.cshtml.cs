@@ -6,6 +6,7 @@ using GraduationWorksOrganizer.Common;
 using GraduationWorksOrganizer.Core.Database;
 using GraduationWorksOrganizer.Core.Database.Models;
 using GraduationWorksOrganizer.Database.Models;
+using GraduationWorksOrganizer.Services.MapEntitiesServices;
 using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <summary>
         /// сървис за работа с базата данни
         /// </summary>
-        private readonly IThesesDatabaseService _dbService;
+        private readonly ThesisService<ThesesViewModel> _dbService;
 
         #endregion
 
@@ -30,7 +31,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <summary>
         /// Конструктор
         /// </summary>
-        public PendingThesesListModel(IThesesDatabaseService dbService)
+        public PendingThesesListModel(ThesisService<ThesesViewModel> dbService)
         {
             _dbService = dbService;
         }
@@ -46,28 +47,17 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
 
         #endregion
 
-        public async Task OnGet()
+        public void OnGet()
         {
-            await InitializeViewModelItems();
+            InitializeViewModelItems();
         }
 
         /// <summary>
-        /// Метод който инициализира реквизити от VM
+        /// Метод който инициализира ВМ
         /// </summary>
-        /// <returns></returns>
-        private async Task InitializeViewModelItems()
+        private void InitializeViewModelItems()
         {
-            IEnumerable<Theses> theses = (await _dbService.GetAllPending()).Cast<Theses>();
-            Theses = theses.Select(t => new ThesesViewModel()
-            {
-                ThesesId = t.Id,
-                SpecialtyId = t.TargetSpecialtyId,
-                Title = t.Title,
-                Description = t.Description,
-                Type = t.Type,
-                Creator = t.Creator.Name,
-                CreationDate = t.CreationDate,
-            });
+            Theses = _dbService.GetViewModels().Where(vm => vm.Status == Enums.ThesesStatusType.Pending);
         }
     }
 }

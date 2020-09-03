@@ -10,30 +10,109 @@
 <form method="post" class="helpinfodefault" data-helpmessagekey="defaulthelpmessage">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="row">
-        <div class="col-md-6">
-            <div class="form-group  helpinfo" data-helpmessagekey="email">
+        <div class="col-md-11">
+            <div class="form-group  helpinfo">
                 <label>Заглавие</label>
                 <input asp-for="Input.Title" class="form-control" />
                 <span asp-validation-for="Input.Title" class="text-danger"></span>
             </div>
-            <div class="form-group helpinfo" data-helpmessagekey="password">
+            <div class="form-group helpinfo">
                 <label>Описание:</label>
-                <input asp-for="Input.Description" class="form-control" />
+                <input asp-for="Input.Description" class="form-control input-large" />
                 <span asp-validation-for="Input.Description" class="text-danger"></span>
             </div>
-            <div class="form-group helpinfo" data-helpmessagekey="confirmpassword">
+            <div class="form-group helpinfo">
                 <label>Тип на заданието</label>
                 <input asp-for="Input.Type" class="form-control" />
                 <span asp-validation-for="Input.Type" class="text-danger"></span>
             </div>
-            <div class="form-group helpinfo" data-helpmessagekey="specialty">
+            <div class="form-group helpinfo">
                 <label>Специалност:</label>
                 <select class="form-control" asp-for="Input.SpecialtyId" asp-items="@Html.GetEntityEnumSelectList(Model.Specialties)"></select>
                 <span></span>
             </div>
+
+            <table class="table-border">
+                <thead>
+                    <tr>
+                        <th style="width:25%">Име</th>
+                        <th style="width:65%">Описание</th>
+                        <th style="width:10%">Максимален брой точки</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>
+                            <input class="form-control" />
+                        </th>
+                        <th>
+                            <input class="form-control" />
+                        </th>
+                        <th>
+                            <input class="form-control" />
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input class="form-control" />
+                        </th>
+                        <th>
+                            <input class="form-control" />
+                        </th>
+                        <th>
+                            <input class="form-control" />
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input class="form-control" />
+                        </th>
+                        <th>
+                            <input class="form-control" />
+                        </th>
+                        <th>
+                            <input class="form-control" />
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input class="form-control" />
+                        </th>
+                        <th>
+                            <input class="form-control" />
+                        </th>
+                        <th>
+                            <input class="form-control" />
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input class="form-control" />
+                        </th>
+                        <th>
+                            <input class="form-control" />
+                        </th>
+                        <th>
+                            <input class="form-control" />
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input class="form-control" />
+                        </th>
+                        <th>
+                            <input class="form-control" />
+                        </th>
+                        <th>
+                            <input class="form-control" />
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
             <button type="submit" class="btn btn-primary">Регистрация</button>
         </div>
         <div class="col-md-6 col-md-offset-2">
+
             <section>
                 <h4 class="helptitle"></h4>
                 <div>

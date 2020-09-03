@@ -39,12 +39,12 @@ namespace GraduationWorksOrganizer.Database.Services
         /// </summary>
         /// <param name="teacher"></param>
         /// <returns></returns>
-        public async Task<Teacher> GetTeacher(ITeacher teacher)
+        public async Task<Teacher> GetTeacher(Teacher teacher)
         {
             if (teacher == null)
                 return null;
 
-            return await _dataContext.Teachers.FindAsync(teacher.TeacherId);
+            return await _dataContext.Teachers.FindAsync(teacher.Id);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace GraduationWorksOrganizer.Database.Services
         /// </summary>
         /// <param name="teacher"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<Teacher>> GetManyTeachers(IEnumerable<ITeacher> teachers)
+        public async Task<IEnumerable<Teacher>> GetManyTeachers(IEnumerable<Teacher> teachers)
         {
             IEnumerable<Task<Teacher>> getTeachersTasks = teachers.Select(t => GetTeacher(t));
             await Task.WhenAll(getTeachersTasks.ToArray());

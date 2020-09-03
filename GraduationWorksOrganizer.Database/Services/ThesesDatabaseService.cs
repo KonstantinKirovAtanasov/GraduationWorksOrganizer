@@ -1,19 +1,22 @@
-﻿using GraduationWorksOrganizer.Core.Database;
-using GraduationWorksOrganizer.Core.Database.Models;
-using GraduationWorksOrganizer.Database.Services.Base;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+﻿using GraduationWorksOrganizer.Database.Models;
 using System.Linq;
-using System.Threading.Tasks;
-using static GraduationWorksOrganizer.Common.Enums;
 
 namespace GraduationWorksOrganizer.Database.Services
 {
     /// <summary>
     /// 
     /// </summary>
-    public class ThesesDatabaseService : BaseRepository, IThesesDatabaseService
+    public class ThesesDatabaseService
     {
+        #region Declarations
+
+        /// <summary>
+        /// Дата контекст
+        /// </summary>
+        private GraduationWorksOrganizerDataContext _dbContext;
+
+        #endregion
+
         #region Initialization
 
         /// <summary>
@@ -21,26 +24,23 @@ namespace GraduationWorksOrganizer.Database.Services
         /// </summary>
         /// <param name="dataContext"></param>
         public ThesesDatabaseService(GraduationWorksOrganizerDataContext dbContext)
-            : base(dbContext) { }
+        {
+            _dbContext = dbContext;
+        }
 
         #endregion
 
-        /// <summary>
-        /// метод който връща всички активни теми
-        /// </summary>
-        /// <returns></returns>
-        public async Task<IEnumerable<ITheses>> GetAllActive()
-        {
-            return await _dbContext.Theses.Include(p => p.Creator).Where(t => t.Status == ThesesStatusType.Accept).ToListAsync();
-        }
+        #region Methods
 
         /// <summary>
-        /// Метод който връща всички теми за одобрение
+        /// Метод който връща всички теми
         /// </summary>
         /// <returns></returns>
-        public async Task<IEnumerable<ITheses>> GetAllPending()
+        public IQueryable<Theses> GetAll()
         {
-            return await _dbContext.Theses.Include(p => p.Creator).Where(t => t.Status == ThesesStatusType.Pending).ToListAsync();
+            return _dbContext.Theses;
         }
+
+        #endregion
     }
 }

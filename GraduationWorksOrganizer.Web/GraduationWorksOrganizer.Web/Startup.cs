@@ -11,6 +11,7 @@ using GraduationWorksOrganizer.Database.Services;
 using GraduationWorksOrganizer.Database.Services.Base;
 using GraduationWorksOrganizer.Services.Commissions;
 using GraduationWorksOrganizer.Services.MapEntitiesServices;
+using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
 using GraduationWorksOrganizer.Web.SharedViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -48,11 +49,12 @@ namespace GraduationWorksOrganizer.Web
 
             services.AddScoped<IEmailSender, ComformationEmailSender>();
             services.AddScoped<IAsyncRepository, BaseRepository>();
-            services.AddScoped<IThesesDatabaseService, ThesesDatabaseService>();
 
             services.AddScoped<TeacherService<TeacherViewModel>>();
+            services.AddScoped<ThesisService<ThesesViewModel>>();
 
             services.AddScoped<CommissionsService>();
+            services.AddScoped<ThesesDatabaseService>();
             services.AddScoped<TeachersDatabaseService>();
             services.AddScoped<ApplicationUserDatabaseService>();
         }

@@ -9,7 +9,7 @@ namespace GraduationWorksOrganizer.Database.Models
     /// <summary>
     /// Модел за тема
     /// </summary>
-    public class Theses : ITheses
+    public class Theses
     {
         /// <summary>
         /// Id

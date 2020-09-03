@@ -41,7 +41,7 @@ namespace GraduationWorksOrganizer.Services.Commissions
         /// <param name="mainTeacher"></param>
         /// <param name="teachers"></param>
         /// <returns></returns>
-        public async Task CreateCommission(ITeacher mainTeacher, ICollection<ITeacher> teachers)
+        public async Task CreateCommission(Teacher mainTeacher, ICollection<Teacher> teachers)
         {
             Teacher mainContextTeacher = await _teachersDbService.GetTeacher(mainTeacher);
             IEnumerable<Teacher> contextTeachers = await _teachersDbService.GetManyTeachers(teachers);

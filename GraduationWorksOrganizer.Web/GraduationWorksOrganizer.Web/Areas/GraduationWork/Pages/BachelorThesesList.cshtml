@@ -4,41 +4,33 @@
     ViewData["Title"] = "Активни Теми";
 }
 <h1>@ViewData["Title"]</h1>
-<form id="form1" runat="server">
+<div>
     @if (Model.Theses.Any())
     {
-        <table class="bordercorner">
-            <thead class="bordercorner">
+        <table class="table-border">
+            <thead>
                 <tr>
-                    <th class="pretty-cell"> <text class="text-center">Заглавие:</text></th>
-                    <th class="pretty-cell"> <text class="text-center">Описание:</text></th>
-                    <th class="pretty-cell"> <text class="text-center">Тип:</text></th>
-                    <th class="pretty-cell"> <text class="text-center">Автор:</text></th>
-                    <th class="pretty-cell"> <text class="text-center">Дата на създаване:</text></th>
+                    <th> Заглавие:</th>
+                    <th> Тип:</th>
+                    <th> Специалност:</th>
+                    <th> Автор:</th>
+                    <th> Дата на създаване:</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.ThesesViewModel vm in Model.Theses)
                 {
                     <tr>
-                        <td class="pretty-cell"> <text class="text-center">@vm.Title</text></td>
-                        <td class="pretty-cell"> <text class="text-left">@vm.Description</text></td>
-                        <td class="pretty-cell"> <text class="text-center">@vm.Type</text></td>
-                        <td class="pretty-cell"> <text class="text-left">@vm.Creator</text></td>
-                        <td class="pretty-cell"> <text class="text-center">@vm.CreationDate.ToShortDateString()</text></td>
-                    </tr>
-                    <tr class="row-footer">
-                        <td class="pretty-cell" colspan="6">
-                            <a asp-area="GraduationWork" asp-page="/PreviewConcreteTheses">
-                                <text class="modal-title">
-                                    Покажи повече ..
-                                </text>
+                        <td class="text-left"> @vm.Title </td>
+                        <td class="text-center"> @vm.Type </td>
+                        <td class="text-center"> @vm.TargetSpecialty.Name </td>
+                        <td class="text-center"> @vm.Creator.Name </td>
+                        <td class="text-center"> @vm.CreationDate </td>
+                        <td>
+                            <a class="nav-item text-dark" asp-area="GraduationWork" asp-page="/PreviewConcreteTheses">
+                                pr.
                             </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="6">
-                            <hr />
                         </td>
                     </tr>
                 }
@@ -53,4 +45,8 @@
             </tfoot>
         </table>
     }
-</form>
+    else
+    {
+        <h2>Няма теми в избраната страница.</h2>
+    }
+</div>
