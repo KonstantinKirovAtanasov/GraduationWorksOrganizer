@@ -4,7 +4,6 @@ using GraduationWorksOrganizer.Core.ViewModels;
 using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 using System.Collections.Generic;
 using System.Linq;
 

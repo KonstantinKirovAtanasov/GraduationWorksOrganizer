@@ -93,3 +93,12 @@
     color: #000000;
     border-radius: 5px;
 }
+
+
+textarea.multilineTextArea {
+    width: 100%;
+    height: auto;
+    white-space: pre-wrap;
+    resize: none;
+    overflow: auto;
+}

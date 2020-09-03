@@ -11,24 +11,24 @@
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="row">
         <div class="col-md-11">
-            <div class="form-group  helpinfo">
+            <div class="helpinfo">
                 <label>Заглавие</label>
                 <input asp-for="Input.Title" class="form-control" />
                 <span asp-validation-for="Input.Title" class="text-danger"></span>
             </div>
             <div class="form-group helpinfo">
                 <label>Описание:</label>
-                <input asp-for="Input.Description" class="form-control input-large" />
+                <textarea class="multilineTextArea form-control" asp-for="Input.Description"></textarea>
                 <span asp-validation-for="Input.Description" class="text-danger"></span>
             </div>
             <div class="form-group helpinfo">
                 <label>Тип на заданието</label>
-                <input asp-for="Input.Type" class="form-control" />
+                <input asp-for="Input.Type" />
                 <span asp-validation-for="Input.Type" class="text-danger"></span>
             </div>
             <div class="form-group helpinfo">
                 <label>Специалност:</label>
-                <select class="form-control" asp-for="Input.SpecialtyId" asp-items="@Html.GetEntityEnumSelectList(Model.Specialties)"></select>
+                <select asp-for="Input.SpecialtyId" asp-items="@Html.GetEntityEnumSelectList(Model.Specialties)"></select>
                 <span></span>
             </div>
 
@@ -36,72 +36,17 @@
                 <thead>
                     <tr>
                         <th style="width:25%">Име</th>
-                        <th style="width:65%">Описание</th>
-                        <th style="width:10%">Максимален брой точки</th>
+                        <th style="width:60%">Описание</th>
+                        <th style="width:15%">Максимален брой точки</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="requermentContent">
                     <tr>
                         <th>
                             <input class="form-control" />
                         </th>
                         <th>
-                            <input class="form-control" />
-                        </th>
-                        <th>
-                            <input class="form-control" />
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input class="form-control" />
-                        </th>
-                        <th>
-                            <input class="form-control" />
-                        </th>
-                        <th>
-                            <input class="form-control" />
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input class="form-control" />
-                        </th>
-                        <th>
-                            <input class="form-control" />
-                        </th>
-                        <th>
-                            <input class="form-control" />
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input class="form-control" />
-                        </th>
-                        <th>
-                            <input class="form-control" />
-                        </th>
-                        <th>
-                            <input class="form-control" />
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input class="form-control" />
-                        </th>
-                        <th>
-                            <input class="form-control" />
-                        </th>
-                        <th>
-                            <input class="form-control" />
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input class="form-control" />
-                        </th>
-                        <th>
-                            <input class="form-control" />
+                            <textarea class="multilineTextArea" asp-for="Input.Description"></textarea>
                         </th>
                         <th>
                             <input class="form-control" />
@@ -109,10 +54,14 @@
                     </tr>
                 </tbody>
             </table>
+            <span />
+            <hr />
+            <span />
             <button type="submit" class="btn btn-primary">Регистрация</button>
+            <a id="addRequermentButton" class="btn btn-light">Добави изискване</a>
+            <a id="addRequermentButton" class="btn btn-light">Добави изискване</a>
         </div>
         <div class="col-md-6 col-md-offset-2">
-
             <section>
                 <h4 class="helptitle"></h4>
                 <div>
@@ -122,4 +71,33 @@
         </div>
     </div>
 </form>
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            let addRequermentBtn = $('#addRequermentButton');
+            $(addRequermentBtn).click(function () {
+                AddRequermentRow();
+            })
+        })
+
+        function AddRequermentRow() {
+            let requermentContent = $('#requermentContent');
+            requermentContent.append(`
+                                                    <tr>
+                                                    <th>
+                                                        <input class="form-control" />
+                                                    </th>
+                                                    <th>
+                                                        <input class="form-control" />
+                                                    </th>
+                                                    <th>
+                                                        <input class="form-control" />
+                                                    </th>
+                                                    </tr>
+                                                    `)
+        }
+    </script>
+
+}
 
