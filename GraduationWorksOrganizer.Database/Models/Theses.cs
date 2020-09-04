@@ -1,7 +1,6 @@
-﻿using GraduationWorksOrganizer.Core.Database.Models;
-using GraduationWorksOrganizer.Database.Models.Base;
-using Microsoft.AspNetCore.Identity;
+﻿using GraduationWorksOrganizer.Database.Models.Base;
 using System;
+using System.Collections.Generic;
 using static GraduationWorksOrganizer.Common.Enums;
 
 namespace GraduationWorksOrganizer.Database.Models
@@ -70,5 +69,10 @@ namespace GraduationWorksOrganizer.Database.Models
         /// Id на специалност
         /// </summary>
         public int TargetSpecialtyId { get; set; }
+
+        /// <summary>
+        /// Изисквания
+        /// </summary>
+        public ICollection<ThesisRequerment> Requerments { get; set; }
     }
 }

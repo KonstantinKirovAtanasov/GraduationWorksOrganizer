@@ -77,6 +77,11 @@ namespace GraduationWorksOrganizer.Database
         /// </summary>
         public DbSet<ThesisMark> Marks { get; set; }
 
+        /// <summary>
+        /// таблица с изисквания към теми
+        /// </summary>
+        public DbSet<ThesisRequerment> ThesisRequerments { get; set; }
+
 
         #endregion // DbSets
 
@@ -108,6 +113,7 @@ namespace GraduationWorksOrganizer.Database
             builder.Entity<CommissionDefencesDates>().HasKey(cd => cd.Id);
             builder.Entity<ThesisDefenceEvent>().HasKey(td => td.Id);
             builder.Entity<ThesisMark>().HasKey(tm => tm.Id);
+            builder.Entity<ThesisRequerment>().HasKey(tr => tr.Id);
 
 
             // Relations
@@ -120,6 +126,7 @@ namespace GraduationWorksOrganizer.Database
 
             builder.Entity<Theses>().HasOne(t => t.Creator).WithMany().HasForeignKey(t => t.CreatorId).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<Theses>().HasOne(t => t.TargetSpecialty).WithMany().HasForeignKey(t => t.TargetSpecialtyId).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Theses>().HasMany(t => t.Requerments).WithOne(r => r.Theses).HasForeignKey(t => t.ThesesId).OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Group>().HasOne(g => g.Specialty).WithMany().HasForeignKey(g => g.SpecialtyId).OnDelete(DeleteBehavior.NoAction);
 

@@ -3,15 +3,13 @@ using GraduationWorksOrganizer.Core.Database;
 using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Models.Base;
 using GraduationWorksOrganizer.Services.MapEntitiesServices;
+using GraduationWorksOrganizer.Services.MapEntitiesServices.ViewModels;
 using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
@@ -43,13 +41,19 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
 
         #region Properties
 
+        /// <summary>
+        /// ВМ за създаване на теза
+        /// </summary>
         [BindProperty]
-        public AddThesesViewModel Input { get; set; }
+        public AddThesisViewModel Input { get; set; }
 
+        /// <summary>
+        /// Специалностти
+        /// </summary>
         public IEnumerable<Specialty> Specialties { get; set; }
 
         /// <summary>
-        /// 
+        /// Гет
         /// </summary>
         /// <returns></returns>
         public async Task OnGet()
@@ -58,53 +62,20 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         }
 
         /// <summary>
-        /// 
+        /// Пост
         /// </summary>
         /// <returns></returns>
         public async Task<IActionResult> OnPost()
         {
-            if (ModelState.IsValid)
-            {
-                Theses theses = await CreateTheses();
-                SetThesesStatusByUser(theses);
-                await _themesService.Add(theses);
+            // TO DO: Validate
+            Input.CreatorId = _userManager.GetUserId(User).ToString();
+            Input.Status = User.IsInRole(Constants.RoleNames.StudentRole) ? Enums.ThesesStatusType.Pending : Enums.ThesesStatusType.Accept;
+
+            if (ModelState.IsValid && await _themesService.AddAsync(Input))
                 return Redirect("BachelorThesesList");
-            }
 
             Specialties = await _dbService.GetAll<Specialty>();
             return Page();
-        }
-
-        /// <summary>
-        /// Метод който сетва статус на модела тема
-        /// </summary>
-        /// <param name="theses"></param>
-        private void SetThesesStatusByUser(Theses theses)
-        {
-            if (this.User.IsInRole(Constants.RoleNames.StudentRole))
-                theses.Status = Enums.ThesesStatusType.Pending;
-
-            if (this.User.IsInRole(Constants.RoleNames.TeacherRole)
-                || this.User.IsInRole(Constants.RoleNames.PromotedTeacherRole))
-                theses.Status = Enums.ThesesStatusType.Accept;
-
-        }
-
-        /// <summary>
-        /// Метод който създава модел за теза
-        /// </summary>
-        /// <returns></returns>
-        private async Task<Theses> CreateTheses()
-        {
-            return new Theses()
-            {
-                CreationDate = DateTime.Now,
-                Creator = await _userManager.GetUserAsync(this.User),
-                Type = Input.Type,
-                Title = Input.Title,
-                TargetSpecialtyId = Input.SpecialtyId,
-                Description = Input.Description,
-            };
         }
 
         #endregion

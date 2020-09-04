@@ -59,9 +59,13 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         /// </summary>
         /// <param name="theses"></param>
         /// <returns></returns>
-        public async Task Add(Theses theses)
+        public async Task<bool> AddAsync(IAutoMapperViewModel thesesVM)
         {
-            await Task.CompletedTask;
+            Mapper mapper = new Mapper(thesesVM.Configuration);
+            Theses theses = mapper.Map<Theses>(thesesVM);
+
+            theses.CreationDate = DateTime.Now;
+            return await _databaseService.AddAsync(theses);
         }
 
     }

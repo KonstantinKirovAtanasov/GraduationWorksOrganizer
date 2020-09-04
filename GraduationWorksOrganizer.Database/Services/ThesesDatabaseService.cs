@@ -1,10 +1,11 @@
 ﻿using GraduationWorksOrganizer.Database.Models;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Database.Services
 {
     /// <summary>
-    /// 
+    /// ДБ Сървис за работа с теми
     /// </summary>
     public class ThesesDatabaseService
     {
@@ -39,6 +40,17 @@ namespace GraduationWorksOrganizer.Database.Services
         public IQueryable<Theses> GetAll()
         {
             return _dbContext.Theses;
+        }
+
+        /// <summary>
+        /// Метод за добавяне на теза
+        /// </summary>
+        /// <param name="thesis"></param>
+        /// <returns></returns>
+        public async Task<bool> AddAsync(Theses thesis)
+        {
+            await _dbContext.Theses.AddAsync(thesis);
+            return await _dbContext.SaveChangesAsync().ContinueWith(t => !t.IsFaulted);
         }
 
         #endregion

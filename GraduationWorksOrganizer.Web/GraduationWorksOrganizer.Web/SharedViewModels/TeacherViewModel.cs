@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using GraduationWorksOrganizer.Core.ViewModels;
 using GraduationWorksOrganizer.Database.Models;
-using System.Collections.Generic;
 
 namespace GraduationWorksOrganizer.Web.SharedViewModels
 {

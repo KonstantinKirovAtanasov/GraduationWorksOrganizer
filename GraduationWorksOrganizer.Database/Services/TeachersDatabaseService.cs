@@ -1,5 +1,6 @@
 ﻿using GraduationWorksOrganizer.Core.Database.Models;
 using GraduationWorksOrganizer.Database.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -58,5 +59,6 @@ namespace GraduationWorksOrganizer.Database.Services
             await Task.WhenAll(getTeachersTasks.ToArray());
             return getTeachersTasks.Select(t => t.Result);
         }
+
     }
 }

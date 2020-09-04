@@ -13,52 +13,71 @@
         <div class="col-md-11">
             <div class="helpinfo">
                 <label>Заглавие</label>
-                <input asp-for="Input.Title" class="form-control" />
+                <input class="form-control" asp-for="Input.Title" />
                 <span asp-validation-for="Input.Title" class="text-danger"></span>
             </div>
             <div class="form-group helpinfo">
                 <label>Описание:</label>
-                <textarea class="multilineTextArea form-control" asp-for="Input.Description"></textarea>
+                <textarea class="multilineTextArea form-control resize" asp-for="Input.Description"></textarea>
                 <span asp-validation-for="Input.Description" class="text-danger"></span>
             </div>
             <div class="form-group helpinfo">
                 <label>Тип на заданието</label>
-                <input asp-for="Input.Type" />
+                <input class="form-control" asp-for="Input.Type" />
                 <span asp-validation-for="Input.Type" class="text-danger"></span>
             </div>
             <div class="form-group helpinfo">
                 <label>Специалност:</label>
-                <select asp-for="Input.SpecialtyId" asp-items="@Html.GetEntityEnumSelectList(Model.Specialties)"></select>
+                <select class="form-control" asp-for="Input.TargetSpecialtyId" asp-items="@Html.GetEntityEnumSelectList(Model.Specialties)"></select>
                 <span></span>
             </div>
 
             <table class="table-border">
                 <thead>
                     <tr>
-                        <th style="width:25%">Име</th>
-                        <th style="width:60%">Описание</th>
-                        <th style="width:15%">Максимален брой точки</th>
+                        <th style="width:85%">Описание</th>
+                        <th style="width:10%">Tочки</th>
+                        <th style="width:5%"></th>
                     </tr>
                 </thead>
                 <tbody id="requermentContent">
-                    <tr>
-                        <th>
-                            <input class="form-control" />
-                        </th>
-                        <th>
-                            <textarea class="multilineTextArea" asp-for="Input.Description"></textarea>
-                        </th>
-                        <th>
-                            <input class="form-control" />
-                        </th>
-                    </tr>
+                    @if (Model.Input != null && Model.Input.Requerments != null && Model.Input.Requerments.Any())
+                    {
+                        for (int i = 0; i < Model.Input.Requerments.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    <input class="form-control" asp-for="Input.Requerments[i].Description" />
+                                </td>
+                                <td>
+                                    <input class="form-control" asp-for="Input.Requerments[i].MaxPointsCount" />
+                                </td>
+                                <td>
+                                    <a class="row-delete btn btn-light">X</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>
+                                <input class="form-control" asp-for="Input.Requerments[0].Description" />
+                            </td>
+                            <td>
+                                <input class="form-control" asp-for="Input.Requerments[0].MaxPointsCount" />
+                            </td>
+                            <td>
+                                <a class="row-delete btn btn-light">X</a>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
             <span />
             <hr />
             <span />
-            <button type="submit" class="btn btn-primary">Регистрация</button>
-            <a id="addRequermentButton" class="btn btn-light">Добави изискване</a>
+            <button type="submit" class="btn btn-primary">Добави</button>
             <a id="addRequermentButton" class="btn btn-light">Добави изискване</a>
         </div>
         <div class="col-md-6 col-md-offset-2">
@@ -72,32 +91,44 @@
     </div>
 </form>
 @section Scripts{
-
+    <script src="~/js/global/autoHeigthTextArea.js"></script>
     <script>
+        let itemIndex = 0;
         $(document).ready(function () {
-            let addRequermentBtn = $('#addRequermentButton');
-            $(addRequermentBtn).click(function () {
+            $('#addRequermentButton').click(function () {
+                itemIndex++;
                 AddRequermentRow();
-            })
+            });
+            $('.row-delete').each((index, element) => {
+                $(element).on('click', event => {
+                    $(event.target).closest('tr').remove();
+                });
+            });
         })
 
         function AddRequermentRow() {
             let requermentContent = $('#requermentContent');
-            requermentContent.append(`
-                                                    <tr>
-                                                    <th>
-                                                        <input class="form-control" />
-                                                    </th>
-                                                    <th>
-                                                        <input class="form-control" />
-                                                    </th>
-                                                    <th>
-                                                        <input class="form-control" />
-                                                    </th>
-                                                    </tr>
-                                                    `)
+            const rowTemplate = GetNewRowItem();
+            requermentContent.append(rowTemplate);
+        }
+
+        function GetNewRowItem() {
+            const descrId = "Input_Requerments_" + itemIndex + "__Description";
+            const pointsId = "Input_Requerments_" + itemIndex + "__MaxPointsCount";
+            const descrName = "Input.Requerments[" + itemIndex + "].Description";
+            const pointsName = "Input.Requerments[" + itemIndex + "].MaxPointsCount";
+            let row = $('<tr></tr>').append(`<td><input class="form-control" type="text" id=` + descrId + ` name=` + descrName + ` value=""></td><td><input class="form-control" type="text" id=` + pointsId + ` name=` + pointsName + ` data-val="true" data-val-number="The field MaxPointsCount must be a number." data-val-required="The MaxPointsCount field is required." value=""></td>`);
+            let aButton = $('<a></a>').append('X');
+            let cell = $('<td></td>');
+
+            $(cell).append(aButton);
+            $(row).append(cell);
+            $(aButton).addClass("row-delete btn btn-light");
+            $(aButton).on('click', event => {
+                $(event.target).closest('tr').remove();
+            });
+
+            return row;
         }
     </script>
-
 }
-

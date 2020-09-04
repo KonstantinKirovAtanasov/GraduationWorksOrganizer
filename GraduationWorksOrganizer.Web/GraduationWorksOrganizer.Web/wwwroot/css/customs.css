@@ -97,7 +97,7 @@
 
 textarea.multilineTextArea {
     width: 100%;
-    height: auto;
+    min-height: 15em;
     white-space: pre-wrap;
     resize: none;
     overflow: auto;
