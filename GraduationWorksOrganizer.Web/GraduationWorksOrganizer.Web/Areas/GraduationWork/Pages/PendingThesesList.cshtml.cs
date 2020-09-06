@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GraduationWorksOrganizer.Common;
-using GraduationWorksOrganizer.Core.Database;
-using GraduationWorksOrganizer.Core.Database.Models;
-using GraduationWorksOrganizer.Database.Models;
+﻿using GraduationWorksOrganizer.Common;
 using GraduationWorksOrganizer.Services.MapEntitiesServices;
 using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
 {
@@ -22,7 +16,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <summary>
         /// сървис за работа с базата данни
         /// </summary>
-        private readonly ThesisService<ThesesViewModel> _dbService;
+        private readonly ThesisViewModelService<ThesesViewModel> _dbService;
 
         #endregion
 
@@ -31,7 +25,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <summary>
         /// Конструктор
         /// </summary>
-        public PendingThesesListModel(ThesisService<ThesesViewModel> dbService)
+        public PendingThesesListModel(ThesisViewModelService<ThesesViewModel> dbService)
         {
             _dbService = dbService;
         }

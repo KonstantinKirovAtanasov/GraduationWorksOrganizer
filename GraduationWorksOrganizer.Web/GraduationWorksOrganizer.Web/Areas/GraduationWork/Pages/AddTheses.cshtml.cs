@@ -20,8 +20,8 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
     [Authorize(Policy = Constants.PolicyNames.AddTheses)]
     public class AddThesesModel : PageModel
     {
-        private readonly IAsyncRepository _dbService;
-        private readonly ThesisService<ThesesViewModel> _themesService;
+        private readonly IAsyncRepository<Specialty> _specialtiesdbService;
+        private readonly ThesisViewModelService<ThesesViewModel> _themesService;
         private readonly UserManager<ApplicationIdentityBase> _userManager;
 
         /// <summary>
@@ -29,11 +29,11 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// </summary>
         /// <param name="dbService"></param>
         /// <param name="themesService"></param>
-        public AddThesesModel(IAsyncRepository dbService,
-                              ThesisService<ThesesViewModel> themesService,
+        public AddThesesModel(IAsyncRepository<Specialty> specialtiesdbService,
+                              ThesisViewModelService<ThesesViewModel> themesService,
                               UserManager<ApplicationIdentityBase> userManager)
         {
-            _dbService = dbService;
+            _specialtiesdbService = specialtiesdbService;
             _themesService = themesService;
             _userManager = userManager;
         }
@@ -58,7 +58,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <returns></returns>
         public async Task OnGet()
         {
-            Specialties = await _dbService.GetAll<Specialty>();
+            Specialties = await _specialtiesdbService.GetAll();
         }
 
         /// <summary>
@@ -67,14 +67,13 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <returns></returns>
         public async Task<IActionResult> OnPost()
         {
-            // TO DO: Validate
             Input.CreatorId = _userManager.GetUserId(User).ToString();
             Input.Status = User.IsInRole(Constants.RoleNames.StudentRole) ? Enums.ThesesStatusType.Pending : Enums.ThesesStatusType.Accept;
 
-            if (ModelState.IsValid && await _themesService.AddAsync(Input))
+            if (ModelState.IsValid)//&& await _themesService.Add(Input))
                 return Redirect("BachelorThesesList");
 
-            Specialties = await _dbService.GetAll<Specialty>();
+            Specialties = await _specialtiesdbService.GetAll();
             return Page();
         }
 

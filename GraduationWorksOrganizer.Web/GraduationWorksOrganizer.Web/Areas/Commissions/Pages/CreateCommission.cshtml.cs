@@ -25,11 +25,6 @@ namespace GraduationWorksOrganizer.Web.Areas.Commissions.Pages
         private readonly CommissionsService _commissionsService;
 
         /// <summary>
-        /// Сървис за работа с базата данни
-        /// </summary>
-        private readonly IAsyncRepository _repository;
-
-        /// <summary>
         /// Сървис за работа с учители
         /// </summary>
         private readonly TeacherService<TeacherViewModel> _teacherService;
@@ -41,12 +36,10 @@ namespace GraduationWorksOrganizer.Web.Areas.Commissions.Pages
         /// <summary>
         /// Конструктор
         /// </summary>
-        public CreateCommissionModel(IAsyncRepository asyncRepository,
-                                     CommissionsService commissionsService,
+        public CreateCommissionModel(CommissionsService commissionsService,
                                      TeacherService<TeacherViewModel> teacherService)
         {
             _commissionsService = commissionsService;
-            _repository = asyncRepository;
             _teacherService = teacherService;
         }
 

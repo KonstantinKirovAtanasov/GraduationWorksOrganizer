@@ -1,5 +1,4 @@
 ﻿using GraduationWorksOrganizer.Common;
-using GraduationWorksOrganizer.Core.Additional;
 using GraduationWorksOrganizer.Core.Database;
 using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Models.Base;
@@ -9,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -24,25 +22,24 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
 
         private readonly SignInManager<ApplicationIdentityBase> _signInManager;
         private readonly UserManager<ApplicationIdentityBase> _userManager;
-        private readonly IAsyncRepository _dbService;
+        private readonly IAsyncRepository<Faculty> _facultiesdbService;
+        private readonly IAsyncRepository<Department> _deparmentsdbService;
         private readonly ILogger<RegisterStudentModel> _logger;
-        private readonly IEmailSender _emailSender;
 
         #endregion
 
         #region Constructor
-        public RegisterTeacherModel(
-                    IAsyncRepository dbService,
-                    UserManager<ApplicationIdentityBase> userManager,
-                    SignInManager<ApplicationIdentityBase> signInManager,
-                    ILogger<RegisterStudentModel> logger,
-                    IEmailSender emailSender)
+        public RegisterTeacherModel(IAsyncRepository<Faculty> facultiesdbService,
+                                    IAsyncRepository<Department> deparmentsdbService,
+                                    UserManager<ApplicationIdentityBase> userManager,
+                                    SignInManager<ApplicationIdentityBase> signInManager,
+                                    ILogger<RegisterStudentModel> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
-            _dbService = dbService;
+            _facultiesdbService = facultiesdbService;
+            _deparmentsdbService = deparmentsdbService;
         }
 
         #endregion
@@ -93,7 +90,7 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync()
         {
-            Faculties = await _dbService.GetAll<Faculty>();
+            Faculties = await _facultiesdbService.GetAll();
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -123,8 +120,8 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
                 }
             }
 
-            Faculties = await _dbService.GetAll<Faculty>();
-            Departments = await _dbService.GetAll<Department>(d => d.FacultyId == Input.FacultyId);
+            Faculties = await _facultiesdbService.GetAll();
+            Departments = await _deparmentsdbService.GetAll(d => d.FacultyId == Input.FacultyId);
             return Page();
         }
 

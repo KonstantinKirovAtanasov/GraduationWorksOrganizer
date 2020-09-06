@@ -9,6 +9,8 @@ namespace GraduationWorksOrganizer.Web.SharedViewModels
     /// </summary>
     public class TeacherViewModel : IAutoMapperViewModel
     {
+        #region Properties
+
         /// <summary>
         /// Ид
         /// </summary>
@@ -29,15 +31,30 @@ namespace GraduationWorksOrganizer.Web.SharedViewModels
         /// </summary>
         public InnerDepartmentViewModel Department { get; set; }
 
+        #endregion
+
+        #region IAutoMapperViewModel
+
         /// <summary>
-        /// Конфигурация
+        /// Метод който връща конфигурацията на АутоМапер-а
         /// </summary>
-        public MapperConfiguration Configuration { get; set; }
-            = new MapperConfiguration(c =>
-            {
-                c.CreateMap<Teacher, TeacherViewModel>();
-                c.CreateMap<Department, InnerDepartmentViewModel>();
-            });
+        /// <returns></returns>
+        public MapperConfiguration GetMapperConfiguration()
+        {
+            return new MapperConfiguration(ConfigureMap);
+        }
+
+        /// <summary>
+        /// Метод за конфигурация
+        /// </summary>
+        /// <param name="expression"></param>
+        protected virtual void ConfigureMap(IMapperConfigurationExpression expression)
+        {
+            expression.CreateMap<Teacher, TeacherViewModel>();
+            expression.CreateMap<Department, InnerDepartmentViewModel>();
+        }
+
+        #endregion
 
         /// <summary>
         /// Вътрешен клас за катедра

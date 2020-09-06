@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -21,22 +20,26 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationIdentityBase> _signInManager;
         private readonly UserManager<ApplicationIdentityBase> _userManager;
-        private readonly IAsyncRepository _dbService;
-        private readonly ILogger<RegisterStudentModel> _logger;
+        private readonly IAsyncRepository<Faculty> _facultydbService;
+        private readonly IAsyncRepository<Department> _departmentsdbService;
+        private readonly IAsyncRepository<Specialty> _specialtiesdbService;
+        private readonly IAsyncRepository<Group> _groupsdbService;
         private readonly IEmailSender _emailSender;
 
         public RegisterStudentModel(
-            IAsyncRepository dbService,
+            IAsyncRepository<Faculty> facultydbService,
+            IAsyncRepository<Department> departmentsdbService,
+            IAsyncRepository<Specialty> specialtiesdbService,
+            IAsyncRepository<Group> groupsdbService,
             UserManager<ApplicationIdentityBase> userManager,
-            SignInManager<ApplicationIdentityBase> signInManager,
-            ILogger<RegisterStudentModel> logger,
-            IEmailSender emailSender)
+            SignInManager<ApplicationIdentityBase> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _logger = logger;
-            _emailSender = emailSender;
-            _dbService = dbService;
+            _facultydbService = facultydbService;
+            _departmentsdbService = departmentsdbService;
+            _specialtiesdbService = specialtiesdbService;
+            _groupsdbService = groupsdbService;
         }
 
         [BindProperty]
@@ -97,7 +100,7 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
-            Faculties = await _dbService.GetAll<Faculty>();
+            Faculties = await _facultydbService.GetAll();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -158,10 +161,10 @@ namespace GraduationWorksOrganizer.Web.Areas.Identity.Pages.Account
         /// <returns></returns>
         private async Task InitializeRequisites()
         {
-            Departments = await _dbService.GetAll<Department>(d => d.FacultyId == Input.FacultyId);
-            Specialties = await _dbService.GetAll<Specialty>(s => s.DepartmentId == Input.DepartmentId);
-            Groups = await _dbService.GetAll<Group>(g => g.SpecialtyId == Input.SpecialtyId);
-            Faculties = await _dbService.GetAll<Faculty>();
+            Departments = await _departmentsdbService.GetAll(d => d.FacultyId == Input.FacultyId);
+            Specialties = await _specialtiesdbService.GetAll(s => s.DepartmentId == Input.DepartmentId);
+            Groups = await _groupsdbService.GetAll(g => g.SpecialtyId == Input.SpecialtyId);
+            Faculties = await _facultydbService.GetAll();
         }
     }
 }

@@ -12,6 +12,9 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
     /// </summary>
     public class ThesesViewModel : IAutoMapperViewModel
     {
+
+        #region  Properties
+
         /// <summary>
         /// Ид на тезата
         /// </summary>
@@ -21,11 +24,6 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
         /// Заглавие
         /// </summary>
         public string Title { get; set; }
-
-        /// <summary>
-        /// Описание
-        /// </summary>
-        public string Description { get; set; }
 
         /// <summary>
         /// Тип
@@ -52,22 +50,31 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
         /// </summary>
         public InnerApplicationUserViewModel Creator { get; set; }
 
-        /// <summary>
-        /// Одобрил
-        /// </summary>
-        public InnerApplicationUserViewModel Approval { get; set; }
+        #endregion
 
+        #region IAutoMapperViewModel
 
         /// <summary>
-        /// Конфигурация за ауто мапер
+        /// Метод който връща конфигурацията на АутоМапер-а
         /// </summary>
-        public virtual MapperConfiguration Configuration { get; set; }
-            = new MapperConfiguration(c =>
-            {
-                c.CreateMap<Theses, ThesesViewModel>();
-                c.CreateMap<ApplicationIdentityBase, InnerApplicationUserViewModel>();
-                c.CreateMap<Specialty, InnerSpecialtyViewModel>();
-            });
+        /// <returns></returns>
+        public MapperConfiguration GetMapperConfiguration()
+        {
+            return new MapperConfiguration(ConfigureMap);
+        }
+
+        /// <summary>
+        /// Метод за конфигурация
+        /// </summary>
+        /// <param name="expression"></param>
+        protected virtual void ConfigureMap(IMapperConfigurationExpression expression)
+        {
+            expression.CreateMap<Theses, ThesesViewModel>();
+            expression.CreateMap<ApplicationIdentityBase, InnerApplicationUserViewModel>();
+            expression.CreateMap<Specialty, InnerSpecialtyViewModel>();
+        }
+
+        #endregion
 
         /// <summary>
         /// ВМ за специалност

@@ -1,4 +1,5 @@
-﻿using GraduationWorksOrganizer.Database.Models.Base;
+﻿using GraduationWorksOrganizer.Core.Database.Models;
+using GraduationWorksOrganizer.Database.Models.Base;
 using System;
 using System.Collections.Generic;
 using static GraduationWorksOrganizer.Common.Enums;
@@ -8,8 +9,17 @@ namespace GraduationWorksOrganizer.Database.Models
     /// <summary>
     /// Модел за тема
     /// </summary>
-    public class Theses
+    public class Theses : IDatabaseEntity
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        public Theses()
+        {
+            Requerments = new HashSet<ThesisRequerment>();
+            UserEntries = new HashSet<ThesesUserEntry>();
+        }
+
         /// <summary>
         /// Id
         /// </summary>
@@ -74,5 +84,10 @@ namespace GraduationWorksOrganizer.Database.Models
         /// Изисквания
         /// </summary>
         public ICollection<ThesisRequerment> Requerments { get; set; }
+
+        /// <summary>
+        /// Записвания
+        /// </summary>
+        public ICollection<ThesesUserEntry> UserEntries { get; set; }
     }
 }

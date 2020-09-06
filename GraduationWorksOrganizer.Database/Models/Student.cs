@@ -1,5 +1,5 @@
 ﻿using GraduationWorksOrganizer.Database.Models.Base;
-using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace GraduationWorksOrganizer.Database.Models
 {
@@ -37,5 +37,10 @@ namespace GraduationWorksOrganizer.Database.Models
         /// Факълтетен Номер
         /// </summary>
         public string FacultyNumber { get; set; }
+
+        /// <summary>
+        /// Записани теми
+        /// </summary>
+        public ICollection<ThesesUserEntry> ThesisEntries { get; set; }
     }
 }

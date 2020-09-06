@@ -9,8 +9,9 @@ namespace GraduationWorksOrganizer.Core.ViewModels
     public interface IAutoMapperViewModel
     {
         /// <summary>
-        /// Конфигурация за ауто мапера
+        /// Метод който връща конфигурацията на АутоМапер-а
         /// </summary>
-        MapperConfiguration Configuration { get; set; }
+        /// <returns></returns>
+        MapperConfiguration GetMapperConfiguration();
     }
 }

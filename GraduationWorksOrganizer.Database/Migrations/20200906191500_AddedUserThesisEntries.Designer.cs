@@ -4,20 +4,37 @@ using GraduationWorksOrganizer.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GraduationWorksOrganizer.Database.Migrations
 {
     [DbContext(typeof(GraduationWorksOrganizerDataContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200906191500_AddedUserThesisEntries")]
+    partial class AddedUserThesisEntries
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Base.ThesesUserEntry", b =>
+                {
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ThesesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentId", "ThesesId");
+
+                    b.HasIndex("ThesesId");
+
+                    b.ToTable("ThesesUserEntry");
+                });
 
             modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Commission", b =>
                 {
@@ -439,21 +456,6 @@ namespace GraduationWorksOrganizer.Database.Migrations
                     b.ToTable("Theses");
                 });
 
-            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesesUserEntry", b =>
-                {
-                    b.Property<string>("StudentId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ThesesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("StudentId", "ThesesId");
-
-                    b.HasIndex("ThesesId");
-
-                    b.ToTable("ThesesUserEntries");
-                });
-
             modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesisDefenceEvent", b =>
                 {
                     b.Property<int>("Id")
@@ -794,6 +796,21 @@ namespace GraduationWorksOrganizer.Database.Migrations
                     b.HasDiscriminator().HasValue("Teacher");
                 });
 
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Base.ThesesUserEntry", b =>
+                {
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Student", "Student")
+                        .WithMany("ThesisEntries")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Theses", "Theses")
+                        .WithMany("UserEntries")
+                        .HasForeignKey("ThesesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Commission", b =>
                 {
                     b.HasOne("GraduationWorksOrganizer.Database.Models.Department", "Department")
@@ -858,21 +875,6 @@ namespace GraduationWorksOrganizer.Database.Migrations
                         .WithMany()
                         .HasForeignKey("TargetSpecialtyId")
                         .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesesUserEntry", b =>
-                {
-                    b.HasOne("GraduationWorksOrganizer.Database.Models.Student", "Student")
-                        .WithMany("ThesisEntries")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GraduationWorksOrganizer.Database.Models.Theses", "Theses")
-                        .WithMany("UserEntries")
-                        .HasForeignKey("ThesesId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 

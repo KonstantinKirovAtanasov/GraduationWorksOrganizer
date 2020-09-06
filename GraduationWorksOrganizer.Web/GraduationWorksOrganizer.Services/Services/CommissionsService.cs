@@ -1,10 +1,6 @@
-﻿using GraduationWorksOrganizer.Core.Database.Models;
-using GraduationWorksOrganizer.Core.Services;
-using GraduationWorksOrganizer.Database.Models;
+﻿using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Services;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Services.Commissions

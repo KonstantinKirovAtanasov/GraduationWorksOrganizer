@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Services.MapEntitiesServices
@@ -14,7 +15,7 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
     /// <summary>
     /// Сървис за работа с учители
     /// </summary>
-    public class ThesisService<TViewModel> : IViewModelService<TViewModel, Teacher> where TViewModel : IAutoMapperViewModel, new()
+    public class ThesisViewModelService<TViewModel> : IViewModelService<TViewModel, Teacher> where TViewModel : IAutoMapperViewModel, new()
     {
         #region Declarations
 
@@ -35,10 +36,10 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         /// <summary>
         /// Конструктор
         /// </summary>
-        public ThesisService(ThesesDatabaseService databaseService)
+        public ThesisViewModelService(ThesesDatabaseService databaseService)
         {
             _databaseService = databaseService;
-            _automapper = new Mapper(new TViewModel().Configuration);
+            _automapper = new Mapper(new TViewModel().GetMapperConfiguration());
         }
 
         #endregion
@@ -49,8 +50,25 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         /// <returns></returns>
         public IEnumerable<TViewModel> GetViewModels()
         {
-            IQueryable<Theses> thesises = _databaseService.GetAll().Include(t => t.TargetSpecialty).Include(t => t.Approval).Include(t => t.Creator);
+            IQueryable<Theses> thesises = _databaseService.GetAllIncluding(t => t.TargetSpecialty, t => t.Creator);
             foreach (Theses thesis in thesises)
+                yield return _automapper.Map<TViewModel>(thesis);
+        }
+
+        /// <summary>
+        /// Метод който връща всички модели от базата като ViewModel-и според предиката
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<TViewModel> GetViewModels(Expression<Func<Theses, bool>> predicate)
+        {
+            IQueryable<Theses> theseses = _databaseService.GetAllIncluding(t => t.TargetSpecialty
+                                                                         , t => t.UserEntries
+                                                                         , t => t.Requerments
+                                                                         , t => t.Creator);
+            if (predicate != null)
+                theseses = theseses.Where(predicate);
+
+            foreach (Theses thesis in theseses)
                 yield return _automapper.Map<TViewModel>(thesis);
         }
 
@@ -59,13 +77,13 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         /// </summary>
         /// <param name="theses"></param>
         /// <returns></returns>
-        public async Task<bool> AddAsync(IAutoMapperViewModel thesesVM)
+        public async Task AddAsync(IAutoMapperViewModel thesesVM)
         {
-            Mapper mapper = new Mapper(thesesVM.Configuration);
+            Mapper mapper = new Mapper(thesesVM.GetMapperConfiguration());
             Theses theses = mapper.Map<Theses>(thesesVM);
 
             theses.CreationDate = DateTime.Now;
-            return await _databaseService.AddAsync(theses);
+            await _databaseService.Add(theses);
         }
 
         /// <summary>
@@ -75,7 +93,7 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         /// <returns></returns>
         public async Task<TViewModel> GetViewModel(int id)
         {
-            Theses thesis = await _databaseService.GeyById(id, t => t.TargetSpecialty);
+            Theses thesis = await _databaseService.GetAllIncluding(t => t.TargetSpecialty, t => t.Requerments, t => t.Creator).FirstOrDefaultAsync(t => t.Id == id);
             return _automapper.Map<TViewModel>(thesis);
         }
     }

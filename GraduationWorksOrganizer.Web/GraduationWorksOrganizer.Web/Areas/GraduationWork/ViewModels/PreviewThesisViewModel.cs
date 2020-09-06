@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using GraduationWorksOrganizer.Core.ViewModels;
 using GraduationWorksOrganizer.Database.Models;
-using GraduationWorksOrganizer.Database.Models.Base;
 using System.Collections.Generic;
+using static GraduationWorksOrganizer.Common.Enums;
 
 namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
 {
@@ -12,20 +12,29 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
     public class PreviewThesisViewModel : ThesesViewModel, IAutoMapperViewModel
     {
         /// <summary>
+        /// Одобрил
+        /// </summary>
+        public InnerApplicationUserViewModel Approval { get; set; }
+
+        /// <summary>
+        /// Описание
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
         /// Клас за изисквания
         /// </summary>
         public IEnumerable<RequermentViewModel> Requerments { get; set; }
 
         /// <summary>
-        /// Конфигурация за ауто мапер
+        /// Метод за конфигурация
         /// </summary>
-        public override MapperConfiguration Configuration { get; set; }
-            = new MapperConfiguration(c =>
-            {
-                c.CreateMap<Theses, PreviewThesisViewModel>();
-                c.CreateMap<ApplicationIdentityBase, InnerApplicationUserViewModel>();
-                c.CreateMap<Specialty, InnerSpecialtyViewModel>();
-                c.CreateMap<ThesisRequerment, RequermentViewModel>();
-            });
+        /// <param name="expression"></param>
+        protected override void ConfigureMap(IMapperConfigurationExpression expression)
+        {
+            base.ConfigureMap(expression);
+            expression.CreateMap<Theses, PreviewThesisViewModel>();
+            expression.CreateMap<ThesisRequerment, RequermentViewModel>();
+        }
     }
 }

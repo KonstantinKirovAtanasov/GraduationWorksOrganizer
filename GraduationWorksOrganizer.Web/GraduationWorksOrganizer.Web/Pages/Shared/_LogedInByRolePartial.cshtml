@@ -21,7 +21,7 @@
             }
             @if ((await AuthorizationService.AuthorizeAsync(User, Constants.PolicyNames.ViewTheses)).Succeeded)
             {
-                <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="" title="Manage">Моите теми</a>
+                <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="/MyTheses" title="Manage">Моите теми</a>
             }
         </div>
     </div>

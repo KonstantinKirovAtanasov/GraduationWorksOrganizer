@@ -37,7 +37,7 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         public TeacherService(TeachersDatabaseService databaseService)
         {
             _databaseService = databaseService;
-            _automapper = new Mapper(new TViewModel().Configuration);
+            _automapper = new Mapper(new TViewModel().GetMapperConfiguration());
         }
 
         #endregion

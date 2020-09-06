@@ -82,7 +82,10 @@ namespace GraduationWorksOrganizer.Database
         /// </summary>
         public DbSet<ThesisRequerment> ThesisRequerments { get; set; }
 
-
+        /// <summary>
+        /// таблица с изисквания към теми
+        /// </summary>
+        public DbSet<ThesesUserEntry> ThesesUserEntries { get; set; }
         #endregion // DbSets
 
         #region Constructor
@@ -114,6 +117,7 @@ namespace GraduationWorksOrganizer.Database
             builder.Entity<ThesisDefenceEvent>().HasKey(td => td.Id);
             builder.Entity<ThesisMark>().HasKey(tm => tm.Id);
             builder.Entity<ThesisRequerment>().HasKey(tr => tr.Id);
+            builder.Entity<ThesesUserEntry>().HasKey(tue => new { tue.StudentId, tue.ThesesId });
 
 
             // Relations
@@ -123,10 +127,12 @@ namespace GraduationWorksOrganizer.Database
             builder.Entity<Teacher>().HasOne(t => t.Department).WithMany().HasForeignKey(t => t.DepartmentId).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<Student>().HasOne(s => s.Specialty).WithMany().HasForeignKey(s => s.SpecialtyId).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<Student>().HasOne(s => s.Group).WithMany(g => g.Students).HasForeignKey(s => s.GroupId).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Student>().HasMany(s => s.ThesisEntries).WithOne(tue => tue.Student).HasForeignKey(tue => tue.StudentId).OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Theses>().HasOne(t => t.Creator).WithMany().HasForeignKey(t => t.CreatorId).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<Theses>().HasOne(t => t.TargetSpecialty).WithMany().HasForeignKey(t => t.TargetSpecialtyId).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<Theses>().HasMany(t => t.Requerments).WithOne(r => r.Theses).HasForeignKey(t => t.ThesesId).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Theses>().HasMany(t => t.UserEntries).WithOne(tue => tue.Theses).HasForeignKey(tue => tue.ThesesId).OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Group>().HasOne(g => g.Specialty).WithMany().HasForeignKey(g => g.SpecialtyId).OnDelete(DeleteBehavior.NoAction);
 

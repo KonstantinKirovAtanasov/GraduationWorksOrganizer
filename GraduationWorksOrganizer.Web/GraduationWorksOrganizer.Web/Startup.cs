@@ -11,6 +11,7 @@ using GraduationWorksOrganizer.Database.Services;
 using GraduationWorksOrganizer.Database.Services.Base;
 using GraduationWorksOrganizer.Services.Commissions;
 using GraduationWorksOrganizer.Services.MapEntitiesServices;
+using GraduationWorksOrganizer.Services.Services;
 using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
 using GraduationWorksOrganizer.Web.SharedViewModels;
 using Microsoft.AspNetCore.Builder;
@@ -44,20 +45,21 @@ namespace GraduationWorksOrganizer.Web
 
             services.AddDbContext<GraduationWorksOrganizerDataContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<ApplicationIdentityBase, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<ApplicationIdentityBase, IdentityRole>()
                 .AddEntityFrameworkStores<GraduationWorksOrganizerDataContext>();
 
             services.AddScoped<IEmailSender, ComformationEmailSender>();
-            services.AddScoped<IAsyncRepository, BaseRepository>();
+
+            services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
+            services.AddScoped(typeof(ThesisViewModelService<>));
 
             services.AddScoped<TeacherService<TeacherViewModel>>();
-            services.AddScoped<ThesisService<ThesesViewModel>>();
-            services.AddScoped<ThesisService<PreviewThesisViewModel>>();
 
             services.AddScoped<CommissionsService>();
             services.AddScoped<ThesesDatabaseService>();
             services.AddScoped<TeachersDatabaseService>();
             services.AddScoped<ApplicationUserDatabaseService>();
+            services.AddScoped<ThesisService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

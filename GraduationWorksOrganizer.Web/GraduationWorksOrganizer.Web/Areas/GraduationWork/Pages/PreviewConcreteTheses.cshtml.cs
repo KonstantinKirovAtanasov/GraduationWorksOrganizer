@@ -1,11 +1,15 @@
+using GraduationWorksOrganizer.Common;
 using GraduationWorksOrganizer.Core.Database;
+using GraduationWorksOrganizer.Database.Models;
+using GraduationWorksOrganizer.Database.Models.Base;
 using GraduationWorksOrganizer.Services.MapEntitiesServices;
+using GraduationWorksOrganizer.Services.Services;
 using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
-using static GraduationWorksOrganizer.Common.Enums;
 
 namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
 {
@@ -18,14 +22,12 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         #region Declarations
 
         /// <summary>
-        /// Сървис
+        /// Сървиси
         /// </summary>
-        private readonly ThesisService<PreviewThesisViewModel> _thesisService;
-
-        /// <summary>
-        /// Дб сървис
-        /// </summary>
-        private readonly IAsyncRepository _dbService;
+        private readonly ThesisViewModelService<PreviewThesisViewModel> _thesesVmService;
+        private readonly ThesisService _thesisService;
+        private readonly IAsyncRepository<Theses> _thesisDbService;
+        private readonly UserManager<ApplicationIdentityBase> _userService;
 
         #endregion
 
@@ -35,9 +37,15 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// Конструктор
         /// </summary>
         /// <param name="thesesService"></param>
-        public PreviewConcreteThesesModel(ThesisService<PreviewThesisViewModel> thesesService, IAsyncRepository dbService)
+        public PreviewConcreteThesesModel(ThesisViewModelService<PreviewThesisViewModel> thesesVmService,
+                                          IAsyncRepository<Theses> thesisDbService,
+                                          UserManager<ApplicationIdentityBase> userService,
+                                          ThesisService thesisService)
         {
-            _thesisService = thesesService;
+            _thesesVmService = thesesVmService;
+            _thesisService = thesisService;
+            _thesisDbService = thesisDbService;
+            _userService = userService;
         }
 
         #endregion
@@ -59,16 +67,46 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <param name="thesisId"></param>
         public async Task OnGet(int thesisId)
         {
-            Thesis = await _thesisService.GetViewModel(thesisId);
+            Thesis = await _thesesVmService.GetViewModel(thesisId);
         }
 
         /// <summary>
-        /// Пост
+        /// Handler за записване на за тема
         /// </summary>
         /// <returns></returns>
-        public async Task OnPost()
+        public async Task<IActionResult> OnPostApplyForTheThesis(int thesisId)
         {
-            await Task.CompletedTask;
+            string userId = _userService.GetUserId(User);
+            await _thesisService.ApplyForTheThesis(userId, thesisId);
+            return Redirect("MyTheses");
+        }
+
+        /// <summary>
+        /// Handler за Одобрение на тема
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> OnPostApprove(int thesisId)
+        {
+            Theses thesis = await _thesisDbService.GetById(thesisId);
+            thesis.Approval = await _userService.GetUserAsync(User);
+            if (await _thesisService.ApproveThesis(thesis))
+                return Redirect("BachelorThesesList");
+
+            return Page();
+        }
+
+        /// <summary>
+        /// Handler за отказване на тема
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> OnPostReject(int thesisId)
+        {
+            Theses thesis = await _thesisDbService.GetById(thesisId);
+            thesis.Approval = await _userService.GetUserAsync(User);
+            if (await _thesisService.RejectThesis(thesis))
+                return Redirect("BachelorThesesList");
+
+            return Page();
         }
         #endregion
     }

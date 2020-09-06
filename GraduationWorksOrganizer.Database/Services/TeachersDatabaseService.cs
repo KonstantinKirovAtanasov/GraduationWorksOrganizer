@@ -1,5 +1,6 @@
 ﻿using GraduationWorksOrganizer.Core.Database.Models;
 using GraduationWorksOrganizer.Database.Models;
+using GraduationWorksOrganizer.Database.Services.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;

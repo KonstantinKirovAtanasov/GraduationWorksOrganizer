@@ -1,10 +1,8 @@
 ﻿using GraduationWorksOrganizer.Core.Database;
-using GraduationWorksOrganizer.Core.Database.Models;
 using GraduationWorksOrganizer.Database.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq.Expressions;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Web.Controllers
@@ -22,7 +20,9 @@ namespace GraduationWorksOrganizer.Web.Controllers
         /// <summary>
         /// Репоситори
         /// </summary>
-        private readonly IAsyncRepository _repository;
+        private readonly IAsyncRepository<Department> _deparmentsRepository;
+        private readonly IAsyncRepository<Specialty> _specialtiesRepository;
+        private readonly IAsyncRepository<Group> _groupsRepository;
 
         #endregion // Declarations
 
@@ -32,9 +32,13 @@ namespace GraduationWorksOrganizer.Web.Controllers
         /// Конструктор
         /// </summary>
         /// <param name="repository"></param>
-        public UnivercityItemsController(IAsyncRepository repository)
+        public UnivercityItemsController(IAsyncRepository<Department> deparmentsRepository,
+                                         IAsyncRepository<Specialty> specialtiesRepository,
+                                         IAsyncRepository<Group> groupsRepository)
         {
-            _repository = repository;
+            _deparmentsRepository = deparmentsRepository;
+            _specialtiesRepository = specialtiesRepository;
+            _groupsRepository = groupsRepository;
         }
 
         #endregion // Initialization
@@ -48,7 +52,8 @@ namespace GraduationWorksOrganizer.Web.Controllers
         [Route("Departments/{facultyId}")]
         public async Task<IActionResult> GetDepartments(int facultyId)
         {
-            return await GetByExpression<Department>(d => d.FacultyId == facultyId);
+            IEnumerable<Department> result = await _deparmentsRepository.GetAll(d => d.FacultyId == facultyId);
+            return Ok(result);
         }
 
         /// <summary>
@@ -58,7 +63,8 @@ namespace GraduationWorksOrganizer.Web.Controllers
         [Route("Specialties/{departmentId}")]
         public async Task<IActionResult> GetSpetialties(int departmentId)
         {
-            return await GetByExpression<Specialty>(s => s.DepartmentId == departmentId);
+            IEnumerable<Specialty> result = await _specialtiesRepository.GetAll(s => s.DepartmentId == departmentId);
+            return Ok(result);
         }
 
         /// <summary>
@@ -68,33 +74,10 @@ namespace GraduationWorksOrganizer.Web.Controllers
         [Route("Groups/{specialtyId}")]
         public async Task<IActionResult> GetGroups(int specialtyId)
         {
-            return await GetByExpression<Group>(g => g.SpecialtyId == specialtyId);
+            IEnumerable<Group> result = await _groupsRepository.GetAll(g => g.SpecialtyId == specialtyId);
+            return Ok(result);
         }
 
         #endregion // Methods
-
-        #region Helpers
-
-        /// <summary>
-        /// Метод който връща резултат по филтър и тип
-        /// </summary>
-        /// <typeparam name="TModelType"></typeparam>
-        /// <param name="expression"></param>
-        /// <returns></returns>
-        private async Task<IActionResult> GetByExpression<TModelType>(Expression<Func<TModelType, bool>> expression)
-            where TModelType : class, IDatabaseEntity
-        {
-            var departments = await _repository.GetAll(expression);
-            if (departments != null)
-            {
-                return Ok(departments);
-            }
-            else
-            {
-                return BadRequest();
-            }
-        }
-
-        #endregion //Helpers
     }
 }

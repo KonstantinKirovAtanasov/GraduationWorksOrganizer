@@ -17,12 +17,12 @@ namespace GraduationWorksOrganizer.Web.Controllers
     public class HelpMessagesController : ControllerBase
     {
         /// <summary> Репоситори </summary>
-        private readonly IAsyncRepository _repository;
+        private readonly IAsyncRepository<HelpMessage> _repository;
 
         /// <summary>
         /// Конструктор
         /// </summary>
-        public HelpMessagesController(IAsyncRepository repository)
+        public HelpMessagesController(IAsyncRepository<HelpMessage> repository)
         {
             _repository = repository;
         }
@@ -36,7 +36,7 @@ namespace GraduationWorksOrganizer.Web.Controllers
         [Route("{key}")]
         public async Task<IActionResult> GetHelpMessage(string key)
         {
-            IEnumerable<HelpMessage> messages = await _repository.GetAll<HelpMessage>(hm => hm.Key.Equals(key));
+            IEnumerable<HelpMessage> messages = await _repository.GetAll(hm => hm.Key.Equals(key));
             return Ok(messages.FirstOrDefault());
         }
     }

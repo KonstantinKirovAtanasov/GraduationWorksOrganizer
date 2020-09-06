@@ -43,14 +43,28 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices.ViewModels
         /// </summary>
         public List<RequermentViewModel> Requerments { get; set; }
 
+        #region IAutoMapperViewModel
+
         /// <summary>
-        /// Конфигурация за АутоМаппер-а
+        /// Метод който връща конфигурацията на АутоМапер-а
         /// </summary>
-        public MapperConfiguration Configuration { get; set; } = new MapperConfiguration(cfg =>
+        /// <returns></returns>
+        public MapperConfiguration GetMapperConfiguration()
         {
-            cfg.CreateMap<AddThesisViewModel, Theses>();
-            cfg.CreateMap<RequermentViewModel, ThesisRequerment>();
-        });
+            return new MapperConfiguration(ConfigureMap);
+        }
+
+        /// <summary>
+        /// Метод за конфигурация
+        /// </summary>
+        /// <param name="expression"></param>
+        protected virtual void ConfigureMap(IMapperConfigurationExpression expression)
+        {
+            expression.CreateMap<AddThesisViewModel, Theses>();
+            expression.CreateMap<RequermentViewModel, ThesisRequerment>();
+        }
+
+        #endregion
 
         /// <summary>
         /// Ид на Създателя на темата

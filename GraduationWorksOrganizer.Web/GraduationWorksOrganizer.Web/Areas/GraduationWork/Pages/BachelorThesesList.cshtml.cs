@@ -13,7 +13,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
     {
         #region Declarations
 
-        private readonly ThesisService<ThesesViewModel> _dbService;
+        private readonly ThesisViewModelService<ThesesViewModel> _dbService;
         #endregion
 
         #region Initialization
@@ -21,7 +21,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <summary>
         /// Конструктор
         /// </summary>
-        public BachelorThesesListModel(ThesisService<ThesesViewModel> dbService)
+        public BachelorThesesListModel(ThesisViewModelService<ThesesViewModel> dbService)
         {
             _dbService = dbService;
         }
