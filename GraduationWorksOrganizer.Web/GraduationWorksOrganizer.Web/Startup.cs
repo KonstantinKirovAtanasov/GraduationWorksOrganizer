@@ -52,6 +52,7 @@ namespace GraduationWorksOrganizer.Web
 
             services.AddScoped<TeacherService<TeacherViewModel>>();
             services.AddScoped<ThesisService<ThesesViewModel>>();
+            services.AddScoped<ThesisService<PreviewThesisViewModel>>();
 
             services.AddScoped<CommissionsService>();
             services.AddScoped<ThesesDatabaseService>();

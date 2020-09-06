@@ -8,7 +8,6 @@
 <hr />
 
 <form method="post" class="helpinfodefault" data-helpmessagekey="defaulthelpmessage">
-    <div asp-validation-summary="All" class="text-danger"></div>
     <div class="row">
         <div class="col-md-11">
             <div class="helpinfo">
@@ -17,9 +16,9 @@
                 <span asp-validation-for="Input.Title" class="text-danger"></span>
             </div>
             <div class="form-group helpinfo">
-                <label>Описание:</label>
-                <textarea class="multilineTextArea form-control resize" asp-for="Input.Description"></textarea>
-                <span asp-validation-for="Input.Description" class="text-danger"></span>
+                <label>Специалност:</label>
+                <select class="form-control" asp-for="Input.TargetSpecialtyId" asp-items="@Html.GetEntityEnumSelectList(Model.Specialties)"></select>
+                <span></span>
             </div>
             <div class="form-group helpinfo">
                 <label>Тип на заданието</label>
@@ -27,12 +26,11 @@
                 <span asp-validation-for="Input.Type" class="text-danger"></span>
             </div>
             <div class="form-group helpinfo">
-                <label>Специалност:</label>
-                <select class="form-control" asp-for="Input.TargetSpecialtyId" asp-items="@Html.GetEntityEnumSelectList(Model.Specialties)"></select>
-                <span></span>
+                <label>Описание:</label>
+                <textarea class="multilineTextArea form-control resize" asp-for="Input.Description"></textarea>
+                <span asp-validation-for="Input.Description" class="text-danger"></span>
             </div>
-
-            <table class="table-border">
+            <table class="table table-bordered mb-0">
                 <thead>
                     <tr>
                         <th style="width:85%">Описание</th>
@@ -47,13 +45,13 @@
                         {
                             <tr>
                                 <td>
-                                    <input class="form-control" asp-for="Input.Requerments[i].Description" />
+                                    <textarea class="form-control resize" asp-for="Input.Requerments[i].Description"></textarea>
                                 </td>
                                 <td>
                                     <input class="form-control" asp-for="Input.Requerments[i].MaxPointsCount" />
                                 </td>
-                                <td>
-                                    <a class="row-delete btn btn-light">X</a>
+                                <td class="justify-content-center">
+                                    <a class="row-delete"><img class="icon" src="~/images/deleteIcon.jpg" /></a>
                                 </td>
                             </tr>
                         }
@@ -62,17 +60,27 @@
                     {
                         <tr>
                             <td>
-                                <input class="form-control" asp-for="Input.Requerments[0].Description" />
+                                <textarea class="form-control resize" asp-for="Input.Requerments[0].Description"></textarea>
                             </td>
                             <td>
                                 <input class="form-control" asp-for="Input.Requerments[0].MaxPointsCount" />
                             </td>
-                            <td>
-                                <a class="row-delete btn btn-light">X</a>
+                            <td class="justify-content-center">
+                                <a class="row-delete"><img class="icon" src="~/images/deleteIcon.jpg" /></a>
                             </td>
                         </tr>
                     }
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            <text class="text-dark">Общо точки:</text>
+                        </td>
+                        <td>
+                            <text id="pointsSum" class="text-dark"></text>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
             <span />
             <hr />
@@ -81,6 +89,7 @@
             <a id="addRequermentButton" class="btn btn-light">Добави изискване</a>
         </div>
         <div class="col-md-6 col-md-offset-2">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <section>
                 <h4 class="helptitle"></h4>
                 <div>
@@ -93,15 +102,17 @@
 @section Scripts{
     <script src="~/js/global/autoHeigthTextArea.js"></script>
     <script>
-        let itemIndex = 0;
         $(document).ready(function () {
             $('#addRequermentButton').click(function () {
-                itemIndex++;
                 AddRequermentRow();
+                ResetIndexes();
             });
             $('.row-delete').each((index, element) => {
-                $(element).on('click', event => {
-                    $(event.target).closest('tr').remove();
+                $(element).on('click', OnRemoveRowAction);
+            });
+            $('#requermentContent').each((index, element) => {
+                $(element.children).find("td input:text").each((index, element) => {
+                    $(element).on('input', OnRequermentPointsChanged);
                 });
             });
         })
@@ -113,22 +124,57 @@
         }
 
         function GetNewRowItem() {
-            const descrId = "Input_Requerments_" + itemIndex + "__Description";
-            const pointsId = "Input_Requerments_" + itemIndex + "__MaxPointsCount";
-            const descrName = "Input.Requerments[" + itemIndex + "].Description";
-            const pointsName = "Input.Requerments[" + itemIndex + "].MaxPointsCount";
-            let row = $('<tr></tr>').append(`<td><input class="form-control" type="text" id=` + descrId + ` name=` + descrName + ` value=""></td><td><input class="form-control" type="text" id=` + pointsId + ` name=` + pointsName + ` data-val="true" data-val-number="The field MaxPointsCount must be a number." data-val-required="The MaxPointsCount field is required." value=""></td>`);
-            let aButton = $('<a></a>').append('X');
-            let cell = $('<td></td>');
+            let row = $('<tr></tr>');
+            let textArea = $(`<td><textarea class="form-control resize" type="text" value=""></textarea></td>`);
+            RegisrerResizeHandler(textArea);
+            row.append(textArea);
+            let pointsInput = $(`<input class="form-control" type="text" data-val="true" data-val-number="The field MaxPointsCount must be a number." data-val-required="The MaxPointsCount field is required." value=""/>`);
+            $(pointsInput).on('input', OnRequermentPointsChanged);
+            let pointscell = $(`<td></td>`).append(pointsInput);
+            row.append(pointscell);
+            let aButton = $('<a></a>').append('<img class="icon" src="/images/deleteIcon.jpg" />');
+            let cell = $('<td class="justify-content-center" ></td>');
 
             $(cell).append(aButton);
             $(row).append(cell);
-            $(aButton).addClass("row-delete btn btn-light");
-            $(aButton).on('click', event => {
-                $(event.target).closest('tr').remove();
-            });
+            $(aButton).addClass("row-delete");
+            $(aButton).on('click', OnRemoveRowAction);
 
             return row;
+        }
+
+        function ResetIndexes() {
+            const descrId = (newRowIndex) => { return "Input_Requerments_" + newRowIndex + "__Description" };
+            const pointsId = (newRowIndex) => { return "Input_Requerments_" + newRowIndex + "__MaxPointsCount" };
+            const descrName = (newRowIndex) => { return "Input.Requerments[" + newRowIndex + "].Description" };
+            const pointsName = (newRowIndex) => { return "Input.Requerments[" + newRowIndex + "].MaxPointsCount" };
+
+            let tableRows = document.getElementById('requermentContent').children;
+            for (let i = 0; i < tableRows.length; i++) {
+                let descrInput = tableRows[i].children[0].getElementsByTagName('textarea')[0];
+                let pointsInput = tableRows[i].children[1].getElementsByTagName('input')[0];
+
+                descrInput.id = descrId(i);
+                descrInput.name = descrName(i);
+                pointsInput.id = pointsId(i);
+                pointsInput.name = pointsName(i);
+            }
+        }
+
+        function OnRemoveRowAction(event) {
+            $(event.target).closest('tr').remove();
+            ResetIndexes();
+            OnRequermentPointsChanged();
+        }
+
+        function OnRequermentPointsChanged() {
+            let inputPointsArray = new Array();
+            let tableRows = document.getElementById('requermentContent').children;
+            for (let i = 0; i < tableRows.length; i++) {
+                inputPointsArray.push(tableRows[i].children[1].getElementsByTagName('input')[0].value);
+            }
+
+            $('#pointsSum')[0].innerHTML = inputPointsArray.reduce(function (accum, val) { return accum + Number(val); }, 0) || 0;
         }
     </script>
 }

@@ -7,7 +7,7 @@
 <div>
     @if (Model.Theses.Any())
     {
-        <table class="table-border">
+        <table class="table table-bordered table-hover mb-0">
             <thead>
                 <tr>
                     <th> Заглавие:</th>
@@ -28,8 +28,8 @@
                         <td class="text-center"> @vm.Creator.Name </td>
                         <td class="text-center"> @vm.CreationDate </td>
                         <td>
-                            <a class="nav-item text-dark" asp-area="GraduationWork" asp-page="/PreviewConcreteTheses">
-                                pr.
+                            <a class="nav-item text-dark" asp-area="GraduationWork" asp-page="/PreviewConcreteTheses" asp-route-thesisId="@vm.Id">
+                                <img class="icon" src="~/images/previewThesisIcon.png" />
                             </a>
                         </td>
                     </tr>

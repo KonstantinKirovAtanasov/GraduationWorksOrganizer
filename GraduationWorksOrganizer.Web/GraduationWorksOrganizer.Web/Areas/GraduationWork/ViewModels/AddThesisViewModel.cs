@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using GraduationWorksOrganizer.Core.ViewModels;
 using GraduationWorksOrganizer.Database.Models;
-using GraduationWorksOrganizer.Database.Models.Base;
+using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using static GraduationWorksOrganizer.Common.Enums;
@@ -41,7 +41,7 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices.ViewModels
         /// <summary>
         /// Колекция с изисквания
         /// </summary>
-        public List<InnerRequermentViewModel> Requerments { get; set; }
+        public List<RequermentViewModel> Requerments { get; set; }
 
         /// <summary>
         /// Конфигурация за АутоМаппер-а
@@ -49,10 +49,8 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices.ViewModels
         public MapperConfiguration Configuration { get; set; } = new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<AddThesisViewModel, Theses>();
-            cfg.CreateMap<InnerRequermentViewModel, ThesisRequerment>();
+            cfg.CreateMap<RequermentViewModel, ThesisRequerment>();
         });
-
-        #region Internal
 
         /// <summary>
         /// Ид на Създателя на темата
@@ -63,23 +61,5 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices.ViewModels
         /// Id на създателя на темата
         /// </summary>
         public ThesesStatusType Status { get; set; }
-
-        #endregion
-
-        /// <summary>
-        /// Вътрешен ВМ за изискване
-        /// </summary>
-        public class InnerRequermentViewModel
-        {
-            /// <summary>
-            /// Описание
-            /// </summary>
-            public string Description { get; set; }
-
-            /// <summary>
-            /// Максимален брой точки
-            /// </summary>
-            public decimal MaxPointsCount { get; set; }
-        }
     }
 }

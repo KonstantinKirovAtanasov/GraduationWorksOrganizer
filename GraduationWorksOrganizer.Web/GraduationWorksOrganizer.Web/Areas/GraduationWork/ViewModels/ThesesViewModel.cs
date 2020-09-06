@@ -61,7 +61,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
         /// <summary>
         /// Конфигурация за ауто мапер
         /// </summary>
-        public MapperConfiguration Configuration { get; set; }
+        public virtual MapperConfiguration Configuration { get; set; }
             = new MapperConfiguration(c =>
             {
                 c.CreateMap<Theses, ThesesViewModel>();

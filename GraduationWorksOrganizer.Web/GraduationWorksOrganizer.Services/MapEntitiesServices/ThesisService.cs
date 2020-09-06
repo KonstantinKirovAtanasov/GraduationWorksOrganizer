@@ -68,5 +68,15 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
             return await _databaseService.AddAsync(theses);
         }
 
+        /// <summary>
+        /// Метод който връща ВМ на тема
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<TViewModel> GetViewModel(int id)
+        {
+            Theses thesis = await _databaseService.GeyById(id, t => t.TargetSpecialty);
+            return _automapper.Map<TViewModel>(thesis);
+        }
     }
 }
