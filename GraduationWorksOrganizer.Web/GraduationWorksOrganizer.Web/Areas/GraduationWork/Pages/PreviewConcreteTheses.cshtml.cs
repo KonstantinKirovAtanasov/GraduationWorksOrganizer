@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
@@ -77,6 +80,16 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         public async Task<IActionResult> OnPostApplyForTheThesis(int thesisId)
         {
             string userId = _userService.GetUserId(User);
+            IEnumerable<ValidationResult> result = await _thesisService.ValidateApply(userId, thesisId);
+            if (result.Any())
+            {
+                foreach (ValidationResult validationResult in result)
+                    ModelState.AddModelError(string.Empty, validationResult.ErrorMessage);
+
+                Thesis = await _thesesVmService.GetViewModel(thesisId);
+                return Page();
+            }
+
             await _thesisService.ApplyForTheThesis(userId, thesisId);
             return Redirect("MyTheses");
         }
@@ -92,6 +105,8 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
             if (await _thesisService.ApproveThesis(thesis))
                 return Redirect("BachelorThesesList");
 
+
+            Thesis = await _thesesVmService.GetViewModel(thesisId);
             return Page();
         }
 
@@ -106,6 +121,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
             if (await _thesisService.RejectThesis(thesis))
                 return Redirect("BachelorThesesList");
 
+            Thesis = await _thesesVmService.GetViewModel(thesisId);
             return Page();
         }
         #endregion

@@ -25,6 +25,16 @@ namespace GraduationWorksOrganizer.Database.Services
 
         #region Methods
 
+        /// <summary>
+        /// Метод който връща всички записани студенти според темата
+        /// </summary>
+        /// <param name="thesisId"></param>
+        /// <returns></returns>
+        public IQueryable<ThesesUserEntry> GetThesisUserEntries(int thesisId)
+        {
+            return _dbContext.ThesesUserEntries.Where(tue => tue.ThesesId == thesisId);
+        }
+
         #endregion
     }
 }

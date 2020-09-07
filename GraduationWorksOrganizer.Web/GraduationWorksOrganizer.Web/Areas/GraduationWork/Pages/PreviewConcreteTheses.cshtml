@@ -13,7 +13,10 @@
         <p class="font-weight-bold">Описание</p>
         <p class="text-md-left">        @Model.Thesis.Description </p>
 
-        <p class="font-weight-bold">Изисквания</p>
+        @if (Model.Thesis.Requerments.Any())
+        {
+            <p class="font-weight-bold">Изисквания</p>
+        }
         @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.RequermentViewModel requerment in Model.Thesis.Requerments)
         {
             <div class="row">
@@ -37,6 +40,7 @@
         </div>
     </div>
     <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
     <div>
         @if (Model.Thesis.Status == GraduationWorksOrganizer.Common.Enums.ThesesStatusType.Pending && (User.IsInRole(GraduationWorksOrganizer.Common.Constants.RoleNames.PromotedTeacherRole) || User.IsInRole(GraduationWorksOrganizer.Common.Constants.RoleNames.TeacherRole)))
         {

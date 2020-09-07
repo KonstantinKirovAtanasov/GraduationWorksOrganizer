@@ -79,15 +79,3 @@ img.icon {
         border-radius: 2px;
         overflow: hidden;
     }
-
-.collapsible {
-    cursor: pointer;
-    width: 100%;
-    outline: none;
-}
-
-/* Style the collapsible content. Note: hidden by default */
-.collapsable-content {
-    display: none;
-    overflow: hidden;
-}

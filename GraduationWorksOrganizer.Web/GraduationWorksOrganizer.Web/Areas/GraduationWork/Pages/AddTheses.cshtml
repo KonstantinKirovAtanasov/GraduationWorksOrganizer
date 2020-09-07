@@ -125,9 +125,11 @@
 
         function GetNewRowItem() {
             let row = $('<tr></tr>');
-            let textArea = $(`<td><textarea class="form-control resize" type="text" value=""></textarea></td>`);
+            let desccell = $(`<td></td>`);
+            let textArea = $(`<textarea class="form-control resize" type="text" value=""></textarea>`);
             RegisrerResizeHandler(textArea);
-            row.append(textArea);
+            desccell.append(textArea);
+            row.append(desccell);
             let pointsInput = $(`<input class="form-control" type="text" data-val="true" data-val-number="The field MaxPointsCount must be a number." data-val-required="The MaxPointsCount field is required." value=""/>`);
             $(pointsInput).on('input', OnRequermentPointsChanged);
             let pointscell = $(`<td></td>`).append(pointsInput);

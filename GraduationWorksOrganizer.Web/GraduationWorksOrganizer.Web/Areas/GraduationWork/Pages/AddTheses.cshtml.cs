@@ -70,8 +70,11 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
             Input.CreatorId = _userManager.GetUserId(User).ToString();
             Input.Status = User.IsInRole(Constants.RoleNames.StudentRole) ? Enums.ThesesStatusType.Pending : Enums.ThesesStatusType.Accept;
 
-            if (ModelState.IsValid)//&& await _themesService.Add(Input))
+            if (ModelState.IsValid)
+            {
+                await _themesService.AddAsync(Input);
                 return Redirect("BachelorThesesList");
+            }
 
             Specialties = await _specialtiesdbService.GetAll();
             return Page();

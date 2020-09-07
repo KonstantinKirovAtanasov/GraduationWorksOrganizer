@@ -7,75 +7,81 @@
 
 @if (Model.Theseses.Any())
 {
+    <div class="row">
+        <div class="col-6">
+            <p class="text-center">Заглавие</p>
+        </div>
+        <div class="col-md-6 offset-1">
+            <p class="text-center">От Дата</p>
+        </div>
+        <hr />
+    </div>
     foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.PreviewThesisViewModel thesisModel in Model.Theseses)
     {
-        <a class="container btn btn-light collapsible">
-            <div class="row">
-                <div class="text-left">
-                    <h4 class="text-center">@thesisModel.Title</h4>
-                </div>
-                <div class="text-right">
-                </div>
+        <div class="row border-secondary">
+            <div class="col-6">
+                <p class="text-center">@thesisModel.Title</p>
             </div>
-        </a>
-        <div class="collapsible-content border-info">
-            <p class="font-weight-bold">Описание</p>
-            <p class="text-md-left">@thesisModel.Description </p>
+            <div class="col-md-6 offset-1">
+                <p class="text-center">@thesisModel.CreationDate.ToShortDateString()</p>
+            </div>
+            <div class="col-md-6 offset-2 text-right">
+                <a class="container btn btn-light" data-toggle="collapse" href="#collapse-info-@thesisModel.Id" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    +
+                </a>
+            </div>
+            <div class="text-right">
+                <a class="container btn btn-light" data-toggle="collapse" href="#collapse-upload-data-@thesisModel.Id" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Upload
+                </a>
+            </div>
+            <hr />
+        </div>
+        <div class="collapse" id="collapse-info-@thesisModel.Id">
+            <div class="container card card-body">
+                <p class="font-weight-bold">Описание</p>
+                <p class="text-md-left">@thesisModel.Description </p>
 
-            <p class="font-weight-bold">Изисквания</p>
-            @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.RequermentViewModel requerment in thesisModel.Requerments)
-            {
+                <p class="font-weight-bold">Изисквания</p>
+                @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.RequermentViewModel requerment in thesisModel.Requerments)
+                {
+                    <div class="row">
+                        <div class="col text-left">
+                            <text>&#8226;</text>
+                            <text>@requerment.Description</text>
+                        </div>
+                        <div class="col text-right">
+                            <text>@requerment.MaxPointsCount точки</text>
+                        </div>
+                    </div>
+                }
+                <span />
                 <div class="row">
                     <div class="col text-left">
-                        <text>&#8226;</text>
-                        <text>@requerment.Description</text>
+                        <text>@thesisModel.Type</text>
                     </div>
                     <div class="col text-right">
-                        <text>@requerment.MaxPointsCount точки</text>
+                        <text>@thesisModel.CreationDate.ToShortDateString() </text>
                     </div>
-                </div>
-            }
-            <span />
-            <div class="row">
-                <div class="col text-left">
-                    <text>@thesisModel.Type</text>
-                </div>
-                <div class="col text-right">
-                    <text>@thesisModel.CreationDate.ToShortDateString() </text>
                 </div>
             </div>
         </div>
+        @*<div id="collapse-upload-data-@thesisModel.Id" class="collapse">
+                <form class="md-form">
+                    <div class="file-field">
+                        <a class="btn-floating purple-gradient mt-0 float-left">
+                            <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
+                            <input type="file">
+                        </a>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" placeholder="Upload your file">
+                        </div>
+                    </div>
+                </form>
+            </div>*@
     }
 }
 else
 {
     <h3>Нямате записани теми</h3>
-}
-
-@section Scripts{
-    <script>
-        let collapsable = document.getElementsByClassName('collapsible');
-
-        window.onload = RegisterHandlers();
-
-        function OnClickEventHandler(event) {
-            let item = event.target;
-            let collapseHeader = item.closest('a');
-            if (collapseHeader == null) {
-                collapseHeader = item;
-            }
-
-            let content = collapseHeader.nextElementSibling;
-            if (content.style.display === "block") {
-                content.style.display = "none";
-            } else {
-                content.style.display = "block";
-            }
-        }
-
-        function RegisterHandlers() {
-            for (let i = 0; i < collapsable.length; i++)
-                collapsable[i].addEventListener('click', OnClickEventHandler);
-        }
-    </script>
 }
