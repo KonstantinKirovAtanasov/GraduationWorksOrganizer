@@ -11,25 +11,26 @@
     <div class="row">
         <div class="col-md-11">
             <div class="helpinfo">
-                <label>Заглавие</label>
+                <p class="font-weight-bold">Заглавие</p>
                 <input class="form-control" asp-for="Input.Title" />
                 <span asp-validation-for="Input.Title" class="text-danger"></span>
             </div>
             <div class="form-group helpinfo">
-                <label>Специалност:</label>
-                <select class="form-control" asp-for="Input.TargetSpecialtyId" asp-items="@Html.GetEntityEnumSelectList(Model.Specialties)"></select>
+                <p class="font-weight-bold"> Предмет</p>
+                <select class="form-control" asp-for="Input.SubjectId" asp-items="@Html.GetEntityEnumSelectList(Model.Specialties)"></select>
                 <span></span>
             </div>
             <div class="form-group helpinfo">
-                <label>Тип на заданието</label>
+                <p class="font-weight-bold">Тип на заданието</p>
                 <input class="form-control" asp-for="Input.Type" />
                 <span asp-validation-for="Input.Type" class="text-danger"></span>
             </div>
             <div class="form-group helpinfo">
-                <label>Описание:</label>
+                <p class="font-weight-bold">Описание</p>
                 <textarea class="multilineTextArea form-control resize" asp-for="Input.Description"></textarea>
                 <span asp-validation-for="Input.Description" class="text-danger"></span>
             </div>
+            <p class="font-weight-bold">Изисквания</p>
             <table class="table table-bordered mb-0">
                 <thead>
                     <tr>

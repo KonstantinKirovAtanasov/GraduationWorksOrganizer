@@ -1,14 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using GraduationWorksOrganizer.Core.Database.Models;
+using static GraduationWorksOrganizer.Common.Enums;
 
 namespace GraduationWorksOrganizer.Database.Models
 {
     /// <summary>
     /// Модел за записвания за теми
     /// </summary>
-    public class ThesesUserEntry
+    public class ThesesUserEntry : IDatabaseEntity
     {
+        /// <summary>
+        /// Ид
+        /// </summary>
+        public int Id { get; set; }
+
         /// <summary>
         /// Teма
         /// </summary>
@@ -28,5 +32,20 @@ namespace GraduationWorksOrganizer.Database.Models
         /// Ид на студента
         /// </summary>
         public string StudentId { get; set; }
+
+        /// <summary>
+        /// Статус за етапа на записаната тема
+        /// </summary>
+        public ThesisUserEntryState State { get; set; }
+
+        /// <summary>
+        /// Наблюдаващ темата
+        /// </summary>
+        public Teacher ThemeObserver { get; set; }
+
+        /// <summary>
+        /// Id на наблюдаващ темата
+        /// </summary>
+        public string ThemeObserverId { get; set; }
     }
 }

@@ -31,30 +31,6 @@ namespace GraduationWorksOrganizer.Services.Services
         }
 
         /// <summary>
-        /// Метод за одобрение на тема
-        /// </summary>
-        /// <param name="theses"></param>
-        /// <returns></returns>
-        public async Task<bool> ApproveThesis(Theses theses)
-        {
-            theses.Status = Common.Enums.ThesesStatusType.Accept;
-            await _dbService.Update(theses);
-            return true;
-        }
-
-        /// <summary>
-        /// Метод за отказване на тема
-        /// </summary>
-        /// <param name="theses"></param>
-        /// <returns></returns>
-        public async Task<bool> RejectThesis(Theses theses)
-        {
-            theses.Status = Common.Enums.ThesesStatusType.Reject;
-            await _dbService.Update(theses);
-            return true;
-        }
-
-        /// <summary>
         /// Метод който записва за тема
         /// </summary>
         /// <param name="userId"></param>
@@ -85,7 +61,7 @@ namespace GraduationWorksOrganizer.Services.Services
             }
 
             Specialty userSpecialty = await _studentsService.GetStudentSpecialty(userId);
-            if ((_dbService.GetAllIncluding(t => t.TargetSpecialty).FirstOrDefault(t => t.Id == thesesId && t.TargetSpecialty.Id == userSpecialty.Id)) == null)
+            if ((_dbService.GetAllIncluding(t => t.Subject).FirstOrDefault(t => t.Id == thesesId && t.Subject.SpecialtyId == userSpecialty.Id)) == null)
             {
                 result.Add(new ValidationResult("Не може да се запишете за тази тема, темата за която се записвате трябва да е за вашата специалност"));
             }

@@ -7,81 +7,83 @@
 
 @if (Model.Theseses.Any())
 {
-    <div class="row">
-        <div class="col-6">
-            <p class="text-center">Заглавие</p>
-        </div>
-        <div class="col-md-6 offset-1">
-            <p class="text-center">От Дата</p>
-        </div>
-        <hr />
-    </div>
     foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.PreviewThesisViewModel thesisModel in Model.Theseses)
     {
-        <div class="row border-secondary">
-            <div class="col-6">
-                <p class="text-center">@thesisModel.Title</p>
+        <div class="row border border-light">
+            <div class="col-md">
+                <div class="row">
+                    <text class="text-left font-weight-bold">@thesisModel.Title</text>
+                </div>
+                <div class="row">
+                    <text class="text-left">@thesisModel.Subject.Name</text>
+                </div>
+                <div class="row">
+                    <text class="text-left">@thesisModel.CreationDate.ToShortDateString()</text>
+                </div>
             </div>
-            <div class="col-md-6 offset-1">
-                <p class="text-center">@thesisModel.CreationDate.ToShortDateString()</p>
-            </div>
-            <div class="col-md-6 offset-2 text-right">
-                <a class="container btn btn-light" data-toggle="collapse" href="#collapse-info-@thesisModel.Id" role="button" aria-expanded="false" aria-controls="collapseExample">
-                    +
-                </a>
-            </div>
-            <div class="text-right">
-                <a class="container btn btn-light" data-toggle="collapse" href="#collapse-upload-data-@thesisModel.Id" role="button" aria-expanded="false" aria-controls="collapseExample">
-                    Upload
-                </a>
+            <div class="col">
+                <div class="row">
+                    <a class="nav-item btn btn-floating float-right" data-toggle="modal" data-target="#exampleModal-@thesisModel.Id">
+                        <img class="icon" src="~/images/previewThesisIcon.png" />
+                    </a>
+                    <a class="nav-item btn btn-floating float-right" data-toggle="collapse" href="#collapse-upload-data-@thesisModel.Id" role="button" aria-expanded="false">
+                        <img class="icon" src="~/images/uploadIcon.png" />
+                    </a>
+                    <a class="nav-item btn btn-floating float-right" data-toggle="collapse" href="#collapse-request-teacher-@thesisModel.Id" role="button" aria-expanded="false">
+                        <img class="icon" src="~/images/peoceedIcon.png" />
+                    </a>
+                </div>
             </div>
             <hr />
         </div>
-        <div class="collapse" id="collapse-info-@thesisModel.Id">
-            <div class="container card card-body">
-                <p class="font-weight-bold">Описание</p>
-                <p class="text-md-left">@thesisModel.Description </p>
-
-                <p class="font-weight-bold">Изисквания</p>
-                @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.RequermentViewModel requerment in thesisModel.Requerments)
-                {
-                    <div class="row">
-                        <div class="col text-left">
-                            <text>&#8226;</text>
-                            <text>@requerment.Description</text>
-                        </div>
-                        <div class="col text-right">
-                            <text>@requerment.MaxPointsCount точки</text>
-                        </div>
+        <div class="modal fade" id="exampleModal-@thesisModel.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel--@thesisModel.Id" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel-@thesisModel.Id">@thesisModel.Title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                }
-                <span />
-                <div class="row">
-                    <div class="col text-left">
-                        <text>@thesisModel.Type</text>
-                    </div>
-                    <div class="col text-right">
-                        <text>@thesisModel.CreationDate.ToShortDateString() </text>
+                    <div class="modal-body" style="width:100%">
+                        <p class="font-weight-bold">Описание</p>
+                        <p class="text-md-left">@thesisModel.Description </p>
+                        <p class="font-weight-bold">Изисквания</p>
+                        @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.RequermentViewModel requerment in thesisModel.Requerments)
+                        {
+                            <div class="row">
+                                <div class="col text-left">
+                                    <text>&#8226;</text>
+                                    <text>@requerment.Description</text>
+                                </div>
+                                <div class="col text-right">
+                                    <text>@requerment.MaxPointsCount точки</text>
+                                </div>
+                            </div>
+                        }
+                        <span />
+                        <div class="row">
+                            <div class="col text-left">
+                                <text>@thesisModel.Type</text>
+                            </div>
+                            <div class="col text-right">
+                                <text>@thesisModel.CreationDate.ToShortDateString() </text>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        @*<div id="collapse-upload-data-@thesisModel.Id" class="collapse">
-                <form class="md-form">
-                    <div class="file-field">
-                        <a class="btn-floating purple-gradient mt-0 float-left">
-                            <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
-                            <input type="file">
-                        </a>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text" placeholder="Upload your file">
-                        </div>
-                    </div>
-                </form>
-            </div>*@
+        <div id="collapse-upload-data-@thesisModel.Id" class="collapse border border-dark">
+            <p>Tuk shte e logikata za Kachavane na materiali</p>
+        </div>
+        <div id="collapse-request-teacher-@thesisModel.Id" class="collapse border border-dark">
+            <p>Tuk shte e logikara za request za odobrenie</p>
+        </div>
+
+        <span />
     }
 }
 else
-{
-    <h3>Нямате записани теми</h3>
+{ <h3>Нямате записани теми</h3>
 }

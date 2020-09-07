@@ -8,7 +8,7 @@
 <form method="post">
     <div>
         <h3 class="text-center">@Model.Thesis.Title</h3>
-        <h5 class="text-center">@Model.Thesis.TargetSpecialty.Name</h5>
+        <h5 class="text-center">@Model.Thesis.Subject.Name</h5>
 
         <p class="font-weight-bold">Описание</p>
         <p class="text-md-left">        @Model.Thesis.Description </p>
@@ -44,8 +44,8 @@
     <div>
         @if (Model.Thesis.Status == GraduationWorksOrganizer.Common.Enums.ThesesStatusType.Pending && (User.IsInRole(GraduationWorksOrganizer.Common.Constants.RoleNames.PromotedTeacherRole) || User.IsInRole(GraduationWorksOrganizer.Common.Constants.RoleNames.TeacherRole)))
         {
-            <button class="btn btn-primary" asp-page-handler="Approve" asp-route-thesisId="@Model.Thesis.Id">Одобри</button>
-            <button class="btn btn-danger" asp-page-handler="Reject" asp-route-thesisId="@Model.Thesis.Id">Отхвърли</button>
+            @*<button class="btn btn-primary" asp-page-handler="Approve" asp-route-thesisId="@Model.Thesis.Id">Одобри</button>
+                <button class="btn btn-danger" asp-page-handler="Reject" asp-route-thesisId="@Model.Thesis.Id">Отхвърли</button>*@
         }
         else if (User.IsInRole(GraduationWorksOrganizer.Common.Constants.RoleNames.StudentRole))
         {

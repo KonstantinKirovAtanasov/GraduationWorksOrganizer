@@ -1,8 +1,6 @@
-﻿using GraduationWorksOrganizer.Common;
-using GraduationWorksOrganizer.Database.Models;
+﻿using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Models.Base;
 using GraduationWorksOrganizer.Database.Seeds;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,11 +19,6 @@ namespace GraduationWorksOrganizer.Database
         /// Студенти
         /// </summary>
         public DbSet<Student> Students { get; set; }
-
-        /// <summary>
-        /// Request за одобрение на дипломна тема и работа
-        /// </summary>
-        public DbSet<GraduationWorkBlanckRequest> GraduationWorkBlanckRequests { get; set; }
 
         /// <summary>
         /// Факултети
@@ -86,6 +79,11 @@ namespace GraduationWorksOrganizer.Database
         /// таблица с изисквания към теми
         /// </summary>
         public DbSet<ThesesUserEntry> ThesesUserEntries { get; set; }
+
+        /// <summary>
+        /// таблица с изисквания към теми
+        /// </summary>
+        public DbSet<Subject> Subjects { get; set; }
         #endregion // DbSets
 
         #region Constructor
@@ -104,11 +102,12 @@ namespace GraduationWorksOrganizer.Database
             builder.Entity<Teacher>().HasBaseType<ApplicationIdentityBase>();
             builder.Entity<Student>().HasBaseType<ApplicationIdentityBase>();
 
-            // PrimaryKeys
-            builder.Entity<GraduationWorkBlanckRequest>().HasKey(gwbr => gwbr.GraduationWorkBlanckRequestId);
+            #region PrimaryKeys
+
             builder.Entity<Faculty>().HasKey(f => f.Id);
             builder.Entity<Department>().HasKey(d => d.Id);
             builder.Entity<Specialty>().HasKey(s => s.Id);
+            builder.Entity<Subject>().HasKey(s => s.Id);
             builder.Entity<Group>().HasKey(g => g.Id);
             builder.Entity<HelpMessage>().HasKey(hm => hm.Id);
             builder.Entity<Theses>().HasKey(t => t.Id);
@@ -117,8 +116,9 @@ namespace GraduationWorksOrganizer.Database
             builder.Entity<ThesisDefenceEvent>().HasKey(td => td.Id);
             builder.Entity<ThesisMark>().HasKey(tm => tm.Id);
             builder.Entity<ThesisRequerment>().HasKey(tr => tr.Id);
-            builder.Entity<ThesesUserEntry>().HasKey(tue => new { tue.StudentId, tue.ThesesId });
+            builder.Entity<ThesesUserEntry>().HasKey(tue => tue.Id);
 
+            #endregion
 
             // Relations
             builder.Entity<Faculty>().HasMany(f => f.Departments).WithOne(d => d.Faculty).HasForeignKey(d => d.FacultyId).OnDelete(DeleteBehavior.Cascade);
@@ -130,11 +130,12 @@ namespace GraduationWorksOrganizer.Database
             builder.Entity<Student>().HasMany(s => s.ThesisEntries).WithOne(tue => tue.Student).HasForeignKey(tue => tue.StudentId).OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Theses>().HasOne(t => t.Creator).WithMany().HasForeignKey(t => t.CreatorId).OnDelete(DeleteBehavior.NoAction);
-            builder.Entity<Theses>().HasOne(t => t.TargetSpecialty).WithMany().HasForeignKey(t => t.TargetSpecialtyId).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Theses>().HasOne(t => t.Subject).WithMany().HasForeignKey(t => t.SubjectId).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<Theses>().HasMany(t => t.Requerments).WithOne(r => r.Theses).HasForeignKey(t => t.ThesesId).OnDelete(DeleteBehavior.Cascade);
             builder.Entity<Theses>().HasMany(t => t.UserEntries).WithOne(tue => tue.Theses).HasForeignKey(tue => tue.ThesesId).OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Group>().HasOne(g => g.Specialty).WithMany().HasForeignKey(g => g.SpecialtyId).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Subject>().HasOne(d => d.Specialty).WithMany().HasForeignKey(s => s.SpecialtyId).OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Commission>().HasOne(c => c.Department).WithMany().HasForeignKey(c => c.DepartmentId).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<Commission>().HasOne(c => c.MainCommissionTeacher).WithMany().HasForeignKey(c => c.MainCommissionTeacherId).OnDelete(DeleteBehavior.NoAction);
@@ -148,7 +149,8 @@ namespace GraduationWorksOrganizer.Database
             builder.Entity<ThesisDefenceEvent>().HasOne(td => td.Thesis).WithOne().HasForeignKey<ThesisDefenceEvent>(td => td.ThesisId).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<ThesisDefenceEvent>().HasOne(td => td.ThesisMark).WithOne().HasForeignKey<ThesisDefenceEvent>(td => td.ThesisMarkId).OnDelete(DeleteBehavior.NoAction);
 
-            // Seeds
+            #region Seeds
+
             builder.Entity<HelpMessage>().SeedData();
             builder.Entity<Faculty>().HasData(new object[]
             {
@@ -180,6 +182,34 @@ namespace GraduationWorksOrganizer.Database
                 new Group(){Id = 4, FromYear = 2020, Name= "42", SpecialtyId = 2},
                 new Group(){Id = 5, FromYear = 2020, Name= "43", SpecialtyId = 2}
             });
+            builder.Entity<Subject>().HasData(new object[]
+            {
+                new Subject(){Id=1, SpecialtyId = 1,Name="Шрифт и типография ІI част"},
+                new Subject(){Id=2, SpecialtyId = 1,Name="WEB  дизайн І (Техники на програмиране)"},
+                new Subject(){Id=3, SpecialtyId = 1,Name="Корпоративен дизайн І част"},
+                new Subject(){Id=4, SpecialtyId = 1,Name="Оформление на страница"},
+
+                new Subject(){Id=5, SpecialtyId = 2,Name="Обектно-ориентирано програмиране"},
+                new Subject(){Id=6, SpecialtyId = 2,Name="Web програмиране"},
+                new Subject(){Id=7, SpecialtyId = 2,Name="Програмиране за мобилни устройства"},
+                new Subject(){Id=8, SpecialtyId = 2,Name="Функционално програмиране"},
+
+                new Subject(){Id=9, SpecialtyId = 3,Name="Проектиране и реализация на големи софтуерни проекти"},
+                new Subject(){Id=10, SpecialtyId = 3,Name="Kомпютърна и мрежова сигурност"},
+                new Subject(){Id=11, SpecialtyId = 3,Name="Управление и документиране на софтуерни проекти"},
+                new Subject(){Id=12, SpecialtyId = 3,Name="Бази от данни"},
+
+                new Subject(){Id=13, SpecialtyId = 4,Name="Операционни системи"},
+                new Subject(){Id=14, SpecialtyId = 4,Name="Електроника"},
+                new Subject(){Id=15, SpecialtyId = 4,Name="Инженерна математика 1"},
+                new Subject(){Id=16, SpecialtyId = 4,Name="Основи на сигурността"},
+
+                new Subject(){Id=17, SpecialtyId = 5,Name="Компютърни архитектури"},
+                new Subject(){Id=18, SpecialtyId = 5,Name="Материали и електронни компоненти"},
+                new Subject(){Id=19, SpecialtyId = 5,Name="Основи на сигурността"},
+            });
+
+            #endregion // Seeds
         }
     }
 }

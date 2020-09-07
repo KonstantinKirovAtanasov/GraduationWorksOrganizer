@@ -50,7 +50,7 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         /// <returns></returns>
         public IEnumerable<TViewModel> GetViewModels()
         {
-            IQueryable<Theses> thesises = _databaseService.GetAllIncluding(t => t.TargetSpecialty, t => t.Creator);
+            IQueryable<Theses> thesises = _databaseService.GetAllIncluding(t => t.Subject, t => t.Creator);
             foreach (Theses thesis in thesises)
                 yield return _automapper.Map<TViewModel>(thesis);
         }
@@ -61,7 +61,7 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         /// <returns></returns>
         public IEnumerable<TViewModel> GetViewModels(Expression<Func<Theses, bool>> predicate)
         {
-            IQueryable<Theses> theseses = _databaseService.GetAllIncluding(t => t.TargetSpecialty
+            IQueryable<Theses> theseses = _databaseService.GetAllIncluding(t => t.Subject
                                                                          , t => t.UserEntries
                                                                          , t => t.Requerments
                                                                          , t => t.Creator);
@@ -93,7 +93,7 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         /// <returns></returns>
         public async Task<TViewModel> GetViewModel(int id)
         {
-            Theses thesis = await _databaseService.GetAllIncluding(t => t.TargetSpecialty, t => t.Requerments, t => t.Creator).FirstOrDefaultAsync(t => t.Id == id);
+            Theses thesis = await _databaseService.GetAllIncluding(t => t.Subject, t => t.Requerments, t => t.Creator).FirstOrDefaultAsync(t => t.Id == id);
             return _automapper.Map<TViewModel>(thesis);
         }
     }

@@ -123,7 +123,7 @@ namespace GraduationWorksOrganizer.Web
             {
                 op.AddPolicy(Constants.PolicyNames.ViewTheses, p => p.RequireRole(Constants.RoleNames.StudentRole, Constants.RoleNames.TeacherRole, Constants.RoleNames.PromotedTeacherRole));
                 op.AddPolicy(Constants.PolicyNames.ApproveTheses, p => p.RequireRole(Constants.RoleNames.TeacherRole, Constants.RoleNames.PromotedTeacherRole));
-                op.AddPolicy(Constants.PolicyNames.AddTheses, p => p.RequireRole(Constants.RoleNames.StudentRole, Constants.RoleNames.TeacherRole));
+                op.AddPolicy(Constants.PolicyNames.AddTheses, p => p.RequireRole(Constants.RoleNames.TeacherRole));
             });
         }
     }

@@ -18,5 +18,14 @@ namespace GraduationWorksOrganizer.Common
             Reject,
             Pending,
         }
+
+        public enum ThesisUserEntryState
+        {
+            Initialized = 1,
+            SendForApprovement = 2,
+            Approve = 3,
+            Reject = 4,
+            CompletedWithMarkItem = 5,
+        }
     }
 }

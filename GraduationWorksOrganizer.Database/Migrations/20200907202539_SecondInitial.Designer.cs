@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GraduationWorksOrganizer.Database.Migrations
 {
     [DbContext(typeof(GraduationWorksOrganizerDataContext))]
-    [Migration("20200902071616_AddedCommissionsDefenceDatesDefenceEventsMarks")]
-    partial class AddedCommissionsDefenceDatesDefenceEventsMarks
+    [Migration("20200907202539_SecondInitial")]
+    partial class SecondInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -137,18 +137,6 @@ namespace GraduationWorksOrganizer.Database.Migrations
                             Id = 2,
                             Name = "Факултет по телекомуникации"
                         });
-                });
-
-            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.GraduationWorkBlanckRequest", b =>
-                {
-                    b.Property<int>("GraduationWorkBlanckRequestId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("GraduationWorkBlanckRequestId");
-
-                    b.ToTable("GraduationWorkBlanckRequests");
                 });
 
             modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Group", b =>
@@ -399,15 +387,148 @@ namespace GraduationWorksOrganizer.Database.Migrations
                         });
                 });
 
-            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Theses", b =>
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Subject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApprovalId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SpecialtyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SpecialtyId");
+
+                    b.ToTable("Subjects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Шрифт и типография ІI част",
+                            SpecialtyId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "WEB  дизайн І (Техники на програмиране)",
+                            SpecialtyId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Корпоративен дизайн І част",
+                            SpecialtyId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Оформление на страница",
+                            SpecialtyId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Обектно-ориентирано програмиране",
+                            SpecialtyId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Web програмиране",
+                            SpecialtyId = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Програмиране за мобилни устройства",
+                            SpecialtyId = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Функционално програмиране",
+                            SpecialtyId = 2
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Проектиране и реализация на големи софтуерни проекти",
+                            SpecialtyId = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Kомпютърна и мрежова сигурност",
+                            SpecialtyId = 3
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Управление и документиране на софтуерни проекти",
+                            SpecialtyId = 3
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Бази от данни",
+                            SpecialtyId = 3
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Операционни системи",
+                            SpecialtyId = 4
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Електроника",
+                            SpecialtyId = 4
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Инженерна математика 1",
+                            SpecialtyId = 4
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "Основи на сигурността",
+                            SpecialtyId = 4
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = "Компютърни архитектури",
+                            SpecialtyId = 5
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = "Материали и електронни компоненти",
+                            SpecialtyId = 5
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Name = "Основи на сигурността",
+                            SpecialtyId = 5
+                        });
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Theses", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
@@ -418,10 +539,7 @@ namespace GraduationWorksOrganizer.Database.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TargetSpecialtyId")
+                    b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -432,13 +550,41 @@ namespace GraduationWorksOrganizer.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApprovalId");
-
                     b.HasIndex("CreatorId");
 
-                    b.HasIndex("TargetSpecialtyId");
+                    b.HasIndex("SubjectId");
 
                     b.ToTable("Theses");
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesesUserEntry", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ThemeObserverId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ThesesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("ThemeObserverId");
+
+                    b.HasIndex("ThesesId");
+
+                    b.ToTable("ThesesUserEntries");
                 });
 
             modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesisDefenceEvent", b =>
@@ -492,6 +638,32 @@ namespace GraduationWorksOrganizer.Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Marks");
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesisRequerment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("MarkPoints")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MaxPointsCount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ThesesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ThesesId");
+
+                    b.ToTable("ThesisRequerments");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -804,21 +976,44 @@ namespace GraduationWorksOrganizer.Database.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Subject", b =>
+                {
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Specialty", "Specialty")
+                        .WithMany()
+                        .HasForeignKey("SpecialtyId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Theses", b =>
                 {
-                    b.HasOne("GraduationWorksOrganizer.Database.Models.Base.ApplicationIdentityBase", "Approval")
-                        .WithMany()
-                        .HasForeignKey("ApprovalId");
-
                     b.HasOne("GraduationWorksOrganizer.Database.Models.Base.ApplicationIdentityBase", "Creator")
                         .WithMany()
                         .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("GraduationWorksOrganizer.Database.Models.Specialty", "TargetSpecialty")
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Subject", "Subject")
                         .WithMany()
-                        .HasForeignKey("TargetSpecialtyId")
+                        .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesesUserEntry", b =>
+                {
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Student", "Student")
+                        .WithMany("ThesisEntries")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Teacher", "ThemeObserver")
+                        .WithMany()
+                        .HasForeignKey("ThemeObserverId");
+
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Theses", "Theses")
+                        .WithMany("UserEntries")
+                        .HasForeignKey("ThesesId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -845,6 +1040,15 @@ namespace GraduationWorksOrganizer.Database.Migrations
                         .WithOne()
                         .HasForeignKey("GraduationWorksOrganizer.Database.Models.ThesisDefenceEvent", "ThesisMarkId")
                         .OnDelete(DeleteBehavior.NoAction);
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesisRequerment", b =>
+                {
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Theses", "Theses")
+                        .WithMany("Requerments")
+                        .HasForeignKey("ThesesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

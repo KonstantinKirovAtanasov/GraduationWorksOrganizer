@@ -30,7 +30,7 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices.ViewModels
         /// Специалност
         /// </summary>
         [Required]
-        public int TargetSpecialtyId { get; set; }
+        public int SubjectId { get; set; }
 
         /// <summary>
         /// Тип
@@ -70,10 +70,5 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices.ViewModels
         /// Ид на Създателя на темата
         /// </summary>
         public string CreatorId { get; set; }
-
-        /// <summary>
-        /// Id на създателя на темата
-        /// </summary>
-        public ThesesStatusType Status { get; set; }
     }
 }

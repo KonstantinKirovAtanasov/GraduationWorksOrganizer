@@ -50,12 +50,23 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
 
         #region Methods
 
+        /// <summary>
+        /// Oн get
+        /// </summary>
         public void OnGet()
         {
             string userId = _userService.GetUserId(User);
             Theseses = _thesesVmService.GetViewModels(t => t.UserEntries.Any(e => e.StudentId == userId));
         }
 
+        /// <summary>
+        /// метод който Handel-ва изтриване на тема
+        /// </summary>
+        /// <param name="thesisId"></param>
+        public void OnPostDeleteThesis(int thesisId)
+        {
+
+        }
         #endregion
 
     }

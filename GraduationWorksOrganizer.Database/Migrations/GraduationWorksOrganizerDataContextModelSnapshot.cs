@@ -4,22 +4,71 @@ using GraduationWorksOrganizer.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GraduationWorksOrganizer.Database.Migrations
 {
     [DbContext(typeof(GraduationWorksOrganizerDataContext))]
-    [Migration("20200827110213_addedStudentAndTeacherProperties")]
-    partial class addedStudentAndTeacherProperties
+    partial class GraduationWorksOrganizerDataContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Commission", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MainCommissionTeacherId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("MainCommissionTeacherId");
+
+                    b.ToTable("Commissions");
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.CommissionDefencesDates", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CommissionId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("HallNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MaxThesisCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartingDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommissionId");
+
+                    b.ToTable("DefenceDates");
+                });
 
             modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Department", b =>
                 {
@@ -86,18 +135,6 @@ namespace GraduationWorksOrganizer.Database.Migrations
                             Id = 2,
                             Name = "Факултет по телекомуникации"
                         });
-                });
-
-            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.GraduationWorkBlanckRequest", b =>
-                {
-                    b.Property<int>("GraduationWorkBlanckRequestId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("GraduationWorkBlanckRequestId");
-
-                    b.ToTable("GraduationWorkBlanckRequests");
                 });
 
             modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Group", b =>
@@ -348,6 +385,285 @@ namespace GraduationWorksOrganizer.Database.Migrations
                         });
                 });
 
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Subject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SpecialtyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SpecialtyId");
+
+                    b.ToTable("Subjects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Шрифт и типография ІI част",
+                            SpecialtyId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "WEB  дизайн І (Техники на програмиране)",
+                            SpecialtyId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Корпоративен дизайн І част",
+                            SpecialtyId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Оформление на страница",
+                            SpecialtyId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Обектно-ориентирано програмиране",
+                            SpecialtyId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Web програмиране",
+                            SpecialtyId = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Програмиране за мобилни устройства",
+                            SpecialtyId = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Функционално програмиране",
+                            SpecialtyId = 2
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Проектиране и реализация на големи софтуерни проекти",
+                            SpecialtyId = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Kомпютърна и мрежова сигурност",
+                            SpecialtyId = 3
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Управление и документиране на софтуерни проекти",
+                            SpecialtyId = 3
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Бази от данни",
+                            SpecialtyId = 3
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Операционни системи",
+                            SpecialtyId = 4
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Електроника",
+                            SpecialtyId = 4
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Инженерна математика 1",
+                            SpecialtyId = 4
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "Основи на сигурността",
+                            SpecialtyId = 4
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = "Компютърни архитектури",
+                            SpecialtyId = 5
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = "Материали и електронни компоненти",
+                            SpecialtyId = 5
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Name = "Основи на сигурността",
+                            SpecialtyId = 5
+                        });
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Theses", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Theses");
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesesUserEntry", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ThemeObserverId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ThesesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("ThemeObserverId");
+
+                    b.HasIndex("ThesesId");
+
+                    b.ToTable("ThesesUserEntries");
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesisDefenceEvent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DefenceDateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ThesisId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ThesisMarkId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DefenceDateId");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("ThesisId")
+                        .IsUnique();
+
+                    b.HasIndex("ThesisMarkId")
+                        .IsUnique()
+                        .HasFilter("[ThesisMarkId] IS NOT NULL");
+
+                    b.ToTable("DefenceEvents");
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesisMark", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Mark")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Marks");
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesisRequerment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("MarkPoints")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("MaxPointsCount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ThesesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ThesesId");
+
+                    b.ToTable("ThesisRequerments");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -497,12 +813,10 @@ namespace GraduationWorksOrganizer.Database.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -539,12 +853,10 @@ namespace GraduationWorksOrganizer.Database.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -554,9 +866,22 @@ namespace GraduationWorksOrganizer.Database.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Student", b =>
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Base.ApplicationIdentityBase", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("ApplicationIdentityBase");
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Student", b =>
+                {
+                    b.HasBaseType("GraduationWorksOrganizer.Database.Models.Base.ApplicationIdentityBase");
 
                     b.Property<string>("FacultyNumber")
                         .HasColumnType("nvarchar(max)");
@@ -570,9 +895,6 @@ namespace GraduationWorksOrganizer.Database.Migrations
                     b.Property<int>("SpecialtyId")
                         .HasColumnType("int");
 
-                    b.Property<string>("StudentName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasIndex("GroupId");
 
                     b.HasIndex("SpecialtyId");
@@ -582,10 +904,13 @@ namespace GraduationWorksOrganizer.Database.Migrations
 
             modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Teacher", b =>
                 {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+                    b.HasBaseType("GraduationWorksOrganizer.Database.Models.Base.ApplicationIdentityBase");
 
                     b.Property<string>("Cabinet")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CommissionId")
+                        .HasColumnType("int");
 
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
@@ -593,12 +918,33 @@ namespace GraduationWorksOrganizer.Database.Migrations
                     b.Property<string>("ScienceDegree")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TeacherName")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasIndex("CommissionId");
 
                     b.HasIndex("DepartmentId");
 
                     b.HasDiscriminator().HasValue("Teacher");
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Commission", b =>
+                {
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Teacher", "MainCommissionTeacher")
+                        .WithMany()
+                        .HasForeignKey("MainCommissionTeacherId")
+                        .OnDelete(DeleteBehavior.NoAction);
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.CommissionDefencesDates", b =>
+                {
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Commission", null)
+                        .WithMany("CommissionDefencesDates")
+                        .HasForeignKey("CommissionId")
+                        .OnDelete(DeleteBehavior.NoAction);
                 });
 
             modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Department", b =>
@@ -624,6 +970,81 @@ namespace GraduationWorksOrganizer.Database.Migrations
                     b.HasOne("GraduationWorksOrganizer.Database.Models.Department", "Department")
                         .WithMany("Specialties")
                         .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Subject", b =>
+                {
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Specialty", "Specialty")
+                        .WithMany()
+                        .HasForeignKey("SpecialtyId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Theses", b =>
+                {
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Base.ApplicationIdentityBase", "Creator")
+                        .WithMany()
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Subject", "Subject")
+                        .WithMany()
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesesUserEntry", b =>
+                {
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Student", "Student")
+                        .WithMany("ThesisEntries")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Teacher", "ThemeObserver")
+                        .WithMany()
+                        .HasForeignKey("ThemeObserverId");
+
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Theses", "Theses")
+                        .WithMany("UserEntries")
+                        .HasForeignKey("ThesesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesisDefenceEvent", b =>
+                {
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.CommissionDefencesDates", "DefencesDate")
+                        .WithMany("Defences")
+                        .HasForeignKey("DefenceDateId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Theses", "Thesis")
+                        .WithOne()
+                        .HasForeignKey("GraduationWorksOrganizer.Database.Models.ThesisDefenceEvent", "ThesisId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.ThesisMark", "ThesisMark")
+                        .WithOne()
+                        .HasForeignKey("GraduationWorksOrganizer.Database.Models.ThesisDefenceEvent", "ThesisMarkId")
+                        .OnDelete(DeleteBehavior.NoAction);
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesisRequerment", b =>
+                {
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Theses", "Theses")
+                        .WithMany("Requerments")
+                        .HasForeignKey("ThesesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -696,6 +1117,11 @@ namespace GraduationWorksOrganizer.Database.Migrations
 
             modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.Teacher", b =>
                 {
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Commission", null)
+                        .WithMany("CommissionTeachers")
+                        .HasForeignKey("CommissionId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("GraduationWorksOrganizer.Database.Models.Department", "Department")
                         .WithMany()
                         .HasForeignKey("DepartmentId")

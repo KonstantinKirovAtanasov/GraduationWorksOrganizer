@@ -2,7 +2,6 @@
 using GraduationWorksOrganizer.Database.Models.Base;
 using System;
 using System.Collections.Generic;
-using static GraduationWorksOrganizer.Common.Enums;
 
 namespace GraduationWorksOrganizer.Database.Models
 {
@@ -46,11 +45,6 @@ namespace GraduationWorksOrganizer.Database.Models
         public string Type { get; set; }
 
         /// <summary>
-        /// Статус
-        /// </summary>
-        public ThesesStatusType Status { get; set; }
-
-        /// <summary>
         /// Създател
         /// </summary>
         public ApplicationIdentityBase Creator { get; set; }
@@ -61,24 +55,14 @@ namespace GraduationWorksOrganizer.Database.Models
         public string CreatorId { get; set; }
 
         /// <summary>
-        /// Създател
-        /// </summary>
-        public ApplicationIdentityBase Approval { get; set; }
-
-        /// <summary>
-        /// Ид на Създателя на темата
-        /// </summary>
-        public string ApprovalId { get; set; }
-
-        /// <summary>
         /// Специалност
         /// </summary>
-        public Specialty TargetSpecialty { get; set; }
+        public Subject Subject { get; set; }
 
         /// <summary>
         /// Id на специалност
         /// </summary>
-        public int TargetSpecialtyId { get; set; }
+        public int SubjectId { get; set; }
 
         /// <summary>
         /// Изисквания

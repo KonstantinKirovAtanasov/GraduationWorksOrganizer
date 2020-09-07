@@ -43,7 +43,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
         /// <summary>
         /// Специалност
         /// </summary>
-        public InnerSpecialtyViewModel TargetSpecialty { get; set; }
+        public InnerSubjectViewModel Subject { get; set; }
 
         /// <summary>
         /// Създател
@@ -71,7 +71,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
         {
             expression.CreateMap<Theses, ThesesViewModel>();
             expression.CreateMap<ApplicationIdentityBase, InnerApplicationUserViewModel>();
-            expression.CreateMap<Specialty, InnerSpecialtyViewModel>();
+            expression.CreateMap<Subject, InnerSubjectViewModel>();
         }
 
         #endregion
@@ -79,7 +79,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
         /// <summary>
         /// ВМ за специалност
         /// </summary>
-        public class InnerSpecialtyViewModel
+        public class InnerSubjectViewModel
         {
             /// <summary>
             /// Ид
