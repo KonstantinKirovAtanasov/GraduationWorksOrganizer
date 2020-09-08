@@ -30,7 +30,7 @@ namespace GraduationWorksOrganizer.Database.Services
         public async Task ChangeUserPhoto(ApplicationIdentityBase user, byte[] image)
         {
             ApplicationIdentityBase contextUser = await _dataContext.Users.FindAsync(user.Id) as ApplicationIdentityBase;
-            contextUser.Image = image;
+            contextUser.Image = new FileContent() { Content = image };
             await _dataContext.SaveChangesAsync();
         }
     }

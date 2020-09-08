@@ -1,7 +1,4 @@
 ﻿using GraduationWorksOrganizer.Core.Database.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GraduationWorksOrganizer.Database.Models
 {

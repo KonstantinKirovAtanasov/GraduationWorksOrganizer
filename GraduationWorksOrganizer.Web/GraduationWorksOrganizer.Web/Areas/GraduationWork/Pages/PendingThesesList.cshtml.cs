@@ -51,7 +51,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// </summary>
         private void InitializeViewModelItems()
         {
-            Theses = _dbService.GetViewModels().Where(vm => vm.Status == Enums.ThesesStatusType.Pending);
+            Theses = new List<ThesesViewModel>();// To do: pending
         }
     }
 }

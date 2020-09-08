@@ -4,7 +4,6 @@ using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using static GraduationWorksOrganizer.Common.Enums;
 
 namespace GraduationWorksOrganizer.Services.MapEntitiesServices.ViewModels
 {

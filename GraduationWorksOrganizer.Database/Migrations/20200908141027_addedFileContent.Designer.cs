@@ -4,14 +4,16 @@ using GraduationWorksOrganizer.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GraduationWorksOrganizer.Database.Migrations
 {
     [DbContext(typeof(GraduationWorksOrganizerDataContext))]
-    partial class GraduationWorksOrganizerDataContextModelSnapshot : ModelSnapshot
+    [Migration("20200908141027_addedFileContent")]
+    partial class addedFileContent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -890,9 +892,6 @@ namespace GraduationWorksOrganizer.Database.Migrations
             modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesisUserEntryFileContent", b =>
                 {
                     b.HasBaseType("GraduationWorksOrganizer.Database.Models.Base.FileContent");
-
-                    b.Property<string>("FileName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserEntryId")
                         .HasColumnType("int");

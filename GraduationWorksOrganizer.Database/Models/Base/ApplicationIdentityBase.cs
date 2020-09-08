@@ -13,8 +13,13 @@ namespace GraduationWorksOrganizer.Database.Models.Base
         public string Name { get; set; }
 
         /// <summary>
-        /// Снимка
+        /// Релация за снимка
         /// </summary>
-        public byte[] Image { get; set; }
+        public FileContent Image { get; set; }
+
+        /// <summary>
+        /// Ид на снимката
+        /// </summary>
+        public int ImageId { get; set; }
     }
 }
