@@ -18,7 +18,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
     {
         #region Declarations
 
-        private readonly ThesisViewModelService<PreviewThesisViewModel> _thesesVmService;
+        private readonly ThesisViewModelService<PreviewThesisExtendedViewModel> _thesesVmService;
         private readonly UserManager<ApplicationIdentityBase> _userService;
 
         #endregion
@@ -30,7 +30,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// </summary>
         /// <param name="thesesVmService"></param>
         /// <param name=""></param>
-        public MyThesesModel(ThesisViewModelService<PreviewThesisViewModel> thesesVmService,
+        public MyThesesModel(ThesisViewModelService<PreviewThesisExtendedViewModel> thesesVmService,
                              UserManager<ApplicationIdentityBase> userService)
         {
             _thesesVmService = thesesVmService;
@@ -44,7 +44,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <summary>
         /// Моите тези
         /// </summary>
-        public IEnumerable<PreviewThesisViewModel> Theseses { get; set; }
+        public IEnumerable<PreviewThesisExtendedViewModel> Theseses { get; set; }
 
         #endregion
 

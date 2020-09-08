@@ -1,4 +1,5 @@
-﻿using GraduationWorksOrganizer.Database.Models;
+﻿using GraduationWorksOrganizer.Core.Database.Models;
+using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Services.Base;
 using System;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace GraduationWorksOrganizer.Database.Services
     /// <summary>
     /// ДБ Сървис за работа с теми
     /// </summary>
-    public class ThesesDatabaseService : BaseRepository<Theses>
+    public class ThesesDatabaseService : BaseRepository<Theses>, IQueryProvider<Theses>
     {
         #region Initialization
 
@@ -24,6 +25,15 @@ namespace GraduationWorksOrganizer.Database.Services
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Метод който връща Query
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<Theses> GetQuery()
+        {
+            return _dbContext.Theses;
+        }
 
         /// <summary>
         /// Метод който връща всички записани студенти според темата

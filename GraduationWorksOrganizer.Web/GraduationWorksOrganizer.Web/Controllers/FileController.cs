@@ -1,9 +1,10 @@
 ﻿using GraduationWorksOrganizer.Database.Models.Base;
-using GraduationWorksOrganizer.Services.Services;
+using GraduationWorksOrganizer.Services.MapEntitiesServices;
+using GraduationWorksOrganizer.Web.Controllers.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Web.Controllers
@@ -19,7 +20,7 @@ namespace GraduationWorksOrganizer.Web.Controllers
         /// <summary>
         /// Сървис за работа с Файлове
         /// </summary>
-        private UserEntryFilesService _userEntryFilesService;
+        private UserEntryFilesViewModelService<UserEntryFileNameViewModel> _userEntryFilesService;
 
         /// <summary>
         /// Усер мениджър сървис
@@ -28,7 +29,7 @@ namespace GraduationWorksOrganizer.Web.Controllers
 
         #region Initialization
 
-        public FileController(UserEntryFilesService userEntryFilesService,
+        public FileController(UserEntryFilesViewModelService<UserEntryFileNameViewModel> userEntryFilesService,
                               UserManager<ApplicationIdentityBase> userManager)
         {
             _userEntryFilesService = userEntryFilesService;
@@ -39,11 +40,13 @@ namespace GraduationWorksOrganizer.Web.Controllers
 
         #region MyRegion
 
-        //[HttpGet]
-        //public async Task<IActionResult> OnGet(int thesisUserEntryId)
-        //{
-        //    await 
-        //}
+        [HttpGet]
+        [Route("{thesisUserEntryId}")]
+        public async Task<IActionResult> OnGet(int thesisUserEntryId)
+        {
+            IEnumerable<UserEntryFileNameViewModel> files = await _userEntryFilesService.GetThesisUserEntries(thesisUserEntryId);
+            return Ok(files);
+        }
 
         #endregion
     }

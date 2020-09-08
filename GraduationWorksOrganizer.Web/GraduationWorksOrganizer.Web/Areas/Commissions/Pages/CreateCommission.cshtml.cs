@@ -27,7 +27,7 @@ namespace GraduationWorksOrganizer.Web.Areas.Commissions.Pages
         /// <summary>
         /// Сървис за работа с учители
         /// </summary>
-        private readonly TeacherService<TeacherViewModel> _teacherService;
+        private readonly TeacherViewModelService<TeacherViewModel> _teacherService;
 
         #endregion
 
@@ -37,7 +37,7 @@ namespace GraduationWorksOrganizer.Web.Areas.Commissions.Pages
         /// Конструктор
         /// </summary>
         public CreateCommissionModel(CommissionsService commissionsService,
-                                     TeacherService<TeacherViewModel> teacherService)
+                                     TeacherViewModelService<TeacherViewModel> teacherService)
         {
             _commissionsService = commissionsService;
             _teacherService = teacherService;

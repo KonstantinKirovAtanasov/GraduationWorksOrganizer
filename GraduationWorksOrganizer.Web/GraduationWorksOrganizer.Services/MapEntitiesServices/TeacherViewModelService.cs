@@ -13,7 +13,7 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
     /// <summary>
     /// Сървис за работа с учители
     /// </summary>
-    public class TeacherService<TViewModel> : IViewModelService<TViewModel, Teacher> where TViewModel : IAutoMapperViewModel, new()
+    public class TeacherViewModelService<TViewModel> : IViewModelService<TViewModel, Teacher> where TViewModel : IAutoMapperViewModel, new()
     {
         #region Declarations
 
@@ -34,7 +34,7 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         /// <summary>
         /// Конструктор
         /// </summary>
-        public TeacherService(TeachersDatabaseService databaseService)
+        public TeacherViewModelService(TeachersDatabaseService databaseService)
         {
             _databaseService = databaseService;
             _automapper = new Mapper(new TViewModel().GetMapperConfiguration());

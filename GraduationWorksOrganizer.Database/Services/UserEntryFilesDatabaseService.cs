@@ -1,4 +1,5 @@
-﻿using GraduationWorksOrganizer.Database.Models;
+﻿using GraduationWorksOrganizer.Core.Database.Models;
+using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Services.Base;
 using System.Linq;
 
@@ -7,7 +8,7 @@ namespace GraduationWorksOrganizer.Database.Services
     /// <summary>
     /// Сървиз 
     /// </summary>
-    public class UserEntryFilesDatabaseService : BaseRepository<ThesisUserEntryFileContent>
+    public class UserEntryFilesDatabaseService : BaseRepository<ThesisUserEntryFileContent>, IQueryProvider<ThesisUserEntryFileContent>
     {
         /// <summary>
         /// Конструктор
@@ -17,6 +18,15 @@ namespace GraduationWorksOrganizer.Database.Services
             : base(dataContext)
         {
 
+        }
+
+        /// <summary>
+        /// Метод който връща Query
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<ThesisUserEntryFileContent> GetQuery()
+        {
+            return _dbContext.UserEntryFileContent;
         }
 
         /// <summary>

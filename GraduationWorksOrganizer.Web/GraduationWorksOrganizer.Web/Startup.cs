@@ -2,17 +2,13 @@
 using GraduationWorksOrganizer.Common;
 using GraduationWorksOrganizer.Core.Additional;
 using GraduationWorksOrganizer.Core.Database;
-using GraduationWorksOrganizer.Core.Services;
-using GraduationWorksOrganizer.Core.ViewModels;
 using GraduationWorksOrganizer.Database;
-using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Models.Base;
 using GraduationWorksOrganizer.Database.Services;
 using GraduationWorksOrganizer.Database.Services.Base;
 using GraduationWorksOrganizer.Services.Commissions;
 using GraduationWorksOrganizer.Services.MapEntitiesServices;
 using GraduationWorksOrganizer.Services.Services;
-using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
 using GraduationWorksOrganizer.Web.SharedViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,7 +18,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Web
@@ -52,8 +47,9 @@ namespace GraduationWorksOrganizer.Web
 
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
             services.AddScoped(typeof(ThesisViewModelService<>));
+            services.AddScoped(typeof(UserEntryFilesViewModelService<>));
 
-            services.AddScoped<TeacherService<TeacherViewModel>>();
+            services.AddScoped<TeacherViewModelService<TeacherViewModel>>();
 
             services.AddScoped<CommissionsService>();
             services.AddScoped<ThesesDatabaseService>();
@@ -61,6 +57,7 @@ namespace GraduationWorksOrganizer.Web
             services.AddScoped<ApplicationUserDatabaseService>();
             services.AddScoped<ThesisService>();
             services.AddScoped<StudentDatabaseService>();
+            services.AddScoped<UserEntryFilesDatabaseService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
