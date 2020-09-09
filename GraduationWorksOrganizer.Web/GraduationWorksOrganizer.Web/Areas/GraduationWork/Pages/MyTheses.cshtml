@@ -77,10 +77,12 @@
         <div id="collapse-upload-data-@thesisModel.ThesisViewModel.Id" class="collapse">
             <br />
             <div id="file-manifest" class="container-fluid">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFileLang" lang="es">
-                    <label class="custom-file-label" for="customFileLang">Изберете файл</label>
-                </div>
+                <form id="file-upload-form" name="formFile">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="file-upload-input">
+                        <label class="custom-file-label">Изберете файл</label>
+                    </div>
+                </form>
             </div>
         </div>
         <div id="collapse-request-teacher-@thesisModel.ThesisViewModel.Id" class="collapse border">
@@ -114,8 +116,8 @@ else
                     RequestApiForFileNames(event.target);
                 });
             }
-            let fileInput = document.getElementById('customFileLang');
-            fileInput.addEventListener('onchange', OnFileUploadedAction);
+            let fileInput = document.getElementById('file-upload-input');
+            fileInput.addEventListener('change', OnFileUploadedAction);
         }
 
         function RequestApiForFileNames(item) {
@@ -138,7 +140,6 @@ else
         }
 
         function OnFileNamesGetted(fileNames) {
-            console.log(fileNames);
             let contentItem = document.getElementById('file-manifest');
             for (let i = 0; i < fileNames.length; i++) {
                 let divElement = BuildDivItem(fileNames[i]);
@@ -170,8 +171,44 @@ else
         }
 
         function OnFileUploadedAction(event) {
-            /// to do add row for the file
-            /// ajax save file
+            const formData = CreateFileFormData();
+            UploadFile(formData);
+        }
+
+        function CreateFileFormData() {
+            let form = document.getElementById('file-upload-form');
+            let formData = new FormData();
+            formData.append('file', form.files[0], 'test');
+            return formData
+        }
+
+        function UploadFile(formData) {
+            $.ajax({
+                method: 'PUT',
+                url: apiEndPoint,
+                contentType: false,
+                data: formData,
+                success: OnFileNamesGetted,
+            });
+        }
+
+        function RequestApiForFileNames(item) {
+            let attributeValue = $(item).attr(attrNameFiles);
+            if (attributeValue == null || attributeValue == 'undefined') {
+                attributeValue = $(item.parentElement).attr(attrNameFiles)
+            }
+
+            if (filesCache[attributeValue])
+                return;
+
+            $.ajax({
+                method: 'GET',
+                url: apiEndPoint + '/' + attributeValue,
+                success: OnFileNamesGetted,
+                error: function (error) { console.log(error) },
+            });
+
+            filesCache[attributeValue] = true;
         }
 
     </script>

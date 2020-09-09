@@ -51,8 +51,8 @@ namespace GraduationWorksOrganizer.Web
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
             services.AddScoped(typeof(ThesisViewModelService<>));
             services.AddScoped(typeof(CombinedQueryBaseService<>));
-
-            services.AddScoped<TeacherViewModelService<TeacherViewModel>>();
+            services.AddScoped(typeof(TeacherViewModelService<>));
+            services.AddScoped(typeof(UserEntryFilesViewModelService<>));
 
             services.AddScoped<CommissionsService>();
             services.AddScoped<ThesesDatabaseService>();

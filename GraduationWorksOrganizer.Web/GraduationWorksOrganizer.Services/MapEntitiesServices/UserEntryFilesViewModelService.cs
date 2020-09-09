@@ -50,9 +50,9 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         /// </summary>
         /// <param name="thesisId"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<TViewModel>> GetThesisUserEntries(int thesisId)
+        public async Task<IEnumerable<TViewModel>> GetThesisUserEntries(int userEntryId)
         {
-            List<ThesisUserEntryFileContent> resultSet = await _databaseService.GetThesisFileContentQuery(thesisId).ToListAsync();
+            List<ThesisUserEntryFileContent> resultSet = await _databaseService.GetQuery().Where(t => t.UserEntryId == userEntryId).ToListAsync();
             return resultSet.Select(r => _automapper.Map<TViewModel>(r));
         }
     }
