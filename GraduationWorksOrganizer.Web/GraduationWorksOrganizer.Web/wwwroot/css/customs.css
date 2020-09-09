@@ -70,6 +70,7 @@ td textarea.multilineTextArea {
 img.icon {
     width: 2em;
     height: 2em;
+    margin: 2px;
 }
 
     img.icon :hover {

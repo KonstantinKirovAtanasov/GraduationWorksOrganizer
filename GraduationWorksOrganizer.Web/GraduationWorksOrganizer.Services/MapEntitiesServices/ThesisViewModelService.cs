@@ -3,6 +3,7 @@ using GraduationWorksOrganizer.Core.Services;
 using GraduationWorksOrganizer.Core.ViewModels;
 using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Services;
+using GraduationWorksOrganizer.Database.Services.BaseServices;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         /// ДБ сървис
         /// </summary>
         private readonly ThesesDatabaseService _databaseService;
+        private readonly CombinedQueryBaseService<ThesesUserEntry> _userEntriesDbService;
 
         /// <summary>
         /// Аутомаппер
@@ -36,9 +38,11 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         /// <summary>
         /// Конструктор
         /// </summary>
-        public ThesisViewModelService(ThesesDatabaseService databaseService)
+        public ThesisViewModelService(ThesesDatabaseService databaseService,
+                                      CombinedQueryBaseService<ThesesUserEntry> userEntriesDbService)
         {
             _databaseService = databaseService;
+            _userEntriesDbService = userEntriesDbService;
             _automapper = new Mapper(new TViewModel().GetMapperConfiguration());
         }
 
@@ -62,7 +66,6 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         public IEnumerable<TViewModel> GetViewModels(Expression<Func<Theses, bool>> predicate)
         {
             IQueryable<Theses> theseses = _databaseService.GetAllIncluding(t => t.Subject
-                                                                         , t => t.UserEntries
                                                                          , t => t.Requerments
                                                                          , t => t.Creator);
             if (predicate != null)
@@ -95,6 +98,17 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         {
             Theses thesis = await _databaseService.GetAllIncluding(t => t.Subject, t => t.Requerments, t => t.Creator).FirstOrDefaultAsync(t => t.Id == id);
             return _automapper.Map<TViewModel>(thesis);
+        }
+
+        /// <summary>
+        /// Метод който връща записа на студент за конкретна теза
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<ThesesUserEntry> GetUserEntry(string userId, int thesisId)
+        {
+            ThesesUserEntry userEntry = await _userEntriesDbService.GetQuery().FirstOrDefaultAsync(te => te.StudentId == userId && te.ThesesId == thesisId);
+            return userEntry;
         }
     }
 }

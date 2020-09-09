@@ -1,17 +1,34 @@
-﻿using System.Linq;
+﻿using GraduationWorksOrganizer.Core.Database.Models;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
 
-namespace GraduationWorksOrganizer.Core.Database.Models
+namespace GraduationWorksOrganizer.Core.Database
 {
     /// <summary>
-    /// Сървис за работа с базата данни който връща Query
+    /// интерфейс за работа с базатаа данни
     /// </summary>
     /// <typeparam name="TDatanaseEntity"></typeparam>
-    public interface IQueryProvider<TDatanaseEntity> where TDatanaseEntity : class, IDatabaseEntity
+    public interface IQueryProvider<TDatabaseEntity> where TDatabaseEntity : class, IDatabaseEntity
     {
         /// <summary>
-        /// метод който връща Query 
+        /// Метод който връща Query-то
         /// </summary>
         /// <returns></returns>
-        IQueryable<TDatanaseEntity> GetQuery();
+        IQueryable<TDatabaseEntity> GetQuery();
+
+        /// <summary>
+        /// Query което Include-ва няколко неща
+        /// </summary>
+        /// <param name="propertySelectors"></param>
+        /// <returns></returns>
+        IQueryable<TDatabaseEntity> GetAllIncluding(params Expression<Func<TDatabaseEntity, object>>[] propertySelectors);
+
+        /// <summary>
+        /// Query с Include на нещо неща
+        /// </summary>
+        /// <param name="propertySelectors"></param>
+        /// <returns></returns>
+        IQueryable<TDatabaseEntity> GetAllIncluding(Expression<Func<TDatabaseEntity, object>> propertySelector);
     }
 }

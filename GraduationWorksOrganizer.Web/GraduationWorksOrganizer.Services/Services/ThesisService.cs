@@ -61,7 +61,7 @@ namespace GraduationWorksOrganizer.Services.Services
             }
 
             Specialty userSpecialty = await _studentsService.GetStudentSpecialty(userId);
-            if ((_dbService.GetAllIncluding(t => t.Subject).FirstOrDefault(t => t.Id == thesesId && t.Subject.SpecialtyId == userSpecialty.Id)) == null)
+            if (_dbService.GetAllIncluding(t => t.Subject).FirstOrDefault(t => t.Id == thesesId && t.Subject.SpecialtyId == userSpecialty.Id) == null)
             {
                 result.Add(new ValidationResult("Не може да се запишете за тази тема, темата за която се записвате трябва да е за вашата специалност"));
             }
