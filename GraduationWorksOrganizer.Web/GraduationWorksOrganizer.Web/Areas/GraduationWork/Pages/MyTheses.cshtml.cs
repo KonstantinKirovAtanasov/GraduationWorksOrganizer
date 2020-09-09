@@ -1,4 +1,4 @@
-using GraduationWorksOrganizer.Common;
+п»їusing GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Models.Base;
 using GraduationWorksOrganizer.Services.MapEntitiesServices;
 using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
@@ -6,12 +6,15 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
+using Constants = GraduationWorksOrganizer.Common.Constants;
 
 namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
 {
     /// <summary>
-    /// Mоите теми
+    /// MГ®ГЁГІГҐ ГІГҐГ¬ГЁ
     /// </summary>
     [Authorize(Roles = Constants.RoleNames.StudentRole)]
     public class MyThesesModel : PageModel
@@ -26,7 +29,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         #region Initialization
 
         /// <summary>
-        /// Конструктор
+        /// ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г°
         /// </summary>
         /// <param name="thesesVmService"></param>
         /// <param name=""></param>
@@ -42,29 +45,37 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         #region Properties
 
         /// <summary>
-        /// Моите тези
+        /// РўРµРјРё
         /// </summary>
-        public IEnumerable<PreviewThesisViewModel> Theseses { get; set; }
+        public ICollection<CompositePreviewThesisViewModel> Theseses { get; set; }
 
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// Oн get
+        /// On Get
         /// </summary>
-        public void OnGet()
+        public async Task OnGet()
         {
             string userId = _userService.GetUserId(User);
-            Theseses = _thesesVmService.GetViewModels(t => t.UserEntries.Any(e => e.StudentId == userId));
+            IEnumerable<PreviewThesisViewModel> viewModels = _thesesVmService.GetViewModels(t => t.UserEntries.Any(e => e.StudentId == userId));
+            Theseses = new Collection<CompositePreviewThesisViewModel>();
+            foreach (PreviewThesisViewModel prvm in viewModels)
+            {
+                ThesesUserEntry thesesUserEntry = await _thesesVmService.GetUserEntry(userId, prvm.Id);
+                UserEntryViewModel userEntry = new UserEntryViewModel() { Id = thesesUserEntry.Id };
+                Theseses.Add(new CompositePreviewThesisViewModel() { ThesisViewModel = prvm, UserEntry = userEntry });
+            }
         }
 
         /// <summary>
-        /// метод който Handel-ва изтриване на тема
+        /// Г¬ГҐГІГ®Г¤ ГЄГ®Г©ГІГ® Handel-ГўГ  ГЁГ§ГІГ°ГЁГўГ Г­ГҐ Г­Г  ГІГҐГ¬Г 
         /// </summary>
         /// <param name="thesisId"></param>
         public void OnPostDeleteThesis(int thesisId)
         {
+
 
         }
         #endregion

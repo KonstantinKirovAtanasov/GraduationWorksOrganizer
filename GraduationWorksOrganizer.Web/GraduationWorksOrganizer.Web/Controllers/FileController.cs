@@ -1,9 +1,11 @@
 ﻿using GraduationWorksOrganizer.Database.Models.Base;
 using GraduationWorksOrganizer.Services.Services;
+using GraduationWorksOrganizer.Web.Controllers.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Web.Controllers
@@ -17,21 +19,14 @@ namespace GraduationWorksOrganizer.Web.Controllers
     public class FileController : ControllerBase
     {
         /// <summary>
-        /// Сървис за работа с Файлове
-        /// </summary>
-        private UserEntryFilesService _userEntryFilesService;
-
-        /// <summary>
         /// Усер мениджър сървис
         /// </summary>
         private UserManager<ApplicationIdentityBase> _userManager;
 
         #region Initialization
 
-        public FileController(UserEntryFilesService userEntryFilesService,
-                              UserManager<ApplicationIdentityBase> userManager)
+        public FileController(UserManager<ApplicationIdentityBase> userManager)
         {
-            _userEntryFilesService = userEntryFilesService;
             _userManager = userManager;
         }
 
@@ -39,11 +34,17 @@ namespace GraduationWorksOrganizer.Web.Controllers
 
         #region MyRegion
 
-        //[HttpGet]
-        //public async Task<IActionResult> OnGet(int thesisUserEntryId)
-        //{
-        //    await 
-        //}
+        [HttpGet]
+        [Route("{thesisUserEntryId}")]
+        public IActionResult OnGet(int thesisUserEntryId)
+        {
+            List<FileNameViewModel> testvms = new List<FileNameViewModel>();
+            testvms.Add(new FileNameViewModel() { Id = 1, FileName = "Документ.pdf" });
+            testvms.Add(new FileNameViewModel() { Id = 1, FileName = "Документ2.pdf" });
+            testvms.Add(new FileNameViewModel() { Id = 1, FileName = "Документ3.pdf" });
+            testvms.Add(new FileNameViewModel() { Id = 1, FileName = "Документ4.pdf" });
+            return Ok(testvms);
+        }
 
         #endregion
     }

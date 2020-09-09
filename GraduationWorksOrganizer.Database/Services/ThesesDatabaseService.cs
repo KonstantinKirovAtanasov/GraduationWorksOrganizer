@@ -1,5 +1,6 @@
-﻿using GraduationWorksOrganizer.Database.Models;
-using GraduationWorksOrganizer.Database.Services.Base;
+﻿using GraduationWorksOrganizer.Core.Database;
+using GraduationWorksOrganizer.Database.Models;
+using GraduationWorksOrganizer.Database.Services.BaseServices;
 using System;
 using System.Linq;
 
@@ -8,7 +9,7 @@ namespace GraduationWorksOrganizer.Database.Services
     /// <summary>
     /// ДБ Сървис за работа с теми
     /// </summary>
-    public class ThesesDatabaseService : BaseRepository<Theses>
+    public class ThesesDatabaseService : CombinedQueryBaseService<Theses>
     {
         #region Initialization
 
@@ -20,6 +21,7 @@ namespace GraduationWorksOrganizer.Database.Services
             : base(dbContext)
         {
         }
+
 
         #endregion
 

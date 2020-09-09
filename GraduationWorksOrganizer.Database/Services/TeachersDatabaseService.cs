@@ -1,7 +1,4 @@
-﻿using GraduationWorksOrganizer.Core.Database.Models;
-using GraduationWorksOrganizer.Database.Models;
-using GraduationWorksOrganizer.Database.Services.Base;
-using System;
+﻿using GraduationWorksOrganizer.Database.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

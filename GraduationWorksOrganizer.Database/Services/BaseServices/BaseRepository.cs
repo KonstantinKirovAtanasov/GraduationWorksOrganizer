@@ -8,7 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace GraduationWorksOrganizer.Database.Services.Base
+namespace GraduationWorksOrganizer.Database.Services.BaseServices
 {
     /// <summary>
     /// Клас за базови действия с базата данни
@@ -90,37 +90,6 @@ namespace GraduationWorksOrganizer.Database.Services.Base
         }
 
         #endregion //  Implementation IAsyncRepository
-
-        public IQueryable<Theses> GetAllIncluding(params Expression<Func<Theses, object>>[] propertySelectors)
-        {
-            IQueryable<Theses> resultQuery = _dbContext.Theses;
-            if (propertySelectors != null)
-            {
-                foreach (Expression<Func<Theses, object>> propertySelector in propertySelectors)
-                {
-                    if (propertySelector.ReturnType.IsAssignableFrom(typeof(IDatabaseEntity))
-                        || propertySelector.ReturnType.GenericTypeArguments.First().IsAssignableFrom(typeof(IDatabaseEntity)))
-                    {
-                        resultQuery = resultQuery.Include(propertySelector);
-                    }
-                }
-            }
-
-            return resultQuery;
-        }
-
-        public IQueryable<Theses> GetAllIncluding(Expression<Func<Theses, object>> propertySelector)
-        {
-            IQueryable<Theses> resultQuery = _dbContext.Theses;
-            if (propertySelector != null
-                || propertySelector.ReturnType.IsAssignableFrom(typeof(IDatabaseEntity))
-                || propertySelector.ReturnType.GenericTypeArguments.First().IsAssignableFrom(typeof(IDatabaseEntity)))
-            {
-                resultQuery = resultQuery.Include(propertySelector);
-            }
-
-            return resultQuery;
-        }
 
         public async Task Update(TEntity entity)
         {

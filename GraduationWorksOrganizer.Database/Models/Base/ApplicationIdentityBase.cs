@@ -20,6 +20,6 @@ namespace GraduationWorksOrganizer.Database.Models.Base
         /// <summary>
         /// Ид на снимката
         /// </summary>
-        public int ImageId { get; set; }
+        public int? ImageId { get; set; }
     }
 }

@@ -7,49 +7,49 @@
 
 @if (Model.Theseses.Any())
 {
-    foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.PreviewThesisViewModel thesisModel in Model.Theseses)
+    foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.CompositePreviewThesisViewModel thesisModel in Model.Theseses)
     {
-        <div class="row border border-light">
+        <div class="row border">
             <div class="col-md">
                 <div class="row">
-                    <text class="text-left font-weight-bold">@thesisModel.Title</text>
+                    <text class="text-left font-weight-bold">@thesisModel.ThesisViewModel.Title</text>
                 </div>
                 <div class="row">
-                    <text class="text-left">@thesisModel.Subject.Name</text>
+                    <text class="text-left">@thesisModel.ThesisViewModel.Subject.Name</text>
                 </div>
                 <div class="row">
-                    <text class="text-left">@thesisModel.CreationDate.ToShortDateString()</text>
+                    <text class="text-left">@thesisModel.ThesisViewModel.CreationDate.ToShortDateString()</text>
                 </div>
             </div>
-            <div class="col">
+            <div class="justify-content-right">
                 <div class="row">
-                    <a class="nav-item btn btn-floating float-right" data-toggle="modal" data-target="#exampleModal-@thesisModel.Id">
+                    <a class="nav-item btn btn-floating float-right" data-toggle="modal" data-target="#exampleModal-@thesisModel.ThesisViewModel.Id">
                         <img class="icon" src="~/images/previewThesisIcon.png" />
                     </a>
-                    <a class="nav-item btn btn-floating float-right" data-toggle="collapse" href="#collapse-upload-data-@thesisModel.Id" role="button" aria-expanded="false">
+                    <a class="nav-item btn btn-floating float-right file-request" data-toggle="collapse" href="#collapse-upload-data-@thesisModel.ThesisViewModel.Id" role="button" aria-expanded="false" data-ajax-request-filename="@thesisModel.UserEntry.Id">
                         <img class="icon" src="~/images/uploadIcon.png" />
                     </a>
-                    <a class="nav-item btn btn-floating float-right" data-toggle="collapse" href="#collapse-request-teacher-@thesisModel.Id" role="button" aria-expanded="false">
+                    <a class="nav-item btn btn-floating float-right" data-toggle="collapse" href="#collapse-request-teacher-@thesisModel.ThesisViewModel.Id" role="button" aria-expanded="false">
                         <img class="icon" src="~/images/peoceedIcon.png" />
                     </a>
                 </div>
             </div>
             <hr />
         </div>
-        <div class="modal fade" id="exampleModal-@thesisModel.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel--@thesisModel.Id" aria-hidden="true">
+        <div class="modal fade" id="exampleModal-@thesisModel.ThesisViewModel.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel--@thesisModel.ThesisViewModel.Id" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel-@thesisModel.Id">@thesisModel.Title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel-@thesisModel.ThesisViewModel.Id">@thesisModel.ThesisViewModel.Title</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body" style="width:100%">
                         <p class="font-weight-bold">Описание</p>
-                        <p class="text-md-left">@thesisModel.Description </p>
+                        <p class="text-md-left">@thesisModel.ThesisViewModel.Description </p>
                         <p class="font-weight-bold">Изисквания</p>
-                        @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.RequermentViewModel requerment in thesisModel.Requerments)
+                        @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.RequermentViewModel requerment in thesisModel.ThesisViewModel.Requerments)
                         {
                             <div class="row">
                                 <div class="col text-left">
@@ -64,27 +64,116 @@
                         <span />
                         <div class="row">
                             <div class="col text-left">
-                                <text>@thesisModel.Type</text>
+                                <text>@thesisModel.ThesisViewModel.Type</text>
                             </div>
                             <div class="col text-right">
-                                <text>@thesisModel.CreationDate.ToShortDateString() </text>
+                                <text>@thesisModel.ThesisViewModel.CreationDate.ToShortDateString() </text>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="collapse-upload-data-@thesisModel.Id" class="collapse">
-            <div class="container border border-dark">
+        <div id="collapse-upload-data-@thesisModel.ThesisViewModel.Id" class="collapse">
+            <br />
+            <div id="file-manifest" class="container-fluid">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFileLang" lang="es">
+                    <label class="custom-file-label" for="customFileLang">Изберете файл</label>
+                </div>
             </div>
         </div>
-        <div id="collapse-request-teacher-@thesisModel.Id" class="collapse border border-dark">
+        <div id="collapse-request-teacher-@thesisModel.ThesisViewModel.Id" class="collapse border">
+            <br />
             <p>Tuk shte e logikara za request za odobrenie</p>
         </div>
 
-        <span />
+        <br />
     }
 }
 else
 { <h3>Нямате записани теми</h3>
+}
+
+
+@section Scripts{
+
+    <script>
+        let filesCache = {};
+        const attrNameFiles = 'data-ajax-request-filename'
+        const AttrNameDownload = 'data-ajax-request-download'
+        const deleteIconUrl = 'https://localhost:44306/images/deleteIcon.png'
+        const apiEndPoint = 'https://localhost:44306/api/file'
+
+        window.onloaded = AddEventHandlers();
+
+        function AddEventHandlers() {
+            let fileRequestItems = document.getElementsByClassName('file-request');
+            for (let i = 0; i < fileRequestItems.length; i++) {
+                fileRequestItems[i].addEventListener('click', function (event) {
+                    RequestApiForFileNames(event.target);
+                });
+            }
+            let fileInput = document.getElementById('customFileLang');
+            fileInput.addEventListener('onchange', OnFileUploadedAction);
+        }
+
+        function RequestApiForFileNames(item) {
+            let attributeValue = $(item).attr(attrNameFiles);
+            if (attributeValue == null || attributeValue == 'undefined') {
+                attributeValue = $(item.parentElement).attr(attrNameFiles)
+            }
+
+            if (filesCache[attributeValue])
+                return;
+
+            $.ajax({
+                method: 'GET',
+                url: apiEndPoint + '/' + attributeValue,
+                success: OnFileNamesGetted,
+                error: function (error) { console.log(error) },
+            });
+
+            filesCache[attributeValue] = true;
+        }
+
+        function OnFileNamesGetted(fileNames) {
+            console.log(fileNames);
+            let contentItem = document.getElementById('file-manifest');
+            for (let i = 0; i < fileNames.length; i++) {
+                let divElement = BuildDivItem(fileNames[i]);
+                contentItem.insertBefore(divElement, contentItem.firstChild);
+            }
+        }
+
+        function BuildDivItem(fileItem) {
+            let divrow = document.createElement('DIV');
+            let iconcol = document.createElement('DIV');
+            let namecol = document.createElement('DIV');
+            let filenameText = document.createElement('TEXT');
+            let iconItem = document.createElement('IMG');
+
+            divrow.className += 'row';
+            namecol.className += 'col-md justify-content-left';
+            iconcol.className += 'justify-content-right';
+            iconItem.className += 'icon';
+
+            filenameText.innerHTML = fileItem.fileName;
+            $(iconItem).attr(AttrNameDownload, fileItem.id);
+            $(iconItem).attr('src', deleteIconUrl);
+            namecol.appendChild(filenameText);
+            iconcol.appendChild(iconItem);
+            divrow.appendChild(namecol);
+            divrow.appendChild(iconcol);
+
+            return divrow;
+        }
+
+        function OnFileUploadedAction(event) {
+            /// to do add row for the file
+            /// ajax save file
+        }
+
+    </script>
+
 }

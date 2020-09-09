@@ -2,17 +2,13 @@
 using GraduationWorksOrganizer.Common;
 using GraduationWorksOrganizer.Core.Additional;
 using GraduationWorksOrganizer.Core.Database;
-using GraduationWorksOrganizer.Core.Services;
-using GraduationWorksOrganizer.Core.ViewModels;
 using GraduationWorksOrganizer.Database;
-using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Models.Base;
 using GraduationWorksOrganizer.Database.Services;
-using GraduationWorksOrganizer.Database.Services.Base;
+using GraduationWorksOrganizer.Database.Services.BaseServices;
 using GraduationWorksOrganizer.Services.Commissions;
 using GraduationWorksOrganizer.Services.MapEntitiesServices;
 using GraduationWorksOrganizer.Services.Services;
-using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
 using GraduationWorksOrganizer.Web.SharedViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,9 +16,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Security.Claims;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Web
@@ -41,6 +38,7 @@ namespace GraduationWorksOrganizer.Web
         {
             services.AddRazorPages();
             services.AddAuthentication();
+            services.AddDirectoryBrowser();
             ConfigureAuthorization(services);
 
             services.AddDbContext<GraduationWorksOrganizerDataContext>(options =>
@@ -52,8 +50,9 @@ namespace GraduationWorksOrganizer.Web
 
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
             services.AddScoped(typeof(ThesisViewModelService<>));
+            services.AddScoped(typeof(CombinedQueryBaseService<>));
 
-            services.AddScoped<TeacherService<TeacherViewModel>>();
+            services.AddScoped<TeacherViewModelService<TeacherViewModel>>();
 
             services.AddScoped<CommissionsService>();
             services.AddScoped<ThesesDatabaseService>();
@@ -80,6 +79,12 @@ namespace GraduationWorksOrganizer.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseDirectoryBrowser(new DirectoryBrowserOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(env.WebRootPath, "images")),
+                RequestPath = "/images"
+            });
 
             app.UseRouting();
             app.UseCookiePolicy();

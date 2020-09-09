@@ -2,7 +2,6 @@
 using GraduationWorksOrganizer.Core.ViewModels;
 using GraduationWorksOrganizer.Database.Models;
 using System.Collections.Generic;
-using static GraduationWorksOrganizer.Common.Enums;
 
 namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
 {
