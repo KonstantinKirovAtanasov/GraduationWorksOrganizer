@@ -26,10 +26,10 @@
                     <a class="nav-item btn btn-floating float-right" data-toggle="modal" data-target="#exampleModal-@thesisModel.ThesisViewModel.Id">
                         <img class="icon" src="~/images/previewThesisIcon.png" />
                     </a>
-                    <a class="nav-item btn btn-floating float-right file-request" data-toggle="collapse" href="#collapse-upload-data-@thesisModel.ThesisViewModel.Id" role="button" aria-expanded="false" data-ajax-request-filename="@thesisModel.UserEntry.Id">
+                    <a class="nav-item btn btn-floating float-right file-request" data-toggle="collapse" href="#collapse-upload-data-@thesisModel.UserEntry.Id" role="button" aria-expanded="false" data-ajax-request-filename="@thesisModel.UserEntry.Id">
                         <img class="icon" src="~/images/uploadIcon.png" />
                     </a>
-                    <a class="nav-item btn btn-floating float-right" data-toggle="collapse" href="#collapse-request-teacher-@thesisModel.ThesisViewModel.Id" role="button" aria-expanded="false">
+                    <a class="nav-item btn btn-floating float-right" data-toggle="collapse" href="#collapse-request-teacher-@thesisModel.UserEntry.Id" role="button" aria-expanded="false">
                         <img class="icon" src="~/images/peoceedIcon.png" />
                     </a>
                 </div>
@@ -74,18 +74,18 @@
                 </div>
             </div>
         </div>
-        <div id="collapse-upload-data-@thesisModel.ThesisViewModel.Id" class="collapse">
+        <div id="collapse-upload-data-@thesisModel.UserEntry.Id" class="collapse">
             <br />
-            <div id="file-manifest" class="container-fluid">
-                <form id="file-upload-form" name="formFile">
+            <div id="file-manifest-@thesisModel.UserEntry.Id" class="container-fluid" data-ajax-request-filename="@thesisModel.UserEntry.Id">
+                <form id="file-upload-form-@thesisModel.UserEntry.Id" name="formFile">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="file-upload-input">
+                        <input id="file-upload-input-@thesisModel.UserEntry.Id" type="file" class="custom-file-input">
                         <label class="custom-file-label">Изберете файл</label>
                     </div>
                 </form>
             </div>
         </div>
-        <div id="collapse-request-teacher-@thesisModel.ThesisViewModel.Id" class="collapse border">
+        <div id="collapse-request-teacher-@thesisModel.UserEntry.Id" class="collapse border">
             <br />
             <p>Tuk shte e logikara za request za odobrenie</p>
         </div>
@@ -116,35 +116,21 @@ else
                     RequestApiForFileNames(event.target);
                 });
             }
-            let fileInput = document.getElementById('file-upload-input');
-            fileInput.addEventListener('change', OnFileUploadedAction);
-        }
-
-        function RequestApiForFileNames(item) {
-            let attributeValue = $(item).attr(attrNameFiles);
-            if (attributeValue == null || attributeValue == 'undefined') {
-                attributeValue = $(item.parentElement).attr(attrNameFiles)
+            let divFileInputs = document.getElementsByClassName('custom-file');
+            for (let i = 0; i < divFileInputs.length; i++) {
+                divFileInputs[i].firstElementChild.addEventListener('change', OnFileUploadedAction);
             }
-
-            if (filesCache[attributeValue])
-                return;
-
-            $.ajax({
-                method: 'GET',
-                url: apiEndPoint + '/' + attributeValue,
-                success: OnFileNamesGetted,
-                error: function (error) { console.log(error) },
-            });
-
-            filesCache[attributeValue] = true;
         }
 
-        function OnFileNamesGetted(fileNames) {
-            let contentItem = document.getElementById('file-manifest');
+        function OnFileNamesGetted(fileNames, filesManifestItem) {
             for (let i = 0; i < fileNames.length; i++) {
-                let divElement = BuildDivItem(fileNames[i]);
-                contentItem.insertBefore(divElement, contentItem.firstChild);
+                AddNewFileElement(fileNames[i], filesManifestItem);
             }
+        }
+
+        function AddNewFileElement(fileItem, fileManifestElement) {
+            let divElement = BuildDivItem(fileItem);
+            fileManifestElement.insertBefore(divElement, fileManifestElement.firstChild);
         }
 
         function BuildDivItem(fileItem) {
@@ -170,25 +156,37 @@ else
             return divrow;
         }
 
-        function OnFileUploadedAction(event) {
-            const formData = CreateFileFormData();
-            UploadFile(formData);
+        function OnFileUploadedAction() {
+            const formData = CreateFileFormData(this);
+            UploadFile(formData, this);
         }
 
-        function CreateFileFormData() {
-            let form = document.getElementById('file-upload-form');
+        function CreateFileFormData(input) {
             let formData = new FormData();
-            formData.append('file', form.files[0], 'test');
-            return formData
+            if (input.files[0] != null && input.files[0] != 'undefined') {
+                formData.append('file', input.files[0], input.files[0].name);
+                console.log(input.files[0])
+            }
+            return formData;
         }
 
-        function UploadFile(formData) {
+        function UploadFile(formData, input) {
+            const userEntryId = $(input.parentElement.parentElement.parentElement).attr(attrNameFiles);
             $.ajax({
                 method: 'PUT',
-                url: apiEndPoint,
+                headers: {
+                    thesisUserEntryId: userEntryId
+                },
                 contentType: false,
+                processData: false,
+                url: apiEndPoint,
                 data: formData,
-                success: OnFileNamesGetted,
+                success: function (result) {
+                    let fileManifest = document.getElementById('file-manifest-' + userEntryId);
+                    console.log('file-manifest-' + userEntryId);
+                    console.log(fileManifest);
+                    AddNewFileElement(result, fileManifest);
+                },
             });
         }
 
@@ -204,7 +202,12 @@ else
             $.ajax({
                 method: 'GET',
                 url: apiEndPoint + '/' + attributeValue,
-                success: OnFileNamesGetted,
+                success: function (result) {
+                    let fileManifest = document.getElementById('file-manifest-' + attributeValue);
+                    console.log('file-manifest-' + attributeValue);
+                    console.log(fileManifest);
+                    OnFileNamesGetted(result, fileManifest);
+                },
                 error: function (error) { console.log(error) },
             });
 

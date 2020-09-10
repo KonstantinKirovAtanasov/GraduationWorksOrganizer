@@ -1,14 +1,15 @@
-﻿using GraduationWorksOrganizer.Database.Models.Base;
+﻿using GraduationWorksOrganizer.Database.Models;
+using GraduationWorksOrganizer.Database.Models.Base;
+using GraduationWorksOrganizer.Database.Services.BaseServices;
 using GraduationWorksOrganizer.Services.MapEntitiesServices;
-using GraduationWorksOrganizer.Services.Services;
 using GraduationWorksOrganizer.Web.Controllers.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Web.Controllers
@@ -24,9 +25,11 @@ namespace GraduationWorksOrganizer.Web.Controllers
         /// <summary>
         /// Усер мениджър сървис
         /// </summary>
-        private UserManager<ApplicationIdentityBase> _userManager;
+        private readonly UserManager<ApplicationIdentityBase> _userManager;
 
         private readonly UserEntryFilesViewModelService<UserEntryFileNameViewModel> _filesVmService;
+
+        private readonly CombinedQueryBaseService<ThesesUserEntry> _userEntryDbService;
 
         #region Initialization
 
@@ -35,10 +38,12 @@ namespace GraduationWorksOrganizer.Web.Controllers
         /// </summary>
         /// <param name="userManager"></param>
         public FileController(UserManager<ApplicationIdentityBase> userManager,
-                               UserEntryFilesViewModelService<UserEntryFileNameViewModel> filesVmService)
+                              CombinedQueryBaseService<ThesesUserEntry> userEntryDbService,
+                              UserEntryFilesViewModelService<UserEntryFileNameViewModel> filesVmService)
         {
             _userManager = userManager;
             _filesVmService = filesVmService;
+            _userEntryDbService = userEntryDbService;
         }
 
         #endregion
@@ -53,11 +58,36 @@ namespace GraduationWorksOrganizer.Web.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Upload(IFormFile file)
+        public async Task<IActionResult> Upload([FromHeader(Name = "ThesisUserEntryId")] int thesisUserEntryId, IFormFile file)
         {
-            await Task.CompletedTask;
-            string fileName = file.FileName.Split("\\").Last();
-            return Ok(new UserEntryFileNameViewModel() { Id = 999, FileName = fileName });
+            if (!await ValidateUserEntry(thesisUserEntryId))
+                return BadRequest();
+
+            byte[] fileContent = null;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                await file.CopyToAsync(ms);
+                fileContent = ms.ToArray();
+            }
+
+            AddUserEntryFileViewModel addVm = new AddUserEntryFileViewModel();
+            addVm.UserEntryId = thesisUserEntryId;
+            addVm.Content = fileContent;
+            addVm.FileName = file.FileName;
+
+            return Ok(await _filesVmService.AddUserEntryFile(addVm));
+        }
+
+
+        /// <summary>
+        /// Метод който валидира дали ентрито е на текущия потребител
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> ValidateUserEntry(int ThesisUserEntryId)
+        {
+            ThesesUserEntry userEntry = await _userEntryDbService.GetById(ThesisUserEntryId);
+            string UserId = _userManager.GetUserId(User);
+            return userEntry.StudentId == UserId;
         }
         #endregion
     }

@@ -5,6 +5,7 @@ using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -54,6 +55,18 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         {
             List<ThesisUserEntryFileContent> resultSet = await _databaseService.GetQuery().Where(t => t.UserEntryId == userEntryId).ToListAsync();
             return resultSet.Select(r => _automapper.Map<TViewModel>(r));
+        }
+
+        /// <summary>
+        /// Метод който записва UserEntryFile
+        /// </summary>
+        /// <returns></returns>
+        public async Task<TViewModel> AddUserEntryFile(IAutoMapperViewModel addViewModel)
+        {
+            Mapper mapper = new Mapper(addViewModel.GetMapperConfiguration());
+            ThesisUserEntryFileContent fileContent = mapper.Map<ThesisUserEntryFileContent>(addViewModel);
+            fileContent = await _databaseService.AddAsync(fileContent);
+            return _automapper.Map<TViewModel>(fileContent);
         }
     }
 }
