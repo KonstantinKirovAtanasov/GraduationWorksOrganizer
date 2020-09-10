@@ -103,9 +103,11 @@ else
     <script>
         let filesCache = {};
         const attrNameFiles = 'data-ajax-request-filename'
-        const AttrNameDownload = 'data-ajax-request-download'
+        const attrFileId = 'data-ajax-request'
         const deleteIconUrl = 'https://localhost:44306/images/deleteIcon.png'
+        const downloadIconUrl = 'https://localhost:44306/images/downloadIcon.png'
         const apiEndPoint = 'https://localhost:44306/api/file'
+        const downloadFileEndPoint = 'https://localhost:44306/api/file/download'
 
         window.onloaded = AddEventHandlers();
 
@@ -135,25 +137,75 @@ else
 
         function BuildDivItem(fileItem) {
             let divrow = document.createElement('DIV');
-            let iconcol = document.createElement('DIV');
+            let iconscol = document.createElement('DIV');
             let namecol = document.createElement('DIV');
             let filenameText = document.createElement('TEXT');
-            let iconItem = document.createElement('IMG');
+            let deleteIconItem = document.createElement('IMG');
+            let deleteIconParent = document.createElement('A');
+            let downloadIconItem = document.createElement('IMG');
+            let downloadIconParent = document.createElement('A');
 
             divrow.className += 'row';
             namecol.className += 'col-md justify-content-left';
-            iconcol.className += 'justify-content-right';
-            iconItem.className += 'icon';
+            iconscol.className += 'justify-content-right';
+            deleteIconItem.className += 'icon';
+            deleteIconParent.className += 'nav-item btn btn-floating float-right';
+            downloadIconItem.className += 'icon';
+            downloadIconParent.className += 'nav-item btn btn-floating float-right';
 
             filenameText.innerHTML = fileItem.fileName;
-            $(iconItem).attr(AttrNameDownload, fileItem.id);
-            $(iconItem).attr('src', deleteIconUrl);
-            namecol.appendChild(filenameText);
-            iconcol.appendChild(iconItem);
-            divrow.appendChild(namecol);
-            divrow.appendChild(iconcol);
+            $(deleteIconParent).attr(attrFileId, fileItem.id);
+            $(deleteIconParent).attr('role', 'button');
+            $(downloadIconParent).attr(attrFileId, fileItem.id);
+            $(downloadIconParent).attr('role', 'button');
+            $(deleteIconItem).attr('src', deleteIconUrl);
+            $(downloadIconItem).attr('src', downloadIconUrl);
 
+            deleteIconParent.appendChild(deleteIconItem);
+            downloadIconParent.appendChild(downloadIconItem);
+            namecol.appendChild(filenameText);
+            iconscol.appendChild(deleteIconParent);
+            iconscol.appendChild(downloadIconParent);
+            divrow.appendChild(namecol);
+            divrow.appendChild(iconscol);
+
+            deleteIconParent.addEventListener('click', DeleteClickedEventHandler);
+            downloadIconParent.addEventListener('click', DownloadClickedEventHandler);
             return divrow;
+        }
+
+        function DownloadClickedEventHandler(event) {
+            const fileId = this.getAttribute(attrFileId);
+            DownloadFileRequest(fileId);
+        }
+
+        function DownloadFileRequest(fileId) {
+            $.ajax({
+                method: 'GET',
+                url: downloadFileEndPoint,
+                headers: {
+                    fileContentId: fileId,
+                },
+            });
+        }
+
+        function DeleteClickedEventHandler(event) {
+            const fileId = this.getAttribute(attrFileId);
+            let parentRow = this.parentElement.parentElement;
+            DeleteFileRequest(fileId, parentRow);
+        }
+
+        function DeleteFileRequest(fileId, parentRow) {
+            $.ajax({
+                method: 'DELETE',
+                url: apiEndPoint,
+                headers: {
+                    fileContentId: fileId,
+                },
+                success: function DeleteRow() {
+                    parentRow.remove();
+                }
+            })
         }
 
         function OnFileUploadedAction() {
@@ -213,7 +265,6 @@ else
 
             filesCache[attributeValue] = true;
         }
-
     </script>
 
 }

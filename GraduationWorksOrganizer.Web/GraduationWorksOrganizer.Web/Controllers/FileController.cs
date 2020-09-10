@@ -1,4 +1,5 @@
-﻿using GraduationWorksOrganizer.Database.Models;
+﻿using GraduationWorksOrganizer.Common;
+using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Models.Base;
 using GraduationWorksOrganizer.Database.Services.BaseServices;
 using GraduationWorksOrganizer.Services.MapEntitiesServices;
@@ -7,9 +8,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Web.Controllers
@@ -22,14 +26,13 @@ namespace GraduationWorksOrganizer.Web.Controllers
     [Authorize]
     public class FileController : ControllerBase
     {
-        /// <summary>
-        /// Усер мениджър сървис
-        /// </summary>
         private readonly UserManager<ApplicationIdentityBase> _userManager;
 
         private readonly UserEntryFilesViewModelService<UserEntryFileNameViewModel> _filesVmService;
 
         private readonly CombinedQueryBaseService<ThesesUserEntry> _userEntryDbService;
+
+        private readonly CombinedQueryBaseService<ThesisUserEntryFileContent> _fileContentDbService;
 
         #region Initialization
 
@@ -39,11 +42,13 @@ namespace GraduationWorksOrganizer.Web.Controllers
         /// <param name="userManager"></param>
         public FileController(UserManager<ApplicationIdentityBase> userManager,
                               CombinedQueryBaseService<ThesesUserEntry> userEntryDbService,
+                              CombinedQueryBaseService<ThesisUserEntryFileContent> fileContentDbService,
                               UserEntryFilesViewModelService<UserEntryFileNameViewModel> filesVmService)
         {
             _userManager = userManager;
             _filesVmService = filesVmService;
             _userEntryDbService = userEntryDbService;
+            _fileContentDbService = fileContentDbService;
         }
 
         #endregion
@@ -78,14 +83,36 @@ namespace GraduationWorksOrganizer.Web.Controllers
             return Ok(await _filesVmService.AddUserEntryFile(addVm));
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> OnDelete([FromHeader] int fileContentId)
+        {
+            ThesisUserEntryFileContent thesisEntry = await _fileContentDbService.GetById(fileContentId);
+            if (!await ValidateUserEntry(thesisEntry.UserEntryId))
+                return BadRequest();
+
+            await _fileContentDbService.Delete(thesisEntry);
+            return Ok();
+        }
+
+        [HttpGet("download")]
+        public async Task<IActionResult> DownloadFile([FromHeader] int fileContentId)
+        {
+            ThesisUserEntryFileContent thesisEntry = await _fileContentDbService.GetById(fileContentId);
+            if (User.IsInRole(Constants.RoleNames.StudentRole) && !await ValidateUserEntry(thesisEntry.UserEntryId))
+                return BadRequest();
+
+            string contentType = "application/";
+            contentType += thesisEntry.FileName.Split('.').LastOrDefault();
+            return File(new MemoryStream(thesisEntry.Content), contentType, thesisEntry.FileName);
+        }
 
         /// <summary>
         /// Метод който валидира дали ентрито е на текущия потребител
         /// </summary>
         /// <returns></returns>
-        public async Task<bool> ValidateUserEntry(int ThesisUserEntryId)
+        public async Task<bool> ValidateUserEntry(int thesisUserEntryId)
         {
-            ThesesUserEntry userEntry = await _userEntryDbService.GetById(ThesisUserEntryId);
+            ThesesUserEntry userEntry = await _userEntryDbService.GetById(thesisUserEntryId);
             string UserId = _userManager.GetUserId(User);
             return userEntry.StudentId == UserId;
         }
