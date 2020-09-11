@@ -39,6 +39,11 @@ namespace GraduationWorksOrganizer.Web
             services.AddRazorPages();
             services.AddAuthentication();
             services.AddDirectoryBrowser();
+            services.AddControllers(options =>
+            {
+                options.RespectBrowserAcceptHeader = true;
+            });
+
             ConfigureAuthorization(services);
 
             services.AddDbContext<GraduationWorksOrganizerDataContext>(options =>

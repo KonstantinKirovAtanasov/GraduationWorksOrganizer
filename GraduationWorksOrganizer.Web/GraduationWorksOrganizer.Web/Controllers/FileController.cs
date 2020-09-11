@@ -5,6 +5,7 @@ using GraduationWorksOrganizer.Database.Services.BaseServices;
 using GraduationWorksOrganizer.Services.MapEntitiesServices;
 using GraduationWorksOrganizer.Web.Controllers.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -101,9 +102,10 @@ namespace GraduationWorksOrganizer.Web.Controllers
             if (User.IsInRole(Constants.RoleNames.StudentRole) && !await ValidateUserEntry(thesisEntry.UserEntryId))
                 return BadRequest();
 
-            string contentType = "application/";
-            contentType += thesisEntry.FileName.Split('.').LastOrDefault();
-            return File(new MemoryStream(thesisEntry.Content), contentType, thesisEntry.FileName);
+            Response.Headers.Add("fileName", thesisEntry.FileName);
+            Response.Headers.Add("responseType", "arraybuffer");
+            Stream stream = new MemoryStream(thesisEntry.Content);
+            return new FileStreamResult(stream, "application/octet-stream");
         }
 
         /// <summary>

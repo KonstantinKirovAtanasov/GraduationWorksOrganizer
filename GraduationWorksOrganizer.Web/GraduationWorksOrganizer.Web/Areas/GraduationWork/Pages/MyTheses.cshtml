@@ -180,13 +180,31 @@ else
         }
 
         function DownloadFileRequest(fileId) {
-            $.ajax({
-                method: 'GET',
-                url: downloadFileEndPoint,
-                headers: {
-                    fileContentId: fileId,
-                },
-            });
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", downloadFileEndPoint, true);
+            xhr.responseType = 'arraybuffer';
+            xhr.setRequestHeader('fileContentId', fileId);
+            xhr.send(null);
+            xhr.onreadystatechange = function () {
+                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                    DownloadActualFile();
+                }
+            }
+
+            function DownloadActualFile() {
+                let url = window.URL.createObjectURL(new Blob([xhr.responseText]));
+                let fileName = xhr.getResponseHeader('fileName');
+                let downloadElement = document.createElement("a");
+
+                document.body.appendChild(downloadElement);
+                downloadElement.style = "display: none";
+                downloadElement.href = url;
+                downloadElement.download = fileName;
+                downloadElement.click();
+
+                document.body.removeChild(downloadElement);
+            };
         }
 
         function DeleteClickedEventHandler(event) {
