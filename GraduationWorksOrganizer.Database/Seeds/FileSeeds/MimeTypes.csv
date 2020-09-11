@@ -1,0 +1,691 @@
+﻿1,3D Crossword Plugin,application/vnd.hzn-3d-crossword,.x3d,IANA: 3D Crossword Plugin
+2,3GP,video/3gpp,.3gp,Wikipedia: 3GP
+3,3GP2,video/3gpp2,.3g2,Wikipedia: 3G2
+4,3GPP MSEQ File,application/vnd.mseq,.mseq,IANA: 3GPP MSEQ File
+5,3M Post It Notes,application/vnd.3m.post-it-notes,.pwn,IANA: 3M Post It Notes
+6,3rd Generation Partnership Project - Pic Large,application/vnd.3gpp.pic-bw-large,.plb,3GPP
+7,3rd Generation Partnership Project - Pic Small,application/vnd.3gpp.pic-bw-small,.psb,3GPP
+8,3rd Generation Partnership Project - Pic Var,application/vnd.3gpp.pic-bw-var,.pvb,3GPP
+9,3rd Generation Partnership Project - Transaction Capabilities Application Part,application/vnd.3gpp2.tcap,.tcap,3GPP
+10,7-Zip,application/x-7z-compressed,.7z,Wikipedia: 7-Zip
+11,AbiWord,application/x-abiword,.abw,Wikipedia: AbiWord
+12,Ace Archive,application/x-ace-compressed,.ace,Wikipedia: ACE
+13,Active Content Compression,application/vnd.americandynamics.acc,.acc,IANA: Active Content Compression
+14,ACU Cobol,application/vnd.acucobol,.acu,IANA: ACU Cobol
+15,ACU Cobol,application/vnd.acucorp,.atc,IANA: ACU Cobol
+16,Adaptive differential pulse-code modulation,audio/adpcm,.adp,Wikipedia: ADPCM
+17,Adobe (Macropedia) Authorware - Binary File,application/x-authorware-bin,.aab,Wikipedia: Authorware
+18,Adobe (Macropedia) Authorware - Map,application/x-authorware-map,.aam,Wikipedia: Authorware
+19,Adobe (Macropedia) Authorware - Segment File,application/x-authorware-seg,.aas,Wikipedia: Authorware
+20,Adobe AIR Application,application/vnd.adobe.air-application-installer-package+zip,.air,Building AIR Applications
+21,Adobe Flash,application/x-shockwave-flash,.swf,Wikipedia: Adobe Flash
+22,Adobe Flex Project,application/vnd.adobe.fxp,.fxp,IANA: Adobe Flex Project
+23,Adobe Portable Document Format,application/pdf,.pdf,Adobe PDF
+24,Adobe PostScript Printer Description File Format,application/vnd.cups-ppd,.ppd,IANA: Cups
+25,Adobe Shockwave Player,application/x-director,.dir,Wikipedia: Adobe Shockwave Player
+26,Adobe XML Data Package,application/vnd.adobe.xdp+xml,.xdp,Wikipedia: XML Data Package
+27,Adobe XML Forms Data Format,application/vnd.adobe.xfdf,.xfdf,Wikipedia: XML Portable Document Format
+28,Advanced Audio Coding (AAC),audio/x-aac,.aac,Wikipedia: AAC
+29,Ahead AIR Application,application/vnd.ahead.space,.ahead,IANA: Ahead AIR Application
+30,AirZip FileSECURE,application/vnd.airzip.filesecure.azf,.azf,IANA: AirZip
+31,AirZip FileSECURE,application/vnd.airzip.filesecure.azs,.azs,IANA: AirZip
+32,Amazon Kindle eBook format,application/vnd.amazon.ebook,.azw,Kindle Direct Publishing
+33,AmigaDE,application/vnd.amiga.ami,.ami,IANA: Amiga
+34,Andrew Toolkit,application/andrew-inset,N/A,IANA - Andrew Inset
+35,Android Package Archive,application/vnd.android.package-archive,.apk,Wikipedia: APK File Format
+36,ANSER-WEB Terminal Client - Certificate Issue,application/vnd.anser-web-certificate-issue-initiation,.cii,IANA: ANSWER-WEB
+37,ANSER-WEB Terminal Client - Web Funds Transfer,application/vnd.anser-web-funds-transfer-initiation,.fti,IANA: ANSWER-WEB
+38,Antix Game Player,application/vnd.antix.game-component,.atx,IANA: Antix Game Component
+39,Apple Disk Image,application/x-apple-diskimage,.dmg,Apple Disk Image
+40,Apple Installer Package,application/vnd.apple.installer+xml,.mpkg,IANA: Apple Installer
+41,Applixware,application/applixware,.aw,Vistasource
+42,Archipelago Lesson Player,application/vnd.hhe.lesson-player,.les,IANA: Archipelago Lesson Player
+43,Arista Networks Software Image,application/vnd.aristanetworks.swi,.swi,IANA: Arista Networks Software Image
+44,Assembler Source File,text/x-asm,.s,Wikipedia: Assembly
+45,Atom Publishing Protocol,application/atomcat+xml,.atomcat,RFC 5023
+46,Atom Publishing Protocol Service Document,application/atomsvc+xml,.atomsvc,RFC 5023
+47,Atom Syndication Format,application/atom+xml,".atom, .xml",RFC 4287
+48,Attribute Certificate,application/pkix-attr-cert,.ac,RFC 5877
+49,Audio Interchange File Format,audio/x-aiff,.aif,Wikipedia: Audio Interchange File Format
+50,Audio Video Interleave (AVI),video/x-msvideo,.avi,Wikipedia: AVI
+51,Audiograph,application/vnd.audiograph,.aep,IANA: Audiograph
+52,AutoCAD DXF,image/vnd.dxf,.dxf,Wikipedia: AutoCAD DXF
+53,Autodesk Design Web Format (DWF),model/vnd.dwf,.dwf,Wikipedia: Design Web Format
+54,BAS Partitur Format,text/plain-bas,.par,Phonetik BAS
+55,Binary CPIO Archive,application/x-bcpio,.bcpio,Wikipedia: cpio
+56,Binary Data,application/octet-stream,.bin,
+57,Bitmap Image File,image/bmp,.bmp,Wikipedia: BMP File Format
+58,BitTorrent,application/x-bittorrent,.torrent,Wikipedia: BitTorrent
+59,Blackberry COD File,application/vnd.rim.cod,.cod,
+60,Blueice Research Multipass,application/vnd.blueice.multipass,.mpm,IANA: Multipass
+61,BMI Drawing Data Interchange,application/vnd.bmi,.bmi,IANA: BMI
+62,Bourne Shell Script,application/x-sh,.sh,Wikipedia: Bourne Shell
+63,BTIF,image/prs.btif,.btif,IANA: BTIF
+64,BusinessObjects,application/vnd.businessobjects,.rep,IANA: BusinessObjects
+65,Bzip Archive,application/x-bzip,.bz,Wikipedia: Bzip
+66,Bzip2 Archive,application/x-bzip2,.bz2,Wikipedia: Bzip
+67,C Shell Script,application/x-csh,.csh,Wikipedia: C Shell
+68,C Source File,text/x-c,.c,Wikipedia: C Programming Language
+69,CambridgeSoft Chem Draw,application/vnd.chemdraw+xml,.cdxml,IANA: Chem Draw
+70,Cascading Style Sheets (CSS),text/css,.css,Wikipedia: CSS
+71,ChemDraw eXchange file,chemical/x-cdx,.cdx,ChemDraw eXchange file
+72,Chemical Markup Language,chemical/x-cml,.cml,Wikipedia: Chemical Markup Language
+73,Chemical Style Markup Language,chemical/x-csml,.csml,Wikipedia: Chemical Style Markup Language
+74,CIM Database,application/vnd.contact.cmsg,.cdbcmsg,IANA: CIM Database
+75,Claymore Data Files,application/vnd.claymore,.cla,IANA: Claymore
+76,Clonk Game,application/vnd.clonk.c4group,.c4g,IANA: Clonk
+77,Close Captioning - Subtitle,image/vnd.dvb.subtitle,.sub,Wikipedia: Closed Captioning
+78,Cloud Data Management Interface (CDMI) - Capability,application/cdmi-capability,.cdmia,RFC 6208
+79,Cloud Data Management Interface (CDMI) - Contaimer,application/cdmi-container,.cdmic,RFC 6209
+80,Cloud Data Management Interface (CDMI) - Domain,application/cdmi-domain,.cdmid,RFC 6210
+81,Cloud Data Management Interface (CDMI) - Object,application/cdmi-object,.cdmio,RFC 6211
+82,Cloud Data Management Interface (CDMI) - Queue,application/cdmi-queue,.cdmiq,RFC 6212
+83,ClueTrust CartoMobile - Config,application/vnd.cluetrust.cartomobile-config,.c11amc,IANA: CartoMobile
+84,ClueTrust CartoMobile - Config Package,application/vnd.cluetrust.cartomobile-config-pkg,.c11amz,IANA: CartoMobile
+85,CMU Image,image/x-cmu-raster,.ras,
+86,COLLADA,model/vnd.collada+xml,.dae,IANA: COLLADA
+87,Comma-Seperated Values,text/csv,.csv,Wikipedia: CSV
+88,Compact Pro,application/mac-compactpro,.cpt,Compact Pro
+89,Compiled Wireless Markup Language (WMLC),application/vnd.wap.wmlc,.wmlc,IANA: WMLC
+90,Computer Graphics Metafile,image/cgm,.cgm,Wikipedia: Computer Graphics Metafile
+91,CoolTalk,x-conference/x-cooltalk,.ice,Wikipedia: CoolTalk
+92,Corel Metafile Exchange (CMX),image/x-cmx,.cmx,Wikipedia: CorelDRAW
+93,CorelXARA,application/vnd.xara,.xar,IANA: CorelXARA
+94,CosmoCaller,application/vnd.cosmocaller,.cmc,IANA: CosmoCaller
+95,CPIO Archive,application/x-cpio,.cpio,Wikipedia: cpio
+96,CrickSoftware - Clicker,application/vnd.crick.clicker,.clkx,IANA: Clicker
+97,CrickSoftware - Clicker - Keyboard,application/vnd.crick.clicker.keyboard,.clkk,IANA: Clicker
+98,CrickSoftware - Clicker - Palette,application/vnd.crick.clicker.palette,.clkp,IANA: Clicker
+99,CrickSoftware - Clicker - Template,application/vnd.crick.clicker.template,.clkt,IANA: Clicker
+100,CrickSoftware - Clicker - Wordbank,application/vnd.crick.clicker.wordbank,.clkw,IANA: Clicker
+101,Critical Tools - PERT Chart EXPERT,application/vnd.criticaltools.wbs+xml,.wbs,IANA: Critical Tools
+102,CryptoNote,application/vnd.rig.cryptonote,.cryptonote,IANA: CryptoNote
+103,Crystallographic Interchange Format,chemical/x-cif,.cif,Crystallographic Interchange Format
+104,CrystalMaker Data Format,chemical/x-cmdf,.cmdf,CrystalMaker Data Format
+105,CU-SeeMe,application/cu-seeme,.cu,White Pine
+106,CU-Writer,application/prs.cww,.cww,
+107,Curl - Applet,text/vnd.curl,.curl,Curl Applet
+108,Curl - Detached Applet,text/vnd.curl.dcurl,.dcurl,Curl Detached Applet
+109,Curl - Manifest File,text/vnd.curl.mcurl,.mcurl,Curl Manifest File
+110,Curl - Source Code,text/vnd.curl.scurl,.scurl,Curl Source Code
+111,CURL Applet,application/vnd.curl.car,.car,IANA: CURL Applet
+112,CURL Applet,application/vnd.curl.pcurl,.pcurl,IANA: CURL Applet
+113,CustomMenu,application/vnd.yellowriver-custom-menu,.cmp,IANA: CustomMenu
+114,Data Structure for the Security Suitability of Cryptographic Algorithms,application/dssc+der,.dssc,RFC 5698
+115,Data Structure for the Security Suitability of Cryptographic Algorithms,application/dssc+xml,.xdssc,RFC 5698
+116,Debian Package,application/x-debian-package,.deb,Wikipedia: Debian Package
+117,DECE Audio,audio/vnd.dece.audio,.uva,IANA: Dece Audio
+118,DECE Graphic,image/vnd.dece.graphic,.uvi,IANA: DECE Graphic
+119,DECE High Definition Video,video/vnd.dece.hd,.uvh,IANA: DECE HD Video
+120,DECE Mobile Video,video/vnd.dece.mobile,.uvm,IANA: DECE Mobile Video
+121,DECE MP4,video/vnd.uvvu.mp4,.uvu,IANA: DECE MP4
+122,DECE PD Video,video/vnd.dece.pd,.uvp,IANA: DECE PD Video
+123,DECE SD Video,video/vnd.dece.sd,.uvs,IANA: DECE SD Video
+124,DECE Video,video/vnd.dece.video,.uvv,IANA: DECE Video
+125,Device Independent File Format (DVI),application/x-dvi,.dvi,Wikipedia: DVI
+126,Digital Siesmograph Networks - SEED Datafiles,application/vnd.fdsn.seed,.seed,IANA: SEED
+127,Digital Talking Book,application/x-dtbook+xml,.dtb,Wikipedia: EPUB
+128,Digital Talking Book - Resource File,application/x-dtbresource+xml,.res,Digital Talking Book
+129,Digital Video Broadcasting,application/vnd.dvb.ait,.ait,IANA: Digital Video Broadcasting
+130,Digital Video Broadcasting,application/vnd.dvb.service,.svc,IANA: Digital Video Broadcasting
+131,Digital Winds Music,audio/vnd.digital-winds,.eol,IANA: Digital Winds
+132,DjVu,image/vnd.djvu,.djvu,Wikipedia: DjVu
+133,Document Type Definition,application/xml-dtd,.dtd,W3C DTD
+134,Dolby Meridian Lossless Packing,application/vnd.dolby.mlp,.mlp,IANA: Dolby Meridian Lossless Packing
+135,Doom Video Game,application/x-doom,.wad,Wikipedia: Doom WAD
+136,DPGraph,application/vnd.dpgraph,.dpg,IANA: DPGraph
+137,DRA Audio,audio/vnd.dra,.dra,IANA: DRA
+138,DreamFactory,application/vnd.dreamfactory,.dfac,IANA: DreamFactory
+139,DTS Audio,audio/vnd.dts,.dts,IANA: DTS
+140,DTS High Definition Audio,audio/vnd.dts.hd,.dtshd,IANA: DTS HD
+141,DWG Drawing,image/vnd.dwg,.dwg,Wikipedia: DWG
+142,DynaGeo,application/vnd.dynageo,.geo,IANA: DynaGeo
+143,ECMAScript,application/ecmascript,.es,ECMA-357
+144,EcoWin Chart,application/vnd.ecowin.chart,.mag,IANA: EcoWin Chart
+145,EDMICS 2000,image/vnd.fujixerox.edmics-mmr,.mmr,IANA: EDMICS 2000
+146,EDMICS 2000,image/vnd.fujixerox.edmics-rlc,.rlc,IANA: EDMICS 2000
+147,Efficient XML Interchange,application/exi,.exi,Efficient XML Interchange (EXI) Best Practices
+148,EFI Proteus,application/vnd.proteus.magazine,.mgz,IANA: EFI Proteus
+149,Electronic Publication,application/epub+zip,.epub,Wikipedia: EPUB
+150,Email Message,message/rfc822,.eml,RFC 2822
+151,Enliven Viewer,application/vnd.enliven,.nml,IANA: Enliven Viewer
+152,Express by Infoseek,application/vnd.is-xpr,.xpr,IANA: Express by Infoseek
+153,eXtended Image File Format (XIFF),image/vnd.xiff,.xif,IANA: XIFF
+154,Extensible Forms Description Language,application/vnd.xfdl,.xfdl,IANA: Extensible Forms Description Language
+155,Extensible MultiModal Annotation,application/emma+xml,.emma,EMMA: Extensible MultiModal Annotation markup language
+156,EZPix Secure Photo Album,application/vnd.ezpix-album,.ez2,IANA: EZPix Secure Photo Album
+157,EZPix Secure Photo Album,application/vnd.ezpix-package,.ez3,IANA: EZPix Secure Photo Album
+158,FAST Search & Transfer ASA,image/vnd.fst,.fst,IANA: FAST Search & Transfer ASA
+159,FAST Search & Transfer ASA,video/vnd.fvt,.fvt,IANA: FVT
+160,FastBid Sheet,image/vnd.fastbidsheet,.fbs,IANA: FastBid Sheet
+161,FCS Express Layout Link,application/vnd.denovo.fcselayout-link,.fe_launch,IANA: FCS Express Layout Link
+162,Flash Video,video/x-f4v,.f4v,Wikipedia: Flash Video
+163,Flash Video,video/x-flv,.flv,Wikipedia: Flash Video
+164,FlashPix,image/vnd.fpx,.fpx,IANA: FPX
+165,FlashPix,image/vnd.net-fpx,.npx,IANA: FPX
+166,FLEXSTOR,text/vnd.fmi.flexstor,.flx,IANA: FLEXSTOR
+167,FLI/FLC Animation Format,video/x-fli,.fli,FLI/FLC Animation Format
+168,FluxTime Clip,application/vnd.fluxtime.clip,.ftc,IANA: FluxTime Clip
+169,Forms Data Format,application/vnd.fdf,.fdf,IANA: Forms Data Format
+170,Fortran Source File,text/x-fortran,.f,Wikipedia: Fortran
+171,FrameMaker Interchange Format,application/vnd.mif,.mif,IANA: FrameMaker Interchange Format
+172,FrameMaker Normal Format,application/vnd.framemaker,.fm,IANA: FrameMaker
+173,FreeHand MX,image/x-freehand,.fh,Wikipedia: Macromedia Freehand
+174,Friendly Software Corporation,application/vnd.fsc.weblaunch,.fsc,IANA: Friendly Software Corporation
+175,Frogans Player,application/vnd.frogans.fnc,.fnc,IANA: Frogans Player
+176,Frogans Player,application/vnd.frogans.ltf,.ltf,IANA: Frogans Player
+177,Fujitsu - Xerox 2D CAD Data,application/vnd.fujixerox.ddd,.ddd,IANA: Fujitsu DDD
+178,Fujitsu - Xerox DocuWorks,application/vnd.fujixerox.docuworks,.xdw,IANA: Docuworks
+179,Fujitsu - Xerox DocuWorks Binder,application/vnd.fujixerox.docuworks.binder,.xbd,IANA: Docuworks Binder
+180,Fujitsu Oasys,application/vnd.fujitsu.oasys,.oas,IANA: Fujitsu Oasys
+181,Fujitsu Oasys,application/vnd.fujitsu.oasys2,.oa2,IANA: Fujitsu Oasys
+182,Fujitsu Oasys,application/vnd.fujitsu.oasys3,.oa3,IANA: Fujitsu Oasys
+183,Fujitsu Oasys,application/vnd.fujitsu.oasysgp,.fg5,IANA: Fujitsu Oasys
+184,Fujitsu Oasys,application/vnd.fujitsu.oasysprs,.bh2,IANA: Fujitsu Oasys
+185,FutureSplash Animator,application/x-futuresplash,.spl,Wikipedia: FutureSplash Animator
+186,FuzzySheet,application/vnd.fuzzysheet,.fzs,IANA: FuzySheet
+187,G3 Fax Image,image/g3fax,.g3,Wikipedia: G3 Fax Image
+188,GameMaker ActiveX,application/vnd.gmx,.gmx,IANA: GameMaker ActiveX
+189,Gen-Trix Studio,model/vnd.gtw,.gtw,IANA: GTW
+190,Genomatix Tuxedo Framework,application/vnd.genomatix.tuxedo,.txd,IANA: Genomatix Tuxedo Framework
+191,GeoGebra,application/vnd.geogebra.file,.ggb,IANA: GeoGebra
+192,GeoGebra,application/vnd.geogebra.tool,.ggt,IANA: GeoGebra
+193,Geometric Description Language (GDL),model/vnd.gdl,.gdl,IANA: GDL
+194,GeoMetry Explorer,application/vnd.geometry-explorer,.gex,IANA: GeoMetry Explorer
+195,GEONExT and JSXGraph,application/vnd.geonext,.gxt,IANA: GEONExT and JSXGraph
+196,GeoplanW,application/vnd.geoplan,.g2w,IANA: GeoplanW
+197,GeospacW,application/vnd.geospace,.g3w,IANA: GeospacW
+198,Ghostscript Font,application/x-font-ghostscript,.gsf,Wikipedia: Ghostscript
+199,Glyph Bitmap Distribution Format,application/x-font-bdf,.bdf,Wikipedia: Glyph Bitmap Distribution Format
+200,GNU Tar Files,application/x-gtar,.gtar,GNU Tar
+201,GNU Texinfo Document,application/x-texinfo,.texinfo,Wikipedia: Texinfo
+202,Gnumeric,application/x-gnumeric,.gnumeric,Wikipedia: Gnumeric
+203,Google Earth - KML,application/vnd.google-earth.kml+xml,.kml,IANA: Google Earth
+204,Google Earth - Zipped KML,application/vnd.google-earth.kmz,.kmz,IANA: Google Earth
+205,GrafEq,application/vnd.grafeq,.gqf,IANA: GrafEq
+206,Graphics Interchange Format,image/gif,.gif,Wikipedia: Graphics Interchange Format
+207,Graphviz,text/vnd.graphviz,.gv,IANA: Graphviz
+208,Groove - Account,application/vnd.groove-account,.gac,IANA: Groove
+209,Groove - Help,application/vnd.groove-help,.ghf,IANA: Groove
+210,Groove - Identity Message,application/vnd.groove-identity-message,.gim,IANA: Groove
+211,Groove - Injector,application/vnd.groove-injector,.grv,IANA: Groove
+212,Groove - Tool Message,application/vnd.groove-tool-message,.gtm,IANA: Groove
+213,Groove - Tool Template,application/vnd.groove-tool-template,.tpl,IANA: Groove
+214,Groove - Vcard,application/vnd.groove-vcard,.vcg,IANA: Groove
+215,H.261,video/h261,.h261,Wikipedia: H.261
+216,H.263,video/h263,.h263,Wikipedia: H.263
+217,H.264,video/h264,.h264,Wikipedia: H.264
+218,Hewlett Packard Instant Delivery,application/vnd.hp-hpid,.hpid,IANA: Hewlett Packard Instant Delivery
+219,Hewlett-Packard's WebPrintSmart,application/vnd.hp-hps,.hps,IANA: Hewlett-Packard's WebPrintSmart
+220,Hierarchical Data Format,application/x-hdf,.hdf,Wikipedia: Hierarchical Data Format
+221,Hit'n'Mix,audio/vnd.rip,.rip,IANA: Hit'n'Mix
+222,Homebanking Computer Interface (HBCI),application/vnd.hbci,.hbci,IANA: HBCI
+223,HP Indigo Digital Press - Job Layout Languate,application/vnd.hp-jlyt,.jlt,IANA: HP Job Layout Language
+224,HP Printer Command Language,application/vnd.hp-pcl,.pcl,IANA: HP Printer Command Language
+225,HP-GL/2 and HP RTL,application/vnd.hp-hpgl,.hpgl,IANA: HP-GL/2 and HP RTL
+226,HV Script,application/vnd.yamaha.hv-script,.hvs,IANA: HV Script
+227,HV Voice Dictionary,application/vnd.yamaha.hv-dic,.hvd,IANA: HV Voice Dictionary
+228,HV Voice Parameter,application/vnd.yamaha.hv-voice,.hvp,IANA: HV Voice Parameter
+229,Hydrostatix Master Suite,application/vnd.hydrostatix.sof-data,.sfd-hdstx,IANA: Hydrostatix Master Suite
+230,Hyperstudio,application/hyperstudio,.stk,IANA - Hyperstudio
+231,Hypertext Application Language,application/vnd.hal+xml,.hal,IANA: HAL
+232,HyperText Markup Language (HTML),text/html,.html,Wikipedia: HTML
+233,IBM DB2 Rights Manager,application/vnd.ibm.rights-management,.irm,IANA: IBM DB2 Rights Manager
+234,IBM Electronic Media Management System - Secure Container,application/vnd.ibm.secure-container,.sc,IANA: EMMS
+235,iCalendar,text/calendar,.ics,Wikipedia: iCalendar
+236,ICC profile,application/vnd.iccprofile,.icc,IANA: ICC profile
+237,Icon Image,image/x-icon,.ico,Wikipedia: ICO File Format
+238,igLoader,application/vnd.igloader,.igl,IANA: igLoader
+239,Image Exchange Format,image/ief,.ief,RFC 1314
+240,ImmerVision PURE Players,application/vnd.immervision-ivp,.ivp,IANA: ImmerVision PURE Players
+241,ImmerVision PURE Players,application/vnd.immervision-ivu,.ivu,IANA: ImmerVision PURE Players
+242,IMS Networks,application/reginfo+xml,.rif,
+243,In3D - 3DML,text/vnd.in3d.3dml,.3dml,IANA: In3D
+244,In3D - 3DML,text/vnd.in3d.spot,.spot,IANA: In3D
+245,Initial Graphics Exchange Specification (IGES),model/iges,.igs,Wikipedia: IGES
+246,Interactive Geometry Software,application/vnd.intergeo,.i2g,IANA: Interactive Geometry Software
+247,Interactive Geometry Software Cinderella,application/vnd.cinderella,.cdy,IANA: Cinderella
+248,Intercon FormNet,application/vnd.intercon.formnet,.xpw,IANA: Intercon FormNet
+249,International Society for Advancement of Cytometry,application/vnd.isac.fcs,.fcs,IANA: International Society for Advancement of Cytometry
+250,Internet Protocol Flow Information Export,application/ipfix,.ipfix,RFC 3917
+251,Internet Public Key Infrastructure - Certificate,application/pkix-cert,.cer,RFC 2585
+252,Internet Public Key Infrastructure - Certificate Management Protocole,application/pkixcmp,.pki,RFC 2585
+253,Internet Public Key Infrastructure - Certificate Revocation Lists,application/pkix-crl,.crl,RFC 2585
+254,Internet Public Key Infrastructure - Certification Path,application/pkix-pkipath,.pkipath,RFC 2585
+255,IOCOM Visimeet,application/vnd.insors.igm,.igm,IANA: IOCOM Visimeet
+256,IP Unplugged Roaming Client,application/vnd.ipunplugged.rcprofile,.rcprofile,IANA: IP Unplugged Roaming Client
+257,iRepository / Lucidoc Editor,application/vnd.irepository.package+xml,.irp,IANA: iRepository / Lucidoc Editor
+258,J2ME App Descriptor,text/vnd.sun.j2me.app-descriptor,.jad,IANA: J2ME App Descriptor
+259,Java Archive,application/java-archive,.jar,Wikipedia: JAR file format
+260,Java Bytecode File,application/java-vm,.class,Wikipedia: Java Bytecode
+261,Java Network Launching Protocol,application/x-java-jnlp-file,.jnlp,Wikipedia: Java Web Start
+262,Java Serialized Object,application/java-serialized-object,.ser,Java Serialization API
+263,Java Source File,"text/x-java-source,java",.java,Wikipedia: Java
+264,JavaScript,application/javascript,.js,JavaScript
+265,JavaScript Object Notation (JSON),application/json,.json,Wikipedia: JSON
+266,Joda Archive,application/vnd.joost.joda-archive,.joda,IANA: Joda Archive
+267,JPEG 2000 Compound Image File Format,video/jpm,.jpm,IANA: JPM
+268,JPEG Image,image/jpeg,".jpeg, .jpg",RFC 1314
+269,JPEG Image (Citrix client),image/x-citrix-jpeg,".jpeg, .jpg",RFC 1314
+270,JPEG Image (Progressive),image/pjpeg,.pjpeg,JPEG image compression FAQ
+271,JPGVideo,video/jpeg,.jpgv,RFC 3555
+272,Kahootz,application/vnd.kahootz,.ktz,IANA: Kahootz
+273,Karaoke on Chipnuts Chipsets,application/vnd.chipnuts.karaoke-mmd,.mmd,IANA: Chipnuts Karaoke
+274,KDE KOffice Office Suite - Karbon,application/vnd.kde.karbon,.karbon,IANA: KDE KOffice Office Suite
+275,KDE KOffice Office Suite - KChart,application/vnd.kde.kchart,.chrt,IANA: KDE KOffice Office Suite
+276,KDE KOffice Office Suite - Kformula,application/vnd.kde.kformula,.kfo,IANA: KDE KOffice Office Suite
+277,KDE KOffice Office Suite - Kivio,application/vnd.kde.kivio,.flw,IANA: KDE KOffice Office Suite
+278,KDE KOffice Office Suite - Kontour,application/vnd.kde.kontour,.kon,IANA: KDE KOffice Office Suite
+279,KDE KOffice Office Suite - Kpresenter,application/vnd.kde.kpresenter,.kpr,IANA: KDE KOffice Office Suite
+280,KDE KOffice Office Suite - Kspread,application/vnd.kde.kspread,.ksp,IANA: KDE KOffice Office Suite
+281,KDE KOffice Office Suite - Kword,application/vnd.kde.kword,.kwd,IANA: KDE KOffice Office Suite
+282,Kenamea App,application/vnd.kenameaapp,.htke,IANA: Kenamea App
+283,Kidspiration,application/vnd.kidspiration,.kia,IANA: Kidspiration
+284,Kinar Applications,application/vnd.kinar,.kne,IANA: Kina Applications
+285,Kodak Storyshare,application/vnd.kodak-descriptor,.sse,IANA: Kodak Storyshare
+286,Laser App Enterprise,application/vnd.las.las+xml,.lasxml,IANA: Laser App Enterprise
+287,LaTeX,application/x-latex,.latex,Wikipedia: LaTeX
+288,Life Balance - Desktop Edition,application/vnd.llamagraphics.life-balance.desktop,.lbd,IANA: Life Balance
+289,Life Balance - Exchange Format,application/vnd.llamagraphics.life-balance.exchange+xml,.lbe,IANA: Life Balance
+290,Lightspeed Audio Lab,application/vnd.jam,.jam,IANA: Lightspeed Audio Lab
+291,Lotus 1-2-3,application/vnd.lotus-1-2-3,0.123,IANA: Lotus 1-2-3
+292,Lotus Approach,application/vnd.lotus-approach,.apr,IANA: Lotus Approach
+293,Lotus Freelance,application/vnd.lotus-freelance,.pre,IANA: Lotus Freelance
+294,Lotus Notes,application/vnd.lotus-notes,.nsf,IANA: Lotus Notes
+295,Lotus Organizer,application/vnd.lotus-organizer,.org,IANA: Lotus Organizer
+296,Lotus Screencam,application/vnd.lotus-screencam,.scm,IANA: Lotus Screencam
+297,Lotus Wordpro,application/vnd.lotus-wordpro,.lwp,IANA: Lotus Wordpro
+298,Lucent Voice,audio/vnd.lucent.voice,.lvp,IANA: Lucent Voice
+299,M3U (Multimedia Playlist),audio/x-mpegurl,.m3u,Wikipedia: M3U
+300,M4v,video/x-m4v,.m4v,Wikipedia: M4v
+301,Macintosh BinHex 4.0,application/mac-binhex40,.hqx,MacMIME
+302,MacPorts Port System,application/vnd.macports.portpkg,.portpkg,IANA: MacPorts Port System
+303,MapGuide DBXML,application/vnd.osgeo.mapguide.package,.mgp,IANA: MapGuide DBXML
+304,MARC Formats,application/marc,.mrc,RFC 2220
+305,MARC21 XML Schema,application/marcxml+xml,.mrcx,RFC 6207
+306,Material Exchange Format,application/mxf,.mxf,RFC 4539
+307,Mathematica Notebook Player,application/vnd.wolfram.player,.nbp,IANA: Mathematica Notebook Player
+308,Mathematica Notebooks,application/mathematica,.ma,IANA - Mathematica
+309,Mathematical Markup Language,application/mathml+xml,.mathml,W3C Math Home
+310,Mbox database files,application/mbox,.mbox,RFC 4155
+311,MedCalc,application/vnd.medcalcdata,.mc1,IANA: MedCalc
+312,Media Server Control Markup Language,application/mediaservercontrol+xml,.mscml,RFC 5022
+313,MediaRemote,application/vnd.mediastation.cdkey,.cdkey,IANA: MediaRemote
+314,Medical Waveform Encoding Format,application/vnd.mfer,.mwf,IANA: Medical Waveform Encoding Format
+315,Melody Format for Mobile Platform,application/vnd.mfmp,.mfm,IANA: Melody Format for Mobile Platform
+316,Mesh Data Type,model/mesh,.msh,RFC 2077
+317,Metadata Authority Description Schema,application/mads+xml,.mads,RFC 6207
+318,Metadata Encoding and Transmission Standard,application/mets+xml,.mets,RFC 6207
+319,Metadata Object Description Schema,application/mods+xml,.mods,RFC 6207
+320,Metalink,application/metalink4+xml,.meta4,Wikipedia: Metalink
+321,Micro CADAM Helix D&D,application/vnd.mcd,.mcd,IANA: Micro CADAM Helix D&D
+322,Micrografx,application/vnd.micrografx.flo,.flo,IANA: Micrografx
+323,Micrografx iGrafx Professional,application/vnd.micrografx.igx,.igx,IANA: Micrografx
+324,MICROSEC e-Szign¢,application/vnd.eszigno3+xml,.es3,IANA: MICROSEC e-Szign¢
+325,Microsoft Access,application/x-msaccess,.mdb,Wikipedia: Microsoft Access
+326,Microsoft Advanced Systems Format (ASF),video/x-ms-asf,.asf,Wikipedia: Advanced Systems Format (ASF)
+327,Microsoft Application,application/x-msdownload,.exe,Wikipedia: EXE
+328,Microsoft Artgalry,application/vnd.ms-artgalry,.cil,IANA: MS Artgalry
+329,Microsoft Cabinet File,application/vnd.ms-cab-compressed,.cab,IANA: MS Cabinet File
+330,Microsoft Class Server,application/vnd.ms-ims,.ims,IANA: MS Class Server
+331,Microsoft ClickOnce,application/x-ms-application,.application,Wikipedia: ClickOnce
+332,Microsoft Clipboard Clip,application/x-msclip,.clp,Wikipedia: Clipboard
+333,Microsoft Document Imaging Format,image/vnd.ms-modi,.mdi,Wikipedia: Microsoft Document Image Format
+334,Microsoft Embedded OpenType,application/vnd.ms-fontobject,.eot,IANA: MS Embedded OpenType
+335,Microsoft Excel,application/vnd.ms-excel,.xls,IANA: MS Excel
+336,Microsoft Excel - Add-In File,application/vnd.ms-excel.addin.macroenabled.12,.xlam,IANA: MS Excel
+337,Microsoft Excel - Binary Workbook,application/vnd.ms-excel.sheet.binary.macroenabled.12,.xlsb,IANA: MS Excel
+338,Microsoft Excel - Macro-Enabled Template File,application/vnd.ms-excel.template.macroenabled.12,.xltm,IANA: MS Excel
+339,Microsoft Excel - Macro-Enabled Workbook,application/vnd.ms-excel.sheet.macroenabled.12,.xlsm,IANA: MS Excel
+340,Microsoft Html Help File,application/vnd.ms-htmlhelp,.chm,IANA:MS Html Help File
+341,Microsoft Information Card,application/x-mscardfile,.crd,Wikipedia: Information Card
+342,Microsoft Learning Resource Module,application/vnd.ms-lrm,.lrm,IANA: MS Learning Resource Module
+343,Microsoft MediaView,application/x-msmediaview,.mvb,Windows Help
+344,Microsoft Money,application/x-msmoney,.mny,Wikipedia: Microsoft Money
+345,Microsoft Office - OOXML - Presentation,application/vnd.openxmlformats-officedocument.presentationml.presentation,.pptx,IANA: OOXML - Presentation
+346,Microsoft Office - OOXML - Presentation (Slide),application/vnd.openxmlformats-officedocument.presentationml.slide,.sldx,IANA: OOXML - Presentation
+347,Microsoft Office - OOXML - Presentation (Slideshow),application/vnd.openxmlformats-officedocument.presentationml.slideshow,.ppsx,IANA: OOXML - Presentation
+348,Microsoft Office - OOXML - Presentation Template,application/vnd.openxmlformats-officedocument.presentationml.template,.potx,IANA: OOXML - Presentation Template
+349,Microsoft Office - OOXML - Spreadsheet,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.xlsx,IANA: OOXML - Spreadsheet
+350,Microsoft Office - OOXML - Spreadsheet Template,application/vnd.openxmlformats-officedocument.spreadsheetml.template,.xltx,IANA: OOXML - Spreadsheet Template
+351,Microsoft Office - OOXML - Word Document,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docx,IANA: OOXML - Word Document
+352,Microsoft Office - OOXML - Word Document Template,application/vnd.openxmlformats-officedocument.wordprocessingml.template,.dotx,IANA: OOXML - Word Document Template
+353,Microsoft Office Binder,application/x-msbinder,.obd,Wikipedia: Microsoft Shared Tools
+354,Microsoft Office System Release Theme,application/vnd.ms-officetheme,.thmx,IANA: MS Office System Release Theme
+355,Microsoft OneNote,application/onenote,.onetoc,MS OneNote 2010
+356,Microsoft PlayReady Ecosystem,audio/vnd.ms-playready.media.pya,.pya,IANA: Microsoft PlayReady Ecosystem
+357,Microsoft PlayReady Ecosystem Video,video/vnd.ms-playready.media.pyv,.pyv,IANA: Microsoft PlayReady Ecosystem
+358,Microsoft PowerPoint,application/vnd.ms-powerpoint,.ppt,IANA: MS PowerPoint
+359,Microsoft PowerPoint - Add-in file,application/vnd.ms-powerpoint.addin.macroenabled.12,.ppam,IANA: MS PowerPoint
+360,Microsoft PowerPoint - Macro-Enabled Open XML Slide,application/vnd.ms-powerpoint.slide.macroenabled.12,.sldm,IANA: MS PowerPoint
+361,Microsoft PowerPoint - Macro-Enabled Presentation File,application/vnd.ms-powerpoint.presentation.macroenabled.12,.pptm,IANA: MS PowerPoint
+362,Microsoft PowerPoint - Macro-Enabled Slide Show File,application/vnd.ms-powerpoint.slideshow.macroenabled.12,.ppsm,IANA: MS PowerPoint
+363,Microsoft PowerPoint - Macro-Enabled Template File,application/vnd.ms-powerpoint.template.macroenabled.12,.potm,IANA: MS PowerPoint
+364,Microsoft Project,application/vnd.ms-project,.mpp,IANA: MS PowerPoint
+365,Microsoft Publisher,application/x-mspublisher,.pub,Wikipedia: Microsoft Publisher
+366,Microsoft Schedule+,application/x-msschedule,.scd,Wikipedia: Microsoft Schedule Plus
+367,Microsoft Silverlight,application/x-silverlight-app,.xap,Wikipedia: Silverlight
+368,Microsoft Trust UI Provider - Certificate Trust Link,application/vnd.ms-pki.stl,.stl,IANA: MS Trust UI Provider
+369,Microsoft Trust UI Provider - Security Catalog,application/vnd.ms-pki.seccat,.cat,IANA: MS Trust UI Provider
+370,Microsoft Visio,application/vnd.visio,.vsd,IANA: Visio
+371,Microsoft Visio 2013,application/vnd.visio2013,.vsdx,IANA: Visio
+372,Microsoft Windows Media,video/x-ms-wm,.wm,Wikipedia: Advanced Systems Format (ASF)
+373,Microsoft Windows Media Audio,audio/x-ms-wma,.wma,Wikipedia: Windows Media Audio
+374,Microsoft Windows Media Audio Redirector,audio/x-ms-wax,.wax,Windows Media Metafiles
+375,Microsoft Windows Media Audio/Video Playlist,video/x-ms-wmx,.wmx,Wikipedia: Advanced Systems Format (ASF)
+376,Microsoft Windows Media Player Download Package,application/x-ms-wmd,.wmd,Wikipedia: Windows Media Player
+377,Microsoft Windows Media Player Playlist,application/vnd.ms-wpl,.wpl,IANA: MS Windows Media Player Playlist
+378,Microsoft Windows Media Player Skin Package,application/x-ms-wmz,.wmz,Wikipedia: Windows Media Player
+379,Microsoft Windows Media Video,video/x-ms-wmv,.wmv,Wikipedia: Advanced Systems Format (ASF)
+380,Microsoft Windows Media Video Playlist,video/x-ms-wvx,.wvx,Wikipedia: Advanced Systems Format (ASF)
+381,Microsoft Windows Metafile,application/x-msmetafile,.wmf,Wikipedia: Windows Metafile
+382,Microsoft Windows Terminal Services,application/x-msterminal,.trm,Wikipedia: Terminal Server
+383,Microsoft Word,application/msword,.doc,Wikipedia: Microsoft Word
+384,Microsoft Word - Macro-Enabled Document,application/vnd.ms-word.document.macroenabled.12,.docm,IANA: MS Word
+385,Microsoft Word - Macro-Enabled Template,application/vnd.ms-word.template.macroenabled.12,.dotm,IANA: MS Word
+386,Microsoft Wordpad,application/x-mswrite,.wri,Wikipedia: Wordpad
+387,Microsoft Works,application/vnd.ms-works,.wps,IANA: MS Works
+388,Microsoft XAML Browser Application,application/x-ms-xbap,.xbap,Wikipedia: XAML Browser
+389,Microsoft XML Paper Specification,application/vnd.ms-xpsdocument,.xps,IANA: MS XML Paper Specification
+390,MIDI - Musical Instrument Digital Interface,audio/midi,.mid,Wikipedia: MIDI
+391,MiniPay,application/vnd.ibm.minipay,.mpy,IANA: MiniPay
+392,MO:DCA-P,application/vnd.ibm.modcap,.afp,IANA: MO:DCA-P
+393,Mobile Information Device Profile,application/vnd.jcp.javame.midlet-rms,.rms,IANA: Mobile Information Device Profile
+394,MobileTV,application/vnd.tmobile-livetv,.tmo,IANA: MobileTV
+395,Mobipocket,application/x-mobipocket-ebook,.prc,Wikipedia: Mobipocket
+396,Mobius Management Systems - Basket file,application/vnd.mobius.mbk,.mbk,IANA: Mobius Management Systems
+397,Mobius Management Systems - Distribution Database,application/vnd.mobius.dis,.dis,IANA: Mobius Management Systems
+398,Mobius Management Systems - Policy Definition Language File,application/vnd.mobius.plc,.plc,IANA: Mobius Management Systems
+399,Mobius Management Systems - Query File,application/vnd.mobius.mqy,.mqy,IANA: Mobius Management Systems
+400,Mobius Management Systems - Script Language,application/vnd.mobius.msl,.msl,IANA: Mobius Management Systems
+401,Mobius Management Systems - Topic Index File,application/vnd.mobius.txf,.txf,IANA: Mobius Management Systems
+402,Mobius Management Systems - UniversalArchive,application/vnd.mobius.daf,.daf,IANA: Mobius Management Systems
+403,mod_fly / fly.cgi,text/vnd.fly,.fly,IANA: Fly
+404,Mophun Certificate,application/vnd.mophun.certificate,.mpc,IANA: Mophun Certificate
+405,Mophun VM,application/vnd.mophun.application,.mpn,IANA: Mophun VM
+406,Motion JPEG 2000,video/mj2,.mj2,IANA: MJ2
+407,MPEG Audio,audio/mpeg,.mpga,Wikipedia: MPGA
+408,MPEG Url,video/vnd.mpegurl,.mxu,IANA: MPEG Url
+409,MPEG Video,video/mpeg,.mpeg,Wikipedia: MPEG
+410,MPEG-21,application/mp21,.m21,Wikipedia: MPEG-21
+411,MPEG-4 Audio,audio/mp4,.mp4a,Wikipedia: MP4A
+412,MPEG-4 Video,video/mp4,.mp4,Wikipedia: MP4
+413,MPEG4,application/mp4,.mp4,RFC 4337
+414,Multimedia Playlist Unicode,application/vnd.apple.mpegurl,.m3u8,Wikipedia: M3U
+415,MUsical Score Interpreted Code Invented for the ASCII designation of Notation,application/vnd.musician,.mus,IANA: MUSICIAN
+416,Muvee Automatic Video Editing,application/vnd.muvee.style,.msty,IANA: Muvee
+417,MXML,application/xv+xml,.mxml,Wikipedia: MXML
+418,N-Gage Game Data,application/vnd.nokia.n-gage.data,.ngdat,IANA: N-Gage Game Data
+419,N-Gage Game Installer,application/vnd.nokia.n-gage.symbian.install,.n-gage,IANA: N-Gage Game Installer
+420,Navigation Control file for XML (for ePub),application/x-dtbncx+xml,.ncx,Wikipedia: EPUB
+421,Network Common Data Form (NetCDF),application/x-netcdf,.nc,Wikipedia: NetCDF
+422,neuroLanguage,application/vnd.neurolanguage.nlu,.nlu,IANA: neuroLanguage
+423,New Moon Liftoff/DNA,application/vnd.dna,.dna,IANA: New Moon Liftoff/DNA
+424,NobleNet Directory,application/vnd.noblenet-directory,.nnd,IANA: NobleNet Directory
+425,NobleNet Sealer,application/vnd.noblenet-sealer,.nns,IANA: NobleNet Sealer
+426,NobleNet Web,application/vnd.noblenet-web,.nnw,IANA: NobleNet Web
+427,Nokia Radio Application - Preset,application/vnd.nokia.radio-preset,.rpst,IANA: Nokia Radio Application
+428,Nokia Radio Application - Preset,application/vnd.nokia.radio-presets,.rpss,IANA: Nokia Radio Application
+429,Notation3,text/n3,.n3,Wikipedia: Notation3
+430,Novadigm's RADIA and EDM products,application/vnd.novadigm.edm,.edm,IANA: Novadigm's RADIA and EDM products
+431,Novadigm's RADIA and EDM products,application/vnd.novadigm.edx,.edx,IANA: Novadigm's RADIA and EDM products
+432,Novadigm's RADIA and EDM products,application/vnd.novadigm.ext,.ext,IANA: Novadigm's RADIA and EDM products
+433,NpGraphIt,application/vnd.flographit,.gph,IANA: FloGraphIt
+434,Nuera ECELP 4800,audio/vnd.nuera.ecelp4800,.ecelp4800,IANA: ECELP 4800
+435,Nuera ECELP 7470,audio/vnd.nuera.ecelp7470,.ecelp7470,IANA: ECELP 7470
+436,Nuera ECELP 9600,audio/vnd.nuera.ecelp9600,.ecelp9600,IANA: ECELP 9600
+437,Office Document Architecture,application/oda,.oda,RFC 2161
+438,Ogg,application/ogg,.ogx,Wikipedia: Ogg
+439,Ogg Audio,audio/ogg,.oga,Wikipedia: Ogg
+440,Ogg Video,video/ogg,.ogv,Wikipedia: Ogg
+441,OMA Download Agents,application/vnd.oma.dd2+xml,.dd2,IANA: OMA Download Agents
+442,Open Document Text Web,application/vnd.oasis.opendocument.text-web,.oth,IANA: OpenDocument Text Web
+443,Open eBook Publication Structure,application/oebps-package+xml,.opf,Wikipedia: Open eBook
+444,Open Financial Exchange,application/vnd.intu.qbo,.qbo,IANA: Open Financial Exchange
+445,Open Office Extension,application/vnd.openofficeorg.extension,.oxt,IANA: Open Office Extension
+446,Open Score Format,application/vnd.yamaha.openscoreformat,.osf,IANA: Open Score Format
+447,Open Web Media Project - Audio,audio/webm,.weba,WebM Project
+448,Open Web Media Project - Video,video/webm,.webm,WebM Project
+449,OpenDocument Chart,application/vnd.oasis.opendocument.chart,.odc,IANA: OpenDocument Chart
+450,OpenDocument Chart Template,application/vnd.oasis.opendocument.chart-template,.otc,IANA: OpenDocument Chart Template
+451,OpenDocument Database,application/vnd.oasis.opendocument.database,.odb,IANA: OpenDocument Database
+452,OpenDocument Formula,application/vnd.oasis.opendocument.formula,.odf,IANA: OpenDocument Formula
+453,OpenDocument Formula Template,application/vnd.oasis.opendocument.formula-template,.odft,IANA: OpenDocument Formula Template
+454,OpenDocument Graphics,application/vnd.oasis.opendocument.graphics,.odg,IANA: OpenDocument Graphics
+455,OpenDocument Graphics Template,application/vnd.oasis.opendocument.graphics-template,.otg,IANA: OpenDocument Graphics Template
+456,OpenDocument Image,application/vnd.oasis.opendocument.image,.odi,IANA: OpenDocument Image
+457,OpenDocument Image Template,application/vnd.oasis.opendocument.image-template,.oti,IANA: OpenDocument Image Template
+458,OpenDocument Presentation,application/vnd.oasis.opendocument.presentation,.odp,IANA: OpenDocument Presentation
+459,OpenDocument Presentation Template,application/vnd.oasis.opendocument.presentation-template,.otp,IANA: OpenDocument Presentation Template
+460,OpenDocument Spreadsheet,application/vnd.oasis.opendocument.spreadsheet,.ods,IANA: OpenDocument Spreadsheet
+461,OpenDocument Spreadsheet Template,application/vnd.oasis.opendocument.spreadsheet-template,.ots,IANA: OpenDocument Spreadsheet Template
+462,OpenDocument Text,application/vnd.oasis.opendocument.text,.odt,IANA: OpenDocument Text
+463,OpenDocument Text Master,application/vnd.oasis.opendocument.text-master,.odm,IANA: OpenDocument Text Master
+464,OpenDocument Text Template,application/vnd.oasis.opendocument.text-template,.ott,IANA: OpenDocument Text Template
+465,OpenGL Textures (KTX),image/ktx,.ktx,KTX File Format
+466,OpenOffice - Calc (Spreadsheet),application/vnd.sun.xml.calc,.sxc,Wikipedia: OpenOffice
+467,OpenOffice - Calc Template (Spreadsheet),application/vnd.sun.xml.calc.template,.stc,Wikipedia: OpenOffice
+468,OpenOffice - Draw (Graphics),application/vnd.sun.xml.draw,.sxd,Wikipedia: OpenOffice
+469,OpenOffice - Draw Template (Graphics),application/vnd.sun.xml.draw.template,.std,Wikipedia: OpenOffice
+470,OpenOffice - Impress (Presentation),application/vnd.sun.xml.impress,.sxi,Wikipedia: OpenOffice
+471,OpenOffice - Impress Template (Presentation),application/vnd.sun.xml.impress.template,.sti,Wikipedia: OpenOffice
+472,OpenOffice - Math (Formula),application/vnd.sun.xml.math,.sxm,Wikipedia: OpenOffice
+473,OpenOffice - Writer (Text - HTML),application/vnd.sun.xml.writer,.sxw,Wikipedia: OpenOffice
+474,OpenOffice - Writer (Text - HTML),application/vnd.sun.xml.writer.global,.sxg,Wikipedia: OpenOffice
+475,OpenOffice - Writer Template (Text - HTML),application/vnd.sun.xml.writer.template,.stw,Wikipedia: OpenOffice
+476,OpenType Font File,application/x-font-otf,.otf,OpenType Font File
+477,OSFPVG,application/vnd.yamaha.openscoreformat.osfpvg+xml,.osfpvg,IANA: OSFPVG
+478,OSGi Deployment Package,application/vnd.osgi.dp,.dp,IANA: OSGi Deployment Package
+479,PalmOS Data,application/vnd.palm,.pdb,IANA: PalmOS Data
+480,Pascal Source File,text/x-pascal,.p,Wikipedia: Pascal
+481,PawaaFILE,application/vnd.pawaafile,.paw,IANA: PawaaFILE
+482,PCL 6 Enhanced (Formely PCL XL),application/vnd.hp-pclxl,.pclxl,IANA: HP PCL XL
+483,Pcsel eFIF File,application/vnd.picsel,.efif,IANA: Picsel eFIF File
+484,PCX Image,image/x-pcx,.pcx,Wikipedia: PCX
+485,Photoshop Document,image/vnd.adobe.photoshop,.psd,Wikipedia: Photoshop Document
+486,PICSRules,application/pics-rules,.prf,W3C PICSRules
+487,PICT Image,image/x-pict,.pic,Wikipedia: PICT
+488,pIRCh,application/x-chat,.chat,Wikipedia: pIRCh
+489,PKCS #10 - Certification Request Standard,application/pkcs10,.p10,RFC 2986
+490,PKCS #12 - Personal Information Exchange Syntax Standard,application/x-pkcs12,.p12,RFC 2986
+491,PKCS #7 - Cryptographic Message Syntax Standard,application/pkcs7-mime,.p7m,RFC 2315
+492,PKCS #7 - Cryptographic Message Syntax Standard,application/pkcs7-signature,.p7s,RFC 2315
+493,PKCS #7 - Cryptographic Message Syntax Standard (Certificate Request Response),application/x-pkcs7-certreqresp,.p7r,RFC 2986
+494,PKCS #7 - Cryptographic Message Syntax Standard (Certificates),application/x-pkcs7-certificates,.p7b,RFC 2986
+495,PKCS #8 - Private-Key Information Syntax Standard,application/pkcs8,.p8,RFC 5208
+496,PocketLearn Viewers,application/vnd.pocketlearn,.plf,IANA: PocketLearn Viewers
+497,Portable Anymap Image,image/x-portable-anymap,.pnm,Wikipedia: Netpbm Format
+498,Portable Bitmap Format,image/x-portable-bitmap,.pbm,Wikipedia: Netpbm Format
+499,Portable Compiled Format,application/x-font-pcf,.pcf,Wikipedia: Portable Compiled Format
+500,Portable Font Resource,application/font-tdpfr,.pfr,RFC 3073
+501,Portable Game Notation (Chess Games),application/x-chess-pgn,.pgn,Wikipedia: Portable Game Notationb
+502,Portable Graymap Format,image/x-portable-graymap,.pgm,Wikipedia: Netpbm Format
+503,Portable Network Graphics (PNG),image/png,.png,RFC 2083
+504,Portable Network Graphics (PNG) (Citrix client),image/x-citrix-png,.png,RFC 2083
+505,Portable Network Graphics (PNG) (x-token),image/x-png,.png,RFC 2083
+506,Portable Pixmap Format,image/x-portable-pixmap,.ppm,Wikipedia: Netpbm Format
+507,Portable Symmetric Key Container,application/pskc+xml,.pskcxml,RFC 6030
+508,PosML,application/vnd.ctc-posml,.pml,IANA: PosML
+509,PostScript,application/postscript,.ai,Wikipedia: PostScript
+510,PostScript Fonts,application/x-font-type1,.pfa,Wikipedia: PostScript Fonts
+511,PowerBuilder,application/vnd.powerbuilder6,.pbd,IANA: PowerBuilder
+512,Pretty Good Privacy,application/pgp-encrypted,.pgp,RFC 2015
+513,Pretty Good Privacy - Signature,application/pgp-signature,.pgp,RFC 2015
+514,Preview Systems ZipLock/VBox,application/vnd.previewsystems.box,.box,IANA: Preview Systems ZipLock/Vbox
+515,Princeton Video Image,application/vnd.pvi.ptid1,.ptid,IANA: Princeton Video Image
+516,Pronunciation Lexicon Specification,application/pls+xml,.pls,RFC 4267
+517,Proprietary P&G Standard Reporting System,application/vnd.pg.format,.str,IANA: Proprietary P&G Standard Reporting System
+518,Proprietary P&G Standard Reporting System,application/vnd.pg.osasli,.ei6,IANA: Proprietary P&G Standard Reporting System
+519,PRS Lines Tag,text/prs.lines.tag,.dsc,IANA: PRS Lines Tag
+520,PSF Fonts,application/x-font-linux-psf,.psf,PSF Fonts
+521,PubliShare Objects,application/vnd.publishare-delta-tree,.qps,IANA: PubliShare Objects
+522,Qualcomm's Plaza Mobile Internet,application/vnd.pmi.widget,.wg,IANA: Qualcomm's Plaza Mobile Internet
+523,QuarkXpress,application/vnd.quark.quarkxpress,.qxd,IANA: QuarkXPress
+524,QUASS Stream Player,application/vnd.epson.esf,.esf,IANA: QUASS Stream Player
+525,QUASS Stream Player,application/vnd.epson.msf,.msf,IANA: QUASS Stream Player
+526,QUASS Stream Player,application/vnd.epson.ssf,.ssf,IANA: QUASS Stream Player
+527,QuickAnime Player,application/vnd.epson.quickanime,.qam,IANA: QuickAnime Player
+528,Quicken,application/vnd.intu.qfx,.qfx,IANA: Quicken
+529,Quicktime Video,video/quicktime,.qt,Wikipedia: Quicktime
+530,RAR Archive,application/x-rar-compressed,.rar,Wikipedia: RAR
+531,Real Audio Sound,audio/x-pn-realaudio,.ram,Wikipedia: RealPlayer
+532,Real Audio Sound,audio/x-pn-realaudio-plugin,.rmp,Wikipedia: RealPlayer
+533,Really Simple Discovery,application/rsd+xml,.rsd,Wikipedia: Really Simple Discovery
+534,RealMedia,application/vnd.rn-realmedia,.rm,
+535,RealVNC,application/vnd.realvnc.bed,.bed,IANA: RealVNC
+536,Recordare Applications,application/vnd.recordare.musicxml,.mxl,IANA: Recordare Apps
+537,Recordare Applications,application/vnd.recordare.musicxml+xml,.musicxml,IANA: Recordare Apps
+538,Relax NG Compact Syntax,application/relax-ng-compact-syntax,.rnc,Relax NG
+539,RemoteDocs R-Viewer,application/vnd.data-vision.rdz,.rdz,IANA: Data-Vision
+540,Resource Description Framework,application/rdf+xml,.rdf,RFC 3870
+541,RetroPlatform Player,application/vnd.cloanto.rp9,.rp9,IANA: RetroPlatform Player
+542,RhymBox,application/vnd.jisp,.jisp,IANA: RhymBox
+543,Rich Text Format,application/rtf,.rtf,Wikipedia: Rich Text Format
+544,Rich Text Format (RTF),text/richtext,.rtx,Wikipedia: Rich Text Format
+545,ROUTE 66 Location Based Services,application/vnd.route66.link66+xml,.link66,IANA: ROUTE 66
+546,RSS - Really Simple Syndication,application/rss+xml,".rss, .xml",Wikipedia: RSS
+547,S Hexdump Format,application/shf+xml,.shf,RFC 4194
+548,SailingTracker,application/vnd.sailingtracker.track,.st,IANA: SailingTracker
+549,Scalable Vector Graphics (SVG),image/svg+xml,.svg,Wikipedia: SVG
+550,ScheduleUs,application/vnd.sus-calendar,.sus,IANA: ScheduleUs
+551,Search/Retrieve via URL Response Format,application/sru+xml,.sru,RFC 6207
+552,Secure Electronic Transaction - Payment,application/set-payment-initiation,.setpay,IANA: SET Payment
+553,Secure Electronic Transaction - Registration,application/set-registration-initiation,.setreg,IANA: SET Registration
+554,Secured eMail,application/vnd.sema,.sema,IANA: Secured eMail
+555,Secured eMail,application/vnd.semd,.semd,IANA: Secured eMail
+556,Secured eMail,application/vnd.semf,.semf,IANA: Secured eMail
+557,SeeMail,application/vnd.seemail,.see,IANA: SeeMail
+558,Server Normal Format,application/x-font-snf,.snf,Wikipedia: Server Normal Format
+559,Server-Based Certificate Validation Protocol - Validation Policies - Request,application/scvp-vp-request,.spq,RFC 5055
+560,Server-Based Certificate Validation Protocol - Validation Policies - Response,application/scvp-vp-response,.spp,RFC 5055
+561,Server-Based Certificate Validation Protocol - Validation Request,application/scvp-cv-request,.scq,RFC 5055
+562,Server-Based Certificate Validation Protocol - Validation Response,application/scvp-cv-response,.scs,RFC 5055
+563,Session Description Protocol,application/sdp,.sdp,RFC 2327
+564,Setext,text/x-setext,.etx,Wikipedia: Setext
+565,SGI Movie,video/x-sgi-movie,.movie,SGI Facts
+566,Shana Informed Filler,application/vnd.shana.informed.formdata,.ifm,IANA: Shana Informed Filler
+567,Shana Informed Filler,application/vnd.shana.informed.formtemplate,.itp,IANA: Shana Informed Filler
+568,Shana Informed Filler,application/vnd.shana.informed.interchange,.iif,IANA: Shana Informed Filler
+569,Shana Informed Filler,application/vnd.shana.informed.package,.ipk,IANA: Shana Informed Filler
+570,Sharing Transaction Fraud Data,application/thraud+xml,.tfi,RFC 5941
+571,Shell Archive,application/x-shar,.shar,Wikipedia: Shell Archie
+572,Silicon Graphics RGB Bitmap,image/x-rgb,.rgb,RGB Image Format
+573,SimpleAnimeLite Player,application/vnd.epson.salt,.slt,IANA: SimpleAnimeLite Player
+574,Simply Accounting,application/vnd.accpac.simply.aso,.aso,IANA: Simply Accounting
+575,Simply Accounting - Data Import,application/vnd.accpac.simply.imp,.imp,IANA: Simply Accounting
+576,SimTech MindMapper,application/vnd.simtech-mindmapper,.twd,IANA: SimTech MindMapper
+577,Sixth Floor Media - CommonSpace,application/vnd.commonspace,.csp,IANA: CommonSpace
+578,SMAF Audio,application/vnd.yamaha.smaf-audio,.saf,IANA: SMAF Audio
+579,SMAF File,application/vnd.smaf,.mmf,IANA: SMAF File
+580,SMAF Phrase,application/vnd.yamaha.smaf-phrase,.spf,IANA: SMAF Phrase
+581,SMART Technologies Apps,application/vnd.smart.teacher,.teacher,IANA: SMART Technologies Apps
+582,SourceView Document,application/vnd.svd,.svd,IANA: SourceView Document
+583,SPARQL - Query,application/sparql-query,.rq,W3C SPARQL
+584,SPARQL - Results,application/sparql-results+xml,.srx,W3C SPARQL
+585,Speech Recognition Grammar Specification,application/srgs,.gram,W3C Speech Grammar
+586,Speech Recognition Grammar Specification - XML,application/srgs+xml,.grxml,W3C Speech Grammar
+587,Speech Synthesis Markup Language,application/ssml+xml,.ssml,W3C Speech Synthesis
+588,SSEYO Koan Play File,application/vnd.koan,.skp,IANA: SSEYO Koan Play File
+589,Standard Generalized Markup Language (SGML),text/sgml,.sgml,Wikipedia: SGML
+590,StarOffice - Calc,application/vnd.stardivision.calc,.sdc,
+591,StarOffice - Draw,application/vnd.stardivision.draw,.sda,
+592,StarOffice - Impress,application/vnd.stardivision.impress,.sdd,
+593,StarOffice - Math,application/vnd.stardivision.math,.smf,
+594,StarOffice - Writer,application/vnd.stardivision.writer,.sdw,
+595,StarOffice - Writer (Global),application/vnd.stardivision.writer-global,.sgl,
+596,StepMania,application/vnd.stepmania.stepchart,.sm,IANA: StepMania
+597,Stuffit Archive,application/x-stuffit,.sit,Wikipedia: Stuffit
+598,Stuffit Archive,application/x-stuffitx,.sitx,Wikipedia: Stuffit
+599,SudokuMagic,application/vnd.solent.sdkm+xml,.sdkm,IANA: SudokuMagic
+600,Sugar Linux Application Bundle,application/vnd.olpc-sugar,.xo,IANA: Sugar Linux App Bundle
+601,Sun Audio - Au file format,audio/basic,.au,Wikipedia: Sun audio
+602,SundaHus WQ,application/vnd.wqd,.wqd,IANA: SundaHus WQ
+603,Symbian Install Package,application/vnd.symbian.install,.sis,IANA: Symbian Install
+604,Synchronized Multimedia Integration Language,application/smil+xml,.smi,RFC 4536
+605,SyncML,application/vnd.syncml+xml,.xsm,IANA: SyncML
+606,SyncML - Device Management,application/vnd.syncml.dm+wbxml,.bdm,IANA: SyncML
+607,SyncML - Device Management,application/vnd.syncml.dm+xml,.xdm,IANA: SyncML
+608,System V Release 4 CPIO Archive,application/x-sv4cpio,.sv4cpio,Wikipedia: pax
+609,System V Release 4 CPIO Checksum Data,application/x-sv4crc,.sv4crc,Wikipedia: pax
+610,Systems Biology Markup Language,application/sbml+xml,.sbml,RFC 3823
+611,Tab Seperated Values,text/tab-separated-values,.tsv,Wikipedia: TSV
+612,Tagged Image File Format,image/tiff,.tiff,Wikipedia: TIFF
+613,Tao Intent,application/vnd.tao.intent-module-archive,.tao,IANA: Tao Intent
+614,Tar File (Tape Archive),application/x-tar,.tar,Wikipedia: Tar
+615,Tcl Script,application/x-tcl,.tcl,Wikipedia: Tcl
+616,TeX,application/x-tex,.tex,Wikipedia: TeX
+617,TeX Font Metric,application/x-tex-tfm,.tfm,Wikipedia: TeX Font Metric
+618,Text Encoding and Interchange,application/tei+xml,.tei,RFC 6129
+619,Text File,text/plain,.txt,Wikipedia: Text File
+620,TIBCO Spotfire,application/vnd.spotfire.dxp,.dxp,IANA: TIBCO Spotfire
+621,TIBCO Spotfire,application/vnd.spotfire.sfs,.sfs,IANA: TIBCO Spotfire
+622,Time Stamped Data Envelope,application/timestamped-data,.tsd,RFC 5955
+623,TRI Systems Config,application/vnd.trid.tpt,.tpt,IANA: TRI Systems
+624,Triscape Map Explorer,application/vnd.triscape.mxs,.mxs,IANA: Triscape Map Explorer
+625,troff,text/troff,.t,Wikipedia: troff
+626,True BASIC,application/vnd.trueapp,.tra,IANA: True BASIC
+627,TrueType Font,application/x-font-ttf,.ttf,Wikipedia: TrueType
+628,Turtle (Terse RDF Triple Language),text/turtle,.ttl,Wikipedia: Turtle
+629,UMAJIN,application/vnd.umajin,.umj,IANA: UMAJIN
+630,Unique Object Markup Language,application/vnd.uoml+xml,.uoml,IANA: UOML
+631,Unity 3d,application/vnd.unity,.unityweb,IANA: Unity 3d
+632,Universal Forms Description Language,application/vnd.ufdl,.ufd,IANA: Universal Forms Description Language
+633,URI Resolution Services,text/uri-list,.uri,RFC 2483
+634,User Interface Quartz - Theme (Symbian),application/vnd.uiq.theme,.utz,IANA: User Interface Quartz
+635,Ustar (Uniform Standard Tape Archive),application/x-ustar,.ustar,Wikipedia: Ustar
+636,UUEncode,text/x-uuencode,.uu,Wikipedia: UUEncode
+637,vCalendar,text/x-vcalendar,.vcs,Wikipedia: vCalendar
+638,vCard,text/x-vcard,.vcf,Wikipedia: vCard
+639,Video CD,application/x-cdlink,.vcd,Wikipedia: Video CD
+640,Viewport+,application/vnd.vsf,.vsf,IANA: Viewport+
+641,Virtual Reality Modeling Language,model/vrml,.wrl,Wikipedia: VRML
+642,VirtualCatalog,application/vnd.vcx,.vcx,IANA: VirtualCatalog
+643,Virtue MTS,model/vnd.mts,.mts,IANA: MTS
+644,Virtue VTU,model/vnd.vtu,.vtu,IANA: VTU
+645,Visionary,application/vnd.visionary,.vis,IANA: Visionary
+646,Vivo,video/vnd.vivo,.viv,IANA: Vivo
+647,Voice Browser Call Control,"application/ccxml+xml,",.ccxml,Voice Browser Call Control: CCXML Version 1.0
+648,VoiceXML,application/voicexml+xml,.vxml,RFC 4267
+649,WAIS Source,application/x-wais-source,.src,YoLinux
+650,WAP Binary XML (WBXML),application/vnd.wap.wbxml,.wbxml,IANA: WBXML
+651,WAP Bitamp (WBMP),image/vnd.wap.wbmp,.wbmp,IANA: WBMP
+652,Waveform Audio File Format (WAV),audio/x-wav,.wav,Wikipedia: WAV
+653,Web Distributed Authoring and Versioning,application/davmount+xml,.davmount,RFC 4918
+654,Web Open Font Format,application/x-font-woff,.woff,Wikipedia: Web Open Font Format
+655,Web Services Policy,application/wspolicy+xml,.wspolicy,W3C Web Services Policy
+656,WebP Image,image/webp,.webp,Wikipedia: WebP
+657,WebTurbo,application/vnd.webturbo,.wtb,IANA: WebTurbo
+658,Widget Packaging and XML Configuration,application/widget,.wgt,W3C Widget Packaging and XML Configuration
+659,WinHelp,application/winhlp,.hlp,Wikipedia: WinHelp
+660,Wireless Markup Language (WML),text/vnd.wap.wml,.wml,Wikipedia: WML
+661,Wireless Markup Language Script (WMLScript),text/vnd.wap.wmlscript,.wmls,Wikipedia: WMLScript
+662,WMLScript,application/vnd.wap.wmlscriptc,.wmlsc,IANA: WMLScript
+663,Wordperfect,application/vnd.wordperfect,.wpd,IANA: Wordperfect
+664,Worldtalk,application/vnd.wt.stf,.stf,IANA: Worldtalk
+665,WSDL - Web Services Description Language,application/wsdl+xml,.wsdl,W3C Web Service Description Language
+666,X BitMap,image/x-xbitmap,.xbm,Wikipedia: X BitMap
+667,X PixMap,image/x-xpixmap,.xpm,Wikipedia: X PixMap
+668,X Window Dump,image/x-xwindowdump,.xwd,Wikipedia: X Window Dump
+669,X.509 Certificate,application/x-x509-ca-cert,.der,Wikipedia: X.509
+670,Xfig,application/x-xfig,.fig,Wikipedia: Xfig
+671,XHTML - The Extensible HyperText Markup Language,application/xhtml+xml,.xhtml,W3C XHTML
+672,XML - Extensible Markup Language,application/xml,.xml,W3C XML
+673,XML Configuration Access Protocol - XCAP Diff,application/xcap-diff+xml,.xdf,Wikipedia: XCAP
+674,XML Encryption Syntax and Processing,application/xenc+xml,.xenc,W3C XML Encryption Syntax and Processing
+675,XML Patch Framework,application/patch-ops-error+xml,.xer,RFC 5261
+676,XML Resource Lists,application/resource-lists+xml,.rl,RFC 4826
+677,XML Resource Lists,application/rls-services+xml,.rs,RFC 4826
+678,XML Resource Lists Diff,application/resource-lists-diff+xml,.rld,RFC 4826
+679,XML Transformations,application/xslt+xml,.xslt,W3C XSLT
+680,XML-Binary Optimized Packaging,application/xop+xml,.xop,W3C XOP
+681,XPInstall - Mozilla,application/x-xpinstall,.xpi,Wikipedia: XPI
+682,XSPF - XML Shareable Playlist Format,application/xspf+xml,.xspf,XML Shareable Playlist Format
+683,XUL - XML User Interface Language,application/vnd.mozilla.xul+xml,.xul,IANA: XUL
+684,XYZ File Format,chemical/x-xyz,.xyz,Wikipedia: XYZ File Format
+685,YAML Ain't Markup Language / Yet Another Markup Language,text/yaml,.yaml,YAML: YAML Ain't Markup Language
+686,YANG Data Modeling Language,application/yang,.yang,Wikipedia: YANG
+687,YIN (YANG - XML),application/yin+xml,.yin,Wikipedia: YANG
+688,Z.U.L. Geometry,application/vnd.zul,.zir,IANA: Z.U.L.
+689,Zip Archive,application/zip,.zip,Wikipedia: Zip
+690,ZVUE Media Manager,application/vnd.handheld-entertainment+xml,.zmm,IANA: ZVUE Media Manager
+691,Zzazz Deck,application/vnd.zzazz.deck+xml,.zaz,IANA: Zzazz

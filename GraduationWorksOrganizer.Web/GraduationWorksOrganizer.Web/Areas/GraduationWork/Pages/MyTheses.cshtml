@@ -193,14 +193,14 @@ else
             }
 
             function DownloadActualFile() {
-                let url = window.URL.createObjectURL(new Blob([xhr.responseText]));
                 let fileName = xhr.getResponseHeader('fileName');
+                let url = window.URL.createObjectURL(new Blob([xhr.response]));
                 let downloadElement = document.createElement("a");
 
                 document.body.appendChild(downloadElement);
                 downloadElement.style = "display: none";
-                downloadElement.href = url;
                 downloadElement.download = fileName;
+                downloadElement.href = url;
                 downloadElement.click();
 
                 document.body.removeChild(downloadElement);

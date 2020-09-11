@@ -103,9 +103,8 @@ namespace GraduationWorksOrganizer.Web.Controllers
                 return BadRequest();
 
             Response.Headers.Add("fileName", thesisEntry.FileName);
-            Response.Headers.Add("responseType", "arraybuffer");
-            Stream stream = new MemoryStream(thesisEntry.Content);
-            return new FileStreamResult(stream, "application/octet-stream");
+            string mimeType = "application/pdf";
+            return new FileContentResult(thesisEntry.Content, mimeType);
         }
 
         /// <summary>

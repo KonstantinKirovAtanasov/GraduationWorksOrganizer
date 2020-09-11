@@ -124,6 +124,7 @@ namespace GraduationWorksOrganizer.Database
             builder.Entity<ThesisRequerment>().HasKey(tr => tr.Id);
             builder.Entity<ThesesUserEntry>().HasKey(tue => tue.Id);
             builder.Entity<FileContent>().HasKey(fc => fc.Id);
+            builder.Entity<MimeType>().HasKey(mt => mt.Id);
 
             #endregion
 
@@ -162,6 +163,7 @@ namespace GraduationWorksOrganizer.Database
 
             #region Seeds
 
+            builder.Entity<MimeType>().SeedData();
             builder.Entity<HelpMessage>().SeedData();
             builder.Entity<Faculty>().HasData(new object[]
             {
