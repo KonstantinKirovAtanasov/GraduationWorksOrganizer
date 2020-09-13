@@ -1,4 +1,5 @@
 ﻿using GraduationWorksOrganizer.Common;
+using GraduationWorksOrganizer.Core.Additional;
 using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Models.Base;
 using GraduationWorksOrganizer.Database.Services.BaseServices;
@@ -35,13 +36,16 @@ namespace GraduationWorksOrganizer.Web.Controllers
 
         private readonly CombinedQueryBaseService<ThesisUserEntryFileContent> _fileContentDbService;
 
+        private readonly IMimeTypeConverter _mimeTypeConverter;
+
         #region Initialization
 
         /// <summary>
         /// Констролер 
         /// </summary>
         /// <param name="userManager"></param>
-        public FileController(UserManager<ApplicationIdentityBase> userManager,
+        public FileController(IMimeTypeConverter mimeTypeConverter,
+                              UserManager<ApplicationIdentityBase> userManager,
                               CombinedQueryBaseService<ThesesUserEntry> userEntryDbService,
                               CombinedQueryBaseService<ThesisUserEntryFileContent> fileContentDbService,
                               UserEntryFilesViewModelService<UserEntryFileNameViewModel> filesVmService)
@@ -50,6 +54,7 @@ namespace GraduationWorksOrganizer.Web.Controllers
             _filesVmService = filesVmService;
             _userEntryDbService = userEntryDbService;
             _fileContentDbService = fileContentDbService;
+            _mimeTypeConverter = mimeTypeConverter;
         }
 
         #endregion
@@ -103,7 +108,7 @@ namespace GraduationWorksOrganizer.Web.Controllers
                 return BadRequest();
 
             Response.Headers.Add("fileName", thesisEntry.FileName);
-            string mimeType = "application/pdf";
+            string mimeType = _mimeTypeConverter.GetMimeTypeByPartialPath(thesisEntry.FileName);
             return new FileContentResult(thesisEntry.Content, mimeType);
         }
 

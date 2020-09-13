@@ -1,4 +1,5 @@
-﻿using GraduationWorksOrganizer.Additional.SMTP;
+﻿using GraduationWorksOrganizer.Additional.Services;
+using GraduationWorksOrganizer.Additional.SMTP;
 using GraduationWorksOrganizer.Common;
 using GraduationWorksOrganizer.Core.Additional;
 using GraduationWorksOrganizer.Core.Database;
@@ -54,6 +55,8 @@ namespace GraduationWorksOrganizer.Web
             services.AddScoped<IEmailSender, ComformationEmailSender>();
 
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
+            services.AddScoped(typeof(IQueryProvider<>), typeof(CombinedQueryBaseService<>));
+            services.AddScoped(typeof(IMimeTypeConverter), typeof(MimeTypeConverter));
             services.AddScoped(typeof(ThesisViewModelService<>));
             services.AddScoped(typeof(CombinedQueryBaseService<>));
             services.AddScoped(typeof(TeacherViewModelService<>));
