@@ -1,49 +1,142 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "Информация за профила";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
 <h4>@ViewData["Title"]</h4>
-<partial name="_StatusMessage" model="Model.StatusMessage" />
-<div class="row">
-    <div class="col-md-6">
-        <form id="profile-form" method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Username"></label>
-                <input asp-for="Username" class="form-control" disabled />
+<hr />
+<form id="profile-form" method="post" enctype="multipart/form-data" class="helpinfodefault" data-helpmessagekey="defaulthelpmessage">
+    <div class="container">
+        <div>
+            <img id="user-image" width="256" height="256" src="data:image/png;base64, @Model.ImageBase64" />
+        </div>
+        <br />
+        <div class="custom-file">
+            <input id="file" type="file" accept="image/*" class="custom-file-input" asp-for="Input.ImageFile">
+            <label class="custom-file-label" for="file">Изберете файл</label>
+            <span asp-validation-for="Input.ImageFile"></span>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col">
+                <p class="font-weight-bold">Име: </p>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.PhoneNumber"></label>
-                <input asp-for="Input.PhoneNumber" class="form-control" />
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            <div class="col">
+                <p>
+                    @if (Model.UserIdentity is GraduationWorksOrganizer.Database.Models.Student)
+                    {
+                        @Model.UserIdentity.Name
+                    }
+                    @if (Model.UserIdentity is GraduationWorksOrganizer.Database.Models.Teacher)
+                    {
+                        @string.Format("{0} {1}", Model.ScienceDegree, Model.UserIdentity.Name);
+                    }
+                </p>
             </div>
-            <div class="col-md-10, offset-1">
-                <div class="row">
-                    <div class="col-2">
-                        <img id="output" width="200" />
-                    </div>
-                    <div class="col-1">
-                        <input asp-for="Input.ImageFile" type="file" accept="image/*" id="file" onchange="loadFile(event)" style="display: none;">
-                        <label class="btn" for="file" style="cursor: pointer;">Качи снимка</label>
-                        <span asp-validation-for="Input.ImageFile"></span>
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p class="font-weight-bold">Email:  </p>
+            </div>
+            <div class="col">
+                <p>@Model.UserIdentity.Email</p>
+            </div>
+        </div>
+        @if (Model.UserIdentity is GraduationWorksOrganizer.Database.Models.Student)
+        {
+            <div class="row">
+                <div class="col">
+                    <p class="font-weight-bold">Факултетен Номер: </p>
+                </div>
+                <div class="col">
+                    <p>@Model.FacultyNumber</p>
                 </div>
             </div>
+            <div class="row">
+                <div class="col">
+                    <p class="font-weight-bold">Катедра: </p>
+                </div>
+                <div class="col">
+                    <p>@Model.DepartmentName</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="font-weight-bold">Специалност: </p>
+                </div>
+                <div class="col">
+                    <p>@Model.SpecialtyName</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="font-weight-bold">Група: </p>
+                </div>
+                <div class="col">
+                    <p>@string.Format("{0} от година:{1}", Model.GroupName, Model.GroupYear);</p>
+                </div>
+            </div>
+        }
+        @if (Model.UserIdentity is GraduationWorksOrganizer.Database.Models.Teacher)
+        {
 
-            <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
-        </form>
+            <div class="row">
+                <div class="col">
+                    <p class="font-weight-bold">Катедра: </p>
+                </div>
+                <div class="col">
+                    <p>@Model.DepartmentName</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="font-weight-bold">Кабинет: </p>
+                </div>
+                <div class="col">
+                    <p>@Model.Cabinet</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="font-weight-bold">Тел. Номер: </p>
+                </div>
+                <div class="col">
+                    <p>@Model.PhoneNumber</p>
+                </div>
+            </div>
+        }
+        <br />
+        <div class="row">
+            <div class="col">
+                <button id="update-profile-button" type="submit" class="btn btn-primary">Запис</button>
+            </div>
+        </div>
     </div>
-</div>
-
+</form>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
-        var loadFile = function (event) {
-            let image = document.getElementById('output');
-            image.src = URL.createObjectURL(event.target.files[0]);
+        let photoInputElement = document.getElementById('file');
+        let userImage = document.getElementById('user-image');
+
+        window.onloaded = RegisterEventListeners();
+
+        function RegisterEventListeners() {
+            photoInputElement.addEventListener('change', LoadNewPhoto);
+            console.log('loaded');
         };
+
+        function LoadNewPhoto(event) {
+            const reader = new FileReader();
+            reader.addEventListener('load', function () {
+                userImage.src = reader.result;
+            }, false);
+
+            if (event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        }
     </script>
 }
