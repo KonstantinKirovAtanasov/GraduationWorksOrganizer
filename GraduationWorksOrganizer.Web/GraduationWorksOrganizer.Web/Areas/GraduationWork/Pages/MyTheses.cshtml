@@ -75,7 +75,9 @@
             </div>
         </div>
         <div id="collapse-upload-data-@thesisModel.UserEntry.Id" class="collapse">
-            <br />
+            <div class="row">
+                <h4>Прикачване на материали</h4>
+            </div>
             <div id="file-manifest-@thesisModel.UserEntry.Id" class="container-fluid" data-ajax-request-filename="@thesisModel.UserEntry.Id">
                 <form id="file-upload-form-@thesisModel.UserEntry.Id" name="formFile">
                     <div class="custom-file">
@@ -84,13 +86,28 @@
                     </div>
                 </form>
             </div>
-        </div>
-        <div id="collapse-request-teacher-@thesisModel.UserEntry.Id" class="collapse border">
             <br />
-            <p>Tuk shte e logikara za request za odobrenie</p>
         </div>
-
-        <br />
+        <div id="collapse-request-teacher-@thesisModel.UserEntry.Id" class="collapse">
+            <div class="row">
+                <h4>Изпращане на @thesisModel.ThesisViewModel.Type</h4>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-10">
+                        <p class="font-weight-bold">Изберете преподавател</p>
+                        <select class="form-control">
+                        </select>
+                        <p class="font-weight-bold">Описание на заявката</p>
+                        <textarea class="form-control resize"></textarea>
+                    </div>
+                    <div class="justify-content-end">
+                        <button class="btn">Изпращане</button>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
     }
 }
 else
@@ -99,7 +116,7 @@ else
 
 
 @section Scripts{
-
+    <script src="~/js/global/autoHeigthTextArea.js"></script>
     <script>
         let filesCache = {};
         const attrNameFiles = 'data-ajax-request-filename'
