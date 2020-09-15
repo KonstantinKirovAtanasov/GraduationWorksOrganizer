@@ -39,7 +39,7 @@ namespace GraduationWorksOrganizer.Services.Commissions
         /// <returns></returns>
         public async Task CreateCommission(Teacher mainTeacher, ICollection<Teacher> teachers)
         {
-            Teacher mainContextTeacher = await _teachersDbService.GetTeacher(mainTeacher);
+            Teacher mainContextTeacher = await _teachersDbService.GetTeacher(mainTeacher.Id);
             IEnumerable<Teacher> contextTeachers = await _teachersDbService.GetManyTeachers(teachers);
             Commission commission = new Commission();
             commission.MainCommissionTeacher = mainContextTeacher;

@@ -8,6 +8,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200909082439_nullableImage.cs" />
     <Compile Remove="Migrations\20200909082439_nullableImage.Designer.cs" />
+    <Compile Remove="Migrations\20200915142643_again.cs" />
+    <Compile Remove="Migrations\20200915142643_again.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,9 +5,9 @@
 
 <h1> Моите теми</h1>
 
-@if (Model.Theseses.Any())
+@if (Model.CurrentTheseses.Any())
 {
-    foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.CompositePreviewThesisViewModel thesisModel in Model.Theseses)
+    foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.CompositePreviewThesisViewModel thesisModel in Model.CurrentTheseses)
     {
         <div class="border">
 
@@ -102,11 +102,12 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <p class="font-weight-bold">Изберете преподавател</p>
-                                        <select id=select-teacher-@thesisModel.UserEntry.Id class="form-control requestTeachers resize" asp-for="Input.TeacherId" data-ajax-request-subject="@thesisModel.ThesisViewModel.Subject.Id">
+                                        <span asp-validation-for="Input.ThemeObserverId" />
+                                        <select id=select-teacher-@thesisModel.UserEntry.Id class="form-control requestTeachers resize" asp-for="Input.ThemeObserverId" data-ajax-request-subject="@thesisModel.ThesisViewModel.Subject.Id">
                                         </select>
                                         <p class="font-weight-bold">Описание на заявката</p>
                                         <textarea class="form-control resize" asp-for="Input.RequestDescription"></textarea>
-                                        <input type="hidden" asp-for="Input.ThesisUserEntryId" value="@thesisModel.UserEntry.Id" />
+                                        <input type="hidden" asp-for="Input.ThesesUserEntryId" value="@thesisModel.UserEntry.Id" />
                                     </div>
                                 </div>
                                 <br />

@@ -1,6 +1,10 @@
-﻿using GraduationWorksOrganizer.Database.Models;
+﻿using GraduationWorksOrganizer.Core.Database;
+using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Models.Base;
+using GraduationWorksOrganizer.Database.Services;
+using GraduationWorksOrganizer.Database.Services.BaseServices;
 using GraduationWorksOrganizer.Services.MapEntitiesServices;
+using GraduationWorksOrganizer.Services.Services;
 using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -24,6 +28,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
 
         private readonly ThesisViewModelService<PreviewThesisExtendedViewModel> _thesesVmService;
         private readonly UserManager<ApplicationIdentityBase> _userService;
+        private readonly ThesisService _thesisService;
 
         #endregion
 
@@ -35,10 +40,12 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <param name="thesesVmService"></param>
         /// <param name=""></param>
         public MyThesesModel(ThesisViewModelService<PreviewThesisExtendedViewModel> thesesVmService,
-                             UserManager<ApplicationIdentityBase> userService)
+                             UserManager<ApplicationIdentityBase> userService,
+                             ThesisService thesisService)
         {
             _thesesVmService = thesesVmService;
             _userService = userService;
+            _thesisService = thesisService;
         }
 
         #endregion
@@ -48,41 +55,34 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <summary>
         /// Теми
         /// </summary>
-        public ICollection<CompositePreviewThesisViewModel> Theseses { get; set; }
+        public ICollection<CompositePreviewThesisViewModel> CurrentTheseses { get; set; }
 
         /// <summary>
         /// Пропърти за изпращане на заявка за одобрение
         /// </summary>
         [BindProperty]
-        public InputModel Input { get; set; }
-
-        #endregion
-
-        #region InputModel
-
-        public class InputModel
-        {
-            public string RequestDescription { get; set; }
-
-            public string TeacherId { get; set; }
-
-            public int ThesisUserEntryId { get; set; }
-        }
+        public AddThesisApprovementRequestViewModel Input { get; set; }
 
         #endregion
 
         #region Methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task LoadPage()
         {
             string userId = _userService.GetUserId(User);
             IEnumerable<PreviewThesisViewModel> viewModels = _thesesVmService.GetViewModels(t => t.UserEntries.Any(e => e.StudentId == userId));
-            Theseses = new Collection<CompositePreviewThesisViewModel>();
+            CurrentTheseses = new Collection<CompositePreviewThesisViewModel>();
             foreach (PreviewThesisViewModel prvm in viewModels)
             {
                 ThesesUserEntry thesesUserEntry = await _thesesVmService.GetUserEntry(userId, prvm.Id);
-                UserEntryViewModel userEntry = new UserEntryViewModel() { Id = thesesUserEntry.Id };
-                Theseses.Add(new CompositePreviewThesisViewModel() { ThesisViewModel = prvm, UserEntry = userEntry });
+                UserEntryViewModel userEntry = new UserEntryViewModel() { Id = thesesUserEntry.Id, State = thesesUserEntry.State };
+
+                if (userEntry.State == Common.Enums.ThesisUserEntryState.Initialized)
+                    CurrentTheseses.Add(new CompositePreviewThesisViewModel() { ThesisViewModel = prvm, UserEntry = userEntry });
             }
         }
 
@@ -100,6 +100,10 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <param name="thesisId"></param>
         public async Task OnPost()
         {
+            if (ModelState.IsValid)
+            {
+                await _thesisService.SendForApprovement(Input);
+            }
 
             await LoadPage();
         }

@@ -107,8 +107,7 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         /// <returns></returns>
         public async Task<ThesesUserEntry> GetUserEntry(string userId, int thesisId)
         {
-            ThesesUserEntry userEntry = await _userEntriesDbService.GetQuery().FirstOrDefaultAsync(te => te.StudentId == userId && te.ThesesId == thesisId);
-            return userEntry;
+            return await _userEntriesDbService.GetQuery().FirstOrDefaultAsync(te => te.StudentId == userId && te.ThesesId == thesisId);
         }
     }
 }

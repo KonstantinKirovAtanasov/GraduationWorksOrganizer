@@ -125,10 +125,14 @@ namespace GraduationWorksOrganizer.Database
             builder.Entity<ThesesUserEntry>().HasKey(tue => tue.Id);
             builder.Entity<FileContent>().HasKey(fc => fc.Id);
             builder.Entity<MimeType>().HasKey(mt => mt.Id);
+            builder.Entity<ThesisApprovementRequest>().HasKey(tar => tar.Id);
 
             #endregion
 
             // Relations
+            builder.Entity<ThesisApprovementRequest>().HasOne(tar => tar.ThemeObserver).WithMany().HasForeignKey(tar => tar.ThemeObserverId).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<ThesisApprovementRequest>().HasOne(tar => tar.ThesesUserEntry).WithOne().HasForeignKey<ThesisApprovementRequest>(tar => tar.ThesesUserEntryId).OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<Faculty>().HasMany(f => f.Departments).WithOne(d => d.Faculty).HasForeignKey(d => d.FacultyId).OnDelete(DeleteBehavior.Cascade);
             builder.Entity<Department>().HasMany(d => d.Specialties).WithOne(s => s.Department).HasForeignKey(s => s.DepartmentId).OnDelete(DeleteBehavior.Cascade);
 

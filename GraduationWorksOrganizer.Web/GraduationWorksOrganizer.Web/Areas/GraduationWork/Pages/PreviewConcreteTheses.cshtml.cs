@@ -94,36 +94,6 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
             return Redirect("MyTheses");
         }
 
-        ///// <summary>
-        ///// Handler за Одобрение на тема
-        ///// </summary>
-        ///// <returns></returns>
-        //public async Task<IActionResult> OnPostApprove(int thesisId)
-        //{
-        //    Theses thesis = await _thesisDbService.GetById(thesisId);
-        //    thesis.Approval = await _userService.GetUserAsync(User);
-        //    if (await _thesisService.ApproveThesis(thesis))
-        //        return Redirect("BachelorThesesList");
-
-
-        //    Thesis = await _thesesVmService.GetViewModel(thesisId);
-        //    return Page();
-        //}
-
-        ///// <summary>
-        ///// Handler за отказване на тема
-        ///// </summary>
-        ///// <returns></returns>
-        //public async Task<IActionResult> OnPostReject(int thesisId)
-        //{
-        //    Theses thesis = await _thesisDbService.GetById(thesisId);
-        //    thesis.Approval = await _userService.GetUserAsync(User);
-        //    if (await _thesisService.RejectThesis(thesis))
-        //        return Redirect("BachelorThesesList");
-
-        //    Thesis = await _thesesVmService.GetViewModel(thesisId);
-        //    return Page();
-        //}
         #endregion
     }
 }

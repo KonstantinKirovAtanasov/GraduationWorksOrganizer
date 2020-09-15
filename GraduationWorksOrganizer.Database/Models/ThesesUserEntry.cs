@@ -37,15 +37,5 @@ namespace GraduationWorksOrganizer.Database.Models
         /// Статус за етапа на записаната тема
         /// </summary>
         public ThesisUserEntryState State { get; set; }
-
-        /// <summary>
-        /// Наблюдаващ темата
-        /// </summary>
-        public Teacher ThemeObserver { get; set; }
-
-        /// <summary>
-        /// Id на наблюдаващ темата
-        /// </summary>
-        public string ThemeObserverId { get; set; }
     }
 }
