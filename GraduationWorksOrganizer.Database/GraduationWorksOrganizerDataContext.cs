@@ -130,8 +130,8 @@ namespace GraduationWorksOrganizer.Database
             #endregion
 
             // Relations
-            builder.Entity<ThesisApprovementRequest>().HasOne(tar => tar.ThemeObserver).WithMany().HasForeignKey(tar => tar.ThemeObserverId).OnDelete(DeleteBehavior.Cascade);
-            builder.Entity<ThesisApprovementRequest>().HasOne(tar => tar.ThesesUserEntry).WithOne().HasForeignKey<ThesisApprovementRequest>(tar => tar.ThesesUserEntryId).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<ThesisApprovementRequest>().HasOne(tar => tar.ThemeObserver).WithMany().HasForeignKey(tar => tar.ThemeObserverId).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<ThesisApprovementRequest>().HasOne(tar => tar.ThesesUserEntry).WithOne().HasForeignKey<ThesisApprovementRequest>(tar => tar.ThesesUserEntryId).OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Faculty>().HasMany(f => f.Departments).WithOne(d => d.Faculty).HasForeignKey(d => d.FacultyId).OnDelete(DeleteBehavior.Cascade);
             builder.Entity<Department>().HasMany(d => d.Specialties).WithOne(s => s.Department).HasForeignKey(s => s.DepartmentId).OnDelete(DeleteBehavior.Cascade);

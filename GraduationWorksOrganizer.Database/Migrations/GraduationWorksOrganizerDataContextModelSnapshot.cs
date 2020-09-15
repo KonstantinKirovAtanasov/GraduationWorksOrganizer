@@ -5937,12 +5937,12 @@ namespace GraduationWorksOrganizer.Database.Migrations
                     b.HasOne("GraduationWorksOrganizer.Database.Models.Teacher", "ThemeObserver")
                         .WithMany()
                         .HasForeignKey("ThemeObserverId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("GraduationWorksOrganizer.Database.Models.ThesesUserEntry", "ThesesUserEntry")
                         .WithOne()
                         .HasForeignKey("GraduationWorksOrganizer.Database.Models.ThesisApprovementRequest", "ThesesUserEntryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 

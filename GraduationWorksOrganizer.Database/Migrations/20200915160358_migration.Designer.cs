@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GraduationWorksOrganizer.Database.Migrations
 {
     [DbContext(typeof(GraduationWorksOrganizerDataContext))]
-    [Migration("20200915143136_4thAttemp")]
-    partial class _4thAttemp
+    [Migration("20200915160358_migration")]
+    partial class migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -5939,12 +5939,12 @@ namespace GraduationWorksOrganizer.Database.Migrations
                     b.HasOne("GraduationWorksOrganizer.Database.Models.Teacher", "ThemeObserver")
                         .WithMany()
                         .HasForeignKey("ThemeObserverId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("GraduationWorksOrganizer.Database.Models.ThesesUserEntry", "ThesesUserEntry")
                         .WithOne()
                         .HasForeignKey("GraduationWorksOrganizer.Database.Models.ThesisApprovementRequest", "ThesesUserEntryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 

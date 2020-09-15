@@ -2,7 +2,7 @@
 
 namespace GraduationWorksOrganizer.Database.Migrations
 {
-    public partial class _4thAttemp : Migration
+    public partial class migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,14 +35,12 @@ namespace GraduationWorksOrganizer.Database.Migrations
                         name: "FK_ThesisApprovementRequest_AspNetUsers_ThemeObserverId",
                         column: x => x.ThemeObserverId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ThesisApprovementRequest_ThesesUserEntries_ThesesUserEntryId",
                         column: x => x.ThesesUserEntryId,
                         principalTable: "ThesesUserEntries",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(

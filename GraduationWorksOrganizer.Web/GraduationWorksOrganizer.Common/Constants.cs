@@ -52,6 +52,11 @@ namespace GraduationWorksOrganizer.Common
             /// Полиси дали може да добавя тезите
             /// </summary>
             public const string AddTheses = "AddTheses";
+
+            /// <summary>
+            /// Полиси дали може да добавя тезите
+            /// </summary>
+            public const string ViewMarks = "ViewMarks";
         }
     }
 }
