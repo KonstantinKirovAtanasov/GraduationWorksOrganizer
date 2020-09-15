@@ -9,105 +9,118 @@
 {
     foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.CompositePreviewThesisViewModel thesisModel in Model.Theseses)
     {
-        <div class="row border">
-            <div class="col-md">
+        <div class="border">
+
+            <div class="container">
                 <div class="row">
-                    <text class="text-left font-weight-bold">@thesisModel.ThesisViewModel.Title</text>
-                </div>
-                <div class="row">
-                    <text class="text-left">@thesisModel.ThesisViewModel.Subject.Name</text>
-                </div>
-                <div class="row">
-                    <text class="text-left">@thesisModel.ThesisViewModel.CreationDate.ToShortDateString()</text>
-                </div>
-            </div>
-            <div class="justify-content-right">
-                <div class="row">
-                    <a class="nav-item btn btn-floating float-right" data-toggle="modal" data-target="#exampleModal-@thesisModel.ThesisViewModel.Id">
-                        <img class="icon" src="~/images/previewThesisIcon.png" />
-                    </a>
-                    <a class="nav-item btn btn-floating float-right file-request" data-toggle="collapse" href="#collapse-upload-data-@thesisModel.UserEntry.Id" role="button" aria-expanded="false" data-ajax-request-filename="@thesisModel.UserEntry.Id">
-                        <img class="icon" src="~/images/uploadIcon.png" />
-                    </a>
-                    <a class="nav-item btn btn-floating float-right" data-toggle="collapse" href="#collapse-request-teacher-@thesisModel.UserEntry.Id" role="button" aria-expanded="false">
-                        <img class="icon" src="~/images/peoceedIcon.png" />
-                    </a>
-                </div>
-            </div>
-            <hr />
-        </div>
-        <div class="modal fade" id="exampleModal-@thesisModel.ThesisViewModel.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel--@thesisModel.ThesisViewModel.Id" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel-@thesisModel.ThesisViewModel.Id">@thesisModel.ThesisViewModel.Title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" style="width:100%">
-                        <p class="font-weight-bold">Описание</p>
-                        <p class="text-md-left">@thesisModel.ThesisViewModel.Description </p>
-                        <p class="font-weight-bold">Изисквания</p>
-                        @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.RequermentViewModel requerment in thesisModel.ThesisViewModel.Requerments)
-                        {
-                            <div class="row">
-                                <div class="col text-left">
-                                    <text>&#8226;</text>
-                                    <text>@requerment.Description</text>
-                                </div>
-                                <div class="col text-right">
-                                    <text>@requerment.MaxPointsCount точки</text>
-                                </div>
-                            </div>
-                        }
-                        <span />
+                    <div class="col-md">
                         <div class="row">
-                            <div class="col text-left">
-                                <text>@thesisModel.ThesisViewModel.Type</text>
+                            <text class="text-left font-weight-bold">@thesisModel.ThesisViewModel.Title</text>
+                        </div>
+                        <div class="row">
+                            <text class="text-left">@thesisModel.ThesisViewModel.Subject.Name</text>
+                        </div>
+                        <div class="row">
+                            <text class="text-left">@thesisModel.ThesisViewModel.CreationDate.ToShortDateString()</text>
+                        </div>
+                    </div>
+                    <div class="justify-content-right">
+                        <div class="row">
+                            <a class="nav-item btn btn-floating float-right" data-toggle="modal" data-target="#exampleModal-@thesisModel.ThesisViewModel.Id">
+                                <img class="icon" src="~/images/previewThesisIcon.png" />
+                            </a>
+                            <a class="nav-item btn btn-floating float-right file-request" data-toggle="collapse" href="#collapse-upload-data-@thesisModel.UserEntry.Id" role="button" aria-expanded="false" data-ajax-request-filename="@thesisModel.UserEntry.Id">
+                                <img class="icon" src="~/images/uploadIcon.png" />
+                            </a>
+                            <a class="nav-item btn btn-floating float-right process-theses" data-toggle="collapse" href="#collapse-request-teacher-@thesisModel.UserEntry.Id" role="button" aria-expanded="false" data-ajax-request-subject="@thesisModel.ThesisViewModel.Subject.Id" data-ajax-userentry="@thesisModel.UserEntry.Id">
+                                <img class="icon" src="~/images/peoceedIcon.png" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleModal-@thesisModel.ThesisViewModel.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel--@thesisModel.ThesisViewModel.Id" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel-@thesisModel.ThesisViewModel.Id">@thesisModel.ThesisViewModel.Title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <div class="col text-right">
-                                <text>@thesisModel.ThesisViewModel.CreationDate.ToShortDateString() </text>
+                            <div class="modal-body" style="width:100%">
+                                <p class="font-weight-bold">Описание</p>
+                                <p class="text-md-left">@thesisModel.ThesisViewModel.Description </p>
+                                <p class="font-weight-bold">Изисквания</p>
+                                @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.RequermentViewModel requerment in thesisModel.ThesisViewModel.Requerments)
+                                {
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <text>&#8226;</text>
+                                            <text>@requerment.Description</text>
+                                        </div>
+                                        <div class="col text-right">
+                                            <text>@requerment.MaxPointsCount точки</text>
+                                        </div>
+                                    </div>
+                                }
+                                <span />
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <text>@thesisModel.ThesisViewModel.Type</text>
+                                    </div>
+                                    <div class="col text-right">
+                                        <text>@thesisModel.ThesisViewModel.CreationDate.ToShortDateString() </text>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div id="collapse-upload-data-@thesisModel.UserEntry.Id" class="collapse">
-            <div class="row">
-                <h4>Прикачване на материали</h4>
-            </div>
-            <div id="file-manifest-@thesisModel.UserEntry.Id" class="container-fluid" data-ajax-request-filename="@thesisModel.UserEntry.Id">
-                <form id="file-upload-form-@thesisModel.UserEntry.Id" name="formFile">
-                    <div class="custom-file">
-                        <input id="file-upload-input-@thesisModel.UserEntry.Id" type="file" class="custom-file-input">
-                        <label class="custom-file-label">Изберете файл</label>
+                <div id="collapse-upload-data-@thesisModel.UserEntry.Id" class="collapse">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <h4>Прикачване на материали</h4>
+                        </div>
+                        <div id="file-manifest-@thesisModel.UserEntry.Id" class="container-fluid" data-ajax-request-filename="@thesisModel.UserEntry.Id">
+                            <form id="file-upload-form-@thesisModel.UserEntry.Id" name="formFile">
+                                <div class="custom-file">
+                                    <input id="file-upload-input-@thesisModel.UserEntry.Id" type="file" class="custom-file-input">
+                                    <label class="custom-file-label">Изберете файл</label>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </form>
-            </div>
-            <br />
-        </div>
-        <div id="collapse-request-teacher-@thesisModel.UserEntry.Id" class="collapse">
-            <div class="row">
-                <h4>Изпращане на @thesisModel.ThesisViewModel.Type</h4>
-            </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-10">
-                        <p class="font-weight-bold">Изберете преподавател</p>
-                        <select class="form-control">
-                        </select>
-                        <p class="font-weight-bold">Описание на заявката</p>
-                        <textarea class="form-control resize"></textarea>
+                    <br />
+                </div>
+                <div id="collapse-request-teacher-@thesisModel.UserEntry.Id" class="collapse">
+                    <div class="container-fluid">
+                        <form method="post" class="helpinfodefault" data-helpmessagekey="defaulthelpmessage">
+                            <div class="row">
+                                <h4>Изпращане на @thesisModel.ThesisViewModel.Type</h4>
+                            </div>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <p class="font-weight-bold">Изберете преподавател</p>
+                                        <select id=select-teacher-@thesisModel.UserEntry.Id class="form-control requestTeachers resize" asp-for="Input.TeacherId" data-ajax-request-subject="@thesisModel.ThesisViewModel.Subject.Id">
+                                        </select>
+                                        <p class="font-weight-bold">Описание на заявката</p>
+                                        <textarea class="form-control resize" asp-for="Input.RequestDescription"></textarea>
+                                        <input type="hidden" asp-for="Input.ThesisUserEntryId" value="@thesisModel.UserEntry.Id" />
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row justify-content-end">
+                                    <button type="submit" class="btn btn-light border">Изпрати</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="justify-content-end">
-                        <button class="btn">Изпращане</button>
-                    </div>
+                    <br />
                 </div>
             </div>
-            <br />
         </div>
+        <br />
     }
 }
 else
@@ -119,12 +132,18 @@ else
     <script src="~/js/global/autoHeigthTextArea.js"></script>
     <script>
         let filesCache = {};
+        let teachersCache = {};
+
         const attrNameFiles = 'data-ajax-request-filename'
+        const attrSubjectId = 'data-ajax-request-subject'
+        const attrUserEntry = 'data-ajax-userentry'
         const attrFileId = 'data-ajax-request'
+
         const deleteIconUrl = 'https://localhost:44306/images/deleteIcon.png'
         const downloadIconUrl = 'https://localhost:44306/images/downloadIcon.png'
         const apiEndPoint = 'https://localhost:44306/api/file'
         const downloadFileEndPoint = 'https://localhost:44306/api/file/download'
+        const teachersApi = 'https://localhost:44306/api/teachers'
 
         window.onloaded = AddEventHandlers();
 
@@ -138,6 +157,13 @@ else
             let divFileInputs = document.getElementsByClassName('custom-file');
             for (let i = 0; i < divFileInputs.length; i++) {
                 divFileInputs[i].firstElementChild.addEventListener('change', OnFileUploadedAction);
+            }
+
+            let processThesesItems = document.getElementsByClassName('process-theses');
+            for (let i = 0; i < processThesesItems.length; i++) {
+                processThesesItems[i].addEventListener('click', function (event) {
+                    RequestTeachers(processThesesItems[i]);
+                });
             }
         }
 
@@ -270,8 +296,6 @@ else
                 data: formData,
                 success: function (result) {
                     let fileManifest = document.getElementById('file-manifest-' + userEntryId);
-                    console.log('file-manifest-' + userEntryId);
-                    console.log(fileManifest);
                     AddNewFileElement(result, fileManifest);
                 },
             });
@@ -299,6 +323,47 @@ else
             });
 
             filesCache[attributeValue] = true;
+        }
+
+        function RequestTeachers(item) {
+            let attributeValue = $(item).attr(attrSubjectId);
+            const userEntryId = $(item).attr(attrUserEntry);
+            if (teachersCache[attributeValue])
+                return;
+
+            $.ajax({
+                method: 'GET',
+                url: teachersApi,
+                headers: {
+                    subjectId: attributeValue,
+                },
+                success: function (data) {
+                    AddSelectTeacherOptions(userEntryId, data);
+                }
+            })
+        }
+
+        function AddSelectTeacherOptions(userEntryId, data) {
+
+            let teachersSelectElement = document.getElementById('select-teacher-' + userEntryId);
+            console.log(teachersSelectElement);
+            for (let i = 0; i < data.length; i++) {
+                console.log(data);
+                console.log(data[i]);
+                let option = document.createElement('OPTION');
+                let textleft = document.createElement('TEXT');
+
+                textleft.className += 'text-left';
+                option.appendChild(textleft);
+
+                textleft.innerText = data[i].scienceDegree + ' ' + data[i].name;
+
+                option.value = data[i].id;
+                console.log(option);
+
+                teachersSelectElement.appendChild(option);
+                teachersCache[userEntryId] = true;
+            }
         }
     </script>
 

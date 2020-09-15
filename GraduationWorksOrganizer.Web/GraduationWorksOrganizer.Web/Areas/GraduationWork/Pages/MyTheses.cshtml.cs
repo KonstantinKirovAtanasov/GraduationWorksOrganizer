@@ -4,6 +4,7 @@ using GraduationWorksOrganizer.Services.MapEntitiesServices;
 using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,7 +30,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         #region Initialization
 
         /// <summary>
-        /// Êîíñòðóêòîð
+        /// Constructor
         /// </summary>
         /// <param name="thesesVmService"></param>
         /// <param name=""></param>
@@ -49,14 +50,30 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// </summary>
         public ICollection<CompositePreviewThesisViewModel> Theseses { get; set; }
 
+        /// <summary>
+        /// Пропърти за изпращане на заявка за одобрение
+        /// </summary>
+        [BindProperty]
+        public InputModel Input { get; set; }
+
+        #endregion
+
+        #region InputModel
+
+        public class InputModel
+        {
+            public string RequestDescription { get; set; }
+
+            public string TeacherId { get; set; }
+
+            public int ThesisUserEntryId { get; set; }
+        }
+
         #endregion
 
         #region Methods
 
-        /// <summary>
-        /// On Get
-        /// </summary>
-        public async Task OnGet()
+        public async Task LoadPage()
         {
             string userId = _userService.GetUserId(User);
             IEnumerable<PreviewThesisViewModel> viewModels = _thesesVmService.GetViewModels(t => t.UserEntries.Any(e => e.StudentId == userId));
@@ -70,14 +87,23 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         }
 
         /// <summary>
-        /// ìåòîä êîéòî Handel-âà èçòðèâàíå íà òåìà
+        /// On Get
+        /// </summary>
+        public async Task OnGet()
+        {
+            await LoadPage();
+        }
+
+        /// <summary>
+        /// On Post
         /// </summary>
         /// <param name="thesisId"></param>
-        public void OnPostDeleteThesis(int thesisId)
+        public async Task OnPost()
         {
 
-
+            await LoadPage();
         }
+
         #endregion
 
     }
