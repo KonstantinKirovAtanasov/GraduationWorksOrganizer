@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GraduationWorksOrganizer.Core.ViewModels;
 using GraduationWorksOrganizer.Database.Models;
+using GraduationWorksOrganizer.Database.Models.Base;
 
 namespace GraduationWorksOrganizer.Web.SharedViewModels
 {
@@ -17,19 +18,24 @@ namespace GraduationWorksOrganizer.Web.SharedViewModels
         public string Id { get; set; }
 
         /// <summary>
-        /// Снимка
-        /// </summary>
-        public byte[] Image { get; set; }
-
-        /// <summary>
         /// Име
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
+        /// Научна степен
+        /// </summary>
+        public string ScienceDegree { get; set; }
+
+        /// <summary>
         /// Катедра
         /// </summary>
         public InnerDepartmentViewModel Department { get; set; }
+
+        /// <summary>
+        /// Картинка
+        /// </summary>
+        public InnerImageViewModel Image { get; set; }
 
         #endregion
 
@@ -52,6 +58,7 @@ namespace GraduationWorksOrganizer.Web.SharedViewModels
         {
             expression.CreateMap<Teacher, TeacherViewModel>();
             expression.CreateMap<Department, InnerDepartmentViewModel>();
+            expression.CreateMap<FileContent, InnerImageViewModel>();
         }
 
         #endregion
@@ -70,6 +77,14 @@ namespace GraduationWorksOrganizer.Web.SharedViewModels
             /// Име
             /// </summary>
             public string Name { get; set; }
+        }
+
+        /// <summary>
+        /// Вм за картинка
+        /// </summary>
+        public class InnerImageViewModel
+        {
+            public byte[] Content { get; set; }
         }
     }
 }

@@ -6,7 +6,6 @@ using GraduationWorksOrganizer.Database.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Services.MapEntitiesServices
 {
@@ -48,7 +47,7 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         /// <returns></returns>
         public IEnumerable<TViewModel> GetViewModels()
         {
-            IQueryable<Teacher> teachers = _databaseService.GetTeachers().Include(t => t.Department);
+            IQueryable<Teacher> teachers = _databaseService.GetTeachers().Include(t => t.Department).Include(t => t.Image);
             foreach (Teacher teacher in teachers)
                 yield return _automapper.Map<TViewModel>(teacher);
         }

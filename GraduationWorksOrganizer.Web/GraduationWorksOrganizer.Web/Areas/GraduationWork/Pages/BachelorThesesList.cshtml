@@ -7,46 +7,46 @@
 <div>
     @if (Model.Theses.Any())
     {
-    <table class="table table-bordered table-hover mb-0">
-        <thead>
-            <tr>
-                <th> Заглавие:</th>
-                <th> Тип:</th>
-                <th> Предмет:</th>
-                <th> Автор:</th>
-                <th> Дата на създаване:</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.ThesesViewModel vm in Model.Theses)
+        <table class="table table-bordered table-hover mb-0">
+            <thead>
+                <tr>
+                    <th> Заглавие:</th>
+                    <th> Тип:</th>
+                    <th> Предмет:</th>
+                    <th> Автор:</th>
+                    <th> Дата на създаване:</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.ThesesViewModel vm in Model.Theses)
                 {
-            <tr>
-                <td class="text-left"> @vm.Title </td>
-                <td class="text-center"> @vm.Type </td>
-                <td class="text-center"> @vm.Subject.Name </td>
-                <td class="text-center"> @vm.Creator.Name </td>
-                <td class="text-center"> @vm.CreationDate </td>
-                <td>
-                    <a class="nav-item text-dark" asp-area="GraduationWork" asp-page="/PreviewConcreteTheses" asp-route-thesisId="@vm.Id">
-                        <img class="icon" src="~/images/previewThesisIcon.png" />
-                    </a>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="text-left"> @vm.Title </td>
+                        <td class="text-center"> @vm.Type </td>
+                        <td class="text-center"> @vm.Subject.Name </td>
+                        <td class="text-center"> @vm.Creator.Name </td>
+                        <td class="text-center"> @vm.CreationDate </td>
+                        <td>
+                            <a class="nav-item text-dark" asp-area="GraduationWork" asp-page="/PreviewConcreteTheses" asp-route-thesisId="@vm.Id">
+                                <img class="icon" src="~/images/previewThesisIcon.png" />
+                            </a>
+                        </td>
+                    </tr>
                 }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td>
-                    <div class="footer-space">
-                    </div>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <div class="footer-space">
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
     }
     else
     {
-    <h2>Няма теми в избраната страница.</h2>
+        <h2>Няма теми в избраната страница.</h2>
     }
 </div>

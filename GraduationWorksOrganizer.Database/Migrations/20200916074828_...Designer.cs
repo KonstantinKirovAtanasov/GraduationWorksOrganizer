@@ -4,14 +4,16 @@ using GraduationWorksOrganizer.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GraduationWorksOrganizer.Database.Migrations
 {
     [DbContext(typeof(GraduationWorksOrganizerDataContext))]
-    partial class GraduationWorksOrganizerDataContextModelSnapshot : ModelSnapshot
+    [Migration("20200916074828_..")]
+    partial class _
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -5500,8 +5502,8 @@ namespace GraduationWorksOrganizer.Database.Migrations
                     b.Property<int>("DefenceDateId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ThesesUserEntryId")
-                        .HasColumnType("int");
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("ThesisMarkId")
                         .HasColumnType("int");
@@ -5510,8 +5512,7 @@ namespace GraduationWorksOrganizer.Database.Migrations
 
                     b.HasIndex("DefenceDateId");
 
-                    b.HasIndex("ThesesUserEntryId")
-                        .IsUnique();
+                    b.HasIndex("StudentId");
 
                     b.HasIndex("ThesisMarkId")
                         .IsUnique()
@@ -5952,11 +5953,10 @@ namespace GraduationWorksOrganizer.Database.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("GraduationWorksOrganizer.Database.Models.ThesesUserEntry", "ThesesUserEntry")
-                        .WithOne()
-                        .HasForeignKey("GraduationWorksOrganizer.Database.Models.ThesisDefenceEvent", "ThesesUserEntryId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("GraduationWorksOrganizer.Database.Models.ThesisMark", "ThesisMark")
                         .WithOne()

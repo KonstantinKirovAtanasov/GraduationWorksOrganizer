@@ -37,7 +37,7 @@
             }
             @if ((await AuthorizationService.AuthorizeAsync(User, Constants.PolicyNames.ApproveTheses)).Succeeded)
             {
-                <a class="nav-link text-dark" asp-area="Commissions" asp-page="" title="Manage">Създай комисия</a>
+                <a class="nav-link text-dark" asp-area="Commissions" asp-page="/CreateCommission" title="Manage">Създай комисия</a>
             }
         </div>
     </div>

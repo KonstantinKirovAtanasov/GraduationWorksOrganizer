@@ -4,17 +4,32 @@
 }
 
 <h1>Създаване на комисия</h1>
-<div class="col">
-    @foreach (GraduationWorksOrganizer.Web.SharedViewModels.TeacherViewModel teacher in Model.Тeachers)
-    {
-        <div class="row">
-            <img id="img" width="256" height="256" src="data:image/png;base64,@Convert.ToBase64String(teacher.Image)" alt="default" />
-        </div>
-        <div class="row">
 
-        </div>
-    }
-</div>
-<div class="col">
+<div class="row">
+    <div class="col-md-7">
+        @foreach (GraduationWorksOrganizer.Web.SharedViewModels.TeacherViewModel teacher in Model.Тeachers)
+        {
+            <div class="row" id="@teacher.Id">
+                <div class="col-2 justify-content-lg-start">
+                    @if (teacher.Image != null)
+                    {
+                        <img class="avatar" alt="avatar" src="data:image/png;base64, @Convert.ToBase64String(teacher.Image.Content)" />
+                    }
+                    else
+                    {
 
+                        <img class="avatar" alt="avatar" src="~/images/DefaultProfilePicture.png" />
+                    }
+                </div>
+                <div class="col-md-6">
+                    <div class="row justify-content-start text-md-left">
+                        <p class="font-weight-bold">@teacher.ScienceDegree  @teacher.Name</p>
+                    </div>
+                    <div class="row justify-content-start text-md-left">
+                        <p>@teacher.Department.Name</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>

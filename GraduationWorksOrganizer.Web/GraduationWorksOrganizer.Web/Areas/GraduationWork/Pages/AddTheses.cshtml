@@ -52,7 +52,7 @@
                                     <input class="form-control" asp-for="Input.Requerments[i].MaxPointsCount" />
                                 </td>
                                 <td class="justify-content-center">
-                                    <a class="row-delete"><img class="icon" src="~/images/deleteIcon.jpg" /></a>
+                                    <a class="row-delete"><img class="icon" src="~/images/deleteIcon.png" /></a>
                                 </td>
                             </tr>
                         }
@@ -135,7 +135,7 @@
             $(pointsInput).on('input', OnRequermentPointsChanged);
             let pointscell = $(`<td></td>`).append(pointsInput);
             row.append(pointscell);
-            let aButton = $('<a></a>').append('<img class="icon" src="/images/deleteIcon.jpg" />');
+            let aButton = $('<a></a>').append('<img class="icon" src="/images/deleteIcon.png" />');
             let cell = $('<td class="justify-content-center" ></td>');
 
             $(cell).append(aButton);

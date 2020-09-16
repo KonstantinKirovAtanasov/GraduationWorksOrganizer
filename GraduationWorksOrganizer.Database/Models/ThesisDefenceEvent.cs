@@ -23,24 +23,14 @@ namespace GraduationWorksOrganizer.Database.Models
         public int DefenceDateId { get; set; }
 
         /// <summary>
-        /// Студент
-        /// </summary>
-        public Student Student { get; set; }
-
-        /// <summary>
-        /// Ид на студента
-        /// </summary>
-        public string StudentId { get; set; }
-
-        /// <summary>
         /// Тема
         /// </summary>
-        public Theses Thesis { get; set; }
+        public ThesesUserEntry ThesesUserEntry { get; set; }
 
         /// <summary>
         /// Ид на темата
         /// </summary>
-        public int ThesisId { get; set; }
+        public int ThesesUserEntryId { get; set; }
 
         /// <summary>
         /// Оценка

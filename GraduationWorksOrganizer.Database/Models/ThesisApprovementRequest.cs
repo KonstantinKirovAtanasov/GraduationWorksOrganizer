@@ -36,5 +36,10 @@ namespace GraduationWorksOrganizer.Database.Models
         /// Описание на Request-а
         /// </summary>
         public string RequestDescription { get; set; }
+
+        /// <summary>
+        /// Описание на Request-а
+        /// </summary>
+        public string ResponseDescription { get; set; }
     }
 }
