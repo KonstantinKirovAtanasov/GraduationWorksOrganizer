@@ -17,11 +17,11 @@
             }
             @if (User.IsInRole(Constants.RoleNames.StudentRole))
             {
-                <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="/MyTheses" title="Manage">Моите теми</a>
+                <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="/MyThesesStudent" title="Manage">Моите теми</a>
             }
-            @if (User.IsInRole(Constants.RoleNames.StudentRole))
+            @if (User.IsInRole(Constants.RoleNames.TeacherRole))
             {
-                <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="/MyTheses" title="Manage">Чакащи теми</a>
+                <a class="nav-link text-dark" asp-area="GraduationWork" asp-page="/MyThesesTeacher" title="Manage">Моите теми</a>
             }
         </div>
     </div>

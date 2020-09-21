@@ -22,7 +22,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
     /// Mîèòå òåìè
     /// </summary>
     [Authorize(Roles = Constants.RoleNames.StudentRole)]
-    public class MyThesesModel : PageModel
+    public class MyThesesStudentModel : PageModel
     {
         #region Declarations
 
@@ -39,9 +39,9 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// </summary>
         /// <param name="thesesVmService"></param>
         /// <param name=""></param>
-        public MyThesesModel(ThesisViewModelService<PreviewThesisExtendedViewModel> thesesVmService,
-                             UserManager<ApplicationIdentityBase> userService,
-                             ThesisService thesisService)
+        public MyThesesStudentModel(ThesisViewModelService<PreviewThesisExtendedViewModel> thesesVmService,
+                                    UserManager<ApplicationIdentityBase> userService,
+                                    ThesisService thesisService)
         {
             _thesesVmService = thesesVmService;
             _userService = userService;
@@ -76,9 +76,9 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
             string userId = _userService.GetUserId(User);
             IEnumerable<PreviewThesisViewModel> viewModels = _thesesVmService.GetViewModels(t => t.UserEntries.Any(e => e.StudentId == userId));
             CurrentTheseses = new Collection<CompositePreviewThesisViewModel>();
-            foreach (PreviewThesisViewModel prvm in viewModels)
+            foreach (PreviewThesisViewModel prvm in viewModels.OrderBy(p => p.CreationDate))
             {
-                ThesesUserEntry thesesUserEntry = await _thesesVmService.GetUserEntry(userId, prvm.Id);
+                ThesesUserEntry thesesUserEntry = await _thesisService.GetUserEntry(userId, prvm.Id);
                 UserEntryViewModel userEntry = new UserEntryViewModel() { Id = thesesUserEntry.Id, State = thesesUserEntry.State };
 
                 if (userEntry.State == Common.Enums.ThesisUserEntryState.Initialized)
@@ -102,7 +102,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         {
             if (ModelState.IsValid)
             {
-                await _thesisService.SendForApprovement(Input);
+                await _thesesVmService.SendForApprovement(Input);
             }
 
             await LoadPage();

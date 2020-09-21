@@ -5484,8 +5484,7 @@ namespace GraduationWorksOrganizer.Database.Migrations
 
                     b.HasIndex("ThemeObserverId");
 
-                    b.HasIndex("ThesesUserEntryId")
-                        .IsUnique();
+                    b.HasIndex("ThesesUserEntryId");
 
                     b.ToTable("ThesisApprovementRequest");
                 });
@@ -5938,8 +5937,8 @@ namespace GraduationWorksOrganizer.Database.Migrations
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("GraduationWorksOrganizer.Database.Models.ThesesUserEntry", "ThesesUserEntry")
-                        .WithOne()
-                        .HasForeignKey("GraduationWorksOrganizer.Database.Models.ThesisApprovementRequest", "ThesesUserEntryId")
+                        .WithMany("ThesesRequests")
+                        .HasForeignKey("ThesesUserEntryId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });

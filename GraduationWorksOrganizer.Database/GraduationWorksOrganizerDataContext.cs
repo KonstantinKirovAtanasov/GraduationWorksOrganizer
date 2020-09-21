@@ -1,6 +1,7 @@
 ﻿using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Models.Base;
 using GraduationWorksOrganizer.Database.Seeds;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -103,7 +104,9 @@ namespace GraduationWorksOrganizer.Database
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
             // Graph types
+            builder.Entity<ApplicationIdentityBase>().HasBaseType<IdentityUser>();
             builder.Entity<Teacher>().HasBaseType<ApplicationIdentityBase>();
             builder.Entity<Student>().HasBaseType<ApplicationIdentityBase>();
             builder.Entity<ThesisUserEntryFileContent>().HasBaseType<FileContent>();
@@ -131,7 +134,7 @@ namespace GraduationWorksOrganizer.Database
 
             // Relations
             builder.Entity<ThesisApprovementRequest>().HasOne(tar => tar.ThemeObserver).WithMany().HasForeignKey(tar => tar.ThemeObserverId).OnDelete(DeleteBehavior.NoAction);
-            builder.Entity<ThesisApprovementRequest>().HasOne(tar => tar.ThesesUserEntry).WithOne().HasForeignKey<ThesisApprovementRequest>(tar => tar.ThesesUserEntryId).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<ThesisApprovementRequest>().HasOne(tar => tar.ThesesUserEntry).WithMany(t => t.ThesesRequests).HasForeignKey(tar => tar.ThesesUserEntryId).OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Faculty>().HasMany(f => f.Departments).WithOne(d => d.Faculty).HasForeignKey(d => d.FacultyId).OnDelete(DeleteBehavior.Cascade);
             builder.Entity<Department>().HasMany(d => d.Specialties).WithOne(s => s.Department).HasForeignKey(s => s.DepartmentId).OnDelete(DeleteBehavior.Cascade);

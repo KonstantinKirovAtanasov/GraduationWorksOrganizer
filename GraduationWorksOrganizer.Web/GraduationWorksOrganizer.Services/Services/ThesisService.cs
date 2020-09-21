@@ -24,7 +24,6 @@ namespace GraduationWorksOrganizer.Services.Services
         private readonly StudentDatabaseService _studentsService;
         private readonly TeachersDatabaseService _teacherDbService;
         private readonly CombinedQueryBaseService<ThesesUserEntry> _thEntryDbService;
-        private readonly IAsyncRepository<ThesisApprovementRequest> _thApproveRequestDbService;
 
         /// <summary>
         /// Конструктор
@@ -33,13 +32,11 @@ namespace GraduationWorksOrganizer.Services.Services
         public ThesisService(ThesesDatabaseService dbService,
                              StudentDatabaseService studentsService,
                              TeachersDatabaseService teacherDbService,
-                             IAsyncRepository<ThesisApprovementRequest> thApproveRequestDbService,
                              CombinedQueryBaseService<ThesesUserEntry> thEntryDbService)
         {
             _dbService = dbService;
             _studentsService = studentsService;
             _teacherDbService = teacherDbService;
-            _thApproveRequestDbService = thApproveRequestDbService;
             _thEntryDbService = thEntryDbService;
         }
 
@@ -83,19 +80,15 @@ namespace GraduationWorksOrganizer.Services.Services
             return result;
         }
 
-        /// <summary>
-        /// Метод които изпраща 
-        /// </summary>
-        /// <returns></returns>
-        public async Task SendForApprovement(IAutoMapperViewModel addViewModel)
-        {
-            Mapper mapper = new Mapper(addViewModel.GetMapperConfiguration());
-            ThesisApprovementRequest request = mapper.Map<ThesisApprovementRequest>(addViewModel);
-            ThesesUserEntry userEntry = await _thEntryDbService.GetById(request.ThesesUserEntryId);
-            userEntry.State = Common.Enums.ThesisUserEntryState.SendForApprovement;
 
-            await _thEntryDbService.Update(userEntry);
-            await _thApproveRequestDbService.Add(request);
+        /// <summary>
+        /// Метод който връща записа на студент за конкретна теза
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<ThesesUserEntry> GetUserEntry(string userId, int thesisId)
+        {
+            return await _thEntryDbService.GetQuery().FirstOrDefaultAsync(te => te.StudentId == userId && te.ThesesId == thesisId);
         }
     }
 }

@@ -6,15 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200909082439_nullableImage.cs" />
-    <Compile Remove="Migrations\20200909082439_nullableImage.Designer.cs" />
-    <Compile Remove="Migrations\20200915142643_again.cs" />
-    <Compile Remove="Migrations\20200915142643_again.Designer.cs" />
-    <Compile Remove="Migrations\20200915143136_4thAttemp.cs" />
-    <Compile Remove="Migrations\20200915143136_4thAttemp.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Seeds\FileSeeds\MimeTypes.csv" />
     <None Remove="Seeds\TextFileSeeds\MIME.csv" />
   </ItemGroup>

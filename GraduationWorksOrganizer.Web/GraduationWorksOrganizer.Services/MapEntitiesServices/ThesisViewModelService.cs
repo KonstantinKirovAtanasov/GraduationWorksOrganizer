@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GraduationWorksOrganizer.Core.Database;
 using GraduationWorksOrganizer.Core.Services;
 using GraduationWorksOrganizer.Core.ViewModels;
 using GraduationWorksOrganizer.Database.Models;
@@ -25,6 +26,7 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         /// </summary>
         private readonly ThesesDatabaseService _databaseService;
         private readonly CombinedQueryBaseService<ThesesUserEntry> _userEntriesDbService;
+        private readonly IAsyncRepository<ThesisApprovementRequest> _thApproveRequestDbService;
 
         /// <summary>
         /// Аутомаппер
@@ -39,10 +41,12 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         /// Конструктор
         /// </summary>
         public ThesisViewModelService(ThesesDatabaseService databaseService,
-                                      CombinedQueryBaseService<ThesesUserEntry> userEntriesDbService)
+                                      CombinedQueryBaseService<ThesesUserEntry> userEntriesDbService,
+                                      IAsyncRepository<ThesisApprovementRequest> thApproveRequestDbService)
         {
             _databaseService = databaseService;
             _userEntriesDbService = userEntriesDbService;
+            _thApproveRequestDbService = thApproveRequestDbService;
             _automapper = new Mapper(new TViewModel().GetMapperConfiguration());
         }
 
@@ -101,13 +105,18 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices
         }
 
         /// <summary>
-        /// Метод който връща записа на студент за конкретна теза
+        /// Метод които изпраща 
         /// </summary>
-        /// <param name="userId"></param>
         /// <returns></returns>
-        public async Task<ThesesUserEntry> GetUserEntry(string userId, int thesisId)
+        public async Task SendForApprovement(IAutoMapperViewModel addViewModel)
         {
-            return await _userEntriesDbService.GetQuery().FirstOrDefaultAsync(te => te.StudentId == userId && te.ThesesId == thesisId);
+            Mapper mapper = new Mapper(addViewModel.GetMapperConfiguration());
+            ThesisApprovementRequest request = mapper.Map<ThesisApprovementRequest>(addViewModel);
+            ThesesUserEntry userEntry = await _userEntriesDbService.GetById(request.ThesesUserEntryId);
+            userEntry.State = Common.Enums.ThesisUserEntryState.SendForApprovement;
+
+            await _userEntriesDbService.Update(userEntry);
+            await _thApproveRequestDbService.Add(request);
         }
     }
 }

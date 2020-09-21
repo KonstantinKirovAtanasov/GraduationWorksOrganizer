@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GraduationWorksOrganizer.Database.Migrations
 {
     [DbContext(typeof(GraduationWorksOrganizerDataContext))]
-    [Migration("20200911145310_MimeTypes")]
-    partial class MimeTypes
+    [Migration("20200921090437_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -5451,9 +5451,6 @@ namespace GraduationWorksOrganizer.Database.Migrations
                     b.Property<string>("StudentId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ThemeObserverId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("ThesesId")
                         .HasColumnType("int");
 
@@ -5461,11 +5458,37 @@ namespace GraduationWorksOrganizer.Database.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.HasIndex("ThemeObserverId");
-
                     b.HasIndex("ThesesId");
 
                     b.ToTable("ThesesUserEntries");
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesisApprovementRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("RequestDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ResponseDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ThemeObserverId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ThesesUserEntryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ThemeObserverId");
+
+                    b.HasIndex("ThesesUserEntryId");
+
+                    b.ToTable("ThesisApprovementRequest");
                 });
 
             modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesisDefenceEvent", b =>
@@ -5478,10 +5501,7 @@ namespace GraduationWorksOrganizer.Database.Migrations
                     b.Property<int>("DefenceDateId")
                         .HasColumnType("int");
 
-                    b.Property<string>("StudentId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ThesisId")
+                    b.Property<int>("ThesesUserEntryId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ThesisMarkId")
@@ -5491,9 +5511,7 @@ namespace GraduationWorksOrganizer.Database.Migrations
 
                     b.HasIndex("DefenceDateId");
 
-                    b.HasIndex("StudentId");
-
-                    b.HasIndex("ThesisId")
+                    b.HasIndex("ThesesUserEntryId")
                         .IsUnique();
 
                     b.HasIndex("ThesisMarkId")
@@ -5906,14 +5924,24 @@ namespace GraduationWorksOrganizer.Database.Migrations
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GraduationWorksOrganizer.Database.Models.Teacher", "ThemeObserver")
-                        .WithMany()
-                        .HasForeignKey("ThemeObserverId");
-
                     b.HasOne("GraduationWorksOrganizer.Database.Models.Theses", "Theses")
                         .WithMany("UserEntries")
                         .HasForeignKey("ThesesId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GraduationWorksOrganizer.Database.Models.ThesisApprovementRequest", b =>
+                {
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.Teacher", "ThemeObserver")
+                        .WithMany()
+                        .HasForeignKey("ThemeObserverId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.ThesesUserEntry", "ThesesUserEntry")
+                        .WithMany("ThesesRequests")
+                        .HasForeignKey("ThesesUserEntryId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -5925,14 +5953,9 @@ namespace GraduationWorksOrganizer.Database.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("GraduationWorksOrganizer.Database.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("GraduationWorksOrganizer.Database.Models.Theses", "Thesis")
+                    b.HasOne("GraduationWorksOrganizer.Database.Models.ThesesUserEntry", "ThesesUserEntry")
                         .WithOne()
-                        .HasForeignKey("GraduationWorksOrganizer.Database.Models.ThesisDefenceEvent", "ThesisId")
+                        .HasForeignKey("GraduationWorksOrganizer.Database.Models.ThesisDefenceEvent", "ThesesUserEntryId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 

@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraduationWorksOrganizer.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraduationWorksOrganizer.Additional", "GraduationWorksOrganizer.Additional\GraduationWorksOrganizer.Additional.csproj", "{60C97140-704F-4A8F-BDBF-ED772ECCF321}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduationWorksOrganizer.Services", "GraduationWorksOrganizer.Services\GraduationWorksOrganizer.Services.csproj", "{A5376E81-CB04-4024-A2E4-9F740595B21F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraduationWorksOrganizer.Services", "GraduationWorksOrganizer.Services\GraduationWorksOrganizer.Services.csproj", "{A5376E81-CB04-4024-A2E4-9F740595B21F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

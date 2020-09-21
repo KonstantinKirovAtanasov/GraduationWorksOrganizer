@@ -1,4 +1,5 @@
 ﻿using GraduationWorksOrganizer.Core.Database.Models;
+using System.Collections.Generic;
 using static GraduationWorksOrganizer.Common.Enums;
 
 namespace GraduationWorksOrganizer.Database.Models
@@ -37,5 +38,10 @@ namespace GraduationWorksOrganizer.Database.Models
         /// Статус за етапа на записаната тема
         /// </summary>
         public ThesisUserEntryState State { get; set; }
+
+        /// <summary>
+        /// Изпращания за удобрение дати за защита
+        /// </summary>
+        public ICollection<ThesisApprovementRequest> ThesesRequests { get; set; }
     }
 }

@@ -1,0 +1,35 @@
+﻿@page
+@model GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages.MyThesesTeacherModel
+@{
+}
+
+<h2> Моите теми</h2>
+
+<table class="table table-bordered table-hover mb-0">
+    <thead>
+        <tr>
+            <th> Заглавие:</th>
+            <th> Тип:</th>
+            <th> Предмет:</th>
+            <th> Автор:</th>
+            <th> Описание на завката:</th>
+            <th> Дата на създаване:</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>
+                <a class="btn btn-outline-light" data-toggle="modal" data-target="#exampleModal-@thesisModel.ThesisViewModel.Id">
+                    <img class="icon" src="~/images/previewThesisIcon.png" />
+                </a>
+            </th>
+        </tr>
+    </tbody>
+</table>
