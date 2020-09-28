@@ -22,16 +22,19 @@
                             <text class="text-left">@thesisModel.ThesisViewModel.CreationDate.ToShortDateString()г.</text>
                         </div>
                     </div>
-                    <div class="justify-content-center">
-                        <a class="btn btn-outline-light" data-toggle="modal" data-target="#exampleModal-@thesisModel.ThesisViewModel.Id">
-                            <img class="icon" src="~/images/previewThesisIcon.png" />
-                        </a>
-                        <a class="btn btn-outline-light file-request" data-toggle="collapse" href="#collapse-upload-data-@thesisModel.UserEntry.Id" role="button" aria-expanded="false" data-ajax-request-filename="@thesisModel.UserEntry.Id">
-                            <img class="icon" src="~/images/uploadIcon.png" />
-                        </a>
-                        <a class="btn btn-outline-light process-theses" data-toggle="collapse" href="#collapse-request-teacher-@thesisModel.UserEntry.Id" role="button" aria-expanded="false" data-ajax-request-subject="@thesisModel.ThesisViewModel.Subject.Id" data-ajax-userentry="@thesisModel.UserEntry.Id">
-                            <img class="icon" src="~/images/peoceedIcon.png" />
-                        </a>
+                    <div class="justify-content-right">
+                        <div class="row">
+                            <a class="btn btn-floating float-right" data-toggle="modal" data-target="#exampleModal-@thesisModel.ThesisViewModel.Id">
+                                <img class="icon" src="~/images/previewThesisIcon.png" />
+                            </a>
+                            <a class="btn btn-floating float-right file-request" data-toggle="collapse" href="#collapse-upload-data-@thesisModel.UserEntry.Id" role="button" aria-expanded="false" data-ajax-request-filename="@thesisModel.UserEntry.Id">
+                                <img class="icon" src="~/images/uploadIcon.png" />
+                            </a>
+                            <a class="btn btn-floating float-right process-theses" data-toggle="collapse" href="#collapse-request-teacher-@thesisModel.UserEntry.Id" role="button" aria-expanded="false" data-ajax-request-subject="@thesisModel.ThesisViewModel.Subject.Id" data-ajax-userentry="@thesisModel.UserEntry.Id">
+                                <img class="icon" src="~/images/peoceedIcon.png" />
+                            </a>
+                        </div>
+                        <a class="btn btn-outline-primary" asp-area="GraduationWork" asp-page="/ThesesCorrespondence" asp-route-thesisId="@thesisModel.ThesisViewModel.Id">Към кореспонденцията</a>
                     </div>
                 </div>
                 <div class="modal fade" id="exampleModal-@thesisModel.ThesisViewModel.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel--@thesisModel.ThesisViewModel.Id" aria-hidden="true">
@@ -45,7 +48,7 @@
                             </div>
                             <div class="modal-body" style="width:100%">
                                 <p class="font-weight-bold">Описание</p>
-                                <p class="text-md-left rich-text">@thesisModel.ThesisViewModel.Description </p>
+                                <p class="text-md-left">@thesisModel.ThesisViewModel.Description </p>
                                 <p class="font-weight-bold">Изисквания</p>
                                 @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.RequermentViewModel requerment in thesisModel.ThesisViewModel.Requerments)
                                 {
