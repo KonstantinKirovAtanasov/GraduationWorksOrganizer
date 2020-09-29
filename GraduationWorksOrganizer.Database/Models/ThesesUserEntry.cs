@@ -1,4 +1,5 @@
 ﻿using GraduationWorksOrganizer.Core.Database.Models;
+using System;
 using System.Collections.Generic;
 using static GraduationWorksOrganizer.Common.Enums;
 
@@ -7,7 +8,7 @@ namespace GraduationWorksOrganizer.Database.Models
     /// <summary>
     /// Модел за записвания за теми
     /// </summary>
-    public class ThesesUserEntry : IDatabaseEntity
+    public class ThesesUserEntry : IDatabaseEntity, IAuditableEntity
     {
         /// <summary>
         /// Ид
@@ -43,5 +44,7 @@ namespace GraduationWorksOrganizer.Database.Models
         /// Изпращания за удобрение дати за защита
         /// </summary>
         public ICollection<ThesisApprovementRequest> ThesesRequests { get; set; }
+        public DateTime CreationDate { get; set; }
+        public DateTime LastModified { get; set; }
     }
 }

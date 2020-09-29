@@ -11,11 +11,6 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
     public class PreviewThesisViewModel : ThesesViewModel, IAutoMapperViewModel
     {
         /// <summary>
-        /// Одобрил
-        /// </summary>
-        public InnerApplicationUserViewModel Approval { get; set; }
-
-        /// <summary>
         /// Описание
         /// </summary>
         public string Description { get; set; }
@@ -23,7 +18,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
         /// <summary>
         /// Клас за изисквания
         /// </summary>
-        public IEnumerable<RequermentViewModel> Requerments { get; set; }
+        public IEnumerable<InnerRequermentViewModel> Requerments { get; set; }
 
         /// <summary>
         /// Метод за конфигурация
@@ -33,7 +28,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
         {
             base.ConfigureMap(expression);
             expression.CreateMap<Theses, PreviewThesisViewModel>();
-            expression.CreateMap<ThesisRequerment, RequermentViewModel>();
+            expression.CreateMap<ThesisRequerment, InnerRequermentViewModel>();
         }
     }
 }

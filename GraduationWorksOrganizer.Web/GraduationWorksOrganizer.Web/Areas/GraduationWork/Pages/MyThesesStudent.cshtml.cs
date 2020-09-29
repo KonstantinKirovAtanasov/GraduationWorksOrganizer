@@ -79,10 +79,8 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
             foreach (PreviewThesisViewModel prvm in viewModels.OrderBy(p => p.CreationDate))
             {
                 ThesesUserEntry thesesUserEntry = await _thesisService.GetUserEntry(userId, prvm.Id);
-                UserEntryViewModel userEntry = new UserEntryViewModel() { Id = thesesUserEntry.Id, State = thesesUserEntry.State };
-
-                if (userEntry.State == Common.Enums.ThesisUserEntryState.Initialized)
-                    CurrentTheseses.Add(new CompositePreviewThesisViewModel() { ThesisViewModel = prvm, UserEntry = userEntry });
+                UserEntryBaseViewModel userEntry = new UserEntryBaseViewModel() { Id = thesesUserEntry.Id, State = thesesUserEntry.State };
+                CurrentTheseses.Add(new CompositePreviewThesisViewModel() { ThesisViewModel = prvm, UserEntry = userEntry });
             }
         }
 

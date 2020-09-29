@@ -8,7 +8,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
     /// <summary>
     /// Вътрешен ВМ за изискване
     /// </summary>
-    public class RequermentViewModel
+    public class InnerRequermentViewModel
     {
         /// <summary>
         /// Описание

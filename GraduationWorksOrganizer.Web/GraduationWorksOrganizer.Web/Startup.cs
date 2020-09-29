@@ -69,6 +69,8 @@ namespace GraduationWorksOrganizer.Web
             services.AddScoped<ThesisService>();
             services.AddScoped<StudentDatabaseService>();
             services.AddScoped<UserEntryFilesDatabaseService>();
+            services.AddScoped<ThesisApprovementService>();
+            services.AddScoped<MapperService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

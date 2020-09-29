@@ -13,7 +13,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
         /// <summary>
         /// Записвания на трудентите на текущата тема
         /// </summary>
-        public IEnumerable<UserEntryViewModel> UserEntries { get; set; }
+        public IEnumerable<UserEntryBaseViewModel> UserEntries { get; set; }
 
         /// <summary>
         /// овъррайд за ConfigureMap
@@ -23,7 +23,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
         {
             base.ConfigureMap(expression);
             expression.CreateMap<Theses, PreviewThesisExtendedViewModel>();
-            expression.CreateMap<ThesesUserEntry, UserEntryViewModel>();
+            expression.CreateMap<ThesesUserEntry, UserEntryBaseViewModel>();
         }
     }
 }

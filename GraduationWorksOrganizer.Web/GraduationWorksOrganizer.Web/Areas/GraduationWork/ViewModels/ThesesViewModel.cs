@@ -2,6 +2,7 @@
 using GraduationWorksOrganizer.Core.ViewModels;
 using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Models.Base;
+using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.InnerViewModels;
 using System;
 using static GraduationWorksOrganizer.Common.Enums;
 
@@ -76,36 +77,5 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
 
         #endregion
 
-        /// <summary>
-        /// ВМ за специалност
-        /// </summary>
-        public class InnerSubjectViewModel
-        {
-            /// <summary>
-            /// Ид
-            /// </summary>
-            public int Id { get; set; }
-
-            /// <summary>
-            /// Наименование
-            /// </summary>
-            public string Name { get; set; }
-        }
-
-        /// <summary>
-        /// ВМ за специалност
-        /// </summary>
-        public class InnerApplicationUserViewModel
-        {
-            /// <summary>
-            /// Ид
-            /// </summary>
-            public string Id { get; set; }
-
-            /// <summary>
-            /// Наименование
-            /// </summary>
-            public string Name { get; set; }
-        }
     }
 }

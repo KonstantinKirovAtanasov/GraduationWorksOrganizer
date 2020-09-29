@@ -5,32 +5,68 @@
 
 <h2> Моите теми</h2>
 
-<table class="table table-bordered table-hover mb-0">
-    <thead>
-        <tr>
-            <th> Заглавие:</th>
-            <th> Тип:</th>
-            <th> Предмет:</th>
-            <th> Автор:</th>
-            <th> Описание на завката:</th>
-            <th> Дата на създаване:</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th>
-                <a class="btn btn-outline-light" data-toggle="modal">
-                    @*data-target="#exampleModal-@thesisModel.ThesisViewModel.Id"*@
-                    <img class="icon" src="~/images/previewThesisIcon.png" />
-                </a>
-            </th>
-        </tr>
-    </tbody>
-</table>
+@if (Model.Theseses.Any())
+{
+    foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.MyThesesTeacherViewModel thesisModel in Model.Theseses)
+    {
+        <div class="border">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="row-md">
+                            <text class="text-left font-weight-bold">@thesisModel.ThesesViewModel.Title</text>
+                        </div>
+                        <div class="row-md">
+                            <text class="text-left">@thesisModel.UserEntry.Student.Name</text>
+                            <text class="justify-content-end">@thesisModel.UserEntry.Student.FacultyNumber</text>
+                        </div>
+                        <div class="row-md">
+                            <text class="text-left">От дата: </text>
+                            <text class="text-left">@thesisModel.UserEntry.CreationDate.ToShortDateString()г.</text>
+                        </div>
+                    </div>
+                    <div class="justify-content-right">
+                        <div class="row">
+                            <a class="btn btn-floating float-right" data-toggle="modal" data-target="#exampleModal-@thesisModel.ThesesViewModel.Id">
+                                <img class="icon" src="~/images/previewThesisIcon.png" />
+                            </a>
+                            <a class="btn btn-floating float-right file-request" data-toggle="collapse" href="#collapse-upload-data-@thesisModel.UserEntry.Id" role="button" aria-expanded="false" data-ajax-request-filename="@thesisModel.UserEntry.Id">
+                                <img class="icon" src="~/images/uploadIcon.png" />
+                            </a>
+                        </div>
+                        <a class="btn btn-outline-primary" asp-area="GraduationWork" asp-page="/ThesesCorrespondence" asp-route-thesisId="@thesisModel.ThesesViewModel.Id">Към кореспонденцията</a>
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleModal-@thesisModel.ThesesViewModel.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel--@thesisModel.ThesesViewModel.Id" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel-@thesisModel.ThesesViewModel.Id">@thesisModel.ThesesViewModel.Title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="width:100%">
+                                <p class="font-weight-bold">Описание</p>
+                                <p class="text-md-left" style="white-space: pre-wrap">@thesisModel.ThesesViewModel.Description </p>
+                                <span />
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <text>@thesisModel.ThesesViewModel.Type</text>
+                                    </div>
+                                    <div class="col text-right">
+                                        <text>@thesisModel.ThesesViewModel.CreationDate.ToShortDateString() </text>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+    }
+}
+else
+{ <h3>Нямате теми чакащи одобрение</h3>
+}

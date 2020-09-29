@@ -11,18 +11,18 @@
         <h5 class="text-center">@Model.Thesis.Subject.Name</h5>
 
         <p class="font-weight-bold">Описание</p>
-        <p class="text-md-left rich-text">        @Model.Thesis.Description </p>
+        <p class="text-md-left" style="white-space: pre-wrap">        @Model.Thesis.Description </p>
 
         @if (Model.Thesis.Requerments.Any())
         {
             <p class="font-weight-bold">Изисквания</p>
         }
-        @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.RequermentViewModel requerment in Model.Thesis.Requerments)
+        @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.InnerRequermentViewModel requerment in Model.Thesis.Requerments)
         {
             <div class="row">
                 <div class="col text-left">
                     <text>&#8226;</text>
-                    <text>@requerment.Description</text>
+                    <text style="white-space: pre-wrap">@requerment.Description</text>
                 </div>
                 <div class="col text-right">
                     <text>@requerment.MaxPointsCount точки</text>

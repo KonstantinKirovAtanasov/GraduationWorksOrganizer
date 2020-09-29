@@ -40,7 +40,7 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices.ViewModels
         /// <summary>
         /// Колекция с изисквания
         /// </summary>
-        public List<RequermentViewModel> Requerments { get; set; }
+        public List<InnerRequermentViewModel> Requerments { get; set; }
 
         #region IAutoMapperViewModel
 
@@ -60,7 +60,7 @@ namespace GraduationWorksOrganizer.Services.MapEntitiesServices.ViewModels
         protected virtual void ConfigureMap(IMapperConfigurationExpression expression)
         {
             expression.CreateMap<AddThesisViewModel, Theses>();
-            expression.CreateMap<RequermentViewModel, ThesisRequerment>();
+            expression.CreateMap<InnerRequermentViewModel, ThesisRequerment>();
         }
 
         #endregion

@@ -13,6 +13,6 @@
         /// <summary>
         /// Модел за записан студент
         /// </summary>
-        public UserEntryViewModel UserEntry { get; set; }
+        public UserEntryBaseViewModel UserEntry { get; set; }
     }
 }

@@ -1,9 +1,16 @@
-﻿using GraduationWorksOrganizer.Database.Models;
+﻿using GraduationWorksOrganizer.Core.Database.Models;
+using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Models.Base;
 using GraduationWorksOrganizer.Database.Seeds;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Database
 {
@@ -229,6 +236,27 @@ namespace GraduationWorksOrganizer.Database
             });
 
             #endregion // Seeds
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            IEnumerator<EntityEntry> enumerator = ChangeTracker.Entries().GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                EntityEntry entry = enumerator.Current;
+                if (typeof(IAuditableEntity).IsAssignableFrom(entry.Entity.GetType()))
+                {
+                    if (entry.State == EntityState.Added)
+                    {
+                        (entry.Entity as IAuditableEntity).CreationDate = DateTime.Now;
+                    }
+                    else if (entry.State == EntityState.Modified)
+                    {
+                        (entry.Entity as IAuditableEntity).LastModified = DateTime.Now;
+                    }
+                }
+            }
+            return base.SaveChangesAsync(cancellationToken);
         }
     }
 }

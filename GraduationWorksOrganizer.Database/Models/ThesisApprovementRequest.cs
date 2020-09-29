@@ -1,11 +1,12 @@
 ﻿using GraduationWorksOrganizer.Core.Database.Models;
+using System;
 
 namespace GraduationWorksOrganizer.Database.Models
 {
     /// <summary>
     /// 
     /// </summary>
-    public class ThesisApprovementRequest : IDatabaseEntity
+    public class ThesisApprovementRequest : IDatabaseEntity, IAuditableEntity
     {
         /// <summary>
         /// Ид
@@ -41,5 +42,7 @@ namespace GraduationWorksOrganizer.Database.Models
         /// Описание на Request-а
         /// </summary>
         public string ResponseDescription { get; set; }
+        public DateTime CreationDate { get; set; }
+        public DateTime LastModified { get; set; }
     }
 }

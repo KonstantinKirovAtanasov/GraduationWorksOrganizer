@@ -48,14 +48,14 @@
                             </div>
                             <div class="modal-body" style="width:100%">
                                 <p class="font-weight-bold">Описание</p>
-                                <p class="text-md-left">@thesisModel.ThesisViewModel.Description </p>
+                                <p class="text-md-left" style="white-space: pre-wrap">@thesisModel.ThesisViewModel.Description </p>
                                 <p class="font-weight-bold">Изисквания</p>
-                                @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.RequermentViewModel requerment in thesisModel.ThesisViewModel.Requerments)
+                                @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.InnerRequermentViewModel requerment in thesisModel.ThesisViewModel.Requerments)
                                 {
                                     <div class="row">
                                         <div class="col text-left">
                                             <text>&#8226;</text>
-                                            <text>@requerment.Description</text>
+                                            <text style="white-space: pre-wrap">@requerment.Description</text>
                                         </div>
                                         <div class="col text-right">
                                             <text>@requerment.MaxPointsCount точки</text>

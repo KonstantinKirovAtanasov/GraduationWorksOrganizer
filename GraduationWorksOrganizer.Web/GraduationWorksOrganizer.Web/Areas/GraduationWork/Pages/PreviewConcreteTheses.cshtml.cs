@@ -91,7 +91,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
             }
 
             await _thesisService.ApplyForTheThesis(userId, thesisId);
-            return Redirect("MyTheses");
+            return Redirect("MyThesesStudent");
         }
 
         #endregion

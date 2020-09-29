@@ -34,7 +34,7 @@ namespace GraduationWorksOrganizer.Database.Models
         public string PersonalNumber { get; set; }
 
         /// <summary>
-        /// Факълтетен Номер
+        /// Факултетен Номер
         /// </summary>
         public string FacultyNumber { get; set; }
 

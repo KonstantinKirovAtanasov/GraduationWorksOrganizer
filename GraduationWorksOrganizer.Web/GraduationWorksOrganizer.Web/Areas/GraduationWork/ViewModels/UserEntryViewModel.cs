@@ -1,24 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using static GraduationWorksOrganizer.Common.Enums;
+﻿using AutoMapper;
+using GraduationWorksOrganizer.Core.ViewModels;
+using GraduationWorksOrganizer.Database.Models;
+using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.InnerViewModels;
+using System;
 
 namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
 {
-    /// <summary>
-    /// ВМ за UserEntry
-    /// </summary>
-    public class UserEntryViewModel
+    public class UserEntryViewModel : UserEntryBaseViewModel, IAutoMapperViewModel
     {
-        /// <summary>
-        /// Ид на UserEntry
-        /// </summary>
-        public int Id { get; set; }
+        public InnerStudentViewModel Student { get; set; }
+
+        public DateTime CreationDate { get; set; }
+
+        #region IAutoMapperViewModel
 
         /// <summary>
-        /// Статус
+        /// Метод който връща конфигурацията на АутоМапер-а
         /// </summary>
-        public ThesisUserEntryState State { get; set; }
+        /// <returns></returns>
+        public MapperConfiguration GetMapperConfiguration()
+        {
+            return new MapperConfiguration(ConfigureMap);
+        }
+
+        /// <summary>
+        /// Метод за конфигурация
+        /// </summary>
+        /// <param name="expression"></param>
+        protected virtual void ConfigureMap(IMapperConfigurationExpression expression)
+        {
+            expression.CreateMap<ThesesUserEntry, UserEntryViewModel>();
+            expression.CreateMap<Student, InnerStudentViewModel>();
+        }
+
+        #endregion
+
+
     }
 }
