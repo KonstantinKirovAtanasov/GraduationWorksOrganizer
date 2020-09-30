@@ -30,11 +30,8 @@
                             <a class="btn btn-floating float-right" data-toggle="modal" data-target="#exampleModal-@thesisModel.ThesesViewModel.Id">
                                 <img class="icon" src="~/images/previewThesisIcon.png" />
                             </a>
-                            <a class="btn btn-floating float-right file-request" data-toggle="collapse" href="#collapse-upload-data-@thesisModel.UserEntry.Id" role="button" aria-expanded="false" data-ajax-request-filename="@thesisModel.UserEntry.Id">
-                                <img class="icon" src="~/images/uploadIcon.png" />
-                            </a>
                         </div>
-                        <a class="btn btn-outline-primary" asp-area="GraduationWork" asp-page="/ThesesCorrespondence" asp-route-thesisId="@thesisModel.ThesesViewModel.Id">Към кореспонденцията</a>
+                        <a class="btn btn-outline-primary" asp-area="GraduationWork" asp-page="/ThesesCorrespondence" asp-route-userEntryId="@thesisModel.UserEntry.Id">Към кореспонденцията</a>
                     </div>
                 </div>
                 <div class="modal fade" id="exampleModal-@thesisModel.ThesesViewModel.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel--@thesisModel.ThesesViewModel.Id" aria-hidden="true">
