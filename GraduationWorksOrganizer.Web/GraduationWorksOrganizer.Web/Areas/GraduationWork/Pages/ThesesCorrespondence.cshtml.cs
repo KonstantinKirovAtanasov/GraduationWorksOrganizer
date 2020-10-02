@@ -40,6 +40,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
                                    {
                                        Name = f.FileName,
                                        Size = f.Content.Length / 1024,
+                                       Id = f.Id
                                    });
         }
 

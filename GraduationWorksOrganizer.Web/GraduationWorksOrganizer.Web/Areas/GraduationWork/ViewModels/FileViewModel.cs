@@ -10,5 +10,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels
         public string Name { get; set; }
 
         public int Size { get; set; }
+
+        public int Id { get; set; }
     }
 }

@@ -22,11 +22,11 @@
                     @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.FileViewModel filevm in Model.Files)
                     {
                         <tr>
-                            <td>@filevm.Name</td>
-                            <td>@filevm.Size KB</td>
+                            <td class="small">@filevm.Name</td>
+                            <td class="small">@filevm.Size KB</td>
                             <td>
-                                <a>
-
+                                <a class="nav-item btn btn-floating float-right download" data-ajax-request="@filevm.Id" role="button">
+                                    <img class="icon" src="https://localhost:44306/images/downloadIcon.png">
                                 </a>
                             </td>
                         </tr>
@@ -34,7 +34,57 @@
                 </tbody>
             </table>
         </div>
-
     </div>
+}
+else
+{
+    <h4></h4>
+}
+
+@section Scripts{
+
+    <script>
+        const attrFileId = 'data-ajax-request';
+        const downloadFileEndPoint = 'https://localhost:44306/api/file/download'
+
+        window.loaded = RegisterHandlers();
+
+        function RegisterHandlers() {
+            let files = document.getElementsByClassName('download');
+            Array.prototype.forEach.call(files, (file) => {
+                const fileId = file.getAttribute(attrFileId);
+                file.addEventListener('click', DownloadFileRequest(fileId));
+            });
+        }
+
+        function DownloadFileRequest(fileId) {
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", downloadFileEndPoint, true);
+            xhr.responseType = 'arraybuffer';
+            xhr.setRequestHeader('fileContentId', fileId);
+            xhr.send(null);
+            xhr.onreadystatechange = function () {
+                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                    DownloadActualFile();
+                }
+            }
+
+            function DownloadActualFile() {
+                let fileName = xhr.getResponseHeader('fileName');
+                let url = window.URL.createObjectURL(new Blob([xhr.response]));
+                let downloadElement = document.createElement("a");
+
+                document.body.appendChild(downloadElement);
+                downloadElement.style = "display: none";
+                downloadElement.download = fileName;
+                downloadElement.href = url;
+                downloadElement.click();
+
+                document.body.removeChild(downloadElement);
+            };
+        }
+
+    </script>
 
 }
