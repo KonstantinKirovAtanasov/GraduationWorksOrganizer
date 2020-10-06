@@ -65,11 +65,12 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         {
             for (int i = 0; i < thesesViewModels.Count(); i++)
             {
-                yield return new MyThesesTeacherViewModel()
-                {
-                    ThesesViewModel = thesesViewModels.ElementAt(i),
-                    UserEntry = userEntryViewModels.ElementAt(i),
-                };
+                if (userEntryViewModels.ElementAt(i).State != Enums.ThesisUserEntryState.Initialized && userEntryViewModels.ElementAt(i).State != Enums.ThesisUserEntryState.CompletedWithMarkItem)
+                    yield return new MyThesesTeacherViewModel()
+                    {
+                        ThesesViewModel = thesesViewModels.ElementAt(i),
+                        UserEntry = userEntryViewModels.ElementAt(i),
+                    };
             }
         }
 

@@ -5,56 +5,78 @@
 
 
 
-@if (User.IsInRole(GraduationWorksOrganizer.Common.Constants.RoleNames.TeacherRole))
-{
-    <h5>Файлове</h5>
-    <div class="row">
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>Име на файла</th>
-                    <th>Размер</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.FileViewModel filevm in Model.Files)
-                {
+
+<div class="row">
+    @if (Model.ApprovementRequests != null)
+    {
+        <div class="col border-info">
+            @foreach (GraduationWorksOrganizer.Database.Models.ThesisApprovementRequest request in Model.ApprovementRequests)
+            {
+                <div class="row justify-content-start">
+                    <div class="w-75 border-info">
+                        <p class="text-left">От дата: @request.CreationDate.ToLongDateString()</p>
+                        <p class="text-left">@request.RequestDescription</p>
+                    </div>
+                    @if (!string.IsNullOrEmpty(@request.ResponseDescription))
+                    {
+                        <div class="w-75 border-info justify-content-end">
+                            <p class="text-right">От дата: @request.LastModified.ToLongDateString()</p>
+                            <p class="text-right">@request.ResponseDescription</p>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    }
+    @if (User.IsInRole(GraduationWorksOrganizer.Common.Constants.RoleNames.TeacherRole))
+    {
+        <div class="col">
+            <h5>Файлове</h5>
+            <table class="table table-bordered table-hover">
+                <thead>
                     <tr>
-                        <td class="small">@filevm.Name</td>
-                        <td class="small">@filevm.Size KB</td>
-                        <td>
-                            <a class="nav-item btn btn-floating float-right download" data-ajax-request="@filevm.Id" role="button">
-                                <img class="icon" src="https://localhost:44306/images/downloadIcon.png">
-                            </a>
-                        </td>
+                        <th>Име на файла</th>
+                        <th>Размер</th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.FileViewModel filevm in Model.Files)
+                    {
+                        <tr>
+                            <td class="small">@filevm.Name</td>
+                            <td class="small">@filevm.Size KB</td>
+                            <td>
+                                <a class="nav-item btn btn-floating float-right download" data-ajax-request="@filevm.Id" role="button">
+                                    <img class="icon" src="https://localhost:44306/images/downloadIcon.png">
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
 
-        <br />
-        <form method="post" class="container">
-            <p class="font-weight-bold">Дата за защита</p>
-            <select asp-for="Input.DateDefenceEventId" class="form-control">
-                <option value="1">1</option>
-            </select>
-
-            <input asp-for="Input.UserEntryId" hidden value="@Model.UserEntryId" />
-            <p class="font-weight-bold">Описание</p>
-            <textarea asp-for="Input.Description" class="form-control resize"></textarea>
 
             <br />
+            <form method="post" class="container">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <p class="font-weight-bold">Дата за защита</p>
+                <select asp-for="Input.DateDefenceEventId" class="form-control">
+                    <option value="1">1</option>
+                </select>
 
-            <button type="submit" asp-page-handler="Proceed" class="btn btn-success float-left">Одобри</button>
-            <button type="submit" asp-page-handler="Cancel" class="btn btn-danger float-right">Откажи</button>
-        </form>
-    </div>
-}
-else
-{
-    <h4>Няма налични файлове по темата</h4>
-}
+                <input asp-for="Input.UserEntryId" hidden value="@Model.UserEntryId" />
+                <p class="font-weight-bold">Описание</p>
+                <textarea asp-for="Input.Description" class="form-control resize"></textarea>
+
+                <br />
+
+                <button type="submit" asp-page-handler="Proceed" class="btn btn-success float-left">Одобри</button>
+                <button type="submit" asp-page-handler="Cancel" class="btn btn-danger float-right">Откажи</button>
+            </form>
+        </div>
+    }
+</div>
 
 @section Scripts{
     <script src="~/wwwroot/js/global/autoHeigthTextArea.js"></script>

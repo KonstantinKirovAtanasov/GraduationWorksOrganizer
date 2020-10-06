@@ -28,15 +28,6 @@ namespace GraduationWorksOrganizer.Database.Services
         #region Methods
 
         /// <summary>
-        /// Метод който връща Query
-        /// </summary>
-        /// <returns></returns>
-        public IQueryable<Theses> GetQuery()
-        {
-            return _dbContext.Theses;
-        }
-
-        /// <summary>
         /// Метод който връща всички записани студенти според темата
         /// </summary>
         /// <param name="thesisId"></param>
