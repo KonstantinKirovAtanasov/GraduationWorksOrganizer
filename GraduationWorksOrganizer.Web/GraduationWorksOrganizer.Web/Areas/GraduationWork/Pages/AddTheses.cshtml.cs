@@ -2,6 +2,7 @@
 using GraduationWorksOrganizer.Core.Database;
 using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Models.Base;
+using GraduationWorksOrganizer.Database.Services;
 using GraduationWorksOrganizer.Services.MapEntitiesServices;
 using GraduationWorksOrganizer.Services.MapEntitiesServices.ViewModels;
 using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
@@ -23,6 +24,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         private readonly IAsyncRepository<Subject> _subjectsdbService;
         private readonly ThesisViewModelService<ThesesViewModel> _themesService;
         private readonly UserManager<ApplicationIdentityBase> _userManager;
+        private readonly TeachersDatabaseService _teachersDatabaseServce;
 
         /// <summary>
         /// Конструктор
@@ -31,11 +33,13 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <param name="themesService"></param>
         public AddThesesModel(IAsyncRepository<Subject> subjectsdbService,
                               ThesisViewModelService<ThesesViewModel> themesService,
-                              UserManager<ApplicationIdentityBase> userManager)
+                              UserManager<ApplicationIdentityBase> userManager,
+                              TeachersDatabaseService teachersDatabaseServce)
         {
             _subjectsdbService = subjectsdbService;
             _themesService = themesService;
             _userManager = userManager;
+            _teachersDatabaseServce = teachersDatabaseServce;
         }
 
 
@@ -50,7 +54,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <summary>
         /// Специалностти
         /// </summary>
-        public IEnumerable<Subject> Specialties { get; set; }
+        public IEnumerable<Subject> Subjects { get; set; }
 
         /// <summary>
         /// Гет
@@ -58,7 +62,11 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <returns></returns>
         public async Task OnGet()
         {
-            Specialties = await _subjectsdbService.GetAll();
+            string teacherid = _userManager.GetUserId(User);
+            Teacher teacher = await _teachersDatabaseServce.GetTeacher(teacherid);
+            if (teacher == null)
+                return;
+            Subjects = await _subjectsdbService.GetAll(s => s.Specialty.DepartmentId == teacher.DepartmentId);
         }
 
         /// <summary>
@@ -67,7 +75,7 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         /// <returns></returns>
         public async Task<IActionResult> OnPost()
         {
-            Input.CreatorId = _userManager.GetUserId(User).ToString();
+            Input.CreatorId = _userManager.GetUserId(User);
 
             if (ModelState.IsValid)
             {
@@ -75,7 +83,12 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
                 return Redirect("BachelorThesesList");
             }
 
-            Specialties = await _subjectsdbService.GetAll();
+            string teacherid = _userManager.GetUserId(User);
+            Teacher teacher = await _teachersDatabaseServce.GetTeacher(teacherid);
+            if (teacher == null)
+                return NotFound();
+            Subjects = await _subjectsdbService.GetAll(s => s.Specialty.DepartmentId == teacher.DepartmentId);
+
             return Page();
         }
 

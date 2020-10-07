@@ -9,17 +9,19 @@
 <div class="row">
     @if (Model.ApprovementRequests != null)
     {
-        <div class="col border-info">
+        <div class="col">
             @foreach (GraduationWorksOrganizer.Database.Models.ThesisApprovementRequest request in Model.ApprovementRequests)
             {
-                <div class="row justify-content-start">
-                    <div class="w-75 border-info">
+                <div class="row">
+                    <div class="w-75">
                         <p class="text-left">От дата: @request.CreationDate.ToLongDateString()</p>
                         <p class="text-left">@request.RequestDescription</p>
                     </div>
+                    <span class="w-25"></span>
                     @if (!string.IsNullOrEmpty(@request.ResponseDescription))
                     {
-                        <div class="w-75 border-info justify-content-end">
+                        <span class="w-25"></span>
+                        <div class="w-75">
                             <p class="text-right">От дата: @request.LastModified.ToLongDateString()</p>
                             <p class="text-right">@request.ResponseDescription</p>
                         </div>
@@ -28,34 +30,34 @@
             }
         </div>
     }
-    @if (User.IsInRole(GraduationWorksOrganizer.Common.Constants.RoleNames.TeacherRole))
-    {
-        <div class="col">
-            <h5>Файлове</h5>
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>Име на файла</th>
-                        <th>Размер</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.FileViewModel filevm in Model.Files)
-                    {
-                        <tr>
-                            <td class="small">@filevm.Name</td>
-                            <td class="small">@filevm.Size KB</td>
-                            <td>
-                                <a class="nav-item btn btn-floating float-right download" data-ajax-request="@filevm.Id" role="button">
-                                    <img class="icon" src="https://localhost:44306/images/downloadIcon.png">
-                                </a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
 
+    <div class="col">
+        <h5>Файлове</h5>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Име на файла</th>
+                    <th>Размер</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.FileViewModel filevm in Model.Files)
+                {
+                    <tr>
+                        <td class="small">@filevm.Name</td>
+                        <td class="small">@filevm.Size KB</td>
+                        <td>
+                            <a class="nav-item btn btn-floating float-right download" data-ajax-request="@filevm.Id" role="button">
+                                <img class="icon" src="https://localhost:44306/images/downloadIcon.png">
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if (User.IsInRole(GraduationWorksOrganizer.Common.Constants.RoleNames.TeacherRole))
+        {
 
             <br />
             <form method="post" class="container">
@@ -74,12 +76,11 @@
                 <button type="submit" asp-page-handler="Proceed" class="btn btn-success float-left">Одобри</button>
                 <button type="submit" asp-page-handler="Cancel" class="btn btn-danger float-right">Откажи</button>
             </form>
-        </div>
-    }
+        }
+    </div>
 </div>
 
 @section Scripts{
-    <script src="~/wwwroot/js/global/autoHeigthTextArea.js"></script>
     <script>
         const attrFileId = 'data-ajax-request';
         const downloadFileEndPoint = 'https://localhost:44306/api/file/download'

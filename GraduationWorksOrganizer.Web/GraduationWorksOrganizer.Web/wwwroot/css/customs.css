@@ -70,13 +70,12 @@ td textarea.multilineTextArea {
 .icon {
     width: 2em;
     height: 2em;
-    margin: 2px;
+    margin: 5px;
+    transition: transform .2s;
 }
 
-    .icon :hover {
-        width: 2.2em;
-        height: 2.2em;
-        overflow: hidden;
+    .icon:hover {
+        transform: scale(1.35);
     }
 
 .avatar {

@@ -23,18 +23,18 @@
                         </div>
                     </div>
                     <div class="justify-content-right">
-                        <div class="row">
-                            <a class="btn btn-floating float-right" data-toggle="modal" data-target="#exampleModal-@thesisModel.ThesisViewModel.Id">
-                                <img class="icon" src="~/images/previewThesisIcon.png" />
-                            </a>
-                            <a class="btn btn-floating float-right file-request" data-toggle="collapse" href="#collapse-upload-data-@thesisModel.UserEntry.Id" role="button" aria-expanded="false" data-ajax-request-filename="@thesisModel.UserEntry.Id">
-                                <img class="icon" src="~/images/uploadIcon.png" />
-                            </a>
-                            <a class="btn btn-floating float-right process-theses" data-toggle="collapse" href="#collapse-request-teacher-@thesisModel.UserEntry.Id" role="button" aria-expanded="false" data-ajax-request-subject="@thesisModel.ThesisViewModel.Subject.Id" data-ajax-userentry="@thesisModel.UserEntry.Id">
-                                <img class="icon" src="~/images/peoceedIcon.png" />
-                            </a>
-                        </div>
-                        <a class="btn btn-outline-primary" asp-area="GraduationWork" asp-page="/ThesesCorrespondence" asp-route-userEntryId="@thesisModel.UserEntry.Id">Към кореспонденцията</a>
+                        <a class="float-right" data-toggle="modal" data-target="#exampleModal-@thesisModel.ThesisViewModel.Id">
+                            <img class="icon" src="~/images/previewThesisIcon.png" />
+                        </a>
+                        <a class="float-right file-request" data-toggle="collapse" href="#collapse-upload-data-@thesisModel.UserEntry.Id" role="button" aria-expanded="false" data-ajax-request-filename="@thesisModel.UserEntry.Id">
+                            <img class="icon" src="~/images/uploadIcon.png" />
+                        </a>
+                        <a class="float-right process-theses" data-toggle="collapse" href="#collapse-request-teacher-@thesisModel.UserEntry.Id" role="button" aria-expanded="false" data-ajax-request-subject="@thesisModel.ThesisViewModel.Subject.Id" data-ajax-userentry="@thesisModel.UserEntry.Id">
+                            <img class="icon" src="~/images/peoceedIcon.png" />
+                        </a>
+                        <a class="float-right" asp-area="GraduationWork" asp-page="/ThesesCorrespondence" asp-route-userEntryId="@thesisModel.UserEntry.Id">
+                            <img class="icon" src="~/images/correspondancepng.png" />
+                        </a>
                     </div>
                 </div>
                 <div class="modal fade" id="exampleModal-@thesisModel.ThesisViewModel.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel--@thesisModel.ThesisViewModel.Id" aria-hidden="true">
@@ -327,7 +327,7 @@ else
         function RequestTeachers(item) {
             let attributeValue = $(item).attr(attrSubjectId);
             const userEntryId = $(item).attr(attrUserEntry);
-            if (teachersCache[attributeValue])
+            if (teachersCache[userEntryId])
                 return;
 
             $.ajax({

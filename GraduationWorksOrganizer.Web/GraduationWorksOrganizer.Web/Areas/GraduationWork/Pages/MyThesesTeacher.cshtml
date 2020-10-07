@@ -26,12 +26,12 @@
                         </div>
                     </div>
                     <div class="justify-content-right">
-                        <div class="row">
-                            <a class="btn btn-floating float-right" data-toggle="modal" data-target="#exampleModal-@thesisModel.ThesesViewModel.Id">
+                            <a class="float-right" data-toggle="modal" data-target="#exampleModal-@thesisModel.ThesesViewModel.Id">
                                 <img class="icon" src="~/images/previewThesisIcon.png" />
                             </a>
-                        </div>
-                        <a class="btn btn-outline-primary" asp-area="GraduationWork" asp-page="/ThesesCorrespondence" asp-route-userEntryId="@thesisModel.UserEntry.Id">Към кореспонденцията</a>
+                            <a class="float-right" asp-area="GraduationWork" asp-page="/ThesesCorrespondence" asp-route-userEntryId="@thesisModel.UserEntry.Id">
+                                <img class="icon" src="~/images/correspondancepng.png" />
+                            </a>
                     </div>
                 </div>
                 <div class="modal fade" id="exampleModal-@thesisModel.ThesesViewModel.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel--@thesisModel.ThesesViewModel.Id" aria-hidden="true">
