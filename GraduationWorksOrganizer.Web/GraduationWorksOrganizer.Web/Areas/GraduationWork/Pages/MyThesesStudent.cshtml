@@ -35,6 +35,30 @@
                         <a class="float-right" asp-area="GraduationWork" asp-page="/ThesesCorrespondence" asp-route-userEntryId="@thesisModel.UserEntry.Id">
                             <img class="icon" src="~/images/correspondancepng.png" />
                         </a>
+                        @if (thesisModel.UserEntry.State == GraduationWorksOrganizer.Common.Enums.ThesisUserEntryState.Initialized)
+                        {
+                            <div>
+                                <text style="font-weight: bold; color:Highlight">Текуща</text>
+                            </div>
+                        }
+                        else if (thesisModel.UserEntry.State == GraduationWorksOrganizer.Common.Enums.ThesisUserEntryState.SendForApprovement)
+                        {
+                            <div>
+                                <text style="font-weight: bold; color:orange">Изпратена за одобрение</text>
+                            </div>
+                        }
+                        else if (thesisModel.UserEntry.State == GraduationWorksOrganizer.Common.Enums.ThesisUserEntryState.Approve)
+                        {
+                            <div>
+                                <text style="font-weight: bold; color:forestgreen">Одобрена</text>
+                            </div>
+                        }
+                        else if (thesisModel.UserEntry.State == GraduationWorksOrganizer.Common.Enums.ThesisUserEntryState.CompletedWithMarkItem)
+                        {
+                            <div>
+                                <text style="font-weight: bold;">Завършена с оценка</text>
+                            </div>
+                        }
                     </div>
                 </div>
                 <div class="modal fade" id="exampleModal-@thesisModel.ThesisViewModel.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel--@thesisModel.ThesisViewModel.Id" aria-hidden="true">
