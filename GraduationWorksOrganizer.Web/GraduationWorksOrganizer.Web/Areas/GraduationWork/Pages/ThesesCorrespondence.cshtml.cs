@@ -1,6 +1,9 @@
+using AutoMapper;
 using GraduationWorksOrganizer.Database.Models;
+using GraduationWorksOrganizer.Database.Models.Base;
 using GraduationWorksOrganizer.Database.Services.BaseServices;
 using GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +21,9 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         private readonly CombinedQueryBaseService<ThesesUserEntry> _thesisUserEntryDbService;
         private readonly CombinedQueryBaseService<ThesisDefenceEvent> _thesesDefenceEventDbService;
         private readonly CombinedQueryBaseService<ThesisApprovementRequest> _thesisApprovementDbService;
+        private readonly CombinedQueryBaseService<TeacherDefencesDates> _defenceDatesService;
+        private readonly UserManager<ApplicationIdentityBase> _userManager;
+        private readonly IMapper _mapper;
 
         #endregion
 
@@ -26,12 +32,17 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
         public ThesesCorrespondenceModel(CombinedQueryBaseService<ThesisUserEntryFileContent> filesDbService,
                                          CombinedQueryBaseService<ThesesUserEntry> thesisUserEntryDbService,
                                          CombinedQueryBaseService<ThesisDefenceEvent> thesesDefenceEventDbService,
-                                         CombinedQueryBaseService<ThesisApprovementRequest> thesisApprovementDbService)
+                                         CombinedQueryBaseService<ThesisApprovementRequest> thesisApprovementDbService,
+                                         CombinedQueryBaseService<TeacherDefencesDates> defenceDatesService,
+                                         UserManager<ApplicationIdentityBase> userManager)
         {
             _filesDbService = filesDbService;
             _thesisUserEntryDbService = thesisUserEntryDbService;
             _thesesDefenceEventDbService = thesesDefenceEventDbService;
             _thesisApprovementDbService = thesisApprovementDbService;
+            _defenceDatesService = defenceDatesService;
+            _userManager = userManager;
+            _mapper = new Mapper(new DefenceDateViewModel().GetMapperConfiguration());
         }
 
         #endregion
@@ -52,18 +63,33 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
 
         public IEnumerable<FileViewModel> Files { get; set; }
         public IEnumerable<ThesisApprovementRequest> ApprovementRequests { get; set; }
+        public IEnumerable<DefenceDateViewModel> DefenceDates { get; set; }
+        public DefenceDateViewModel SelectedDefenceDate { get; set; }
 
         public int UserEntryId { get; set; }
+
+        public async Task OnGet(int userEntryId)
+        {
 
         #endregion
 
         #region Methods
-
-        public async Task OnGet(int userEntryId)
-        {
+            UserEntryId = userEntryId;
             SelectFiles(userEntryId);
             await InitApprovementRequests(userEntryId);
-            UserEntryId = userEntryId;
+
+            string userId = _userManager.GetUserId(User);
+
+            ThesisDefenceEvent de = _thesesDefenceEventDbService.GetQuery().FirstOrDefault(de => de.ThesesUserEntryId == userEntryId);
+            if (de != null)
+            {
+                TeacherDefencesDates defencesDate = _defenceDatesService.GetQuery().First(dd => dd.Id == de.DefenceDateId);
+                SelectedDefenceDate = _mapper.Map<DefenceDateViewModel>(defencesDate);
+            }
+            else
+            {
+                DefenceDates = _defenceDatesService.GetQuery().Where(d => d.TeacherId == userId).Select(dd => _mapper.Map<DefenceDateViewModel>(dd));
+            }
         }
 
         public async Task<IActionResult> OnPostProceed()

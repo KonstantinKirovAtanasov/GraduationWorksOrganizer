@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace GraduationWorksOrganizer.Web.Areas.Commissions.Pages
+namespace GraduationWorksOrganizer.Web.Areas.Defence.Pages
 {
-    public class CommissionsListModel : PageModel
+    public class DefenceDatesModel : PageModel
     {
         public void OnGet()
         {

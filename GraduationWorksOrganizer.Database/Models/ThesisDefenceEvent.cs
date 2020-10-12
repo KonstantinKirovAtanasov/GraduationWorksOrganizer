@@ -15,7 +15,7 @@ namespace GraduationWorksOrganizer.Database.Models
         /// <summary>
         /// Дата на защита  
         /// </summary>
-        public CommissionDefencesDates DefencesDate { get; set; }
+        public TeacherDefencesDates DefencesDate { get; set; }
 
         /// <summary>
         /// Ид на датата на защита

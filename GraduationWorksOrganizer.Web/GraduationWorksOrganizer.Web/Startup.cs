@@ -7,7 +7,6 @@ using GraduationWorksOrganizer.Database;
 using GraduationWorksOrganizer.Database.Models.Base;
 using GraduationWorksOrganizer.Database.Services;
 using GraduationWorksOrganizer.Database.Services.BaseServices;
-using GraduationWorksOrganizer.Services.Commissions;
 using GraduationWorksOrganizer.Services.MapEntitiesServices;
 using GraduationWorksOrganizer.Services.Services;
 using GraduationWorksOrganizer.Web.SharedViewModels;
@@ -62,7 +61,6 @@ namespace GraduationWorksOrganizer.Web
             services.AddScoped(typeof(TeacherViewModelService<>));
             services.AddScoped(typeof(UserEntryFilesViewModelService<>));
 
-            services.AddScoped<CommissionsService>();
             services.AddScoped<ThesesDatabaseService>();
             services.AddScoped<TeachersDatabaseService>();
             services.AddScoped<ApplicationUserDatabaseService>();

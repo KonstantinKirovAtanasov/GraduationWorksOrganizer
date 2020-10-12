@@ -1,0 +1,78 @@
+﻿@page
+@model GraduationWorksOrganizer.Web.Areas.Commissions.Pages.CommissionsListModel
+@{
+    <div class="row">
+        <div class="col-3">
+            <h5>Филтър катедри</h5>
+        </div>
+        <div class="co-8">
+            <select id="deparment-filter-source" class="form-control">
+                @foreach (string departmentName in Model.DepartmentNames)
+                {
+                    <option>@departmentName</option>
+                }
+            </select>
+        </div>
+    </div>
+    <hr />
+    <div id="teachers-container" class="container">
+        @foreach (GraduationWorksOrganizer.Web.Areas.Commissions.ViewModels.PreviewTeacherViewModel tvm in Model.Teachers)
+        {
+            <div class="row" id="@tvm.TeacherId" filter-value="@tvm.DepartmentName">
+                <div class="col-3">
+                    @if (tvm.Image == null || tvm.Image.Length == 0)
+                    {
+                        <img class="avatar" alt="avatar" src="~/images/DefaultProfilePicture.png" />
+                    }
+                    else
+                    {
+                        <img class="avatar" alt="avatar" src="data:image/png;base64, @Convert.ToBase64String(tvm.Image)" />
+                    }
+                </div>
+                <div class="col-8">
+                    <div class="row">
+                        <text class="font-weight-bold">@tvm.ScienceDegree @tvm.Name</text>
+                    </div>
+                    <div class="row">
+                        <text>Кабинет: @tvm.Cabinet</text>
+                    </div>
+                    <div class="row">
+                        <text>Телефон: @tvm.PhoneNumber</text>
+                    </div>
+                    <div class="row">
+                        <text>Катедра: @tvm.DepartmentName</text>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@section Scripts{
+
+
+    <script>
+        const filter = document.getElementById('deparment-filter-source');
+        const elementsForFiltration = document.getElementById('teachers-container').children;
+
+        window.loaded = RegisterHandlers();
+
+        function RegisterHandlers() {
+            filter.addEventListener('change', CollapseElementByFilter);
+        }
+
+        function CollapseElementByFilter(event) {
+            Array.prototype.forEach.call(elementsForFiltration, (element) => {
+                const rowValue = element.getAttribute('filter-value');
+                const filterValue = event.target.options[event.target.selectedIndex].value;
+                if (rowValue === filterValue || filterValue === 'Всички') {
+                    element.style.display = 'flex';
+                }
+                else {
+                    element.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+}

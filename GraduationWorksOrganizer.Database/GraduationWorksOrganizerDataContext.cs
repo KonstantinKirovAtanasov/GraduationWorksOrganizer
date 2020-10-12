@@ -61,12 +61,7 @@ namespace GraduationWorksOrganizer.Database
         /// <summary>
         /// таблица с теми
         /// </summary>
-        public DbSet<Commission> Commissions { get; set; }
-
-        /// <summary>
-        /// таблица с теми
-        /// </summary>
-        public DbSet<CommissionDefencesDates> DefenceDates { get; set; }
+        public DbSet<TeacherDefencesDates> DefenceDates { get; set; }
 
         /// <summary>
         /// таблица с теми
@@ -127,8 +122,7 @@ namespace GraduationWorksOrganizer.Database
             builder.Entity<Group>().HasKey(g => g.Id);
             builder.Entity<HelpMessage>().HasKey(hm => hm.Id);
             builder.Entity<Theses>().HasKey(t => t.Id);
-            builder.Entity<Commission>().HasKey(c => c.Id);
-            builder.Entity<CommissionDefencesDates>().HasKey(cd => cd.Id);
+            builder.Entity<TeacherDefencesDates>().HasKey(cd => cd.Id);
             builder.Entity<ThesisDefenceEvent>().HasKey(td => td.Id);
             builder.Entity<ThesisMark>().HasKey(tm => tm.Id);
             builder.Entity<ThesisRequerment>().HasKey(tr => tr.Id);
@@ -161,12 +155,7 @@ namespace GraduationWorksOrganizer.Database
             builder.Entity<Group>().HasOne(g => g.Specialty).WithMany().HasForeignKey(g => g.SpecialtyId).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<Subject>().HasOne(d => d.Specialty).WithMany().HasForeignKey(s => s.SpecialtyId).OnDelete(DeleteBehavior.NoAction);
 
-            builder.Entity<Commission>().HasOne(c => c.Department).WithMany().HasForeignKey(c => c.DepartmentId).OnDelete(DeleteBehavior.NoAction);
-            builder.Entity<Commission>().HasOne(c => c.MainCommissionTeacher).WithMany().HasForeignKey(c => c.MainCommissionTeacherId).OnDelete(DeleteBehavior.NoAction);
-            builder.Entity<Commission>().HasMany(c => c.CommissionTeachers).WithOne().OnDelete(DeleteBehavior.NoAction);
-            builder.Entity<Commission>().HasMany(c => c.CommissionDefencesDates).WithOne().OnDelete(DeleteBehavior.NoAction);
-
-            builder.Entity<CommissionDefencesDates>().HasMany(cd => cd.Defences).WithOne(td => td.DefencesDate).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<TeacherDefencesDates>().HasMany(cd => cd.Defences).WithOne(td => td.DefencesDate).OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<ThesisDefenceEvent>().HasOne(td => td.DefencesDate).WithMany(cd => cd.Defences).HasForeignKey(td => td.DefenceDateId).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<ThesisDefenceEvent>().HasOne(td => td.ThesesUserEntry).WithOne().HasForeignKey<ThesisDefenceEvent>(t => t.ThesesUserEntryId).OnDelete(DeleteBehavior.NoAction);

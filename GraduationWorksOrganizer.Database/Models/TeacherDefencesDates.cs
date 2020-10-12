@@ -8,7 +8,7 @@ namespace GraduationWorksOrganizer.Database.Models
     /// <summary>
     /// Модел за дати за защита 
     /// </summary>
-    public class CommissionDefencesDates : IDatabaseEntity
+    public class TeacherDefencesDates : IDatabaseEntity
     {
         /// <summary>
         /// Id
@@ -34,6 +34,16 @@ namespace GraduationWorksOrganizer.Database.Models
         /// Максимален брой защити
         /// </summary>
         public int MaxThesisCount { get; set; }
+
+        /// <summary>
+        /// Преподавател
+        /// </summary>
+        public Teacher Teacher { get; set; }
+
+        /// <summary>
+        /// Id
+        /// </summary>
+        public string TeacherId { get; set; }
 
         /// <summary>
         /// Защити

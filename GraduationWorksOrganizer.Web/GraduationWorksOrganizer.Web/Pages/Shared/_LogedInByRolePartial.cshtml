@@ -29,15 +29,11 @@
 @if ((await AuthorizationService.AuthorizeAsync(User, Constants.PolicyNames.ViewTheses)).Succeeded)
 {
     <div class="dropdown">
-        <button class="dropbtn">Комисии</button>
+        <button class="dropbtn">Преподаватели</button>
         <div class="dropdown-content">
             @if ((await AuthorizationService.AuthorizeAsync(User, Constants.PolicyNames.ViewTheses)).Succeeded)
             {
-                <a class="nav-link text-dark" asp-area="Commissions" asp-page="/CommissionsList" title="Manage">Списък с комисии</a>
-            }
-            @if ((await AuthorizationService.AuthorizeAsync(User, Constants.PolicyNames.ApproveTheses)).Succeeded)
-            {
-                <a class="nav-link text-dark" asp-area="Commissions" asp-page="/CreateCommission" title="Manage">Създай комисия</a>
+                <a class="nav-link text-dark" asp-area="Commissions" asp-page="/TeachersList" title="Manage">Списък с преподаватели</a>
             }
         </div>
     </div>
@@ -65,7 +61,7 @@
         <div class="dropdown-content">
             @if ((await AuthorizationService.AuthorizeAsync(User, Constants.PolicyNames.AddTheses)).Succeeded)
             {
-                <a class="nav-link text-dark" asp-area="" asp-page="">Добави дата</a>
+                <a class="nav-link text-dark" asp-area="Defence" asp-page="/AddDefenceDate">Добави дата</a>
             }
             @if (User.IsInRole(Constants.RoleNames.StudentRole))
             {

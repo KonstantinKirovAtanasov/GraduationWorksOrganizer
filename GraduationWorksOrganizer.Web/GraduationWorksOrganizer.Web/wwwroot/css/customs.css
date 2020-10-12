@@ -80,7 +80,14 @@ td textarea.multilineTextArea {
 
 .avatar {
     vertical-align: middle;
-    width: 50px;
-    height: 50px;
+    width: 95%;
+    height: 95%;
     border-radius: 10%;
+    transition: transform .2s;
+    max-height: 7vw;
+    object-fit: scale-down;
 }
+
+    .avatar:hover {
+        transform: scale(1.2);
+    }
