@@ -60,16 +60,15 @@
                                 if (teacherClosestDate.DefenceDates != null && teacherClosestDate.DefenceDates.Any())
                                 {
                                     <div class="row border-bottom">
-                                        <p class="small font-weight-bold mb-1">@teacherClosestDate.TeacherName</p>
-                                        @foreach (GraduationWorksOrganizer.Web.Areas.Defence.ViewModels.InnerDefenceDate innerDate in teacherClosestDate.DefenceDates)
-                                        {
-                                            <div class="row">
+                                        <div class="col-11">
+                                            <span class="w-25"></span>
+                                            <p class="small font-weight-bold mb-1">@teacherClosestDate.TeacherName</p>
+                                            @foreach (GraduationWorksOrganizer.Web.Areas.Defence.ViewModels.InnerDefenceDate innerDate in teacherClosestDate.DefenceDates)
+                                            {
                                                 <p class="small text-secondary mb-0">@innerDate.Description</p>
-                                            </div>
-                                            <div class="row">
                                                 <p class="small text-secondary mb-0">@innerDate.Date.ToLongDateString()</p>
-                                            </div>
-                                        }
+                                            }
+                                        </div>
                                     </div>
                                 }
                             }
