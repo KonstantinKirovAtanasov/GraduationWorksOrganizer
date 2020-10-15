@@ -63,10 +63,7 @@
             {
                 <a class="nav-link text-dark" asp-area="Defence" asp-page="/AddDefenceDate">Добави дата</a>
             }
-            @if (User.IsInRole(Constants.RoleNames.StudentRole))
-            {
-                <a class="nav-link text-dark" asp-area="" asp-page="">Предстоящи дати</a>
-            }
+            <a class="nav-link text-dark" asp-area="Defence" asp-page="/DefenceDates">Предстоящи дати</a>
         </div>
     </div>
 }

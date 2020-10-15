@@ -16,6 +16,11 @@ namespace GraduationWorksOrganizer.Database.Models
         public int Id { get; set; }
 
         /// <summary>
+        /// Кратко описание
+        /// </summary>
+        public string ShortDescription { get; set; }
+
+        /// <summary>
         /// Номер на зала
         /// </summary>
         public string HallNumber { get; set; }

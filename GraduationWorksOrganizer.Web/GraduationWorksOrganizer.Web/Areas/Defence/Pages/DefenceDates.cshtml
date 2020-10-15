@@ -2,5 +2,174 @@
 @model GraduationWorksOrganizer.Web.Areas.Defence.Pages.DefenceDatesModel
 @{
 }
+<h1>Дати за защита</h1>
 
-<h1>Dati za zashtita</h1>
+<div class="row">
+    <div class="col-7">
+        @if (Model.DefenceDates.Any())
+        {
+            @foreach (GraduationWorksOrganizer.Web.Areas.Defence.ViewModels.DefenceDatesViewModel ddvm in Model.DefenceDates)
+            {
+                <div class="row mb-2 theses-date border-bottom border-light" ajax-request="@ddvm.Id">
+                    <div class="col-10">
+                        <div class="row">
+                            <p class="h5 mb-2">@ddvm.ShortDescription</p>
+                        </div>
+                        @if (User.IsInRole(GraduationWorksOrganizer.Common.Constants.RoleNames.StudentRole))
+                        {
+                            <div class="row">
+                                <text class="blockquote-footer">Преподавател: @ddvm.TeacherScienceDegree @ddvm.TeacherName</text>
+                            </div>
+                        }
+                        <div class="row">
+                            <text class="blockquote-footer">Дата: @ddvm.StartingDate.ToLongTimeString() - @ddvm.EndDate.ToLongTimeString() @ddvm.EndDate.ToShortDateString()</text>
+                        </div>
+                        <div class="row">
+                            <text class="blockquote-footer">Зала: @ddvm.HallNumber</text>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <text class="text-primary">@ddvm.ThesesCount / @ddvm.MaxThesisCount</text>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div class="col-5">
+        @if (User.IsInRole(GraduationWorksOrganizer.Common.Constants.RoleNames.TeacherRole))
+        {
+            <div class="card sticky-top">
+                <h5 class="card-header">Записани теми</h5>
+                <div class="card-body">
+                    <div id="defence-date-info">
+                        <text class="text-secondary">Моля кликнете върху някоя от датите за да визуализирате данни</text>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (User.IsInRole(GraduationWorksOrganizer.Common.Constants.RoleNames.StudentRole))
+        {
+            <div class="card sticky-top">
+                <h5 class="card-header">Предстоящи дати при вашите преподаватели</h5>
+                <div class="card-body">
+                    <div id="defence-date-info">
+                        @if (Model.TeachersDefenceDates.Any())
+                        {
+                            @foreach (GraduationWorksOrganizer.Web.Areas.Defence.ViewModels.TeacherClosestDefenceDatesViewModel teacherClosestDate in Model.TeachersDefenceDates)
+                            {
+                                if (teacherClosestDate.DefenceDates != null && teacherClosestDate.DefenceDates.Any())
+                                {
+                                    <div class="row border-bottom">
+                                        <p class="small font-weight-bold mb-1">@teacherClosestDate.TeacherName</p>
+                                        @foreach (GraduationWorksOrganizer.Web.Areas.Defence.ViewModels.InnerDefenceDate innerDate in teacherClosestDate.DefenceDates)
+                                        {
+                                            <div class="row">
+                                                <p class="small text-secondary mb-0">@innerDate.Description</p>
+                                            </div>
+                                            <div class="row">
+                                                <p class="small text-secondary mb-0">@innerDate.Date.ToLongDateString()</p>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <p class="h6">Все още няма обявени дати за вашите теми и преподаватели</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Scripts{
+    @if (User.IsInRole(GraduationWorksOrganizer.Common.Constants.RoleNames.TeacherRole))
+    {
+        <script>
+
+            const ajaxDateInfoRequestHandler = '/Defence/DefenceDates?handler=DateInfo&defenceDateId=';
+            let defenceDateInfo = document.getElementById('defence-date-info');
+            let thesesesDatesElements = document.getElementsByClassName('theses-date');
+
+            window.loaded = RegisterHandlers();
+
+            function RegisterHandlers() {
+                Array.prototype.forEach.call(thesesesDatesElements, (dd) => {
+                    dd.addEventListener('click', function () {
+                        const defenceDateId = this.getAttribute('ajax-request');
+                        GetDefenceDateDetails(defenceDateId);
+                    });
+                })
+            }
+
+            function GetDefenceDateDetails(defenceDateId) {
+                $.ajax({
+                    method: 'GET',
+                    url: ajaxDateInfoRequestHandler + defenceDateId,
+                    success: OnAjaxDateInfoSuccess
+                });
+            }
+
+            function OnAjaxDateInfoSuccess(requestData) {
+                defenceDateInfo.innerHTML = '';
+                Array.prototype.forEach.call(requestData, (thesesItem) => {
+                    let thesesRow = BuildContentElementForTheses(thesesItem);
+                    defenceDateInfo.appendChild(thesesRow);
+                });
+            }
+
+            function BuildContentElementForTheses(thesesItem) {
+
+                let titleDiv = document.createElement('DIV');
+                titleDiv.className += 'row';
+
+                let titleTitle = document.createElement('p');
+                titleTitle.className += 'small font-weight-bold mb-0';
+                titleTitle.innerText = 'Заглавие : ';
+
+                let titleValue = document.createElement('p');
+                titleValue.className += 'small text-secondary mb-1';
+                titleValue.innerText = thesesItem.thesesTitle;
+                titleDiv.appendChild(titleTitle);
+                titleDiv.appendChild(titleValue);
+
+                let typeDiv = document.createElement('DIV');
+                typeDiv.className += 'row';
+
+                let typeTitle = document.createElement('p');
+                typeTitle.className += 'small font-weight-bold mb-0';
+                typeTitle.innerText = 'Тип : ';
+
+                let typeValue = document.createElement('p');
+                typeValue.className += 'small text-secondary mb-1';
+                typeValue.innerText = thesesItem.thesesType;
+                typeDiv.appendChild(typeTitle);
+                typeDiv.appendChild(typeValue);
+
+                let subjectDiv = document.createElement('DIV');
+                subjectDiv.className += 'row';
+
+                let subjectTitle = document.createElement('p');
+                subjectTitle.className += 'small font-weight-bold mb-0';
+                subjectTitle.innerText = 'Предмет : ';
+
+                let subjectValue = document.createElement('p');
+                subjectValue.className += 'small text-secondary mb-1';
+                subjectValue.innerText = thesesItem.subjectName;
+                subjectDiv.appendChild(subjectTitle);
+                subjectDiv.appendChild(subjectValue);
+
+                let infoDiv = document.createElement('DIV');
+                infoDiv.className += 'col-12 border-bottom'
+
+                infoDiv.appendChild(titleDiv);
+                infoDiv.appendChild(typeDiv);
+                infoDiv.appendChild(subjectDiv);
+
+                return infoDiv;
+            }
+        </script>
+    }
+}

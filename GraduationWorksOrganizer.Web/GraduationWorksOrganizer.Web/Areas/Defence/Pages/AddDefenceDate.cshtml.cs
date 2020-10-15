@@ -45,6 +45,9 @@ namespace GraduationWorksOrganizer.Web.Areas.Defence.Pages
             [Required(ErrorMessage = "Полето за максимален брой дипломни работи е задължително")]
             [Range(2, 10, ErrorMessage = "Броят дипломни работи трябва да е между 2 и 10")]
             public int MaxThesesCount { get; set; }
+
+            [Required(ErrorMessage = "Полето за кратко описание е задължително")]
+            public string ShortDescription { get; set; }
         }
 
 
@@ -72,7 +75,8 @@ namespace GraduationWorksOrganizer.Web.Areas.Defence.Pages
                 StartingDate = fromDate,
                 HallNumber = Input.HallNumber,
                 MaxThesisCount = Input.MaxThesesCount,
-                TeacherId = _userManager.GetUserId(User)
+                TeacherId = _userManager.GetUserId(User),
+                ShortDescription = Input.ShortDescription
             };
 
             await _defenceDatesDbService.Add(dd);

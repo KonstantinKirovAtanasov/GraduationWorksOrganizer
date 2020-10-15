@@ -6,90 +6,110 @@
     @if (Model.ApprovementRequests != null)
     {
         <div class="col">
-            @foreach (GraduationWorksOrganizer.Database.Models.ThesisApprovementRequest request in Model.ApprovementRequests)
-            {
-                <div class="row">
-                    <div class="w-75">
-                        <p class="text-left font-weight-bold mb-1">От дата: @request.CreationDate.ToLongDateString() @request.CreationDate.ToLongTimeString()</p>
-                        <p class="text-left blockquote-footer">@request.RequestDescription</p>
-                    </div>
-                    <span class="w-25"></span>
-                    @if (!string.IsNullOrEmpty(@request.ResponseDescription))
+            <div class="card">
+                <h5 class="card-header">Koреспонденция</h5>
+                <div class="card-body">
+                    @foreach (GraduationWorksOrganizer.Database.Models.ThesisApprovementRequest request in Model.ApprovementRequests)
                     {
-                        <span class="w-25"></span>
-                        <div class="w-75">
-                            <p class="text-right font-weight-bold mb-1">От дата: @request.LastModified.ToLongDateString() @request.LastModified.ToLongTimeString()</p>
-                            <p class="text-right blockquote-footer">@request.ResponseDescription</p>
+                        <div class="row">
+                            <div class="w-75">
+                                <p class="text-left font-weight-bold mb-1">От дата: @request.CreationDate.ToLongDateString() @request.CreationDate.ToLongTimeString()</p>
+                                <p class="text-left blockquote-footer">@request.RequestDescription</p>
+                            </div>
+                            <span class="w-25"></span>
+                            @if (!string.IsNullOrEmpty(@request.ResponseDescription))
+                            {
+                                <span class="w-25"></span>
+                                <div class="w-75">
+                                    <p class="text-right font-weight-bold mb-1">От дата: @request.LastModified.ToLongDateString() @request.LastModified.ToLongTimeString()</p>
+                                    <p class="text-right blockquote-footer">@request.ResponseDescription</p>
+                                </div>
+                            }
                         </div>
                     }
                 </div>
-            }
+            </div>
         </div>
     }
 
     <div class="col">
-        <h5>Файлове</h5>
-        <table class="table table-bordered table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th class="text-center">Име на файла</th>
-                    <th class="text-center">Размер</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.FileViewModel filevm in Model.Files)
-                {
-                    <tr>
-                        <td class="small">@filevm.Name</td>
-                        <td class="small">@filevm.Size KB</td>
-                        <td>
-                            <a class="float-right download" data-ajax-request="@filevm.Id" role="button">
-                                <img class="icon" src="https://localhost:44306/images/downloadIcon.png">
-                            </a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <div class="card mb-3">
+            <h5 class="card-header">Файлове</h5>
+            <div class="card-body">
+                <table class="table table-hover w-100">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">Име на файла</th>
+                            <th class="text-center">Размер</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.FileViewModel filevm in Model.Files)
+                        {
+                            <tr>
+                                <td class="small">@filevm.Name</td>
+                                <td class="small">@filevm.Size KB</td>
+                                <td>
+                                    <a class="float-right download" data-ajax-request="@filevm.Id" role="button">
+                                        <img class="icon" src="https://localhost:44306/images/downloadIcon.png">
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
         @if (Model.SelectedDefenceDate != null)
         {
-            <br />
-            <div class="row">
-                <div class="col">
-                    <p>Дата: @Model.SelectedDefenceDate.StartingDate.ToLongDateString()</p>
-                    <p>Начало: @Model.SelectedDefenceDate.StartingDate.ToShortTimeString()</p>
-                    <p>Край: @Model.SelectedDefenceDate.EndDate.ToShortTimeString()</p>
-                    <p>Зала: @Model.SelectedDefenceDate.HallNumber</p>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5>Дата за защита</h5>
+                </div>
+                <div class="card-body">
+                    <div class="col">
+                        <p class="font-weight-bold mb-2">Дата:  <text class="font-weight-normal"> @Model.SelectedDefenceDate.StartingDate.ToLongDateString()</text></p>
+                        <p class="font-weight-bold mb-2">Начало:<text class="font-weight-normal"> @Model.SelectedDefenceDate.StartingDate.ToShortTimeString()</text></p>
+                        <p class="font-weight-bold mb-2">Край:  <text class="font-weight-normal"> @Model.SelectedDefenceDate.EndDate.ToShortTimeString()</text></p>
+                        <p class="font-weight-bold mb-2">Зала:  <text class="font-weight-normal"> @Model.SelectedDefenceDate.HallNumber</text></p>
+                    </div>
                 </div>
             </div>
+
         }
         else if (User.IsInRole(GraduationWorksOrganizer.Common.Constants.RoleNames.TeacherRole))
         {
-            <br />
-            <form method="post" class="container">
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <a class="font-weight-bold">Дата за защита</a>
-                <select asp-for="Input.DateDefenceEventId" class="form-control">
-                    @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.DefenceDateViewModel dd in Model.DefenceDates)
-                    {
-                        <option value="@dd.Id">
-                            <text class="text-left">@dd.StartingDate.TimeOfDay.ToString() - @dd.EndDate.ToString()</text>
-                            <text class="text-right">зала: @dd.HallNumber</text>
-                            <text class="text-right">зала: @dd.ThesesCount / @dd.MaxThesisCount</text>
-                        </option>
-                    }
-                </select>
+            <div class="card">
+                <div class="card-header">
+                    <h5>Отговор / Одобрение</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <a class="font-weight-bold">Дата за защита</a>
+                        <select asp-for="Input.DateDefenceEventId" class="form-control">
+                            @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.DefenceDateViewModel dd in Model.DefenceDates)
+                            {
+                                <option value="@dd.Id">
+                                    <text class="font-weight-bold">@dd.ShortDescription</text>
+                                    <text>@dd.StartingDate.TimeOfDay.ToString() - @dd.EndDate.ToString()</text>
+                                    <text>зала: @dd.HallNumber</text>
+                                </option>
+                            }
+                        </select>
 
-                <input asp-for="Input.UserEntryId" hidden value="@Model.UserEntryId" />
-                <a class="font-weight-bold">Описание</a>
-                <textarea asp-for="Input.Description" class="form-control resize"></textarea>
+                        <input asp-for="Input.UserEntryId" hidden value="@Model.UserEntryId" />
+                        <a class="font-weight-bold">Описание</a>
+                        <textarea asp-for="Input.Description" class="form-control resize"></textarea>
 
-                <br />
+                        <br />
 
-                <button type="submit" asp-page-handler="Proceed" class="btn btn-success float-left">Одобри</button>
-                <button type="submit" asp-page-handler="Cancel" class="btn btn-danger float-right">Откажи</button>
-            </form>
+                        <button type="submit" asp-page-handler="Proceed" class="btn btn-success float-left">Одобри</button>
+                        <button type="submit" asp-page-handler="Cancel" class="btn btn-danger float-right">Откажи</button>
+                    </form>
+                </div>
+            </div>
         }
     </div>
 </div>

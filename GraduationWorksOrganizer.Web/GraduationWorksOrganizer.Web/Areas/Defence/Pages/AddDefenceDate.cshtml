@@ -5,22 +5,27 @@
         <div class="container">
             <div class="row text-danger" asp-validation-summary="All"></div>
             <div class="row">
+                <label class="font-weight-bold">Кратко описание</label>
+                <input class="form-control" type="text" asp-for="@Model.Input.ShortDescription" />
+                <span class="text-danger" asp-validation-for="@Model.Input.ShortDescription"></span>
+            </div>
+            <div class="row">
                 <label class="font-weight-bold">Дата на защита</label>
-                <input class="form-control" type="date" asp-for="@Model.Input.FromDate"/>
+                <input class="form-control" type="date" asp-for="@Model.Input.FromDate" />
                 <span class="text-danger" asp-validation-for="@Model.Input.FromDate"></span>
             </div>
             <div class="row">
                 <label class="font-weight-bold">
                     Начало на защитите
                 </label>
-                <input class="form-control" type="time" asp-for="@Model.Input.FromTime"/>
+                <input class="form-control" type="time" asp-for="@Model.Input.FromTime" />
                 <span class="text-danger" asp-validation-for="@Model.Input.FromTime"></span>
             </div>
             <div class="row">
                 <label class="font-weight-bold">
                     Край на защитите
                 </label>
-                <input class="form-control" type="time" asp-for="@Model.Input.ToTime"/>
+                <input class="form-control" type="time" asp-for="@Model.Input.ToTime" />
                 <span class="text-danger" asp-validation-for="@Model.Input.ToTime"></span>
             </div>
             <div class="row">
