@@ -2,149 +2,155 @@
 @model GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages.MyThesesStudentModel
 @{
 }
-<h2> Моите теми</h2>
+<div class="content-heading">
+    <p class="h3">Моите теми</p>
+</div>
 @if (Model.CurrentTheseses.Any())
 {
     foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.CompositePreviewThesisViewModel thesisModel in Model.CurrentTheseses)
     {
-        <div class="border">
-            <div class="container">
+        <div class="container border-bottom mb-3">
+            <div class="row">
+                <div class="col">
+                    <div class="row-md">
+                        <text class="text-left font-weight-bold">@thesisModel.ThesisViewModel.Title</text>
+                    </div>
+                    <div class="row-md">
+                        <text class="text-left">@thesisModel.ThesisViewModel.Subject.Name</text>
+                    </div>
+                    <div class="row-md">
+                        <text class="text-left">От дата: </text>
+                        <text class="text-left">@thesisModel.ThesisViewModel.CreationDate.ToShortDateString()</text>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col">
-                        <div class="row-md">
-                            <text class="text-left font-weight-bold">@thesisModel.ThesisViewModel.Title</text>
+                        <div class="row justify-content-end">
+                            <a class="float-right" data-toggle="modal" data-target="#exampleModal-@thesisModel.ThesisViewModel.Id">
+                                <img class="icon" src="~/images/previewThesisIcon.png" />
+                            </a>
+                            @if (thesisModel.UserEntry.State == GraduationWorksOrganizer.Common.Enums.ThesisUserEntryState.Initialized)
+                            {
+                                <a class="float-right file-request" data-toggle="collapse" href="#collapse-upload-data-@thesisModel.UserEntry.Id" role="button" aria-expanded="false" data-ajax-request-filename="@thesisModel.UserEntry.Id">
+                                    <img class="icon" src="~/images/uploadIcon.png" />
+                                </a>
+                                <a class="float-right process-theses" data-toggle="collapse" href="#collapse-request-teacher-@thesisModel.UserEntry.Id" role="button" aria-expanded="false" data-ajax-request-subject="@thesisModel.ThesisViewModel.Subject.Id" data-ajax-userentry="@thesisModel.UserEntry.Id">
+                                    <img class="icon" src="~/images/peoceedIcon.png" />
+                                </a>
+                            }
+                            <a class="float-right" asp-area="GraduationWork" asp-page="/ThesesCorrespondence" asp-route-userEntryId="@thesisModel.UserEntry.Id">
+                                <img class="icon" src="~/images/correspondancepng.png" />
+                            </a>
                         </div>
-                        <div class="row-md">
-                            <text class="text-left">@thesisModel.ThesisViewModel.Subject.Name</text>
-                        </div>
-                        <div class="row-md">
-                            <text class="text-left">От дата: </text>
-                            <text class="text-left">@thesisModel.ThesisViewModel.CreationDate.ToShortDateString()г.</text>
-                        </div>
-                    </div>
-                    <div class="justify-content-right">
-                        <a class="float-right" data-toggle="modal" data-target="#exampleModal-@thesisModel.ThesisViewModel.Id">
-                            <img class="icon" src="~/images/previewThesisIcon.png" />
-                        </a>
-                        <a class="float-right file-request" data-toggle="collapse" href="#collapse-upload-data-@thesisModel.UserEntry.Id" role="button" aria-expanded="false" data-ajax-request-filename="@thesisModel.UserEntry.Id">
-                            <img class="icon" src="~/images/uploadIcon.png" />
-                        </a>
-                        <a class="float-right process-theses" data-toggle="collapse" href="#collapse-request-teacher-@thesisModel.UserEntry.Id" role="button" aria-expanded="false" data-ajax-request-subject="@thesisModel.ThesisViewModel.Subject.Id" data-ajax-userentry="@thesisModel.UserEntry.Id">
-                            <img class="icon" src="~/images/peoceedIcon.png" />
-                        </a>
-                        <a class="float-right" asp-area="GraduationWork" asp-page="/ThesesCorrespondence" asp-route-userEntryId="@thesisModel.UserEntry.Id">
-                            <img class="icon" src="~/images/correspondancepng.png" />
-                        </a>
                         @if (thesisModel.UserEntry.State == GraduationWorksOrganizer.Common.Enums.ThesisUserEntryState.Initialized)
                         {
-                            <div>
+                            <div class="row justify-content-end">
                                 <text style="font-weight: bold; color:Highlight">Текуща</text>
                             </div>
                         }
                         else if (thesisModel.UserEntry.State == GraduationWorksOrganizer.Common.Enums.ThesisUserEntryState.SendForApprovement)
                         {
-                            <div>
+                            <div class="row justify-content-end">
                                 <text style="font-weight: bold; color:orange">Изпратена за одобрение</text>
                             </div>
                         }
                         else if (thesisModel.UserEntry.State == GraduationWorksOrganizer.Common.Enums.ThesisUserEntryState.Approve)
                         {
-                            <div>
+                            <div class="row justify-content-end">
                                 <text style="font-weight: bold; color:forestgreen">Одобрена</text>
                             </div>
                         }
                         else if (thesisModel.UserEntry.State == GraduationWorksOrganizer.Common.Enums.ThesisUserEntryState.CompletedWithMarkItem)
                         {
-                            <div>
+                            <div class="row justify-content-end">
                                 <text style="font-weight: bold;">Завършена с оценка</text>
                             </div>
                         }
                     </div>
                 </div>
-                <div class="modal fade" id="exampleModal-@thesisModel.ThesisViewModel.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel--@thesisModel.ThesisViewModel.Id" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel-@thesisModel.ThesisViewModel.Id">@thesisModel.ThesisViewModel.Title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body" style="width:100%">
-                                <p class="font-weight-bold">Описание</p>
-                                <p class="text-md-left" style="white-space: pre-wrap">@thesisModel.ThesisViewModel.Description </p>
-                                <p class="font-weight-bold">Изисквания</p>
-                                @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.InnerRequermentViewModel requerment in thesisModel.ThesisViewModel.Requerments)
-                                {
-                                    <div class="row">
-                                        <div class="col text-left">
-                                            <text>&#8226;</text>
-                                            <text style="white-space: pre-wrap">@requerment.Description</text>
-                                        </div>
-                                        <div class="col text-right">
-                                            <text>@requerment.MaxPointsCount точки</text>
-                                        </div>
-                                    </div>
-                                }
-                                <span />
+            </div>
+            <div class="modal fade" id="exampleModal-@thesisModel.ThesisViewModel.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel--@thesisModel.ThesisViewModel.Id" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel-@thesisModel.ThesisViewModel.Id">@thesisModel.ThesisViewModel.Title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="width:100%">
+                            <p class="font-weight-bold">Описание</p>
+                            <p class="text-md-left" style="white-space: pre-wrap">@thesisModel.ThesisViewModel.Description </p>
+                            <p class="font-weight-bold">Изисквания</p>
+                            @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.InnerRequermentViewModel requerment in thesisModel.ThesisViewModel.Requerments)
+                            {
                                 <div class="row">
                                     <div class="col text-left">
-                                        <text>@thesisModel.ThesisViewModel.Type</text>
+                                        <text>&#8226;</text>
+                                        <text style="white-space: pre-wrap">@requerment.Description</text>
                                     </div>
                                     <div class="col text-right">
-                                        <text>@thesisModel.ThesisViewModel.CreationDate.ToShortDateString() </text>
+                                        <text>@requerment.MaxPointsCount точки</text>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="collapse-upload-data-@thesisModel.UserEntry.Id" class="collapse">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <h4>Прикачване на материали</h4>
-                        </div>
-                        <div id="file-manifest-@thesisModel.UserEntry.Id" class="container-fluid" data-ajax-request-filename="@thesisModel.UserEntry.Id">
-                            <form id="file-upload-form-@thesisModel.UserEntry.Id" name="formFile">
-                                <div class="custom-file">
-                                    <input id="file-upload-input-@thesisModel.UserEntry.Id" type="file" class="custom-file-input">
-                                    <label class="custom-file-label">Изберете файл</label>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <br />
-                </div>
-                <div id="collapse-request-teacher-@thesisModel.UserEntry.Id" class="collapse">
-                    <div class="container-fluid">
-                        <form method="post" class="helpinfodefault" data-helpmessagekey="defaulthelpmessage">
+                            }
+                            <span />
                             <div class="row">
-                                <h4>Изпращане на @thesisModel.ThesisViewModel.Type</h4>
+                                <div class="col text-left">
+                                    <text>@thesisModel.ThesisViewModel.Type</text>
+                                </div>
+                                <div class="col text-right">
+                                    <text>@thesisModel.ThesisViewModel.CreationDate.ToShortDateString() </text>
+                                </div>
                             </div>
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <p class="font-weight-bold">Изберете преподавател</p>
-                                        <span asp-validation-for="Input.ThemeObserverId" />
-                                        <select id=select-teacher-@thesisModel.UserEntry.Id class="form-control requestTeachers resize" asp-for="Input.ThemeObserverId" data-ajax-request-subject="@thesisModel.ThesisViewModel.Subject.Id">
-                                        </select>
-                                        <p class="font-weight-bold">Описание на заявката</p>
-                                        <textarea class="form-control resize" asp-for="Input.RequestDescription"></textarea>
-                                        <input type="hidden" asp-for="Input.ThesesUserEntryId" value="@thesisModel.UserEntry.Id" />
-                                    </div>
-                                </div>
-                                <br />
-                                <div class="row justify-content-end">
-                                    <button type="submit" class="btn btn-light border">Изпрати</button>
-                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="collapse-upload-data-@thesisModel.UserEntry.Id" class="collapse">
+                <div class="container-fluid">
+                    <div class="content-heading">
+                        <p>Прикачване на материали</p>
+                    </div>
+                    <div id="file-manifest-@thesisModel.UserEntry.Id" class="container-fluid" data-ajax-request-filename="@thesisModel.UserEntry.Id">
+                        <form id="file-upload-form-@thesisModel.UserEntry.Id" name="formFile">
+                            <div class="custom-file">
+                                <input id="file-upload-input-@thesisModel.UserEntry.Id" type="file" class="custom-file-input">
+                                <label class="custom-file-label">Изберете файл</label>
                             </div>
                         </form>
                     </div>
-                    <br />
                 </div>
+                <br />
+            </div>
+            <div id="collapse-request-teacher-@thesisModel.UserEntry.Id" class="collapse">
+                <div class="container-fluid">
+                    <form method="post" class="helpinfodefault" data-helpmessagekey="defaulthelpmessage">
+                        <div class="content-heading">
+                            <p>Изпращане на @thesisModel.ThesisViewModel.Type</p>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p class="font-weight-bold">Изберете преподавател</p>
+                                    <span asp-validation-for="Input.ThemeObserverId" />
+                                    <select id=select-teacher-@thesisModel.UserEntry.Id class="form-control requestTeachers resize" asp-for="Input.ThemeObserverId" data-ajax-request-subject="@thesisModel.ThesisViewModel.Subject.Id">
+                                    </select>
+                                    <p class="font-weight-bold">Описание на заявката</p>
+                                    <textarea class="form-control resize" asp-for="Input.RequestDescription"></textarea>
+                                    <input type="hidden" asp-for="Input.ThesesUserEntryId" value="@thesisModel.UserEntry.Id" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row justify-content-end">
+                                <button type="submit" class="btn btn-light border">Изпрати</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <br />
             </div>
         </div>
-        <br />
     }
 }
 else

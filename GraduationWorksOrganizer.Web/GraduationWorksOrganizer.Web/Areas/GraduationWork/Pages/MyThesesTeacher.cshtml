@@ -2,58 +2,56 @@
 @model GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages.MyThesesTeacherModel
 @{
 }
-
-<h2> Моите теми</h2>
-
+<div class="content-heading">
+    <p class="h3">Моите теми</p>
+</div>
 @if (Model.Theseses.Any())
 {
     foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.MyThesesTeacherViewModel thesisModel in Model.Theseses)
     {
-        <div class="border">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="row-md">
-                            <text class="text-left font-weight-bold">@thesisModel.ThesesViewModel.Title</text>
-                        </div>
-                        <div class="row-md">
-                            <text class="text-left">@thesisModel.UserEntry.Student.Name</text>
-                            <text class="justify-content-end">@thesisModel.UserEntry.Student.FacultyNumber</text>
-                        </div>
-                        <div class="row-md">
-                            <text class="text-left">От дата: </text>
-                            <text class="text-left">@thesisModel.UserEntry.CreationDate.ToShortDateString()г.</text>
-                        </div>
+        <div class="container border-bottom mb-3">
+            <div class="row">
+                <div class="col">
+                    <div class="row-md">
+                        <text class="text-left font-weight-bold">@thesisModel.ThesesViewModel.Title</text>
                     </div>
-                    <div class="justify-content-right">
-                            <a class="float-right" data-toggle="modal" data-target="#exampleModal-@thesisModel.ThesesViewModel.Id">
-                                <img class="icon" src="~/images/previewThesisIcon.png" />
-                            </a>
-                            <a class="float-right" asp-area="GraduationWork" asp-page="/ThesesCorrespondence" asp-route-userEntryId="@thesisModel.UserEntry.Id">
-                                <img class="icon" src="~/images/correspondancepng.png" />
-                            </a>
+                    <div class="row-md">
+                        <text class="text-left">@thesisModel.UserEntry.Student.Name</text>
+                        <text class="justify-content-end">@thesisModel.UserEntry.Student.FacultyNumber</text>
+                    </div>
+                    <div class="row-md">
+                        <text class="text-left">От дата: </text>
+                        <text class="text-left">@thesisModel.UserEntry.CreationDate.ToShortDateString()г.</text>
                     </div>
                 </div>
-                <div class="modal fade" id="exampleModal-@thesisModel.ThesesViewModel.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel--@thesisModel.ThesesViewModel.Id" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel-@thesisModel.ThesesViewModel.Id">@thesisModel.ThesesViewModel.Title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body" style="width:100%">
-                                <p class="font-weight-bold">Описание</p>
-                                <p class="text-md-left" style="white-space: pre-wrap">@thesisModel.ThesesViewModel.Description </p>
-                                <span />
-                                <div class="row">
-                                    <div class="col text-left">
-                                        <text>@thesisModel.ThesesViewModel.Type</text>
-                                    </div>
-                                    <div class="col text-right">
-                                        <text>@thesisModel.ThesesViewModel.CreationDate.ToShortDateString() </text>
-                                    </div>
+                <div class="justify-content-right">
+                    <a class="float-right" data-toggle="modal" data-target="#exampleModal-@thesisModel.ThesesViewModel.Id">
+                        <img class="icon" src="~/images/previewThesisIcon.png" />
+                    </a>
+                    <a class="float-right" asp-area="GraduationWork" asp-page="/ThesesCorrespondence" asp-route-userEntryId="@thesisModel.UserEntry.Id">
+                        <img class="icon" src="~/images/correspondancepng.png" />
+                    </a>
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModal-@thesisModel.ThesesViewModel.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel--@thesisModel.ThesesViewModel.Id" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel-@thesisModel.ThesesViewModel.Id">@thesisModel.ThesesViewModel.Title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="width:100%">
+                            <p class="font-weight-bold">Описание</p>
+                            <p class="text-md-left" style="white-space: pre-wrap">@thesisModel.ThesesViewModel.Description </p>
+                            <span />
+                            <div class="row">
+                                <div class="col text-left">
+                                    <text>@thesisModel.ThesesViewModel.Type</text>
+                                </div>
+                                <div class="col text-right">
+                                    <text>@thesisModel.ThesesViewModel.CreationDate.ToShortDateString() </text>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +59,6 @@
                 </div>
             </div>
         </div>
-        <br />
     }
 }
 else

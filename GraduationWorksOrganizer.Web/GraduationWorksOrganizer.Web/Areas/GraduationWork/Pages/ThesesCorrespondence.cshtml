@@ -2,6 +2,9 @@
 @model GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages.ThesesCorrespondenceModel
 @{
 }
+<div class="content-heading">
+    <p class="h3">Кореспонденция по темата</p>
+</div>
 <div class="row">
     @if (Model.ApprovementRequests != null)
     {
@@ -101,10 +104,7 @@
 
                         <input asp-for="Input.UserEntryId" hidden value="@Model.UserEntryId" />
                         <a class="font-weight-bold">Описание</a>
-                        <textarea asp-for="Input.Description" class="form-control resize"></textarea>
-
-                        <br />
-
+                        <textarea asp-for="Input.Description" class="form-control mb-4 resize"></textarea>
                         <button type="submit" asp-page-handler="Proceed" class="btn btn-success float-left">Одобри</button>
                         <button type="submit" asp-page-handler="Cancel" class="btn btn-danger float-right">Откажи</button>
                     </form>
@@ -115,6 +115,25 @@
 </div>
 
 @section Scripts{
+    <script>
+        let textArea = $('textarea.resize');
+
+        $(document).ready(ResizeTextArea);
+
+        function ResizeTextArea() {
+            $(textArea).each((index, item) => {
+                RegisrerResizeHandler(item);
+            });
+        }
+
+        function RegisrerResizeHandler(element) {
+            $(element).on('input', function () {
+                this.style.height = 'auto';
+                this.style.height = this.scrollHeight + 5 + 'px';
+            })
+        }
+
+    </script>
     <script>
         const attrFileId = 'data-ajax-request';
         const downloadFileEndPoint = 'https://localhost:44306/api/file/download'

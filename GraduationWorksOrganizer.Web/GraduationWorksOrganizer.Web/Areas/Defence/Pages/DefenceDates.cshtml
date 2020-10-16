@@ -2,8 +2,9 @@
 @model GraduationWorksOrganizer.Web.Areas.Defence.Pages.DefenceDatesModel
 @{
 }
-<h1>Дати за защита</h1>
-
+<div class="content-heading">
+    <p class="h3">Моите теми</p>
+</div>
 <div class="row">
     <div class="col-7">
         @if (Model.DefenceDates.Any())
@@ -84,7 +85,7 @@
     </div>
 </div>
 @section Scripts{
-    @if (User.IsInRole(GraduationWorksOrganizer.Common.Constants.RoleNames.TeacherRole))
+    @if (!User.IsInRole(GraduationWorksOrganizer.Common.Constants.RoleNames.StudentRole))
     {
         <script>
 

@@ -45,11 +45,11 @@
         <div class="dropdown-content">
             @if ((await AuthorizationService.AuthorizeAsync(User, Constants.PolicyNames.AddTheses)).Succeeded)
             {
-                <a class="nav-link text-dark" asp-area="" asp-page="">Добави оценка</a>
+                <a class="nav-link text-dark" asp-area="Marks" asp-page="/AddMarkItem">Добави оценка</a>
             }
             @if (User.IsInRole(Constants.RoleNames.StudentRole))
             {
-                <a class="nav-link text-dark" asp-area="" asp-page="">Моите оценки</a>
+                <a class="nav-link text-dark" asp-area="Marks" asp-page="/MyMarkItemsStudent">Моите оценки</a>
             }
         </div>
     </div>

@@ -6,6 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Areas\Defence\Pages\AddDefenceDate.cshtml.cs" />
+    <Content Include="Areas\Defence\Pages\DefenceDates.cshtml.cs" />
+    <Content Include="Areas\Defence\ViewModels\DefenceDatesViewModel.cs" />
+    <Content Include="Areas\Defence\ViewModels\InnerThesesViewModel.cs" />
+    <Content Include="Areas\Defence\ViewModels\TeacherClosestDefenceDatesViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.4" />
@@ -18,6 +26,10 @@
     <ProjectReference Include="..\..\GraduationWorksOrganizer.Database\GraduationWorksOrganizer.Database.csproj" />
     <ProjectReference Include="..\GraduationWorksOrganizer.Additional\GraduationWorksOrganizer.Additional.csproj" />
     <ProjectReference Include="..\GraduationWorksOrganizer.Services\GraduationWorksOrganizer.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Marks\NewFolder\" />
   </ItemGroup>
 
 </Project>

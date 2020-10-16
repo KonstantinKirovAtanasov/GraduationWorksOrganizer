@@ -3,12 +3,14 @@
 @{
     ViewData["Title"] = "Активни Теми";
 }
-<h1>@ViewData["Title"]</h1>
+<div class="content-heading">
+    <p class="h3">Активни теми</p>
+</div>
 <div>
     @if (Model.Theses.Any())
     {
         <table class="table table-bordered table-hover mb-0">
-            <thead>
+            <thead class="thead-light">
                 <tr>
                     <th> Заглавие:</th>
                     <th> Тип:</th>
