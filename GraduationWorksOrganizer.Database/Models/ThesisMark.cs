@@ -1,5 +1,6 @@
 ﻿using GraduationWorksOrganizer.Core.Database.Models;
 using System;
+using System.Collections.Generic;
 
 namespace GraduationWorksOrganizer.Database.Models
 {
@@ -22,6 +23,11 @@ namespace GraduationWorksOrganizer.Database.Models
         /// Дата
         /// </summary>
         public DateTime Date { get; set; }
+
+        /// <summary>
+        /// Резилтат
+        /// </summary>
+        public IEnumerable<ThesisRequerment> MarkResults { get; set; }
 
     }
 }

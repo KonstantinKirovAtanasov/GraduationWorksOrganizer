@@ -36,5 +36,9 @@ namespace GraduationWorksOrganizer.Database.Models
         /// Максимален брой точки
         /// </summary>
         public decimal? MarkPoints { get; set; }
+
+        public int? ThesesMarkId { get; set; }
+
+        public ThesisMark ThesesMark { get; set; }
     }
 }

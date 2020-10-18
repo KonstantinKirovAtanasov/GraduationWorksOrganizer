@@ -4,6 +4,7 @@ using GraduationWorksOrganizer.Database.Models;
 using GraduationWorksOrganizer.Database.Models.Base;
 using GraduationWorksOrganizer.Database.Services.BaseServices;
 using GraduationWorksOrganizer.Web.Areas.Defence.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

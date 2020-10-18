@@ -163,6 +163,8 @@ namespace GraduationWorksOrganizer.Database
 
             builder.Entity<ThesisUserEntryFileContent>().HasOne(tfc => tfc.UserEntry).WithMany().HasForeignKey(tfc => tfc.UserEntryId).OnDelete(DeleteBehavior.Cascade);
 
+            builder.Entity<ThesisRequerment>().HasOne(tr => tr.ThesesMark).WithMany(tm => tm.MarkResults).HasForeignKey(tr => tr.ThesesMarkId).OnDelete(DeleteBehavior.NoAction);
+
             #region Seeds
 
             builder.Entity<MimeType>().SeedData();

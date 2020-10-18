@@ -2,3 +2,42 @@
 @model GraduationWorksOrganizer.Web.Areas.Marks.Pages.AddMarksModel
 @{
 }
+<div class="content-heading">
+    <p class="h3">Добавяне на оценка</p>
+</div>
+<div class="container">
+    <div class="row">
+        @foreach (GraduationWorksOrganizer.Web.Areas.Marks.ViewModels.DefenceDateViewModel ddvm in Model.DefenceDates)
+        {
+            <div class="col-12 mb-3" id="@ddvm.Id">
+                <text class="font-weight-bold h4">@ddvm.Description</text>
+                <text class="text-right h4">@ddvm.FromDate.ToLongDateString()</text>
+            </div>
+            <div class="col-12 border-bottom mb-5">
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">Студент</th>
+                            <th class="text-center">Факултетен Номер</th>
+                            <th class="text-center">Специалност</th>
+                            <th class="text-center">Тема</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (GraduationWorksOrganizer.Web.Areas.Marks.ViewModels.DefenceEventUserEntryViewModel userEntry in ddvm.DefenceEntries)
+                        {
+                            <tr>
+                                <td class="text-center">@userEntry.StudentName</td>
+                                <td class="text-center">@userEntry.FacultyNumber</td>
+                                <td class="text-center">@userEntry.SpecialtyName</td>
+                                <td class="text-center">@userEntry.ThesesName</td>
+                                <td>@* TO DO MODAL FOR MARK INPUIT *@</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
