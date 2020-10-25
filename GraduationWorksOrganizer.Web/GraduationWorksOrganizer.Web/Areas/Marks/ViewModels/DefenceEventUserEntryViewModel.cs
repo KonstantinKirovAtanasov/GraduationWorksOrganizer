@@ -18,6 +18,10 @@ namespace GraduationWorksOrganizer.Web.Areas.Marks.ViewModels
 
         public string Type { get; set; }
 
+        public decimal Points { get; set; }
+
+        public decimal Mark { get; set; }
+
         public IEnumerable<InnerRequermentViewwModel> Requerments { get; set; }
 
         #endregion

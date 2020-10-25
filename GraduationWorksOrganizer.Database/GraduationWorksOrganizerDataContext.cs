@@ -159,6 +159,7 @@ namespace GraduationWorksOrganizer.Database
 
             builder.Entity<ThesisDefenceEvent>().HasOne(td => td.DefencesDate).WithMany(cd => cd.Defences).HasForeignKey(td => td.DefenceDateId).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<ThesisDefenceEvent>().HasOne(td => td.ThesesUserEntry).WithOne().HasForeignKey<ThesisDefenceEvent>(t => t.ThesesUserEntryId).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<ThesesUserEntry>().HasOne(td => td.ThesisDefenceEvent).WithOne().HasForeignKey<ThesesUserEntry>(t => t.ThesisDefenceEventId).OnDelete(DeleteBehavior.NoAction);
             builder.Entity<ThesisDefenceEvent>().HasOne(td => td.ThesisMark).WithOne().HasForeignKey<ThesisDefenceEvent>(td => td.ThesisMarkId).OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<ThesisUserEntryFileContent>().HasOne(tfc => tfc.UserEntry).WithMany().HasForeignKey(tfc => tfc.UserEntryId).OnDelete(DeleteBehavior.Cascade);

@@ -7,7 +7,7 @@ namespace GraduationWorksOrganizer.Database.Models
     /// <summary>
     /// Оценка на защитата
     /// </summary>
-    public class ThesisMark : IDatabaseEntity
+    public class ThesisMark : IDatabaseEntity, IAuditableEntity
     {
         /// <summary>
         /// Id
@@ -17,7 +17,7 @@ namespace GraduationWorksOrganizer.Database.Models
         /// <summary>
         /// Оценка
         /// </summary>
-        public double Mark { get; set; }
+        public decimal Mark { get; set; }
 
         /// <summary>
         /// Дата
@@ -28,6 +28,7 @@ namespace GraduationWorksOrganizer.Database.Models
         /// Резилтат
         /// </summary>
         public IEnumerable<ThesisRequerment> MarkResults { get; set; }
-
+        public DateTime CreationDate { get; set; }
+        public DateTime LastModified { get; set; }
     }
 }

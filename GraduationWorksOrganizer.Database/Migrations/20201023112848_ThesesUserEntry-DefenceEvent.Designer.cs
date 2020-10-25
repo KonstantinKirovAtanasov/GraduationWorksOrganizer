@@ -4,14 +4,16 @@ using GraduationWorksOrganizer.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GraduationWorksOrganizer.Database.Migrations
 {
     [DbContext(typeof(GraduationWorksOrganizerDataContext))]
-    partial class GraduationWorksOrganizerDataContextModelSnapshot : ModelSnapshot
+    [Migration("20201023112848_ThesesUserEntry-DefenceEvent")]
+    partial class ThesesUserEntryDefenceEvent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -5535,8 +5537,8 @@ namespace GraduationWorksOrganizer.Database.Migrations
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Mark")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Mark")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

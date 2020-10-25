@@ -44,7 +44,13 @@ namespace GraduationWorksOrganizer.Database.Models
         /// Изпращания за удобрение дати за защита
         /// </summary>
         public ICollection<ThesisApprovementRequest> ThesesRequests { get; set; }
+
+        public ThesisDefenceEvent ThesisDefenceEvent { get; set; }
+
+        public int? ThesisDefenceEventId { get; set; }
+
         public DateTime CreationDate { get; set; }
+
         public DateTime LastModified { get; set; }
     }
 }
