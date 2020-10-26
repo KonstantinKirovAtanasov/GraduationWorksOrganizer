@@ -40,5 +40,16 @@ namespace GraduationWorksOrganizer.Database.Models
         public int? ThesesMarkId { get; set; }
 
         public ThesisMark ThesesMark { get; set; }
+
+        public ThesisRequerment Clone()
+        {
+            return new ThesisRequerment()
+            {
+                ThesesId = this.ThesesId,
+                Description = this.Description,
+                MarkPoints = this.MarkPoints,
+                MaxPointsCount = this.MaxPointsCount,
+            };
+        }
     }
 }

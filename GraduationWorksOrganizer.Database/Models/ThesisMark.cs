@@ -27,7 +27,7 @@ namespace GraduationWorksOrganizer.Database.Models
         /// <summary>
         /// Резилтат
         /// </summary>
-        public IEnumerable<ThesisRequerment> MarkResults { get; set; }
+        public ICollection<ThesisRequerment> MarkResults { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastModified { get; set; }
     }

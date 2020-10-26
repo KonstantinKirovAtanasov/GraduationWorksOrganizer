@@ -45,7 +45,18 @@
                         <div class="modal-body" style="width:100%">
                             <p class="font-weight-bold">Описание</p>
                             <p class="text-md-left" style="white-space: pre-wrap">@thesisModel.ThesesViewModel.Description </p>
-                            <span />
+                            @foreach (GraduationWorksOrganizer.Web.Areas.GraduationWork.ViewModels.InnerRequermentViewModel requerment in thesisModel.ThesesViewModel.Requerments)
+                            {
+                                <div class="row">
+                                    <div class="col text-left">
+                                        <text>&#8226;</text>
+                                        <text style="white-space: pre-wrap">@requerment.Description</text>
+                                    </div>
+                                    <div class="col text-right">
+                                        <text>@requerment.MaxPointsCount точки</text>
+                                    </div>
+                                </div>
+                            }
                             <div class="row">
                                 <div class="col text-left">
                                     <text>@thesisModel.ThesesViewModel.Type</text>

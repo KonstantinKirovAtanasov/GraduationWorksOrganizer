@@ -37,72 +37,75 @@
                                 <td class="text-center">@userEntry.Mark</td>
                                 <td class="text-center">@userEntry.Points / @userEntry.Requerments.Sum(p => p.MaxPoints)</td>
                                 <td>
-                                    <a class="float-right" data-toggle="modal" data-target="#requermenta-@userEntry.UserEntryId">
-                                        <img class="icon" src="~/images/previewThesisIcon.png" />
-                                    </a>
-                                    <div class="modal fade" id="requermenta-@userEntry.UserEntryId" tabindex="-1" role="dialog" aria-labelledby="requermenta-@userEntry.UserEntryId" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <div class="container modal-title">
-                                                        <div class="row w-100">
-                                                            <p class="font-weight-bold text-left h4" id="requermenta-@userEntry.UserEntryId">Оценка: @userEntry.StudentName @userEntry.FacultyNumber </p>
+                                    @if (userEntry.Mark == 0)
+                                    {
+                                        <a class="float-right" data-toggle="modal" data-target="#requermenta-@userEntry.UserEntryId">
+                                            <img class="icon" src="~/images/previewThesisIcon.png" />
+                                        </a>
+                                        <div class="modal fade" id="requermenta-@userEntry.UserEntryId" tabindex="-1" role="dialog" aria-labelledby="requermenta-@userEntry.UserEntryId" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <div class="container modal-title">
+                                                            <div class="row w-100">
+                                                                <p class="font-weight-bold text-left h4" id="requermenta-@userEntry.UserEntryId">Оценка: @userEntry.StudentName @userEntry.FacultyNumber </p>
+                                                            </div>
+                                                            <div class="row w-100">
+                                                                <p class="text-left h6" id="requermenta-@userEntry.UserEntryId">Тема: @userEntry.ThesesName @userEntry.Type</p>
+                                                            </div>
                                                         </div>
-                                                        <div class="row w-100">
-                                                            <p class="text-left h6" id="requermenta-@userEntry.UserEntryId">Тема: @userEntry.ThesesName @userEntry.Type</p>
-                                                        </div>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
                                                     </div>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <form method="post">
-                                                    <div class="modal-body">
-                                                        <div class="container">
-                                                            @for (int i = 0; i < userEntry.Requerments.Count(); i++)
-                                                            {
-                                                                <div class="row border-bottom">
+                                                    <form method="post">
+                                                        <div class="modal-body">
+                                                            <div class="container">
+                                                                @for (int i = 0; i < userEntry.Requerments.Count(); i++)
+                                                                {
+                                                                    <div class="row border-bottom">
+                                                                        <div class="w-100">
+                                                                            <span asp-validation-for="Input.RequermentsPoints[i].ActualPoints"></span>
+                                                                        </div>
+                                                                        <div class="col-8">
+                                                                            <p class="font-weight-bold text-left">Изискване</p>
+                                                                            <p>@userEntry.Requerments.ElementAt(i).Description</p>
+                                                                        </div>
+                                                                        <div class="col-2">
+                                                                            <p class="font-weight-bold text-left">Максимален брой точки</p>
+                                                                            <p>@userEntry.Requerments.ElementAt(i).MaxPoints</p>
+                                                                        </div>
+                                                                        <div class="col-2">
+                                                                            <p class="font-weight-bold text-left">Точки от защитата</p>
+                                                                            <input hidden asp-for="Input.RequermentsPoints[i].RequermentId" type="number" value="@userEntry.Requerments.ElementAt(i).Id" />
+                                                                            <input class="form-control" asp-for="Input.RequermentsPoints[i].ActualPoints" type="text" />
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                <div class="row">
                                                                     <div class="w-100">
-                                                                        <span asp-validation-for="Input.RequermentsPoints[i].ActualPoints"></span>
+                                                                        <span asp-validation-for="Input.ActualMark"></span>
                                                                     </div>
-                                                                    <div class="col-8">
-                                                                        <p class="font-weight-bold text-left">Изискване</p>
-                                                                        <p>@userEntry.Requerments.ElementAt(i).Description</p>
-                                                                    </div>
-                                                                    <div class="col-2">
-                                                                        <p class="font-weight-bold text-left">Максимален брой точки</p>
-                                                                        <p>@userEntry.Requerments.ElementAt(i).MaxPoints</p>
+                                                                    <div class="col-10">
+                                                                        <p class="font-weight-bold text-left h4 mt-3" id="requermenta-@userEntry.UserEntryId">Крайна оценка:</p>
                                                                     </div>
                                                                     <div class="col-2">
-                                                                        <p class="font-weight-bold text-left">Точки от защитата</p>
-                                                                        <input hidden asp-for="Input.RequermentsPoints[i].RequermentId" type="number" value="@userEntry.Requerments.ElementAt(i).Id" />
-                                                                        <input class="form-control" asp-for="Input.RequermentsPoints[i].ActualPoints" type="text" />
+                                                                        <input hidden asp-for="Input.UserEntryId" value="@userEntry.UserEntryId" />
+                                                                        <input class="form-control mt-3" asp-for="Input.ActualMark" type="text" />
                                                                     </div>
-                                                                </div>
-                                                            }
-                                                            <div class="row">
-                                                                <div class="w-100">
-                                                                    <span asp-validation-for="Input.ActualMark"></span>
-                                                                </div>
-                                                                <div class="col-10">
-                                                                    <p class="font-weight-bold text-left h4 mt-3" id="requermenta-@userEntry.UserEntryId">Крайна оценка:</p>
-                                                                </div>
-                                                                <div class="col-2">
-                                                                    <input hidden asp-for="Input.UserEntryId" value="@userEntry.UserEntryId" />
-                                                                    <input class="form-control mt-3" asp-for="Input.ActualMark" type="text" />
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-primary" asp-page-handler="">
-                                                            Запис
-                                                        </button>
-                                                    </div>
-                                                </form>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-primary" asp-page-handler="">
+                                                                Запис
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    }
                                 </td>
                             </tr>
                         }

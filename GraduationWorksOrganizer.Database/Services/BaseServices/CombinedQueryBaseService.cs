@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Database.Services.BaseServices
 {
@@ -71,6 +72,16 @@ namespace GraduationWorksOrganizer.Database.Services.BaseServices
             }
 
             return resultQuery;
+        }
+
+        /// <summary>
+        /// Метод който връща обекта по ИД
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<TDatabaseEntity> GetById(int id, params Expression<Func<TDatabaseEntity, object>>[] propertySelectors)
+        {
+            return await GetAllIncluding(propertySelectors).FirstOrDefaultAsync(p => p.Id == id);
         }
     }
 }

@@ -20,11 +20,42 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach (GraduationWorksOrganizer.Web.Areas.Marks.ViewModels.MarkItemViewModel markItem in Model.MarkItems)
+                {
+                    <tr>
+                        <td> @markItem.SubjectName</td>
+                        <td>@markItem.Date.ToLongDateString()</td>
+                        <td>@markItem.ThesesTitle</td>
+                        <td>@markItem.ThesesType</td>
+                        @if (markItem.MarkValue.HasValue)
+                        {
+                            <td class="text-primary">@markItem.MarkPoints от @markItem.ThesesPoints</td>
+                            <td>@markItem.PointsPercentage</td>
+                        }
+                        else
+                        {
+                            <td>-</td>
+                            <td>-</td>
+                        }
+                        <td>@markItem.TeacherScienceDegree @markItem.TeacherName</td>
+                        @if (markItem.MarkValue.HasValue)
+                        {
+                            <td class="text-primary">@markItem.MarkValue</td>
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
+                    </tr>
+                }
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="8">
+                    <td colspan="7">
                         <text class="font-weight-bold">Общ текущ резултат:</text>
+                    </td>
+                    <td class="text-primary">
+                        @Model.OverAllResult
                     </td>
                 </tr>
             </tfoot>

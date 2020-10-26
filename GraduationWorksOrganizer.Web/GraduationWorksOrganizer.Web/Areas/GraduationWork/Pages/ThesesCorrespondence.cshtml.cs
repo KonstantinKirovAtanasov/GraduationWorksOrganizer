@@ -68,12 +68,12 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
 
         public int UserEntryId { get; set; }
 
-        public async Task OnGet(int userEntryId)
-        {
-
         #endregion
 
         #region Methods
+
+        public async Task OnGet(int userEntryId)
+        {
             UserEntryId = userEntryId;
             SelectFiles(userEntryId);
             await InitApprovementRequests(userEntryId);
@@ -106,13 +106,20 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
 
             ThesesUserEntry userEntry = await GetUserEntry();
             userEntry.State = Common.Enums.ThesisUserEntryState.Approve;
-            await _thesisUserEntryDbService.Update(userEntry);
             ThesisDefenceEvent defenceEvent = new ThesisDefenceEvent()
             {
-                ThesesUserEntry = userEntry,
+                ThesesUserEntryId = userEntry.Id,
                 DefenceDateId = Input.DateDefenceEventId,
             };
+
+            userEntry.ThesisDefenceEvent = defenceEvent;
             await _thesesDefenceEventDbService.Add(defenceEvent);
+            await _thesisUserEntryDbService.Update(userEntry);
+
+            ThesisApprovementRequest req = await _thesisApprovementDbService.GetById(ApprovementRequests.Last().Id);
+            req.ResponseDescription = Input.Description;
+            await _thesisApprovementDbService.Update(req);
+
             return Redirect("/GraduationWork/MyThesesTeacher");
         }
 

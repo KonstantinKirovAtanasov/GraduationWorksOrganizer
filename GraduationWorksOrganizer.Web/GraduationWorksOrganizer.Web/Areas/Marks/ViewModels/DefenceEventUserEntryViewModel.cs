@@ -12,6 +12,8 @@ namespace GraduationWorksOrganizer.Web.Areas.Marks.ViewModels
 
         public string SpecialtyName { get; set; }
 
+        public int? DefenceEventId { get; set; }
+
         #region ThesesItems
 
         public string ThesesName { get; set; }
@@ -32,6 +34,8 @@ namespace GraduationWorksOrganizer.Web.Areas.Marks.ViewModels
         public int Id { get; set; }
 
         public decimal? MaxPoints { get; set; }
+
+        public decimal MarkPoints { get; set; }
 
         public string Description { get; set; }
     }
