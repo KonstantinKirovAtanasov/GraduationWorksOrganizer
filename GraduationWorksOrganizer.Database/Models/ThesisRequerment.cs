@@ -25,7 +25,7 @@ namespace GraduationWorksOrganizer.Database.Models
         /// <summary>
         /// Ид на тезата
         /// </summary>
-        public int ThesesId { get; set; }
+        public int? ThesesId { get; set; }
 
         /// <summary>
         /// Максимален брой точки
@@ -45,7 +45,6 @@ namespace GraduationWorksOrganizer.Database.Models
         {
             return new ThesisRequerment()
             {
-                ThesesId = this.ThesesId,
                 Description = this.Description,
                 MarkPoints = this.MarkPoints,
                 MaxPointsCount = this.MaxPointsCount,

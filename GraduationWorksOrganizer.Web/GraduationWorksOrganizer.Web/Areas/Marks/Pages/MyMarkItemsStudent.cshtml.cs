@@ -50,10 +50,10 @@ namespace GraduationWorksOrganizer.Web.Areas.Marks.Pages
                 if (markItem.DefenceEventId != null)
                 {
                     ThesisDefenceEvent de = await _defenceEventsDbService.GetById(markItem.DefenceEventId.Value, p => p.ThesisMark, p => p.DefencesDate.Teacher, p => p.ThesisMark.MarkResults);
-                    markItem.MarkPoints = de.ThesisMark.MarkResults.Sum(m => m.MarkPoints ?? 0);
+                    markItem.MarkPoints = de.ThesisMark?.MarkResults?.Sum(m => m.MarkPoints ?? 0);
                     markItem.TeacherName = de.DefencesDate.Teacher.Name;
                     markItem.TeacherScienceDegree = de.DefencesDate.Teacher.ScienceDegree;
-                    markItem.MarkValue = de.ThesisMark.Mark;
+                    markItem.MarkValue = de.ThesisMark?.Mark;
                 }
 
             }

@@ -24,7 +24,14 @@
                 {
                     <tr>
                         <td> @markItem.SubjectName</td>
-                        <td>@markItem.Date.ToLongDateString()</td>
+                        @if (markItem.MarkValue.HasValue)
+                        {
+                            <td>@markItem.Date.ToLongDateString()</td>
+                        }
+                        else
+                        {
+                            <td>-</td>
+                        }
                         <td>@markItem.ThesesTitle</td>
                         <td>@markItem.ThesesType</td>
                         @if (markItem.MarkValue.HasValue)

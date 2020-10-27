@@ -78,7 +78,8 @@
                                                                         <div class="col-2">
                                                                             <p class="font-weight-bold text-left">Точки от защитата</p>
                                                                             <input hidden asp-for="Input.RequermentsPoints[i].RequermentId" type="number" value="@userEntry.Requerments.ElementAt(i).Id" />
-                                                                            <input class="form-control" asp-for="Input.RequermentsPoints[i].ActualPoints" type="text" />
+                                                                            <input class="form-control validate-points" asp-for="Input.RequermentsPoints[i].ActualPoints" type="text" val-max-points="@userEntry.Requerments.ElementAt(i).MaxPoints" val-min-points="0" />
+                                                                            <text class="text-danger small"></text>
                                                                         </div>
                                                                     </div>
                                                                 }
@@ -91,13 +92,14 @@
                                                                     </div>
                                                                     <div class="col-2">
                                                                         <input hidden asp-for="Input.UserEntryId" value="@userEntry.UserEntryId" />
-                                                                        <input class="form-control mt-3" asp-for="Input.ActualMark" type="text" />
+                                                                        <input class="form-control mt-3 validate-points" asp-for="Input.ActualMark" type="text" val-max-points="6" val-min-points="2" />
+                                                                        <text class="text-danger small"></text>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button class="btn btn-primary" asp-page-handler="">
+                                                            <button id="post-button" class="btn btn-primary" asp-page-handler="">
                                                                 Запис
                                                             </button>
                                                         </div>
@@ -115,3 +117,46 @@
         }
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        const postButton = document.getElementById('post-button');
+
+        window.loaded = RegisterHandlers();
+
+        function RegisterHandlers() {
+            let inputPointsElements = document.getElementsByClassName('validate-points');
+            Array.prototype.forEach.call(inputPointsElements, (element) => {
+                element.addEventListener('input', () => {
+                    ValidatePointsInput(element);
+                });
+            });
+        }
+
+        function ValidatePointsInput(element) {
+            const maxPoints = parseFloat(element.getAttribute('val-max-points'));
+            const minPoints = parseFloat(element.getAttribute('val-min-points'));
+            if(isNaN(parseFloat(element.value))){
+                postButton.disabled = true;
+                element.className += ' border-danger';
+                element.nextElementSibling.innerText = "Въведената стойност трябва да е число";
+            }
+            else if (parseFloat(element.value) > maxPoints) {
+                postButton.disabled = true;
+                element.className += ' border-danger';
+                element.nextElementSibling.innerText = "Въведения резултат трябва да не е повече от максималния брой точки за изискване";
+            }
+            else if (parseFloat(element.value) < 0) {
+                postButton.disabled = true;
+                element.className += ' border-danger';
+                element.nextElementSibling.innerText = "Въведения резултат трябва да не е повече от "+ minPoints;
+            }
+            else if (element.classList.contains('border-danger')) {
+                postButton.disabled = false;
+                element.classList.remove('border-danger');
+                element.nextElementSibling.innerText = "";
+            }
+        }
+
+    </script>
+}
