@@ -71,7 +71,7 @@ namespace GraduationWorksOrganizer.Web.Areas.Marks.Pages
                                                           .Select(dd => new DefenceDateViewModel() { Id = dd.Id, Description = dd.ShortDescription, FromDate = dd.StartingDate }).ToListAsync();
             foreach (DefenceDateViewModel ddvm in DefenceDates)
             {
-                ddvm.DefenceEntries = await _defenceDatesService.GetQuery().Where(d => d.Id == d.Id).SelectMany(d => d.Defences.Select(de => de.ThesesUserEntry)).Select(tue => new DefenceEventUserEntryViewModel()
+                ddvm.DefenceEntries = await _defenceDatesService.GetQuery().Where(d => d.Id == ddvm.Id).SelectMany(d => d.Defences.Select(de => de.ThesesUserEntry)).Select(tue => new DefenceEventUserEntryViewModel()
                 {
                     StudentName = tue.Student.Name,
                     FacultyNumber = tue.Student.FacultyNumber,

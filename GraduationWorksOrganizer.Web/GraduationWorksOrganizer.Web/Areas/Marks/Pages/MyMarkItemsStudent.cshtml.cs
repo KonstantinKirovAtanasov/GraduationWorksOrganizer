@@ -57,8 +57,10 @@ namespace GraduationWorksOrganizer.Web.Areas.Marks.Pages
                 }
 
             }
-
-            OverAllResult = MarkItems.Where(p => p.MarkValue.HasValue).Average(p => p.MarkValue.Value);
+            if (MarkItems.Any())
+                OverAllResult = MarkItems.Where(p => p.MarkValue.HasValue).Average(p => p.MarkValue.Value);
+            else
+                OverAllResult = 0M;
         }
     }
 }

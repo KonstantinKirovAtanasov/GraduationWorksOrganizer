@@ -67,3 +67,23 @@
         </div>
     </div>
 }
+@if (User.IsInRole(Constants.RoleNames.StudentRole))
+{
+    <div class="dropdown">
+        <button class="dropbtn">Архив</button>
+        <div class="dropdown-content">
+            <a class="nav-link text-dark" asp-area="Reports" asp-page="/EndedThesesArchive">Теми</a>
+        </div>
+    </div>
+}
+@if (User.IsInRole(Constants.RoleNames.TeacherRole))
+{
+    <div class="dropdown">
+        <button class="dropbtn">Справки</button>
+        <div class="dropdown-content">
+            <a class="nav-link text-dark" asp-area="Reports" asp-page="/MarkItemsThesesReport">Оценени Теми</a>
+            <a class="nav-link text-dark" asp-area="Reports" asp-page="/ThesesInProcessReport">Теми в процес на работа</a>
+            <a class="nav-link text-dark" asp-area="Reports" asp-page="/UpcommingDefencesReport">Предстоящи защити</a>
+        </div>
+    </div>
+}

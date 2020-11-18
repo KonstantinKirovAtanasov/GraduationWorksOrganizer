@@ -47,7 +47,7 @@ namespace GraduationWorksOrganizer.Database.Models
         /// <summary>
         /// Създател
         /// </summary>
-        public ApplicationIdentityBase Creator { get; set; }
+        public Teacher Creator { get; set; }
 
         /// <summary>
         /// Ид на Създателя на темата

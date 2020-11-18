@@ -1,0 +1,45 @@
+﻿@page
+@model GraduationWorksOrganizer.Web.Areas.Reports.Pages.EndedThesesArchiveModel
+@{
+}
+
+
+<div class="content-heading">
+    <p class="h3">Архив на оценените теми</p>
+</div>
+
+<div class="container">
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th class="text-center">Предмемт</th>
+                <th class="text-center">Тема</th>
+                <th class="text-center">Тип</th>
+                <th class="text-center">Автор на темата</th>
+                <th class="text-center">Проверил темата</th>
+                <th class="text-center">Оценка</th>
+                <th class="text-center">Дата на оценката</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (GraduationWorksOrganizer.Web.Areas.Reports.ViewModels.PreviewArchiveTheses arch in Model.Theseses)
+            {
+                <tr>
+                    <td class="p-1 small">@arch.SubjectName</td>
+                    <td class="p-1 small">@arch.ThesesTitle</td>
+                    <td class="p-1 small">@arch.ThesesType</td>
+                    <td class="p-1 small">@arch.CreatorScienceDegree @arch.CreatorName</td>
+                    <td class="p-1 small">@arch.ReviewerScienceDegree @arch.ReviewerName</td>
+                    <td class="p-1 small text-center">@arch.MarkResult</td>
+                    <td class="p-1 small text-center">@arch.MarkDate.ToShortDateString()</td>
+                    <td>
+                        <a class="float-right" href="/GraduationWork/ThesesCorrespondence?userEntryId=@arch.UserEntryId">
+                            <img class="icon" src="/images/correspondancepng.png">
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

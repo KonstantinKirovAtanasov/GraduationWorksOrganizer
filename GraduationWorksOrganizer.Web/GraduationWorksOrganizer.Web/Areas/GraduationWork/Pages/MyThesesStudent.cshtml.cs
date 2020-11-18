@@ -76,11 +76,14 @@ namespace GraduationWorksOrganizer.Web.Areas.GraduationWork.Pages
             string userId = _userService.GetUserId(User);
             IEnumerable<PreviewThesisViewModel> viewModels = _thesesVmService.GetViewModels(t => t.UserEntries.Any(e => e.StudentId == userId));
             CurrentTheseses = new Collection<CompositePreviewThesisViewModel>();
-            foreach (PreviewThesisViewModel prvm in viewModels.OrderBy(p => p.CreationDate))
+            foreach (PreviewThesisViewModel prvm in viewModels.OrderByDescending(p => p.CreationDate))
             {
                 ThesesUserEntry thesesUserEntry = await _thesisService.GetUserEntry(userId, prvm.Id);
-                UserEntryBaseViewModel userEntry = new UserEntryBaseViewModel() { Id = thesesUserEntry.Id, State = thesesUserEntry.State };
-                CurrentTheseses.Add(new CompositePreviewThesisViewModel() { ThesisViewModel = prvm, UserEntry = userEntry });
+                if (thesesUserEntry.State != Common.Enums.ThesisUserEntryState.CompletedWithMarkItem)
+                {
+                    UserEntryBaseViewModel userEntry = new UserEntryBaseViewModel() { Id = thesesUserEntry.Id, State = thesesUserEntry.State };
+                    CurrentTheseses.Add(new CompositePreviewThesisViewModel() { ThesisViewModel = prvm, UserEntry = userEntry });
+                }
             }
         }
 
