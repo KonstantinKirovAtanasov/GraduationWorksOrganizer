@@ -1,6 +1,5 @@
 ﻿@page
 @model IndexModel
-@using GraduationWorksOrganizer.Common
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 
@@ -36,11 +35,11 @@
             <p class="h4 card-header">Регистрация</p>
             <div class="card-body">
                 <p class="text-center mt-5">
-                    <a asp-area="Identity" asp-page="/Account/RegisterStudent">Към регистраиця за студенти</a>
+                    <a class="h5" asp-area="Identity" asp-page="/Account/RegisterStudent">Към регистраиця за студенти</a>
                 </p>
                 <p class="text-center">или</p>
                 <p class="text-center">
-                    <a asp-area="Identity" asp-page="/Account/RegisterTeacher">Към регистраиця за учители</a>
+                    <a class="h5" asp-area="Identity" asp-page="/Account/RegisterTeacher">Към регистраиця за учители</a>
                 </p>
             </div>
         </div>
@@ -48,10 +47,8 @@
 }
 else if (User.IsInRole(Common.Constants.RoleNames.StudentRole))
 {
-    <h4>описание на работа Стъдент</h4>
 }
 else if (User.IsInRole(Common.Constants.RoleNames.TeacherRole))
 {
-    <h4>описание на работа Преподажател</h4>
 }
 

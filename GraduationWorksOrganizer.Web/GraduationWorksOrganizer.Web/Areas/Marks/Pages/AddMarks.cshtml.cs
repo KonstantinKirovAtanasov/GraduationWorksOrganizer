@@ -84,6 +84,8 @@ namespace GraduationWorksOrganizer.Web.Areas.Marks.Pages
                 }).ToListAsync();
             }
 
+            DefenceDates = DefenceDates.Where(p => p.DefenceEntries.Count() > 0);
+
             foreach (DefenceEventUserEntryViewModel defenceEventUserEntry in DefenceDates.SelectMany(d => d.DefenceEntries))
             {
                 ThesisDefenceEvent defenceEvent = await _defenceEventsService.GetAllIncluding(p => p.ThesisMark, p => p.ThesisMark.MarkResults).FirstOrDefaultAsync(p => p.Id == defenceEventUserEntry.DefenceEventId);
@@ -93,6 +95,8 @@ namespace GraduationWorksOrganizer.Web.Areas.Marks.Pages
                     defenceEventUserEntry.Points = defenceEvent.ThesisMark.MarkResults.Sum(r => r.MarkPoints ?? 0);
                 }
             }
+
+            DefenceDates = DefenceDates.Where(p => p.DefenceEntries.Any(p => p.Mark != 0));
         }
 
         public async Task<IActionResult> OnPost()
@@ -119,7 +123,6 @@ namespace GraduationWorksOrganizer.Web.Areas.Marks.Pages
                 requerment.MarkPoints = requermentInput.ActualPoints;
                 thesesMark.MarkResults.Add(requerment);
             }
-
 
             thesesDE.ThesisMark = thesesMark;
 

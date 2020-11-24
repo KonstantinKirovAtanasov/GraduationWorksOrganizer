@@ -2,3 +2,58 @@
 @model GraduationWorksOrganizer.Web.Areas.Reports.Pages.MarkItemsThesesReportModel
 @{
 }
+<div class="container">
+    <form method="post" class="">
+        <div class="container p-3 border-dark">
+            <p class="mb-1 h4 text-center">Справка за оценени теми</p>
+            <div class="row">
+                <p class="text-center w-25">Предмет</p>
+                <select class="form-control w-25" asp-for="Filter.SubjectId">
+                    @foreach (var subject in Model.Subjects)
+                    {
+                        <option value="@subject.Id">@subject.Name</option>
+                    }
+                </select>
+                <p class="text-center w-25">Тип на заданието</p>
+                <select class="form-control w-25" asp-for="Filter.ThesesType">
+                    @foreach (var type in Model.ThesesTypes)
+                    {
+                        <option value="@type">@type</option>
+                    }
+                </select>
+            </div>
+            <div class="row">
+                <p class="text-center w-25">От Дата</p>
+                <input class="form-control w-25" type="date" asp-for="Filter.FromDate" />
+                <p class="text-center w-25">До дата</p>
+                <input class="form-control w-25" type="date" asp-for="Filter.ToDate" />
+                <button type="submit" class="form-control btn btn-outline-primary" asp-page-handler="">Търсене</button>
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th class="text-center">Предмемт</th>
+                <th class="text-center">Тема</th>
+                <th class="text-center">Тип</th>
+                <th class="text-center">Оценка</th>
+                <th class="text-center">Студент</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.ThesesMarks != null && Model.ThesesMarks.Any())
+                @foreach (var tm in Model.ThesesMarks)
+                {
+                    <tr>
+                        <td class="small">@tm.SubjectName</td>
+                        <td class="small">@tm.ThesesTitle</td>
+                        <td class="small">@tm.ThesesType</td>
+                        <td class="text-center small">@tm.MarkResult.ToString("#.00")</td>
+                        <td class="small">@tm.StudentName (@tm.StudentFacultyNumber)</td>
+                    </tr>
+                }
+        </tbody>
+    </table>
+</div>
