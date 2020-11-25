@@ -86,3 +86,26 @@
         </div>
     </div>
 }
+@if (User.IsInRole(Constants.RoleNames.AdminRole))
+{
+    <div class="dropdown">
+        <button class="dropbtn">Статистика</button>
+        <div class="dropdown-content">
+            <a class="nav-link text-dark" asp-area="Reports" asp-page="/MarksStatistics">Статистика оценки</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn">Експорт / Импорт</button>
+        <div class="dropdown-content">
+            <a class="nav-link text-dark" asp-area="ImportExport" asp-page="/ExportMarksPage">Експорт оценки</a>
+            <a class="nav-link text-dark" asp-area="ImportExport" asp-page="/ImportNomenclaturesPage">Импорт</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn">Справки</button>
+        <div class="dropdown-content">
+            <a class="nav-link text-dark" asp-area="Reports" asp-page="/MarkItemsThesesReport">Оценени Теми</a>
+            <a class="nav-link text-dark" asp-area="Reports" asp-page="/ThesesInProcessReport">Теми в процес на работа</a>
+        </div>
+    </div>
+}

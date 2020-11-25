@@ -11,5 +11,7 @@ namespace GraduationWorksOrganizer.Web.Areas.Reports.ViewModels
         public DateTime ToDate { get; set; }
 
         public string ThesesType { get; set; }
+
+        public string UserId { get; set; }
     }
 }

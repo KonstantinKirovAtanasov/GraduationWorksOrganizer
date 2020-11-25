@@ -69,6 +69,7 @@ namespace GraduationWorksOrganizer.Web
             services.AddScoped<UserEntryFilesDatabaseService>();
             services.AddScoped<ThesisApprovementService>();
             services.AddScoped<MapperService>();
+            services.AddScoped<MarksExportService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -101,12 +102,29 @@ namespace GraduationWorksOrganizer.Web
             app.UseAuthentication();
             app.UseAuthorization();
             SetupRolesAndClaims(app.ApplicationServices.CreateScope().ServiceProvider).Wait();
+            SetupUsers(app.ApplicationServices.CreateScope().ServiceProvider).Wait();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
             });
+        }
+
+        /// <summary>
+        /// Метод който сетъп-ва дефоутни потребители
+        /// </summary>
+        /// <param name="services"></param>
+        private async Task SetupUsers(IServiceProvider serviceProvider)
+        {
+            UserManager<ApplicationIdentityBase> userManager = serviceProvider.GetRequiredService<UserManager<ApplicationIdentityBase>>();
+            if (await userManager.FindByEmailAsync("admin@gmail.com") != null)
+                return;
+
+            ApplicationIdentityBase admin = new ApplicationIdentityBase() { Email = "admin@gmail.com", UserName = "admin@gmail.com" };
+            IdentityResult res = await userManager.CreateAsync(admin, "123@Bg");
+            if (res.Succeeded)
+                await userManager.AddToRoleAsync(admin, Constants.RoleNames.AdminRole);
         }
 
         /// <summary>

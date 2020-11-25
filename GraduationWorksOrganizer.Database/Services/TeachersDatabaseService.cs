@@ -67,5 +67,9 @@ namespace GraduationWorksOrganizer.Database.Services
             return await _dataContext.Subjects.Where(s => s.Specialty.Department.Id == department.Id).ToListAsync();
         }
 
+        public async Task<IEnumerable<Teacher>> GetTeachersAsync()
+        {
+            return await _dataContext.Teachers.ToListAsync();
+        }
     }
 }

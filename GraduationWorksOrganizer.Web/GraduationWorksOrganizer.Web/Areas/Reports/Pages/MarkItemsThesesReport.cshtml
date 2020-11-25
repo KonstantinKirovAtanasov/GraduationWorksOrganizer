@@ -7,6 +7,16 @@
         <div class="container p-3 border-dark">
             <p class="mb-1 h4 text-center">Справка за оценени теми</p>
             <div class="row">
+                @if (User.IsInRole(GraduationWorksOrganizer.Common.Constants.RoleNames.AdminRole))
+                {
+                    <p class="text-center w-25">Преподавател</p>
+                    <select class="form-control w-25" asp-for="Filter.UserId">
+                        @foreach (var teacher in Model.Teachers)
+                        {
+                            <option value="@teacher.Id">@teacher.ScienceDegree @teacher.Name</option>
+                        }
+                    </select>
+                }
                 <p class="text-center w-25">Предмет</p>
                 <select class="form-control w-25" asp-for="Filter.SubjectId">
                     @foreach (var subject in Model.Subjects)

@@ -21,14 +21,17 @@ namespace GraduationWorksOrganizer.Web.Areas.Reports.Pages
         private readonly CombinedQueryBaseService<ThesesUserEntry> _userEntryDbService;
         private readonly TeachersDatabaseService _teacherDbService;
         private readonly UserManager<ApplicationIdentityBase> _userManager;
+        private readonly CombinedQueryBaseService<Subject> _subjectsDbService;
 
         public MarkItemsThesesReportModel(CombinedQueryBaseService<ThesesUserEntry> userEntryDbService,
+                                          CombinedQueryBaseService<Subject> subjectsDbService,
                                           TeachersDatabaseService teacherDbService,
                                           UserManager<ApplicationIdentityBase> userManager)
         {
             _userEntryDbService = userEntryDbService;
             _teacherDbService = teacherDbService;
             _userManager = userManager;
+            _subjectsDbService = subjectsDbService;
         }
 
 
@@ -36,6 +39,8 @@ namespace GraduationWorksOrganizer.Web.Areas.Reports.Pages
         public ReportFilterViewModel Filter { get; set; }
 
         public IEnumerable<Subject> Subjects { get; set; }
+
+        public IEnumerable<Teacher> Teachers { get; set; }
 
         public IEnumerable<string> ThesesTypes { get; set; }
 
@@ -52,34 +57,52 @@ namespace GraduationWorksOrganizer.Web.Areas.Reports.Pages
         public async Task OnPostAsync()
         {
             await Init();
-            string userId = _userManager.GetUserId(User);
-            ThesesMarks = await _userEntryDbService.GetQuery()
-                                                   .Where(p => (Filter.SubjectId == 0 || p.Theses.SubjectId == Filter.SubjectId)
-                                                            && (Filter.ThesesType == "Всички" || Filter.ThesesType == p.Theses.Type)
-                                                            && Filter.FromDate <= p.ThesisDefenceEvent.ThesisMark.CreationDate
-                                                            && Filter.ToDate >= p.ThesisDefenceEvent.ThesisMark.CreationDate
-                                                            && (p.Theses.CreatorId == userId || p.ThesisDefenceEvent.DefencesDate.TeacherId == userId)
-                                                            && p.ThesisDefenceEvent != null && p.ThesisDefenceEvent.ThesisMark != null)
-                                                   .Select(p => new ThesesCompleteWithMarkItemViewModel()
-                                                   {
-                                                       StudentFacultyNumber = p.Student.FacultyNumber,
-                                                       StudentName = p.Student.Name,
-                                                       SubjectName = p.Theses.Subject.Name,
-                                                       ThesesTitle = p.Theses.Title,
-                                                       ThesesType = p.Theses.Type,
-                                                       ThesesUserEntryId = p.Id,
-                                                       MarkResult = p.ThesisDefenceEvent.ThesisMark.Mark,
-                                                   })
-                                                   .ToListAsync();
+            bool userOwnerCondition = User.IsInRole(Common.Constants.RoleNames.AdminRole);
+            ThesesMarks = await GetReportQuery().Select(p => new ThesesCompleteWithMarkItemViewModel()
+            {
+                StudentFacultyNumber = p.Student.FacultyNumber,
+                StudentName = p.Student.Name,
+                SubjectName = p.Theses.Subject.Name,
+                ThesesTitle = p.Theses.Title,
+                ThesesType = p.Theses.Type,
+                ThesesUserEntryId = p.Id,
+                MarkResult = p.ThesisDefenceEvent.ThesisMark.Mark,
+            }).ToListAsync();
         }
 
         private async Task Init()
         {
             Teacher teacher = await _teacherDbService.GetTeacher(_userManager.GetUserId(User));
-            Subjects = await _teacherDbService.GetTeacherSubjects(teacher);
+            if (teacher != null)
+            {
+                Subjects = await _teacherDbService.GetTeacherSubjects(teacher);
+                ThesesTypes = _userEntryDbService.GetQuery().Where(t => t.Theses.Creator.Id == teacher.Id || t.ThesisDefenceEvent.DefencesDate.TeacherId == teacher.Id).Select(t => t.Theses.Type).Distinct();
+            }
+            else
+            {
+                Subjects = await _subjectsDbService.GetAll();
+                ThesesTypes = _userEntryDbService.GetQuery().Select(t => t.Theses.Type).Distinct();
+                Teachers = await _teacherDbService.GetTeachersAsync();
+                Teachers = Teachers.Append(new Teacher() { Id = string.Empty, Name = "Всички" });
+            }
+
             Subjects = Subjects.Append(new Subject() { Id = 0, Name = "Всички" });
-            ThesesTypes = _userEntryDbService.GetQuery().Where(t => t.Theses.Creator.Id == teacher.Id || t.ThesisDefenceEvent.DefencesDate.TeacherId == teacher.Id).Select(t => t.Theses.Type).Distinct();
             ThesesTypes = ThesesTypes.Append("Всички");
+        }
+
+        private IQueryable<ThesesUserEntry> GetReportQuery()
+        {
+            string userId = string.Empty;
+            if (User.IsInRole(Common.Constants.RoleNames.AdminRole))
+                userId = Filter.UserId;
+            else
+                userId = _userManager.GetUserId(User);
+            return _userEntryDbService.GetQuery().Where(p => (Filter.SubjectId == 0 || p.Theses.SubjectId == Filter.SubjectId)
+                                                   && (Filter.ThesesType == "Всички" || Filter.ThesesType == p.Theses.Type)
+                                                   && Filter.FromDate <= p.ThesisDefenceEvent.ThesisMark.CreationDate
+                                                   && Filter.ToDate >= p.ThesisDefenceEvent.ThesisMark.CreationDate
+                                                   && (p.Theses.CreatorId == userId || p.ThesisDefenceEvent.DefencesDate.TeacherId == userId || string.IsNullOrEmpty(userId))
+                                                   && p.ThesisDefenceEvent != null && p.ThesisDefenceEvent.ThesisMark != null);
         }
     }
 }

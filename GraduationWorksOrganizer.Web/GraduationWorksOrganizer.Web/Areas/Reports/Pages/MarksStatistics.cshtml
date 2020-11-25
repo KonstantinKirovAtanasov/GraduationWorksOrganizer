@@ -1,0 +1,56 @@
+﻿@page
+@model GraduationWorksOrganizer.Web.Areas.Reports.Pages.MarksStatisticsModel
+@{
+}
+
+<div class="row">
+    <div class="col-2">
+        <p class="m-3 h4">Специалност</p>
+    </div>
+    <div class="col-7">
+        <select class="form-control m-3" id="filter">
+            @foreach (GraduationWorksOrganizer.Database.Models.Specialty spec in Model.Specialties)
+            {
+                if (spec.SpecialtyType == GraduationWorksOrganizer.Database.SpecialtyType.Bachelor)
+                {
+                    <option value="@spec.Id"> @spec.Name (Бакалавър) </option>
+                }
+                if (spec.SpecialtyType == GraduationWorksOrganizer.Database.SpecialtyType.Master)
+                {
+                    <option value="@spec.Id"> @spec.Name (Магистър) </option>
+                }
+                if (spec.SpecialtyType == GraduationWorksOrganizer.Database.SpecialtyType.MasterAfterBachelor)
+                {
+                    <option value="@spec.Id"> @spec.Name (Магистър след бакалавър) </option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-3">
+        <button class="form-control btn btn-outline-primary chart-request m-3">Търсене</button>
+    </div>
+</div>
+
+<div class="container" id="chart-container" style="height: 500px"></div>
+
+@section Scripts{
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script type="module">
+
+        import { default as ChartLoader } from '../../js/ChartRequest.js'
+
+        let chartLoaders = [];
+
+        window.loaded = InitializeChartLoaders();
+
+        function InitializeChartLoaders() {
+            const elements = document.getElementsByClassName('chart-request');
+            Array.prototype.forEach.call(elements, (element) => {
+                chartLoaders.push(new ChartLoader('filter', "chart-container", element, Highcharts.chart))
+            });
+        }
+    </script>
+}
