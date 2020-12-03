@@ -4,7 +4,8 @@ using System.Text;
 
 namespace GraduationWorksOrganizer.Core.ViewModels
 {
-    public interface IQuerySelectorViewModel
+    public interface IQuerySelectorViewModel<TEntityType, TViewModelType>
     {
+        Func<TEntityType, TViewModelType> GetQuerySelector();
     }
 }

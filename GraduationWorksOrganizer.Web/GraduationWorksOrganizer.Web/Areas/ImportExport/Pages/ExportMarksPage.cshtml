@@ -1,0 +1,143 @@
+﻿@page
+@model GraduationWorksOrganizer.Web.Areas.ImportExport.ExportMarksPageModel
+@{
+}
+
+<form id="filter-form" class="mb-3" method="post">
+    <div class="row">
+        <div class="col-2">
+            <p class="mt-2 h5">Специалност</p>
+        </div>
+        <div class="col-10">
+            <select class="form-control" asp-for="Filter.SpecialtyId">
+                @foreach (GraduationWorksOrganizer.Database.Models.Specialty spec in Model.Specialties)
+                {
+                    if (spec.SpecialtyType == GraduationWorksOrganizer.Database.SpecialtyType.Bachelor)
+                    {
+                        <option value="@spec.Id"> @spec.Name (Бакалавър) </option>
+                    }
+                    if (spec.SpecialtyType == GraduationWorksOrganizer.Database.SpecialtyType.Master)
+                    {
+                        <option value="@spec.Id"> @spec.Name (Магистър) </option>
+                    }
+                    if (spec.SpecialtyType == GraduationWorksOrganizer.Database.SpecialtyType.MasterAfterBachelor)
+                    {
+                        <option value="@spec.Id"> @spec.Name (Магистър след бакалавър) </option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <p class="mt-2 h5">Дата на защита</p>
+        </div>
+        <div class="col-10">
+            <select class="form-control" asp-for="Filter.DefenceDateId">
+                @foreach (GraduationWorksOrganizer.Database.Models.TeacherDefencesDates defd in Model.DefenceDates)
+                {
+                    <option value="@defd.Id"> @defd.ShortDescription (@defd.StartingDate.ToShortDateString())</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <p class="mt-2 h5">Студент</p>
+        </div>
+        <div class="col-10">
+            <select class="form-control" asp-for="Filter.StudentId">
+                @foreach (GraduationWorksOrganizer.Database.Models.Student student in Model.Students)
+                {
+                    <option value="@student.Id"> @student.Name (@student.FacultyNumber)</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <p class="mt-2 h5">От Дата</p>
+        </div>
+        <div class="col-3">
+            <input class="form-control" asp-for="Filter.FromDate" type="date" />
+        </div>
+        <div class="col-2">
+            <p class="mt-2 h5 text-center">До Дата</p>
+        </div>
+        <div class="col-3">
+            <input class="form-control" asp-for="Filter.ToDate" type="date" />
+        </div>
+        <div class="col-2">
+            <button class="form-control btn btn-outline-primary" type="submit">Търсене</button>
+        </div>
+    </div>
+</form>
+@if (Model.ExportResult != null)
+{
+    if (Model.ExportResult.Any())
+    {
+        <table id="result-table" class=" table table-bordered w-100">
+            <thead>
+                <tr class="thead-light">
+                    <th class="text-center">Студент</th>
+                    <th class="text-center">Оценка</th>
+                    <th class="text-center">Точки</th>
+                    <th class="text-center">Предмет</th>
+                    <th class="text-center">Преподавател</th>
+                    <th class="text-center">Дата</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (GraduationWorksOrganizer.Web.Areas.ImportExport.ViewModels.ExportMarkViewModel mark in Model.ExportResult)
+                {
+                    <tr>
+                        <th class="small">@mark.StudentName (@mark.FacultyNumber)</th>
+                        <th class="small">@mark.Mark</th>
+                        <th class="small">@mark.Points / @mark.MaxPoints</th>
+                        <th class="small">@mark.Subject</th>
+                        <th class="small">@mark.ScienceDegree @mark.TeacherName</th>
+                        <th class="small">@mark.Date.ToLongDateString() @mark.Date.ToLongTimeString()</th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-2 offset-10">
+                <button id="download-file" class="btn btn-outline-success w-100">Свали файла</button>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div>
+            <p class="h4 text-center">Няма намерени резултати за избраното търсене</p>
+        </div>
+    }
+}
+
+@section Scripts{
+    <script src="~/lib/table-to-json/jquery.tabletojson.min.js"></script>
+    <script>
+        window.loaded = RegisterHandlers();
+
+        function RegisterHandlers() {
+            const downButton = document.getElementById('download-file');
+            downButton.addEventListener('click', function(){
+                let jsonResult = $('#result-table').tableToJSON();
+                DownloadActualFile(jsonResult);
+            });
+        }
+
+         function DownloadActualFile(content) {
+                let url = window.URL.createObjectURL(new Blob([JSON.stringify(content)], {type: "application/json"}));
+                let downloadElement = document.createElement("a");
+                document.body.appendChild(downloadElement);
+                downloadElement.style = "display: none";
+                downloadElement.download = 'MarksExport_'+new Date().toLocaleDateString()+'.json';
+                downloadElement.href = url;
+                downloadElement.click();
+
+                document.body.removeChild(downloadElement);
+            };
+    </script>
+}

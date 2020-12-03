@@ -26,5 +26,11 @@ namespace GraduationWorksOrganizer.Common
             Approve = 3,
             CompletedWithMarkItem = 5,
         }
+
+        public enum ExportFileType
+        {
+            JSON,
+            SVC,
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using GraduationWorksOrganizer.Database.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GraduationWorksOrganizer.Database.Services
@@ -31,6 +32,11 @@ namespace GraduationWorksOrganizer.Database.Services
         {
             Student student = await _dataContext.Students.FindAsync(userId);
             return await _dataContext.Specialties.FindAsync(student.SpecialtyId);
+        }
+
+        public async Task<IEnumerable<Student>> GetAll()
+        {
+            return await _dataContext.Students.ToArrayAsync();
         }
     }
 }
